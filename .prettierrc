@@ -1,6 +1,5 @@
 {
-    "semi": false,
-    "tabWidth": 4,
-    "printWidth": 120,
-    "htmlWhitespaceSensitivity": "ignore"
+	"semi": false,
+	"printWidth": 120,
+	"htmlWhitespaceSensitivity": "ignore"
 }
