@@ -7,9 +7,15 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
+
     "lint": "eslint --fix 'src/**/*.{ts,tsx,js,jsx}'",
     "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json,css,scss,md}'",
-    "prepare": "husky install"
+    "fix": "npm run lint && npm run format",
+    "prepare": "husky install",
+    
+    "setup": "npm install && npx prisma db push",
+    "frontend:dev": "npm run dev",
+    "backend:dev": "node-dev src/server.js"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
