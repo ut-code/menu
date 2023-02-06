@@ -8,6 +8,7 @@ export default function Home() {
   return (
     <>
       <Header />
+      <p>本文はここ</p>
       <Footer />
     </>
   )
