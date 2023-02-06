@@ -20,6 +20,8 @@
   "dependencies": {
     "@prisma/client": "^4.9.0",
     "@supabase/supabase-js": "^2.7.1",
+    "express": "^4.18.2",
+    "node-dev": "^8.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.0"
