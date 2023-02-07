@@ -6,6 +6,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
+    "setup:env": "cp .env.sample .env",
     "setup": "npm run setup:install",
     "setup:install": "npm install"
   },
