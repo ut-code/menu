@@ -1,4 +1,5 @@
 # 献立作成システム（仮）
+
 質問に答えていくだけで献立を提案してくれるアプリ
 
 ## 環境構築
@@ -26,6 +27,12 @@ npm run setup
 ```
 
 `frontend` ディレクトリに移動（`cd frontend`）
+
+```shell
+npm run setup:env
+```
+
+`.env` ファイルには何もしなくてよい。
 
 ```shell
 npm run setup
@@ -58,11 +65,11 @@ npm run dev
     - `/src`
 
       - `/assets`
-        画像やCSSなど
-      
+        画像や CSS など
+
       - `/components`
         コンポーネント
-      
+
       - `/pages`
         ホームページ
 
@@ -75,7 +82,7 @@ npm run dev
     - `/dist` ビルド時に自動で作られる? 編集はしない。
 
   - `/backend` バックエンド関係
-    
+
     - `server.ts` メイン
 
     - `/prisma` Prisma のファイル
