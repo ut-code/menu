@@ -6,7 +6,17 @@
   "scripts": {
     "lint": "eslint --fix 'frontend/src/*.{ts,tsx,js,jsx}' && eslint --fix 'frontend/src/**/*.{ts,tsx,js,jsx}' && eslint --fix 'backend/*.{ts,tsx,js,jsx}'",
     "format": "prettier --write .",
-    "fix": "npm run lint && npm run format"
+    "fix": "npm run lint && npm run format",
+    "prepare": "husky install"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown",
+    "*.{ts,tsx,js,jsx}": "eslint --fix"
   },
   "repository": {
     "type": "git",
