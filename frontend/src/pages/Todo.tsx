@@ -1,10 +1,52 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 import Header from "./../components/Header"
 import Footer from "./../components/Footer"
 import "@/assets/css/style.css"
 
 type Todo = { id: number; title: string }
+const fetchTodoData = async (setData: (value: Todo[]) => void) => {
+  try {
+    const res = await fetch("/feed")
+    console.log(res.status)
+    console.log(res)
+    const data = await res.json()
+    console.log(data)
+  } catch (e) {
+    console.log("error", e)
+    throw e
+  }
+  // setData(data)
+}
+
+let responseClone: any
+fetch("/feed", {
+  method: "GET",
+  headers: { "Content-Type": "application/json" },
+})
+  .then(function (response) {
+    responseClone = response.clone()
+    return response.json()
+  })
+  .then(
+    function (data) {
+      // Do something with data
+    },
+    function (rejectionReason) {
+      console.log("Error parsing JSON from response:", rejectionReason, responseClone)
+      responseClone.text().then(function (bodyText: any) {
+        console.log("Received the following instead of valid JSON:", bodyText)
+      })
+    }
+  )
+
+type Fact = { fact: string; length: number }
+const fetchCatFactsData = async (setData: (value: Fact[]) => void) => {
+  const res = await fetch("https://catfact.ninja/facts") // 2本の//が必要
+  console.log(res)
+  const data = await res.json()
+  setData(data.data)
+}
 
 export default function Todo() {
   const [todos, setTodos] = useState<Todo[]>([])
@@ -47,9 +89,26 @@ export default function Todo() {
     setEdittingTodo({ id: -1, title: "" })
   }
 
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await fetch("${import.meta.env.VITE_API_ENDPOINT}/feed")
+  //     const tmp = await response.json()
+  //     alert(tmp)
+  //     console.log(tmp)
+  //   })()
+  // }, [])
+
+  const [cats, setCatsData] = useState<Fact[]>([])
+  useEffect(() => {
+    fetchCatFactsData(setCatsData)
+    fetchTodoData(setTodos)
+  }, [])
+
   return (
     <>
       <Header />
+      {cats && cats.map((cat: Fact, i) => <p key={i}>{cat.fact}</p>)}
+      {todos && todos.map((todo: Todo, i) => <p key={i}>{todo.title}</p>)}
       <ul>
         {todos.map((todo, i) => (
           <li key={todo.id}>

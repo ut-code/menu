@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Todo2 {
-  id   Int    @id @default(autoincrement())
-  title String
+model Message {
+  id      Int    @id @default(autoincrement())
+  content String
 }
