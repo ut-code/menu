@@ -14,6 +14,10 @@ git clone git@github.com:ut-code/menu.git
 cd menu
 ```
 
+```shell
+npm ci
+```
+
 `backend` ディレクトリに移動（`cd backend`）
 
 ```shell
