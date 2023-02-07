@@ -4,9 +4,11 @@ import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import "@/assets/css/style.css"
 
-// Vite はトランスパイル時に import.meta.env のプロパティを VITE_ から始まる環境変数に置換する
-// これを利用して本番環境と開発環境で Fetch API のリクエスト先を切り替えられる
-// 参考: https://ja.vitejs.dev/guide/env-and-mode.html
+/*
+ * Vite はトランスパイル時に import.meta.env のプロパティを VITE_ から始まる環境変数に置換する
+ * これを利用して本番環境と開発環境で Fetch API のリクエスト先を切り替えられる
+ * 参考: https://ja.vitejs.dev/guide/env-and-mode.html
+ */
 const getMessagesApi = `${import.meta.env.VITE_API_ENDPOINT}/messages`
 const postSendApi = `${import.meta.env.VITE_API_ENDPOINT}/send`
 
@@ -16,7 +18,10 @@ export default function Message() {
   const [messages, setMessages] = useState<Message[]>([])
   const [newMessageContent, setNewMessageContent] = useState("")
 
+  //----------------------------------------------------------------
   // コンポーネント読み込み時に処理を実行するには useEffect フックを使う
+  // 5000ms ごとにメッセージを取得
+  //----------------------------------------------------------------
   useEffect(() => {
     const timerId = setInterval(async () => {
       const response = await fetch(getMessagesApi)
@@ -32,6 +37,7 @@ export default function Message() {
   return (
     <>
       <Header />
+      <a href="/home">戻る</a>
 
       <ul>
         {messages.map((message) => (
