@@ -8,7 +8,7 @@
     "preview": "vite preview",
     "setup:env": "cp .env.sample .env",
     "setup": "npm run setup:install",
-    "setup:install": "npm install"
+    "setup:install": "npm ci"
   },
   "dependencies": {
     "react": "^18.0.0",
