@@ -17,8 +17,7 @@ export default function Question2() {
         </div>
         <div className="nextButton">Next</div>
       </div>
-      <a href="/message">掲示板</a>
-      <br></br>
+
       <a href="/home">ホーム</a>
     </>
   )
