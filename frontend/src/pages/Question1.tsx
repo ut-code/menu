@@ -1,6 +1,6 @@
 import "@/assets/css/style.css"
 
-export default function Home() {
+export default function Question1() {
   return (
     <>
       <div className="style1">
@@ -17,6 +17,8 @@ export default function Home() {
         <div className="nextButton">Next</div>
       </div>
       <a href="/message">掲示板</a>
+      <br></br>
+      <a href="/home">ホーム</a>
     </>
   )
 }

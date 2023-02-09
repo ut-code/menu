@@ -43,6 +43,10 @@ export default function Home() {
           <li key={recipe.categoryId}>{recipe.categoryName}</li>
         ))} */}
       </ul>
+      <a href="/question-1">Q1</a>
+      <br></br>
+      <a href="/question-2">Q2-4?</a>
+      <br></br>
       <a href="/message">掲示板</a>
       <Footer />
     </>
