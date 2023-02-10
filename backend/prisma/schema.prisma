@@ -14,3 +14,12 @@ model Message {
   id      Int    @id @default(autoincrement())
   content String
 }
+
+model Categories {
+  id      Int    @id @default(autoincrement())
+  category1 String
+  category2 String
+  category3 String
+  categoryId String
+  categoryName String
+}
