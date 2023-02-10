@@ -38,6 +38,12 @@ var(--変数名)で使える
   background-color: var(--Blue);
 }
 
+.style1 .backButton {
+  padding: 1em;
+  background-color: var(--Brown);
+  border-radius: 50%;
+}
+
 .style1 .suggestIngredient {
   padding: 1em;
 
