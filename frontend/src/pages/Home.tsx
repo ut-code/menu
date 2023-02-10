@@ -59,6 +59,8 @@ export default function Home() {
         ))}
       </ul>
 
+      <a href="/questions">はじめる</a>
+      <br></br>
       <a href="/question-1">Q1</a>
       <br></br>
       <a href="/question-2">Q2-4?</a>

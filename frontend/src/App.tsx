@@ -4,6 +4,7 @@ import Home from "@/pages/Home"
 import Message from "@/pages/Message"
 import Question1 from "@/pages/Question1"
 import Question2 from "@/pages/Question2"
+import Questions from "@/pages/Questions"
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/message" element={<Message />}></Route>
         <Route path="/question-1" element={<Question1 />}></Route>
         <Route path="/question-2" element={<Question2 />}></Route>
+        <Route path="/questions" element={<Questions />}></Route>
       </Routes>
     </>
   )
