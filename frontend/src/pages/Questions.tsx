@@ -1,9 +1,10 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 //----------------------------------------------------------------
 // 参考
 // https://dev.classmethod.jp/articles/react-survey-app-to-proceed-to-the-next-question-without-having-to-reload-the-page/
 //----------------------------------------------------------------
+
 type Choices = { [key: number]: string }
 
 type Question = {
@@ -13,6 +14,9 @@ type Question = {
   choices: Choices
 }
 
+//----------------------------------------------------------------
+// 質問を配列で定義
+//----------------------------------------------------------------
 const questions: Question[] = [
   {
     questionNumber: 1,
@@ -51,15 +55,32 @@ const questions: Question[] = [
     questionText: "他に使いたい食材・調味料はありますか？",
     userInput: true,
     choices: {
-      1: "tmp1",
+      1: "ここどうしよう",
     },
   },
 ]
 
 export default function Questions() {
   const [currentQuestion, setCurrentQuestion] = useState<Question>(questions[0])
+  const [style, setStyle] = useState<string>("style1")
 
+  //----------------------------------------------------------------
+  // currentQuestionの変更をフックにする
+  // userInput が true なら className="style1" をセット
+  //----------------------------------------------------------------
+  useEffect(() => {
+    if (currentQuestion.userInput === true) {
+      setStyle("style1")
+    } else {
+      setStyle("style2")
+    }
+  }, [currentQuestion])
+
+  //----------------------------------------------------------------
+  // 選択肢のボタンが押されたときの処理
+  //----------------------------------------------------------------
   const onClickHandler = () => {
+    // 1-indexed と 0-indexed を利用して簡潔に書いてるだけで本質的ではない
     const currentNumber = currentQuestion.questionNumber
     if (currentNumber === questions.length) {
       window.location.href = "/home"
@@ -69,14 +90,19 @@ export default function Questions() {
 
   return (
     <>
-      <div>
-        {"質問 " + currentQuestion.questionNumber + "/" + questions.length + ": " + currentQuestion.questionText}
+      <div className={style}>
+        <div className="question">{currentQuestion.questionText}</div>
+        <div className="suggestIngredient">
+          {Object.values(currentQuestion.choices).map((choice, index) => (
+            <button className="box" key={index} onClick={onClickHandler}>
+              {choice}
+            </button>
+          ))}
+        </div>
+        <div className="nextButton" onClick={onClickHandler}>
+          Next
+        </div>
       </div>
-      {Object.values(currentQuestion.choices).map((choice, index) => (
-        <button key={index} onClick={onClickHandler}>
-          {choice}
-        </button>
-      ))}
     </>
   )
 }
