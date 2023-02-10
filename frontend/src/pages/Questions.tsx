@@ -91,7 +91,18 @@ export default function Questions() {
   return (
     <>
       <div className={style}>
+        {currentQuestion.questionNumber === 1 && <div className="howToPlay">?</div>}
+        {currentQuestion.questionNumber > 1 && <div className="backButton">＜</div>}
+        {style === "style2" && (
+          <div className="tmpImage">
+            <img src="https://placehold.jp/600x150.png" alt="tmpImage" />
+          </div>
+        )}
         <div className="question">{currentQuestion.questionText}</div>
+        {currentQuestion.userInput === true && (
+          <div className="letsInputIngredient">食材の名前を入力してみましょう</div>
+        )}
+        {currentQuestion.userInput === true && <div className="inputIngredient">a</div>}
         <div className="suggestIngredient">
           {Object.values(currentQuestion.choices).map((choice, index) => (
             <button className="box" key={index} onClick={onClickHandler}>
