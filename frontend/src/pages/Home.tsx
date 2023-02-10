@@ -18,26 +18,26 @@ type recipe = {
 export default function Home() {
   const [recipes, setRecipes] = useState<recipe[]>([])
 
+  const addRecipe = (recipe: recipe) => setRecipes((prev) => [...prev, recipe])
+
   //----------------------------------------------------------------
   // 指定したカテゴリの人気レシピ上位4件を取得する。小カテゴリまで指定すれば十分な精度になるのでは？
   // 例として categoryId=18-189 の結果を表示している
   // res.jsonは{ "result": [] }の形式で返ってくる
-  // 今回 recipe 型の配列に整形するため、 results の配列をループして recipe型 の配列に変換してから setRecipes する
+  // 今回 recipe 型の配列に整形するため、 results の配列をループして recipe型 の配列に変換してから addRecipe する
   //----------------------------------------------------------------
   useEffect(() => {
     const fetchRecipes = async () => {
       const res: Response = await fetch(
-        "https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426?applicationId=1032749498491273405&categoryId=18-189"
+        "https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426?applicationId=1032749498491273405&categoryId=37-498-1677"
       )
       const datas = await res.json()
       const results = datas.result
 
-      const tmps: recipe[] = []
       results.forEach((result: any) => {
         const tmp: recipe = result as recipe
-        tmps.push(tmp)
+        addRecipe(tmp)
       }, [])
-      setRecipes(tmps)
     }
 
     fetchRecipes()
