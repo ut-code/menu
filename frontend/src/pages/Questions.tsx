@@ -81,13 +81,14 @@ export default function Questions() {
   //----------------------------------------------------------------
   // 選択肢のボタンが押されたときの処理
   //----------------------------------------------------------------
-  const onClickHandler = (index: any) => {
-    // save answer to localStorage where currentQuestion.questionNumber is the key
-    localStorage.setItem("answer-" + currentQuestion.questionNumber.toString(), index)
+  const onClickHandler = (index: number) => {
+    localStorage.setItem("answer-" + currentQuestion.questionNumber.toString(), index.toString())
 
     // localStorageから取得
     const answer = localStorage.getItem("answer-" + currentQuestion.questionNumber.toString())
-    alert("選択肢" + answer + "が選択されました")
+    // convert type of answer into number
+
+    alert("選択肢" + (Number(answer) + 1) + "が選択されました")
   }
 
   //----------------------------------------------------------------
@@ -98,6 +99,12 @@ export default function Questions() {
     setCurrentQuestion(questions[currentNumber])
   }
   const onClickNextPage = () => {
+    const answer = localStorage.getItem("answer-" + currentQuestion.questionNumber.toString())
+    if (answer === null) {
+      alert("選択肢を選んでください")
+      return
+    }
+
     const currentNumber = currentQuestion.questionNumber + 1
     if (currentNumber === questions.length) {
       window.location.href = "/home"
@@ -108,7 +115,7 @@ export default function Questions() {
   return (
     <>
       <div className={style}>
-        {currentQuestion.questionNumber === 1 && <div className="howToPlay">?</div>}
+        {currentQuestion.questionNumber === 0 && <div className="howToPlay">?</div>}
         {currentQuestion.questionNumber > 0 && (
           <div className="backButton" onClick={onClickPreviousPage}>
             ＜
