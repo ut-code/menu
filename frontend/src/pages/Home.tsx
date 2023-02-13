@@ -16,6 +16,11 @@ type recipe = {
 }
 
 export default function Home() {
+  // 永続的に残るので、localStorageから問題への回答を消しておく
+  for (let i = 0; i < 4; i++) {
+    localStorage.removeItem("answer-" + i.toString())
+  }
+
   const [recipes, setRecipes] = useState<recipe[]>([])
 
   const addRecipe = (recipe: recipe) => setRecipes((prev) => [...prev, recipe])
@@ -34,7 +39,9 @@ export default function Home() {
       const datas = await res.json()
       const results = datas.result
 
-      results.forEach((result: any) => {
+      results.forEach((result: object) => {
+        // resultの型はrecipeより拡張されているから、recipe型に変換する
+        // tmp: recipe = ...と明示的に書いてみた
         const tmp: recipe = result as recipe
         addRecipe(tmp)
       }, [])
@@ -60,10 +67,6 @@ export default function Home() {
       </ul>
 
       <a href="/questions">はじめる</a>
-      <br></br>
-      <a href="/question-1">Q1</a>
-      <br></br>
-      <a href="/question-2">Q2-4?</a>
       <br></br>
       <a href="/message">掲示板</a>
       <Footer />
