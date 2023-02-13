@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react"
 
+import "@/assets/css/style.css"
+
 //----------------------------------------------------------------
 // 参考
 // https://dev.classmethod.jp/articles/react-survey-app-to-proceed-to-the-next-question-without-having-to-reload-the-page/
@@ -19,7 +21,7 @@ type Question = {
 //----------------------------------------------------------------
 const questions: Question[] = [
   {
-    questionNumber: 1,
+    questionNumber: 0,
     questionText: "使いたい食材・調味料は何ですか？",
     userInput: true,
     choices: {
@@ -30,7 +32,7 @@ const questions: Question[] = [
     },
   },
   {
-    questionNumber: 2,
+    questionNumber: 1,
     questionText: "分類はどれですか？",
     userInput: false,
     choices: {
@@ -41,7 +43,7 @@ const questions: Question[] = [
     },
   },
   {
-    questionNumber: 3,
+    questionNumber: 2,
     questionText: "調理時間はどのくらいかけられますか？",
     userInput: false,
     choices: {
@@ -51,7 +53,7 @@ const questions: Question[] = [
     },
   },
   {
-    questionNumber: 4,
+    questionNumber: 3,
     questionText: "他に使いたい食材・調味料はありますか？",
     userInput: true,
     choices: {
@@ -79,9 +81,24 @@ export default function Questions() {
   //----------------------------------------------------------------
   // 選択肢のボタンが押されたときの処理
   //----------------------------------------------------------------
-  const onClickHandler = () => {
-    // 1-indexed と 0-indexed を利用して簡潔に書いてるだけで本質的ではない
-    const currentNumber = currentQuestion.questionNumber
+  const onClickHandler = (index: any) => {
+    // save answer to localStorage where currentQuestion.questionNumber is the key
+    localStorage.setItem("answer-" + currentQuestion.questionNumber.toString(), index)
+
+    // localStorageから取得
+    const answer = localStorage.getItem("answer-" + currentQuestion.questionNumber.toString())
+    alert("選択肢" + answer + "が選択されました")
+  }
+
+  //----------------------------------------------------------------
+  // 前のページ・次のページ
+  //----------------------------------------------------------------
+  const onClickPreviousPage = () => {
+    const currentNumber = currentQuestion.questionNumber - 1
+    setCurrentQuestion(questions[currentNumber])
+  }
+  const onClickNextPage = () => {
+    const currentNumber = currentQuestion.questionNumber + 1
     if (currentNumber === questions.length) {
       window.location.href = "/home"
     }
@@ -92,7 +109,11 @@ export default function Questions() {
     <>
       <div className={style}>
         {currentQuestion.questionNumber === 1 && <div className="howToPlay">?</div>}
-        {currentQuestion.questionNumber > 1 && <div className="backButton">＜</div>}
+        {currentQuestion.questionNumber > 0 && (
+          <div className="backButton" onClick={onClickPreviousPage}>
+            ＜
+          </div>
+        )}
         {style === "style2" && (
           <div className="tmpImage">
             <img src="https://placehold.jp/600x150.png" alt="tmpImage" />
@@ -105,12 +126,12 @@ export default function Questions() {
         {currentQuestion.userInput === true && <div className="inputIngredient">a</div>}
         <div className="suggestIngredient">
           {Object.values(currentQuestion.choices).map((choice, index) => (
-            <button className="box" key={index} onClick={onClickHandler}>
+            <button className="box" key={index} onClick={() => onClickHandler(index)}>
               {choice}
             </button>
           ))}
         </div>
-        <div className="nextButton" onClick={onClickHandler}>
+        <div className="nextButton" onClick={onClickNextPage}>
           Next
         </div>
       </div>

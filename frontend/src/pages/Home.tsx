@@ -16,6 +16,11 @@ type recipe = {
 }
 
 export default function Home() {
+  // localStorageから問題の答えを消しておく
+  for (let i = 0; i < 4; i++) {
+    localStorage.removeItem("answer-" + i.toString())
+  }
+
   const [recipes, setRecipes] = useState<recipe[]>([])
 
   const addRecipe = (recipe: recipe) => setRecipes((prev) => [...prev, recipe])
