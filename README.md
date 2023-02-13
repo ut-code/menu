@@ -77,11 +77,14 @@ npm run dev
       - `/pages`
         ホームページ
 
-        - `/Home`
-          これから
+        - `Home.tsx`
+          開発の都合で設置。困ったら/home
 
-        - `/Message`
+        - `Message.tsx`
           [`https://github.com/ut-code/typescript-react-node-template`](https://github.com/ut-code/typescript-react-node-template)
+          
+        - `Questions.tsx`
+          質問形式で条件を聞き出す。/questions
 
     - `/dist` ビルド時に自動で作られる? 編集はしない。
 
