@@ -16,7 +16,7 @@ type recipe = {
 }
 
 export default function Home() {
-  // localStorageから問題の答えを消しておく
+  // 永続的に残るので、localStorageから問題への回答を消しておく
   for (let i = 0; i < 4; i++) {
     localStorage.removeItem("answer-" + i.toString())
   }
@@ -39,7 +39,9 @@ export default function Home() {
       const datas = await res.json()
       const results = datas.result
 
-      results.forEach((result: any) => {
+      results.forEach((result: object) => {
+        // resultの型はrecipeより拡張されているから、recipe型に変換する
+        // tmp: recipe = ...と明示的に書いてみた
         const tmp: recipe = result as recipe
         addRecipe(tmp)
       }, [])
