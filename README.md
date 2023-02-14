@@ -82,7 +82,6 @@ npm run dev
 
         - `Message.tsx`
           [`https://github.com/ut-code/typescript-react-node-template`](https://github.com/ut-code/typescript-react-node-template)
-          
         - `Questions.tsx`
           質問形式で条件を聞き出す。/questions
 
