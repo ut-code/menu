@@ -2,8 +2,10 @@ import { useState, useEffect } from "react"
 
 import "@/assets/css/style.css"
 import "@/assets/css/home.css"
+import "@/assets/css/choice.css"
 
 import { FaRegQuestionCircle } from "react-icons/fa"
+import { FaArrowLeft } from "react-icons/fa"
 
 //----------------------------------------------------------------
 // 参考
@@ -145,15 +147,16 @@ export default function Questions() {
         )}
         {currentQuestion.questionNumber > 0 && (
           <div className="backButton" onClick={onClickPreviousPage}>
-            ＜
+            <FaArrowLeft size="1.5rem" />
           </div>
         )}
         {style === "style2" && (
           <div className="tmpImage">
-            <img src="https://placehold.jp/600x150.png" alt="tmpImage" />
+            <img src="/src/assets/image/pork.jpeg" alt="tmpImage" />
           </div>
         )}
-        <div className="question">{currentQuestion.questionText}</div>
+        {currentQuestion.userInput === true && <div className="q_white">{currentQuestion.questionText}</div>}
+        {currentQuestion.userInput === false && <div className="q_black">{currentQuestion.questionText}</div>}
         {currentQuestion.userInput === true && <div className="letsInputIngredient"></div>}
         {currentQuestion.userInput === true && (
           <div className="inputIngredient">
