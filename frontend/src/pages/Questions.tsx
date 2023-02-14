@@ -98,12 +98,15 @@ export default function Questions() {
   // 選択肢のボタンが押されたときの処理
   //----------------------------------------------------------------
   const onClickHandler = (index: number) => {
-    // 問題番号をキーにして、選択肢の番号をlocalStorageに保存
-    localStorage.setItem("answer-" + currentQuestion.questionNumber.toString(), index.toString())
+    // 選んだ選択肢をinputContentにセット
+    setInputContent(currentQuestion.choices[index + 1])
+    // 問題番号をキーにして、選んだ選択肢をlocalStorageに保存
+    localStorage.setItem("answer-" + currentQuestion.questionNumber.toString(), currentQuestion.choices[index + 1])
 
     // localStorageの保存状況を確認
-    const answer = localStorage.getItem("answer-" + currentQuestion.questionNumber.toString())
-    alert("選択肢" + (Number(answer) + 1) + "が選択されました")
+    // const answer = localStorage.getItem("answer-" + currentQuestion.questionNumber.toString())
+    const answer = currentQuestion.choices[index + 1]
+    alert("選択肢「" + answer + "」が選択されました")
   }
 
   //----------------------------------------------------------------
@@ -116,10 +119,13 @@ export default function Questions() {
   const onClickNextPage = () => {
     // localStorageの保存状況を確認
     const answer = localStorage.getItem("answer-" + currentQuestion.questionNumber.toString())
-    if (answer === null) {
+    if (inputContent === "") {
       alert("選択肢を選んでください")
       return
+    } else {
+      localStorage.setItem("answer-" + currentQuestion.questionNumber.toString(), inputContent)
     }
+    setInputContent("")
 
     const currentNumber = currentQuestion.questionNumber + 1
     if (currentNumber === questions.length) {
@@ -146,7 +152,15 @@ export default function Questions() {
         {currentQuestion.userInput === true && <div className="letsInputIngredient"></div>}
         {currentQuestion.userInput === true && (
           <div className="inputIngredient">
-            <input className="input" type="text" placeholder="食材の名前を入力してみましょう" />
+            <input
+              className="input"
+              type="text"
+              placeholder="食材の名前を入力してみましょう"
+              value={inputContent}
+              onChange={(e) => {
+                setInputContent(e.target.value)
+              }}
+            />
           </div>
         )}
         <div className="suggestIngredient">
