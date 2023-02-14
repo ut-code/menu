@@ -121,7 +121,7 @@ export default function Questions() {
     const currentNumber = currentQuestion.questionNumber + 1
     if (currentNumber === questions.length) {
       // あとで変更する
-      window.location.href = "/home"
+      window.location.href = "/result"
     }
     setCurrentQuestion(questions[currentNumber])
   }

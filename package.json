@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint --fix 'frontend/src/*.{ts,tsx,js,jsx}' && eslint --fix 'frontend/src/**/*.{ts,tsx,js,jsx}' && eslint --fix 'backend/*.{ts,tsx,js,jsx}'",
+    "lint": "eslint --fix 'frontend/src/*.{ts,tsx,js,jsx,css}' && eslint --fix 'frontend/src/**/*.{ts,tsx,js,jsx}' && eslint --fix 'backend/*.{ts,tsx,js,jsx}'",
     "format": "prettier --write .",
     "fix": "npm run lint && npm run format",
     "prepare": "husky install"
