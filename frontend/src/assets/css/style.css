@@ -1,5 +1,7 @@
 /* cssファイル置くのは @/assets/css */
 
+/*--- 全ページ共通のスタイル ---*/
+
 /*----------------------------------------------------------------
 CSS変数代入について
 :rootで変数を定義
@@ -7,76 +9,21 @@ CSS変数代入について
 var(--変数名)で使える
 ----------------------------------------------------------------*/
 :root {
+  /*-- Color --*/
   --Blue: #1f5c70;
   --Orange: #fba01d;
   --Yellow: #fcbc49;
   --Brown: #b29476;
   --LightBrown: #e3d6c9;
+  --Gray: #7e7e7e;
+  --Black: #1c1c1c;
+
+  /*-- Font --*/
+  --Font: "Noto Sans JP", sans-serif;
 }
 
-/* make "style1" class */
-.style1 {
-  padding: 1em;
-  background-color: var(--Orange);
-  color: white;
-
-  /* everything in middle */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.style1 .inputIngredient {
-  padding: 1em;
-  background-color: white;
-  width: 80em;
-}
-
-.style1 .nextButton {
-  padding: 1em;
-  background-color: var(--Blue);
-}
-
-.style1 .backButton {
-  padding: 1em;
-  background-color: var(--Brown);
-  border-radius: 50%;
-}
-
-.style1 .suggestIngredient {
-  padding: 1em;
-
-  /* make a 2x2 grid with 4 objects */
-  display: grid;
-  grid-template-columns: 200px 200px;
-  grid-row: auto auto;
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
-}
-
-.style1 .suggestIngredient .box {
-  background-color: Gray;
-  padding: 1em;
-  border-radius: 0.5em;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 40px;
-  font-family: sans-serif;
-}
-
-.style1 .howToPlay {
-  /* make a circle border */
-  border-radius: 50%;
-  border: 1px solid white;
-  padding: 1em;
-  width: 0.5px;
-  height: 0.5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+html {
+  font-family: var(--Font);
 }
 
 .style2 {

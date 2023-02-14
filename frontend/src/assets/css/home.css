@@ -1,0 +1,86 @@
+/*--- 使いたい食材を入力する ---*/
+
+/* make "style1" class */
+.style1 {
+  padding: 1em;
+  background-color: var(--Orange);
+  color: white;
+
+  /* everything in middle */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.style1 .inputIngredient {
+  padding: 0.6em 1em;
+  background-color: white;
+  width: 100%;
+  border-radius: 50rem; /* make a circle border */
+  border: var(--Black) 1px solid;
+}
+
+.style1 .nextButton {
+  padding: 1em;
+  background-color: var(--Blue);
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 10rem; /* make a circle border */
+  border: var(--Black) 1px solid;
+}
+
+.style1 .backButton {
+  padding: 1em;
+  background-color: var(--Brown);
+  border-radius: 50%;
+}
+
+.style1 .suggestIngredient {
+  padding: 1em;
+  margin-left: 8%;
+  /* make a 2x2 grid with 4 objects */
+  display: grid;
+  grid-template-columns: 200px 200px;
+  grid-row: auto auto;
+  grid-column-gap: 0px;
+  grid-row-gap: 20px;
+}
+
+.style1 .suggestIngredient .box {
+  background-color: var(--Brown);
+  padding: 1em;
+  border-radius: 0.5em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  font-family: sans-serif;
+}
+
+.style1 .howToPlay {
+  /* make a circle border */
+  border-radius: 50%;
+  border: 1px solid white;
+  padding: 1em;
+  width: 0.5px;
+  height: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--Yellow);
+}
+
+.style1 .box2 {
+  background-image: url(../image/tomato.jpg);
+  /*Crop image*/
+  background-size: cover;
+  color: white;
+  font-weight: bold;
+  border: solid 2px var(--Black);
+  border-radius: 0.5em;
+  width: 85%;
+  height: 180px;
+}
