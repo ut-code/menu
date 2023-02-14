@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import "@/assets/css/style.css"
 import "@/assets/css/home.css"
 
-//import { BsQuestion } from 'react-icons/fa';
+import { FaRegQuestionCircle } from "react-icons/fa"
 
 //----------------------------------------------------------------
 // 参考
@@ -131,7 +131,12 @@ export default function Questions() {
   return (
     <>
       <div className={style}>
-        {currentQuestion.questionNumber === 0 && <div className="howToPlay">?</div>}
+        {currentQuestion.questionNumber === 0 && (
+          <div className="title">
+            <p>だるめし Dull Meshi</p>
+            <FaRegQuestionCircle size="2rem" />
+          </div>
+        )}
         {currentQuestion.questionNumber > 0 && (
           <div className="backButton" onClick={onClickPreviousPage}>
             ＜
