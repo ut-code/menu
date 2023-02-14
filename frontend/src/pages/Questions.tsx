@@ -64,6 +64,7 @@ const questions: Question[] = [
 
 export default function Questions() {
   const [currentQuestion, setCurrentQuestion] = useState<Question>(questions[0])
+  const [inputContent, setInputContent] = useState<string>("")
   const [style, setStyle] = useState<string>("style1")
   const [box, setBox] = useState<string>("box")
 
@@ -120,7 +121,6 @@ export default function Questions() {
 
     const currentNumber = currentQuestion.questionNumber + 1
     if (currentNumber === questions.length) {
-      // あとで変更する
       window.location.href = "/result"
     }
     setCurrentQuestion(questions[currentNumber])
@@ -144,7 +144,13 @@ export default function Questions() {
         {currentQuestion.userInput === true && <div className="letsInputIngredient"></div>}
         {currentQuestion.userInput === true && (
           <div className="inputIngredient">
-            <input type="text" placeholder="食材の名前を入力してみましょう" />
+            <input
+              placeholder="食材の名前を入力してみましょう"
+              value={inputContent}
+              onChange={(e) => {
+                setInputContent(e.target.value)
+              }}
+            />
           </div>
         )}
         <div className="suggestIngredient">
