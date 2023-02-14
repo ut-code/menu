@@ -27,7 +27,7 @@ export default function Result() {
         <div className="card__footer">
           <p className="card__text">
             <a href="#" className="button -compact">
-              正義Tシャツの詳細を見る
+              正義Tシャツの詳細を見たい
             </a>
           </p>
         </div>
