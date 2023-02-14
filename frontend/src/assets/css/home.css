@@ -89,4 +89,10 @@
 .question {
   font-size: 1.8rem;
   font-weight: bold;
+  width: 90%;
+}
+
+.input {
+  width: 100%;
+  border: none;
 }

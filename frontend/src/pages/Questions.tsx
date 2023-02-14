@@ -3,6 +3,8 @@ import { useState, useEffect } from "react"
 import "@/assets/css/style.css"
 import "@/assets/css/home.css"
 
+//import { BsQuestion } from 'react-icons/fa';
+
 //----------------------------------------------------------------
 // 参考
 // https://dev.classmethod.jp/articles/react-survey-app-to-proceed-to-the-next-question-without-having-to-reload-the-page/
@@ -144,13 +146,7 @@ export default function Questions() {
         {currentQuestion.userInput === true && <div className="letsInputIngredient"></div>}
         {currentQuestion.userInput === true && (
           <div className="inputIngredient">
-            <input
-              placeholder="食材の名前を入力してみましょう"
-              value={inputContent}
-              onChange={(e) => {
-                setInputContent(e.target.value)
-              }}
-            />
+            <input className="input" type="text" placeholder="食材の名前を入力してみましょう" />
           </div>
         )}
         <div className="suggestIngredient">
