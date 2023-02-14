@@ -1,7 +1,6 @@
 /* https://eclair.blog/examples-of-card/ */
 .card {
   color: black;
-
   width: 50em;
   height: auto;
   overflow: hidden;
@@ -18,7 +17,7 @@
   width: 100%;
   height: auto;
   padding-top: 56.25%;
-  background: url(https://placehold.jp/640x360.png) no-repeat center;
+  background: no-repeat center;
   background-size: cover;
   background-color: var(--Blue);
   box-sizing: border-box;
