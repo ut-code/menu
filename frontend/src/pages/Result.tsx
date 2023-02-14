@@ -15,7 +15,20 @@ type recipe = {
   recipeMaterial: string[]
 }
 
+// 二回マウントするので8個表示されるけど気にしない
+const answers: string[] = []
+
 export default function Result() {
+  // localStorageに保存出来ているか確認
+  useEffect(() => {
+    for (let i = 0; i < 4; i++) {
+      const answer = localStorage.getItem("answer-" + i.toString())
+      if (answer !== null) {
+        answers.push(answer)
+      }
+    }
+  }, [])
+
   const [categoryId, setCategoryId] = useState<string>("37-498-1677")
   const [recipes, setRecipes] = useState<recipe[]>([])
 
@@ -56,6 +69,12 @@ export default function Result() {
     <>
       <div className="style1">
         <a href="/home">ホーム</a>
+        {answers.map((answer, index) => (
+          <div key={index}>
+            {index + 1}
+            {answer}
+          </div>
+        ))}
         <div className="backButton">＜</div>
         <div className="result">検索結果</div>
         <div className="card">

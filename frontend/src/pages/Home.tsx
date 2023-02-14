@@ -17,9 +17,11 @@ type recipe = {
 
 export default function Home() {
   // 永続的に残るので、localStorageから問題への回答を消しておく
-  for (let i = 0; i < 4; i++) {
-    localStorage.removeItem("answer-" + i.toString())
-  }
+  useEffect(() => {
+    for (let i = 0; i < 4; i++) {
+      localStorage.removeItem("answer-" + i.toString())
+    }
+  }, [])
 
   const [recipes, setRecipes] = useState<recipe[]>([])
 
