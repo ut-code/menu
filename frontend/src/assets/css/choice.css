@@ -1,0 +1,63 @@
+/*--- 質問に答える ---*/
+
+.style2 {
+  padding: 1em;
+  background-color: white;
+  color: white;
+
+  /* everything in middle */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.q_black {
+  color: var(--Black);
+  text-align: center;
+  font-weight: bold;
+}
+
+.suggestIngredient {
+  padding: 1em;
+
+  /* make a 2x2 grid with 4 objects */
+  display: grid;
+  grid-template-columns: 55% 55%;
+  grid-row: auto auto;
+  grid-column-gap: 0px;
+  grid-row-gap: 20px;
+  width: 93%;
+}
+
+.box {
+  background-color: var(--Brown);
+  border: solid 2px var(--Black);
+  padding: 1em;
+  border-radius: 0.5em;
+  text-align: center;
+  font-size: 1em;
+  color: white;
+  font-weight: bold;
+}
+
+.nextButton {
+  padding: 1em;
+  background-color: var(--Blue);
+  color: white;
+}
+
+.backButton {
+  /* make a square*/
+  padding: 0.8em;
+  padding-bottom: 0.5em;
+  background-color: var(--Brown);
+  border-radius: 100%;
+  border: solid 2px var(--Black);
+  text-align: center;
+}
+
+.tmpImage img {
+  /* cover the whole width */
+  width: 100%;
+}
