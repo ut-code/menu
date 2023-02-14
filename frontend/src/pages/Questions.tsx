@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 
 import "@/assets/css/style.css"
+import "@/assets/css/home.css"
 
 //----------------------------------------------------------------
 // 参考
@@ -25,10 +26,10 @@ const questions: Question[] = [
     questionText: "使いたい食材・調味料は何ですか？",
     userInput: true,
     choices: {
-      1: "季節の野菜1",
-      2: "季節の野菜2",
-      3: "季節の野菜3",
-      4: "季節の野菜4",
+      1: "トマト",
+      2: "ブロッコリー",
+      3: "牛乳",
+      4: "卵",
     },
   },
   {
@@ -65,6 +66,7 @@ const questions: Question[] = [
 export default function Questions() {
   const [currentQuestion, setCurrentQuestion] = useState<Question>(questions[0])
   const [style, setStyle] = useState<string>("style1")
+  const [box, setBox] = useState<string>("box")
 
   //----------------------------------------------------------------
   // currentQuestionの変更をフックにする
@@ -75,6 +77,18 @@ export default function Questions() {
       setStyle("style1")
     } else {
       setStyle("style2")
+    }
+  }, [currentQuestion])
+
+  //----------------------------------------------------------------
+  // currentQuestionの変更をフックにする
+  // questionNumber が 0以外 なら box2 をセット
+  //----------------------------------------------------------------
+  useEffect(() => {
+    if (currentQuestion.questionNumber === 0) {
+      setBox("box2")
+    } else {
+      setBox("box")
     }
   }, [currentQuestion])
 
@@ -128,13 +142,15 @@ export default function Questions() {
           </div>
         )}
         <div className="question">{currentQuestion.questionText}</div>
+        {currentQuestion.userInput === true && <div className="letsInputIngredient"></div>}
         {currentQuestion.userInput === true && (
-          <div className="letsInputIngredient">食材の名前を入力してみましょう</div>
+          <div className="inputIngredient">
+            <input type="text" placeholder="食材の名前を入力してみましょう" />
+          </div>
         )}
-        {currentQuestion.userInput === true && <div className="inputIngredient">a</div>}
         <div className="suggestIngredient">
           {Object.values(currentQuestion.choices).map((choice, index) => (
-            <button className="box" key={index} onClick={() => onClickHandler(index)}>
+            <button className={box} key={index} onClick={() => onClickHandler(index)}>
               {choice}
             </button>
           ))}
