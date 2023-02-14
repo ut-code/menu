@@ -68,6 +68,8 @@ export default function Home() {
 
       <a href="/questions">はじめる</a>
       <br></br>
+      <a href="/result">検索結果</a>
+      <br></br>
       <a href="/message">掲示板</a>
       <Footer />
     </>
