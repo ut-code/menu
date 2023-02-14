@@ -61,19 +61,6 @@
   font-family: sans-serif;
 }
 
-.howToPlay {
-  /* make a circle border */
-  border-radius: 50%;
-  border: 1px solid white;
-  padding: 1em;
-  width: 0.5px;
-  height: 0.5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--Yellow);
-}
-
 .box2 {
   background-image: url(../image/tomato.jpg);
   /*Crop image*/
@@ -89,10 +76,26 @@
 .question {
   font-size: 1.8rem;
   font-weight: bold;
-  width: 90%;
+  width: 93%;
 }
 
 .input {
   width: 100%;
   border: none;
+}
+
+.title {
+  /* two side flex */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 93%;
+  margin-bottom: 10%;
+}
+
+.title p {
+  font-size: 0.4rem;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
 }
