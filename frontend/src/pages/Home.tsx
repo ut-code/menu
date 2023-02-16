@@ -60,6 +60,11 @@ export default function Home() {
   return (
     <>
       <Header />
+
+      <div className="tmpImage">
+        <img src="https://placehold.jp/300x300.png" alt="tmpImage" />
+      </div>
+
       <ul>
         {recipes.map((recipe, index) => (
           <div key={index}>
