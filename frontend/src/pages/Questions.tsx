@@ -118,7 +118,6 @@ export default function Questions() {
   }
   const onClickNextPage = () => {
     // localStorageの保存状況を確認
-    const answer = localStorage.getItem("answer-" + currentQuestion.questionNumber.toString())
     if (inputContent === "") {
       alert("選択肢を選んでください")
       return

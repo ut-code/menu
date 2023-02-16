@@ -1,11 +1,11 @@
 /* https://eclair.blog/examples-of-card/ */
 .card {
   color: black;
-  width: 50em;
-  height: auto;
+  width: auto;
+  /* height: 500px; */
   overflow: hidden;
   border-radius: 8px;
-  /* box-shadow: 0 4px 15px rgba(0,0,0,.2); */
+  padding: 1em;
 
   /* everything in middle */
   display: flex;
@@ -14,9 +14,11 @@
   align-items: center;
 }
 .card__imgframe {
+  /* 画像を指定のサイズでトリミング */
   width: 100%;
-  height: auto;
-  padding-top: 56.25%;
+  height: 200px;
+  object-fit: cover;
+
   background: no-repeat center;
   background-size: cover;
   background-color: var(--Blue);

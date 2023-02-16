@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 
 import "@/assets/css/style.css"
-import "@/assets/css/home.css"
 import "@/assets/css/card.css"
 
 // 人気レシピ4件を取得できるAPIから、必要なキーの情報のみを取得する
@@ -29,7 +28,7 @@ export default function Result() {
     }
   }, [])
 
-  const [categoryId, setCategoryId] = useState<string>("37-498-1677")
+  const [categoryId, setCategoryId] = useState<string>("12-102")
   const [recipes, setRecipes] = useState<recipe[]>([])
 
   const addRecipe = (recipe: recipe) => setRecipes((prev) => [...prev, recipe])
@@ -77,24 +76,20 @@ export default function Result() {
         ))}
         <div className="backButton">＜</div>
         <div className="result">検索結果</div>
-        <div className="card">
-          {recipes.map((recipe, index) => (
-            <div key={index}>
-              <div className="card__imgframe">
-                <img src={recipe.foodImageUrl} />
-              </div>
-              <div className="card__textbox">
-                <div className="card__titletext">{recipe.recipeTitle}</div>
-                <div className="card__overviewtext">
-                  {/* show each element of the list recipeMaterial */}
-                  {recipe.recipeMaterial.map((material, index) => (
-                    <div key={index}>{material}</div>
-                  ))}
-                </div>
+        {recipes.map((recipe, index) => (
+          <div key={index} className="card">
+            <img className="card__imgframe" src={recipe.foodImageUrl} />
+            <div className="card__textbox">
+              <div className="card__titletext">{recipe.recipeTitle}</div>
+              <div className="card__overviewtext">
+                {/* show each element of the list recipeMaterial */}
+                {recipe.recipeMaterial.map((material, index) => (
+                  <div key={index}>{material}</div>
+                ))}
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </>
   )
