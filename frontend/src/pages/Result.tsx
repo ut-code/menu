@@ -12,6 +12,7 @@ type recipe = {
   recipeTitle: string
   recipeUrl: string
   recipeMaterial: string[]
+  recipeMaterialConverted: string
 }
 
 // 二回マウントするので8個表示されるけど気にしない
@@ -52,6 +53,10 @@ export default function Result() {
         // resultの型はrecipeより拡張されているから、recipe型に変換する
         // tmp: recipe = ...と明示的に書いてみた
         const tmp: recipe = result as recipe
+
+        // recipeMaterialConverted は、recipeMaterial の配列を"・"で連結したもの
+        // 例: ["豚肉", "玉ねぎ", "にんにく"] -> "豚肉・玉ねぎ・にんにく"
+        tmp.recipeMaterialConverted = tmp.recipeMaterial.join("・")
         addRecipe(tmp)
       }, [])
     }
@@ -67,13 +72,6 @@ export default function Result() {
   return (
     <>
       <div className="style1">
-        <a href="/home">ホーム</a>
-        {answers.map((answer, index) => (
-          <div key={index}>
-            {index + 1}
-            {answer}
-          </div>
-        ))}
         <div className="backButton">＜</div>
         <div className="result">検索結果</div>
         {recipes.map((recipe, index) => (
@@ -81,13 +79,16 @@ export default function Result() {
             <img className="card__imgframe" src={recipe.foodImageUrl} />
             <div className="card__textbox">
               <div className="card__titletext">{recipe.recipeTitle}</div>
-              <div className="card__overviewtext">
-                {/* show each element of the list recipeMaterial */}
-                {recipe.recipeMaterial.map((material, index) => (
-                  <div key={index}>{material}</div>
-                ))}
-              </div>
+              <div className="card__overviewtext">{recipe.recipeMaterialConverted}</div>
             </div>
+          </div>
+        ))}
+
+        <a href="/home">ホーム</a>
+        {answers.map((answer, index) => (
+          <div key={index}>
+            {index + 1}
+            {answer}
           </div>
         ))}
       </div>
