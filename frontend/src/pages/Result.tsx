@@ -76,11 +76,14 @@ export default function Result() {
         <div className="result">検索結果</div>
         {recipes.map((recipe, index) => (
           <div key={index} className="card">
-            <img className="card__imgframe" src={recipe.foodImageUrl} />
-            <div className="card__textbox">
-              <div className="card__titletext">{recipe.recipeTitle}</div>
-              <div className="card__overviewtext">{recipe.recipeMaterialConverted}</div>
-            </div>
+            {/* click anywhere and it opens recipe.recipeUrl but you don't make texts blue with underline */}
+            <a href={recipe.recipeUrl} target="_blank" rel="noreferrer">
+              <img className="card__imgframe" src={recipe.foodImageUrl} />
+              <div className="card__textbox">
+                <div className="card__titletext">{recipe.recipeTitle}</div>
+                <div className="card__overviewtext">{recipe.recipeMaterialConverted}</div>
+              </div>
+            </a>
           </div>
         ))}
 

@@ -26,6 +26,12 @@ html {
   font-family: var(--Font);
 }
 
+/* リンクの文字が変な色にならない */
+a {
+  text-decoration: none;
+  color: var(--Black);
+}
+
 .style2 {
   padding: 1em;
   background-color: white;
@@ -39,7 +45,7 @@ html {
 }
 
 .style2 .question {
-  color: black;
+  color: var(--Black);
 }
 
 .style2 .suggestIngredient {
