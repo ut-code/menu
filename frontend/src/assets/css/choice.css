@@ -18,7 +18,11 @@
   font-weight: bold;
 }
 
-/* home.cssと同じ */
+/*----------------------------------------------------------------
+  選択肢の表示 (材料を提案しない用途にも...)
+  一旦styleによって異なるようにしてみた
+  結局 choice.css の方と同じ内容になりそうだけど
+----------------------------------------------------------------*/
 .style2 .suggestIngredient {
   padding: 1em;
   /* make a 2x2 grid with 4 objects with 25px margin for each direction */
@@ -31,6 +35,11 @@
 }
 
 .suggestIngredient .box {
+  /* 文字 */
+  color: white;
+  font-weight: bold;
+
+  /* 縁 */
   border-radius: 0.5em;
   border: solid 2px var(--Black);
 
@@ -43,8 +52,8 @@
   align-items: center;
   justify-content: center;
 
-  color: white;
-  font-weight: bold;
+  /* 背景色 */
+  background-color: var(--Brown);
 }
 
 /*----------------------------------------------------------------
@@ -53,10 +62,6 @@
 ----------------------------------------------------------------*/
 .suggestIngredient input[type="radio"] {
   display: none; /* ラジオボタンを非表示にする */
-}
-
-.suggestIngredient .box {
-  background-color: var(--Brown);
 }
 
 /* :has()を使って input[type=radio]:checked の親要素の背景色を変更 */

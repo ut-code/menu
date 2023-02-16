@@ -38,8 +38,11 @@
   border-radius: 50%;
 }
 
-/* 一旦styleによって異なるようにしてみた */
-/* 結局 choce.css と同じ内容になりそうだけど */
+/*----------------------------------------------------------------
+  選択肢の表示
+  一旦styleによって異なるようにしてみた
+  結局 choice.css の方と同じ内容になりそうだけど
+----------------------------------------------------------------*/
 .style1 .suggestIngredient {
   padding: 1em;
   /* make a 2x2 grid with 4 objects with 25px margin for each direction */
@@ -53,8 +56,12 @@
 
 .suggestIngredient .box_pic {
   background-image: url(../image/tomato.jpg);
+
+  /* 文字 */
   color: white;
   font-weight: bold;
+
+  /* 縁 */
   border: solid 2px var(--Black);
   border-radius: 0.5em;
 
