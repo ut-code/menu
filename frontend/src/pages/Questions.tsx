@@ -73,8 +73,22 @@ export default function Questions() {
   const [box, setBox] = useState<string>("box")
 
   //----------------------------------------------------------------
+  // localStorage を使って inputContent と currentQuestion を設定する
+  //----------------------------------------------------------------
+  useEffect(() => {
+    for (let i = 0; i < questions.length; i++) {
+      const answer = localStorage.getItem("answer-" + i.toString())
+      if (answer !== null) {
+        setCurrentQuestion(questions[i])
+        setInputContent(answer)
+      }
+    }
+  }, [])
+
+  //----------------------------------------------------------------
   // currentQuestionの変更をフックにする
   // userInput が true なら className="style1" をセット
+  // questionNumber が 0以外 なら box2 をセット
   //----------------------------------------------------------------
   useEffect(() => {
     if (currentQuestion.userInput === true) {
@@ -82,17 +96,16 @@ export default function Questions() {
     } else {
       setStyle("style2")
     }
-  }, [currentQuestion])
 
-  //----------------------------------------------------------------
-  // currentQuestionの変更をフックにする
-  // questionNumber が 0以外 なら box2 をセット
-  //----------------------------------------------------------------
-  useEffect(() => {
     if (currentQuestion.questionNumber === 0) {
       setBox("box2")
     } else {
       setBox("box")
+    }
+
+    const answer = localStorage.getItem("answer-" + currentQuestion.questionNumber.toString())
+    if (answer !== null) {
+      setInputContent(answer)
     }
   }, [currentQuestion])
 
