@@ -152,7 +152,7 @@ export default function Questions() {
     <>
       <div className={style}>
         {currentQuestion.questionNumber === 0 && (
-          <div className="title">
+          <div className="title" onClick={() => (window.location.href = "/home")}>
             <p>だるめし Dull Meshi</p>
             <FaRegQuestionCircle size="2rem" />
           </div>

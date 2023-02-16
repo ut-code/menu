@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react"
 
 import "@/assets/css/style.css"
+import "@/assets/css/home.css"
 import "@/assets/css/card.css"
+
+import { FaArrowLeft } from "react-icons/fa"
 
 // 人気レシピ4件を取得できるAPIから、必要なキーの情報のみを取得する
 type recipe = {
@@ -20,13 +23,17 @@ const answers: string[] = []
 
 export default function Result() {
   // localStorageに保存出来ているか確認
+  // 無駄に unmounted で一回しか実行されないようにコントロール
+  let unmounted = false
   useEffect(() => {
+    if (unmounted) return
     for (let i = 0; i < 4; i++) {
       const answer = localStorage.getItem("answer-" + i.toString())
       if (answer !== null) {
         answers.push(answer)
       }
     }
+    unmounted = true
   }, [])
 
   const [categoryId, setCategoryId] = useState<string>("12-102")
@@ -72,7 +79,9 @@ export default function Result() {
   return (
     <>
       <div className="style1">
-        <div className="backButton">＜</div>
+        <div className="backButton-b" onClick={() => (window.location.href = "/questions")}>
+          <FaArrowLeft size="1.5rem" />
+        </div>
         <div className="result">検索結果</div>
         {recipes.map((recipe, index) => (
           <div key={index} className="card">
@@ -87,7 +96,7 @@ export default function Result() {
           </div>
         ))}
 
-        <a href="/home">ホーム</a>
+        <a href="/home">ホーム ←ボタンになってます</a>
         {answers.map((answer, index) => (
           <div key={index}>
             {index + 1}
