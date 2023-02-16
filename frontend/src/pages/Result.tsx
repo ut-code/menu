@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 
 import "@/assets/css/style.css"
-import "@/assets/css/home.css"
 import "@/assets/css/card.css"
 
 // 人気レシピ4件を取得できるAPIから、必要なキーの情報のみを取得する
@@ -13,6 +12,7 @@ type recipe = {
   recipeTitle: string
   recipeUrl: string
   recipeMaterial: string[]
+  recipeMaterialConverted: string
 }
 
 // 二回マウントするので8個表示されるけど気にしない
@@ -29,7 +29,7 @@ export default function Result() {
     }
   }, [])
 
-  const [categoryId, setCategoryId] = useState<string>("37-498-1677")
+  const [categoryId, setCategoryId] = useState<string>("12-102")
   const [recipes, setRecipes] = useState<recipe[]>([])
 
   const addRecipe = (recipe: recipe) => setRecipes((prev) => [...prev, recipe])
@@ -53,6 +53,10 @@ export default function Result() {
         // resultの型はrecipeより拡張されているから、recipe型に変換する
         // tmp: recipe = ...と明示的に書いてみた
         const tmp: recipe = result as recipe
+
+        // recipeMaterialConverted は、recipeMaterial の配列を"・"で連結したもの
+        // 例: ["豚肉", "玉ねぎ", "にんにく"] -> "豚肉・玉ねぎ・にんにく"
+        tmp.recipeMaterialConverted = tmp.recipeMaterial.join("・")
         addRecipe(tmp)
       }, [])
     }
@@ -68,6 +72,21 @@ export default function Result() {
   return (
     <>
       <div className="style1">
+        <div className="backButton">＜</div>
+        <div className="result">検索結果</div>
+        {recipes.map((recipe, index) => (
+          <div key={index} className="card">
+            {/* click anywhere and it opens recipe.recipeUrl but you don't make texts blue with underline */}
+            <a href={recipe.recipeUrl} target="_blank" rel="noreferrer">
+              <img className="card__imgframe" src={recipe.foodImageUrl} />
+              <div className="card__textbox">
+                <div className="card__titletext">{recipe.recipeTitle}</div>
+                <div className="card__overviewtext">{recipe.recipeMaterialConverted}</div>
+              </div>
+            </a>
+          </div>
+        ))}
+
         <a href="/home">ホーム</a>
         {answers.map((answer, index) => (
           <div key={index}>
@@ -75,26 +94,6 @@ export default function Result() {
             {answer}
           </div>
         ))}
-        <div className="backButton">＜</div>
-        <div className="result">検索結果</div>
-        <div className="card">
-          {recipes.map((recipe, index) => (
-            <div key={index}>
-              <div className="card__imgframe">
-                <img src={recipe.foodImageUrl} />
-              </div>
-              <div className="card__textbox">
-                <div className="card__titletext">{recipe.recipeTitle}</div>
-                <div className="card__overviewtext">
-                  {/* show each element of the list recipeMaterial */}
-                  {recipe.recipeMaterial.map((material, index) => (
-                    <div key={index}>{material}</div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </>
   )

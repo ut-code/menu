@@ -25,3 +25,9 @@ var(--変数名)で使える
 html {
   font-family: var(--Font);
 }
+
+/* リンクの文字が変な色にならない */
+a {
+  text-decoration: none;
+  color: var(--Black);
+}

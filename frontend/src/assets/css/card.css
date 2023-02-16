@@ -1,26 +1,53 @@
+.result {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: bold;
+  width: 93%;
+
+  /* text in the middle */
+  display: flex;
+  justify-content: center;
+
+  margin: 0.5em;
+}
+
 /* https://eclair.blog/examples-of-card/ */
 .card {
   color: black;
-  width: 50em;
-  height: auto;
+  width: auto;
+  /* height: 500px; */
   overflow: hidden;
   border-radius: 8px;
-  /* box-shadow: 0 4px 15px rgba(0,0,0,.2); */
 
   /* everything in middle */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  /* 角を丸める */
+  border: solid 2px var(--Black);
+  border-radius: 0.5em;
+
+  /* 色 */
+  background-color: white;
+
+  /* cardごとに間隔をあける */
+  margin: 0 0 5% 0;
 }
 .card__imgframe {
+  /* 画像を指定のサイズでトリミング */
   width: 100%;
-  height: auto;
-  padding-top: 56.25%;
+  height: 200px;
+  object-fit: cover;
+
   background: no-repeat center;
   background-size: cover;
   background-color: var(--Blue);
-  box-sizing: border-box;
+
+  /* 角を丸める */
+  border-bottom: solid 2px var(--Black);
+  border-radius: 0.5em;
 }
 .card__textbox {
   width: 100%;
@@ -40,7 +67,4 @@
 .card__overviewtext {
   font-size: 12px;
   line-height: 150%;
-}
-.result {
-  color: white;
 }
