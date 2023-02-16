@@ -100,7 +100,7 @@ export default function Questions() {
     if (currentQuestion.userInput === true) {
       setBox("box_pic")
     } else {
-      setBox("box_brown")
+      setBox("box")
     }
   }
 
@@ -119,7 +119,7 @@ export default function Questions() {
   //----------------------------------------------------------------
   // 選択肢のボタンが押されたときの処理
   //----------------------------------------------------------------
-  const onClickHandler = (index: number, choice: string) => {
+  const onChangeHandler = (index: number) => {
     // 選んだ選択肢をinputContentにセット (0-indexed を 1-indexed に変換)
     setInputContent(currentQuestion.choices[index + 1])
 
@@ -128,8 +128,8 @@ export default function Questions() {
 
     // localStorageの保存状況を確認
     // const answer = localStorage.getItem("answer-" + currentQuestion.questionNumber.toString())
-    const answer = currentQuestion.choices[index + 1]
-    alert("選択肢「" + answer + "」が選択されました")
+    // const answer = currentQuestion.choices[index + 1]
+    // alert("選択肢「" + answer + "」が選択されました")
   }
 
   //----------------------------------------------------------------
@@ -198,9 +198,20 @@ export default function Questions() {
 
         <div className="suggestIngredient">
           {Object.values(currentQuestion.choices).map((choice, index) => (
-            <button className={box} key={index} onClick={() => onClickHandler(index, choice)}>
-              {choice}
-            </button>
+            <label key={index} className={box}>
+              <input
+                type="radio"
+                value={choice}
+                onChange={() => onChangeHandler(index)}
+                checked={inputContent === choice}
+              />
+              <span>
+                {choice} {1 * Number(inputContent === choice)}
+              </span>
+            </label>
+            // <button className={box} key={index} onClick={() => onChangeHandler(index)}>
+            //   {choice}
+            // </button>
           ))}
         </div>
 

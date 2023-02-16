@@ -18,8 +18,9 @@
   font-weight: bold;
 }
 
+/* home.cssと内容被ってませんか? */
 .suggestIngredient {
-  padding: 1em;
+  /* padding: 1em; */
 
   /* make a 2x2 grid with 4 objects */
   display: grid;
@@ -30,8 +31,8 @@
   width: 93%;
 }
 
-.box_brown {
-  background-color: var(--Brown);
+.box {
+  /* background-color: var(--Brown); */
   border: solid 2px var(--Black);
   padding: 1em;
   border-radius: 0.5em;
@@ -41,15 +42,18 @@
   font-weight: bold;
 }
 
-.box_orange {
+.suggestIngredient input[type="radio"] {
+  display: none; /* ラジオボタンを非表示にする */
+}
+
+.suggestIngredient label {
+  background-color: var(--Brown);
+}
+
+/* :has()を使って input[type=radio]:checked の親要素の背景色を変更 */
+/* Copilotくん天才？ */
+.suggestIngredient label:has(input[type="radio"]:checked) {
   background-color: var(--Orange);
-  border: solid 2px var(--Black);
-  padding: 1em;
-  border-radius: 0.5em;
-  text-align: center;
-  font-size: 1em;
-  color: white;
-  font-weight: bold;
 }
 
 .nextButton {
