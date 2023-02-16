@@ -57,6 +57,16 @@
   text-align: center;
 }
 
+.backButton-b {
+  /* make a square*/
+  padding: 0.8em;
+  padding-bottom: 0.5em;
+  background-color: var(--Blue);
+  border-radius: 100%;
+  border: solid 2px var(--Black);
+  text-align: center;
+}
+
 .tmpImage img {
   /* cover the whole width */
   width: 100%;

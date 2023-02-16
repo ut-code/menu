@@ -68,11 +68,11 @@ export default function Home() {
         ))}
       </ul>
 
-      <a href="/questions">はじめる</a>
+      <a href="/questions">はじめる ←ボタンになってます</a>
       <br></br>
-      <a href="/result">検索結果</a>
+      <a href="/result">検索結果 ←ボタンになってます</a>
       <br></br>
-      <a href="/message">掲示板</a>
+      <a href="/message">掲示板 ←ボタンになってます</a>
       <Footer />
     </>
   )
