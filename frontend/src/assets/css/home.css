@@ -61,7 +61,7 @@
   font-family: sans-serif;
 }
 
-.box2 {
+.box_pic {
   background-image: url(../image/tomato.jpg);
   /*Crop image*/
   background-size: cover;

@@ -70,7 +70,7 @@ export default function Questions() {
   const [currentQuestion, setCurrentQuestion] = useState<Question>(questions[0])
   const [inputContent, setInputContent] = useState<string>("")
   const [style, setStyle] = useState<string>("style1")
-  const [box, setBox] = useState<string>("box")
+  const [box, setBox] = useState<string>("box_brown")
 
   //----------------------------------------------------------------
   // localStorage を使って inputContent と currentQuestion を設定する
@@ -86,22 +86,29 @@ export default function Questions() {
   }, [])
 
   //----------------------------------------------------------------
-  // currentQuestionの変更をフックにする
+  // CSS用の関数
   // userInput が true なら className="style1" をセット
-  // questionNumber が 0以外 なら box2 をセット
+  // questionNumber が 0以外 なら box-pic をセット
   //----------------------------------------------------------------
-  useEffect(() => {
+  const changeStyles = () => {
     if (currentQuestion.userInput === true) {
       setStyle("style1")
     } else {
       setStyle("style2")
     }
 
-    if (currentQuestion.questionNumber === 0) {
-      setBox("box2")
+    if (currentQuestion.userInput === true) {
+      setBox("box_pic")
     } else {
-      setBox("box")
+      setBox("box_brown")
     }
+  }
+
+  //----------------------------------------------------------------
+  // currentQuestionの変更をフックにして回答状況を復元
+  //----------------------------------------------------------------
+  useEffect(() => {
+    changeStyles()
 
     const answer = localStorage.getItem("answer-" + currentQuestion.questionNumber.toString())
     if (answer !== null) {
@@ -112,9 +119,10 @@ export default function Questions() {
   //----------------------------------------------------------------
   // 選択肢のボタンが押されたときの処理
   //----------------------------------------------------------------
-  const onClickHandler = (index: number) => {
-    // 選んだ選択肢をinputContentにセット
+  const onClickHandler = (index: number, choice: string) => {
+    // 選んだ選択肢をinputContentにセット (0-indexed を 1-indexed に変換)
     setInputContent(currentQuestion.choices[index + 1])
+
     // 問題番号をキーにして、選んだ選択肢をlocalStorageに保存
     localStorage.setItem("answer-" + currentQuestion.questionNumber.toString(), currentQuestion.choices[index + 1])
 
@@ -157,18 +165,22 @@ export default function Questions() {
             <FaRegQuestionCircle size="2rem" />
           </div>
         )}
+
         {currentQuestion.questionNumber > 0 && (
           <div className="backButton" onClick={onClickPreviousPage}>
             <FaArrowLeft size="1.5rem" />
           </div>
         )}
+
         {style === "style2" && (
           <div className="tmpImage">
             <img src="/src/assets/image/pork.jpeg" alt="tmpImage" />
           </div>
         )}
+
         {currentQuestion.userInput === true && <div className="q_white">{currentQuestion.questionText}</div>}
         {currentQuestion.userInput === false && <div className="q_black">{currentQuestion.questionText}</div>}
+
         {currentQuestion.userInput === true && <div className="letsInputIngredient"></div>}
         {currentQuestion.userInput === true && (
           <div className="inputIngredient">
@@ -183,13 +195,15 @@ export default function Questions() {
             />
           </div>
         )}
+
         <div className="suggestIngredient">
           {Object.values(currentQuestion.choices).map((choice, index) => (
-            <button className={box} key={index} onClick={() => onClickHandler(index)}>
+            <button className={box} key={index} onClick={() => onClickHandler(index, choice)}>
               {choice}
             </button>
           ))}
         </div>
+
         <div className="nextButton" onClick={onClickNextPage}>
           Next
         </div>

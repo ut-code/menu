@@ -30,8 +30,19 @@
   width: 93%;
 }
 
-.box {
+.box_brown {
   background-color: var(--Brown);
+  border: solid 2px var(--Black);
+  padding: 1em;
+  border-radius: 0.5em;
+  text-align: center;
+  font-size: 1em;
+  color: white;
+  font-weight: bold;
+}
+
+.box_orange {
+  background-color: var(--Orange);
   border: solid 2px var(--Black);
   padding: 1em;
   border-radius: 0.5em;
