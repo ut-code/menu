@@ -18,44 +18,56 @@
   font-weight: bold;
 }
 
-/* home.cssと内容被ってませんか? */
-.suggestIngredient {
-  /* padding: 1em; */
-
-  /* make a 2x2 grid with 4 objects */
+/* home.cssと同じ */
+.style2 .suggestIngredient {
+  padding: 1em;
+  /* make a 2x2 grid with 4 objects with 25px margin for each direction */
   display: grid;
-  grid-template-columns: 55% 55%;
-  grid-row: auto auto;
-  grid-column-gap: 0px;
-  grid-row-gap: 20px;
-  width: 93%;
+  grid-template-columns: 50% 50%;
+  grid-gap: 25px; /* 25px margin */
+
+  width: 100%;
+  height: 100%;
 }
 
-.box {
-  /* background-color: var(--Brown); */
-  border: solid 2px var(--Black);
-  padding: 1em;
+.suggestIngredient .box {
   border-radius: 0.5em;
-  text-align: center;
-  font-size: 1em;
+  border: solid 2px var(--Black);
+
+  /* 180px x 180px */
+  width: 180px;
+  height: 180px;
+
+  /* text in center */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   color: white;
   font-weight: bold;
 }
 
+/*----------------------------------------------------------------
+  デフォルトのラジオボタンは表示せず、labelタグの要素をボタン代わりにする
+  ラジオボタンが選択状態なら背景色を変える
+----------------------------------------------------------------*/
 .suggestIngredient input[type="radio"] {
   display: none; /* ラジオボタンを非表示にする */
 }
 
-.suggestIngredient label {
+.suggestIngredient .box {
   background-color: var(--Brown);
 }
 
 /* :has()を使って input[type=radio]:checked の親要素の背景色を変更 */
 /* Copilotくん天才？ */
-.suggestIngredient label:has(input[type="radio"]:checked) {
+.suggestIngredient .box:has(input[type="radio"]:checked) {
   background-color: var(--Orange);
 }
 
+/*----------------------------------------------------------------
+  進む・戻るボタン（基本共通）
+----------------------------------------------------------------*/
 .nextButton {
   padding: 1em;
   background-color: var(--Blue);
@@ -82,6 +94,9 @@
   text-align: center;
 }
 
+/*----------------------------------------------------------------
+  たぶんQuestion2, 3の肉の画像
+----------------------------------------------------------------*/
 .tmpImage img {
   /* cover the whole width */
   width: 100%;

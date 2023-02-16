@@ -1,6 +1,5 @@
-/*--- 使いたい食材を入力する! ---*/
+/*--- 使いたい食材を入力する ---*/
 
-/* make "style1" class */
 .style1 {
   padding: 1em;
   background-color: var(--Orange);
@@ -39,45 +38,37 @@
   border-radius: 50%;
 }
 
-.suggestIngredient {
+/* 一旦styleによって異なるようにしてみた */
+/* 結局 choce.css と同じ内容になりそうだけど */
+.style1 .suggestIngredient {
   padding: 1em;
-  /* make a 2x2 grid with 4 objects */
+  /* make a 2x2 grid with 4 objects with 25px margin for each direction */
   display: grid;
-  grid-template-columns: 55% 55%;
-  grid-row: auto auto;
-  grid-column-gap: 0px;
-  grid-row-gap: 20px;
-  width: 100%;
-}
+  grid-template-columns: 50% 50%;
+  grid-gap: 25px; /* 25px margin */
 
-/* 上のと被ってます、あとchoices.cssに書くべき内容だったりしませんか? */
-/* .suggestIngredient .box {
-  background-color: var(--Brown);
-  padding: 1em;
-  border-radius: 0.5em;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 40px;
-  font-family: sans-serif;
-} */
+  width: 100%;
+  height: 100%;
+}
 
 .suggestIngredient .box_pic {
   background-image: url(../image/tomato.jpg);
-  /*Crop image*/
-  background-size: cover;
   color: white;
   font-weight: bold;
   border: solid 2px var(--Black);
   border-radius: 0.5em;
-  width: 85%;
+
+  /* crop image */
+  background-size: cover;
+
+  /* 180px x 180px */
+  width: 180px;
   height: 180px;
 
-  /* text in middle */
+  /* text in bottom left */
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-end;
+  justify-content: flex-start;
 }
 
 .q_white {
