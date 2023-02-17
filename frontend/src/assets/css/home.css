@@ -45,13 +45,11 @@
 ----------------------------------------------------------------*/
 .style1 .suggestIngredient {
   padding: 1em;
-  /* make a 2x2 grid with 4 objects with 25px margin for each direction */
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-gap: 25px; /* 25px margin */
 
-  width: 100%;
-  height: 100%;
+  /* 2x2に並べる */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2em;
 }
 
 .suggestIngredient .box_pic {
@@ -68,9 +66,9 @@
   /* crop image */
   background-size: cover;
 
-  /* 180px x 180px */
-  width: 180px;
-  height: 180px;
+  /* boxのサイズ */
+  width: 150px;
+  height: 150px;
 
   /* text in bottom left */
   display: flex;
