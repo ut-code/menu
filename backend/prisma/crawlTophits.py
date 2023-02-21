@@ -5,6 +5,36 @@ https://rurukblog.com/post/WebScraping-Google-Top/
 import requests, urllib.parse
 from bs4 import BeautifulSoup
 
+# schema.org/recipe の構造化データを取得できるサイト
+whitelist = [
+    "www.kurashiru.com",
+    "www.kyounoryouri.jp",
+    "www.lettuceclub.net",
+    "www.tablemark.co.jp",
+    "www.ebarafoods.com",
+    "www.marukome.co.jp",
+    "park.ajinomoto.co.jp",
+    "www.ntv.co.jp/3min/",
+    "www.mizkan.co.jp",
+    "www.meg-snow.com",
+    "www.salad-cafe.com",
+    "kumiko-jp.com",
+    "dancyu.jp",
+    "www.yutori.co.jp",
+    # "recipe.yamasa.com", o
+    # "www.nipponham.co.jp", o
+    # "www.kikkoman.co.jp", o
+    # "www.sirogohan.com", o
+    # "erecipe.woman.excite.co.jp", x
+    # "www.momoya.co.jp", x
+    # "www.yamaki.co.jp", x
+    # "www.abc-cooking.co.jp", x
+    # "www.nisshin-oillio.com", x
+    # "www.morinagamilk.co.jp", x
+    # "www.j-oil.com", x
+    # "www.asahimatsu.co.jp", x
+    # "www.itoham.co.jp", x
+]
 
 def crawlTophits(search_word, pages_num=16):
     print(f"【検索ワード】{search_word}")
@@ -32,6 +62,10 @@ def crawlTophits(search_word, pages_num=16):
         #     site_title = site.select("img")[0]["alt"]
 
         site_url = site["href"].replace("/url?q=", "")
+        # レシピページではなく検索ページならスキップ
+        if "search" in site_url:
+            continue
+
         # urllib.parseを使用してドメインを取得
         domain = urllib.parse.urlparse(site_url).netloc
 
@@ -45,35 +79,9 @@ def crawlTophits(search_word, pages_num=16):
             print(str(len(used)) + "位: " + site_url)
 
 
-whitelist = [
-    "www.kurashiru.com",
-    "www.kyounoryouri.jp",
-    "recipe.yamasa.com",
-    "www.lettuceclub.net",
-    "www.tablemark.co.jp",
-    "erecipe.woman.excite.co.jp",
-    "www.ebarafoods.com",
-    "www.mizkan.co.jp",
-    "www.marukome.co.jp",
-    "park.ajinomoto.co.jp",
-    "www.momoya.co.jp",
-    "www.ntv.co.jp/3min/",
-    "www.yamaki.co.jp",
-    "www.mizkan.co.jp",
-    "www.nipponham.co.jp",
-    "www.kikkoman.co.jp",
-    "www.meg-snow.com",
-    "www.abc-cooking.co.jp",
-    "www.nisshin-oillio.com",
-    "www.marukome.co.jp",
-    "www.morinagamilk.co.jp",
-    "www.j-oil.com",
-    "www.asahimatsu.co.jp",
-    "www.itoham.co.jp",
-    "www.salad-cafe.com",
-]
-
 def checkDomain(domain, url):
+    # &以下を削除（原因は不明）
+    url = url.replace("%3F", "&")
     url = url.split("&")[0]
 
     # 今日の料理の場合は、 https://www.kyounoryouri.jp/recipe/数字_ のうち"_"以降を削除する
@@ -83,6 +91,6 @@ def checkDomain(domain, url):
     return url
 
 
-search_word = "麻婆豆腐+レシピ"  # Google検索するキーワードを設定
+search_word = "チキンソテー+レシピ"  # Google検索するキーワードを設定
 pages_num = 20  # 上位から何件までのサイトを抽出するか指定する
 crawlTophits(search_word, pages_num)
