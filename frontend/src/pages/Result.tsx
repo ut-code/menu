@@ -92,7 +92,7 @@ export default function Result() {
               <div className="card__textbox">
                 <div className="card__titletext">{recipe.recipeTitle}</div>
                 <div className="card__overviewtext">{recipe.recipeMaterialConverted}</div>
-                <Reference />
+                <Reference url={recipe.recipeUrl} />
               </div>
             </a>
           </div>
