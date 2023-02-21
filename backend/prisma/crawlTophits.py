@@ -36,7 +36,12 @@ whitelist = [
     # "www.itoham.co.jp", x
 ]
 
-def crawlTophits(search_word, pages_num=16):
+# 明示的に型を指定する
+def crawlTophits(search_word: str, pages_num: int) -> list:
+    """
+    search_word: Google検索するキーワードを設定
+    pages_num: 上位から何件までのサイトを抽出するか指定する
+    """
     print(f"【検索ワード】{search_word}")
 
     # ----------------------------------------------------------------
@@ -56,11 +61,6 @@ def crawlTophits(search_word, pages_num=16):
     # ----------------------------------------------------------------
     used = set()
     for site in search_site_list:
-        # try:
-        #     site_title = site.select("h3.zBAuLc")[0].text
-        # except IndexError:
-        #     site_title = site.select("img")[0]["alt"]
-
         site_url = site["href"].replace("/url?q=", "")
         # レシピページではなく検索ページならスキップ
         if "search" in site_url:
@@ -68,18 +68,18 @@ def crawlTophits(search_word, pages_num=16):
 
         # urllib.parseを使用してドメインを取得
         domain = urllib.parse.urlparse(site_url).netloc
-
         if domain in whitelist:
-            site_url = checkDomain(domain, site_url)
+            site_url = unifyUrl(domain, site_url)
             if site_url in used:
                 continue
             used.add(site_url)
 
             # 結果を出力する
-            print(str(len(used)) + "位: " + site_url)
+            # print(str(len(used)) + "位: " + site_url)
+    return list(used)
 
 
-def checkDomain(domain, url):
+def unifyUrl(domain: str, url: str) -> str:
     # &以下を削除（原因は不明）
     url = url.replace("%3F", "&")
     url = url.split("&")[0]
@@ -91,6 +91,4 @@ def checkDomain(domain, url):
     return url
 
 
-search_word = "チキンソテー+レシピ"  # Google検索するキーワードを設定
-pages_num = 20  # 上位から何件までのサイトを抽出するか指定する
-crawlTophits(search_word, pages_num)
+# print(crawlTophits(search_word="チキンソテー+レシピ", pages_num=20))
