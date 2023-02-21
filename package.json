@@ -34,10 +34,5 @@
     "husky": "^8.0.0",
     "lint-staged": "^13.1.0",
     "prettier": "^2.8.3"
-  },
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.3.0",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "react-icons": "^4.7.1"
   }
 }
