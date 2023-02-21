@@ -5,7 +5,7 @@ from crawlTophits import crawlTophits
 
 
 def extractRecipes(urls: list) -> list:
-    site_dicts = []
+    recipe_dicts = []
     for url in urls:
         # url先のHTMLから、"<script type="application/ld+json">" のタグで囲まれた場所を取得
         request = requests.get(url)
@@ -20,10 +20,12 @@ def extractRecipes(urls: list) -> list:
 
             # 構造化データがRecipeの場合は記録
             if data_dict["@type"].lower() == "recipe":
-                site_dicts.append(data_dict)
+                recipe_dicts.append(data_dict)
                 break
-    return site_dicts
+    return recipe_dicts
 
 
 site_urls = crawlTophits(search_word="チキンソテー+レシピ", pages_num=20)
-print(extractRecipes(site_urls))
+recipe_dicts = extractRecipes(site_urls)
+for key, value in recipe_dicts[1].items():
+    print(f"{key}: {value}")
