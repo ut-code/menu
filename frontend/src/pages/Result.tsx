@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 
 import "@/assets/css/style.css"
@@ -96,7 +97,7 @@ export default function Result() {
           </div>
         ))}
 
-        <a href="/home">ホーム ←ボタンになってます</a>
+        <Link to={"/home"}>ホーム ←ボタンになってます</Link>
         {answers.map((answer, index) => (
           <div key={index}>
             {index + 1}
