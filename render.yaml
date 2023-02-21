@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: dull-meshi
+    env: static
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    pullRequestPreviewsEnabled: true
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: sameorigin
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /
+    envVars:
+      - key: VITE_API_ENDPOINT
+        value: https://dull-meshi-backend.onrender.com
+  - type: web
+    name: dull-meshi-backend
+    env: node
+    region: singapore
+    plan: free
+    rootDir: backend
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: PORT
+        value: 3001
+      - key: DATABASE_URL
+        sync: false
+      - key: WEB_ORIGIN
+        value: https://dull-meshi.onrender.com
