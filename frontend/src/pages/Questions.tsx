@@ -73,6 +73,9 @@ export default function Questions() {
   const [style, setStyle] = useState<string>("style1")
   const [box, setBox] = useState<string>("box_brown")
 
+  // useNavigate を Navigate に変化させる呪文
+  const Navigate = useNavigate()
+
   //----------------------------------------------------------------
   // localStorage を使って inputContent と currentQuestion を設定する
   //----------------------------------------------------------------
@@ -152,24 +155,20 @@ export default function Questions() {
 
     const currentNumber = currentQuestion.questionNumber + 1
     if (currentNumber === questions.length) {
-      window.location.href = "/result"
-      // Navigate("/result")
+      Navigate("/result")
     }
     setCurrentQuestion(questions[currentNumber])
   }
 
-  // useNavigate を Navigate に変化させる呪文
-  const Navigate = useNavigate()
-
   return (
     <>
       <div className={style}>
-        {/* {currentQuestion.questionNumber === 0 && (
+        {currentQuestion.questionNumber === 0 && (
           <div className="title" onClick={() => Navigate("/home")}>
             <p>だるめし Dull Meshi</p>
             <FaRegQuestionCircle size="2rem" />
           </div>
-        )} */}
+        )}
 
         {currentQuestion.questionNumber > 0 && (
           <div className="backButton" onClick={onClickPreviousPage}>

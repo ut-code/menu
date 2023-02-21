@@ -23,6 +23,9 @@ type recipe = {
 const answers: string[] = []
 
 export default function Result() {
+  // useNavigate を Navigate に変化させる呪文
+  const Navigate = useNavigate()
+
   // localStorageに保存出来ているか確認
   // 無駄に unmounted で一回しか実行されないようにコントロール
   let unmounted = false
@@ -76,9 +79,6 @@ export default function Result() {
     しかし、本来はリンク先の情報を見ればわかることだった
     */
   }, [])
-
-  // useNavigate を Navigate に変化させる呪文
-  const Navigate = useNavigate()
 
   return (
     <>
