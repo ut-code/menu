@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 
 import Header from "@/components/Header"
@@ -73,11 +74,11 @@ export default function Home() {
         ))}
       </ul>
 
-      <a href="/questions">はじめる ←ボタンになってます</a>
+      <Link to={"/questions"}>はじめる ←ボタンになってます</Link>
       <br></br>
-      <a href="/result">検索結果 ←ボタンになってます</a>
+      <Link to={"/result"}>検索結果 ←ボタンになってます</Link>
       <br></br>
-      <a href="/message">掲示板 ←ボタンになってます</a>
+      <Link to={"/message"}>掲示板 ←ボタンになってます</Link>
       <Footer />
     </>
   )

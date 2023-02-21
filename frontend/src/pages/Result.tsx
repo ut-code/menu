@@ -1,3 +1,4 @@
+import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
 import "@/assets/css/style.css"
@@ -22,6 +23,9 @@ type recipe = {
 const answers: string[] = []
 
 export default function Result() {
+  // useNavigate を Navigate に変化させる呪文
+  const Navigate = useNavigate()
+
   // localStorageに保存出来ているか確認
   // 無駄に unmounted で一回しか実行されないようにコントロール
   let unmounted = false
@@ -79,7 +83,7 @@ export default function Result() {
   return (
     <>
       <div className="style1">
-        <div className="backButton-b" onClick={() => (window.location.href = "/questions")}>
+        <div className="backButton-b" onClick={() => Navigate("/questions")}>
           <FaArrowLeft size="1.5rem" />
         </div>
         <div className="result">検索結果</div>
@@ -96,7 +100,7 @@ export default function Result() {
           </div>
         ))}
 
-        <a href="/home">ホーム ←ボタンになってます</a>
+        <Link to={"/home"}>ホーム ←ボタンになってます</Link>
         {answers.map((answer, index) => (
           <div key={index}>
             {index + 1}

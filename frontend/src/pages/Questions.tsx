@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
 import "@/assets/css/style.css"
@@ -71,6 +72,9 @@ export default function Questions() {
   const [inputContent, setInputContent] = useState<string>("")
   const [style, setStyle] = useState<string>("style1")
   const [box, setBox] = useState<string>("box_brown")
+
+  // useNavigate を Navigate に変化させる呪文
+  const Navigate = useNavigate()
 
   //----------------------------------------------------------------
   // localStorage を使って inputContent と currentQuestion を設定する
@@ -151,7 +155,7 @@ export default function Questions() {
 
     const currentNumber = currentQuestion.questionNumber + 1
     if (currentNumber === questions.length) {
-      window.location.href = "/result"
+      Navigate("/result")
     }
     setCurrentQuestion(questions[currentNumber])
   }
@@ -160,7 +164,7 @@ export default function Questions() {
     <>
       <div className={style}>
         {currentQuestion.questionNumber === 0 && (
-          <div className="title" onClick={() => (window.location.href = "/home")}>
+          <div className="title" onClick={() => Navigate("/home")}>
             <p>だるめし Dull Meshi</p>
             <FaRegQuestionCircle size="2rem" />
           </div>

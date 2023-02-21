@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 
 import Header from "@/components/Header"
@@ -37,7 +38,7 @@ export default function Message() {
   return (
     <>
       <Header />
-      <a href="/home">戻る</a>
+      <Link to={"/home"}>戻る</Link>
 
       <ul>
         {messages.map((message) => (
