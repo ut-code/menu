@@ -29,7 +29,7 @@ model Recipes {
   recipeTitle       String
   recipeUrl         String
   recipeDescription String
-  foodImageUrl      String
+  foodImageUrls     String[]
   keywords          String[]
   totalTime         Int
   recipeIngredients String[]
