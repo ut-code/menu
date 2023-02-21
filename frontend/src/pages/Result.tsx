@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
 import "@/assets/css/style.css"
@@ -77,10 +77,13 @@ export default function Result() {
     */
   }, [])
 
+  // useNavigate を Navigate に変化させる呪文
+  const Navigate = useNavigate()
+
   return (
     <>
       <div className="style1">
-        <div className="backButton-b" onClick={() => (window.location.href = "/questions")}>
+        <div className="backButton-b" onClick={() => Navigate("/questions")}>
           <FaArrowLeft size="1.5rem" />
         </div>
         <div className="result">検索結果</div>

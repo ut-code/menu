@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
 import "@/assets/css/style.css"
@@ -152,19 +153,23 @@ export default function Questions() {
     const currentNumber = currentQuestion.questionNumber + 1
     if (currentNumber === questions.length) {
       window.location.href = "/result"
+      // Navigate("/result")
     }
     setCurrentQuestion(questions[currentNumber])
   }
 
+  // useNavigate を Navigate に変化させる呪文
+  const Navigate = useNavigate()
+
   return (
     <>
       <div className={style}>
-        {currentQuestion.questionNumber === 0 && (
-          <div className="title" onClick={() => (window.location.href = "/home")}>
+        {/* {currentQuestion.questionNumber === 0 && (
+          <div className="title" onClick={() => Navigate("/home")}>
             <p>だるめし Dull Meshi</p>
             <FaRegQuestionCircle size="2rem" />
           </div>
-        )}
+        )} */}
 
         {currentQuestion.questionNumber > 0 && (
           <div className="backButton" onClick={onClickPreviousPage}>
