@@ -5,6 +5,7 @@ import "@/assets/css/home.css"
 import "@/assets/css/card.css"
 
 import { FaArrowLeft } from "react-icons/fa"
+import Reference from "@/components/reference"
 
 // 人気レシピ4件を取得できるAPIから、必要なキーの情報のみを取得する
 type recipe = {
@@ -91,6 +92,7 @@ export default function Result() {
               <div className="card__textbox">
                 <div className="card__titletext">{recipe.recipeTitle}</div>
                 <div className="card__overviewtext">{recipe.recipeMaterialConverted}</div>
+                <Reference />
               </div>
             </a>
           </div>
