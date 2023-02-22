@@ -16,10 +16,21 @@ model Message {
 }
 
 model Categories {
-  id      Int    @id @default(autoincrement())
-  category1 String
-  category2 String
-  category3 String
-  categoryId String
+  id           Int    @id @default(autoincrement())
+  category1    String
+  category2    String
+  category3    String
+  categoryId   String
   categoryName String
+}
+
+model Recipes {
+  id                Int      @id @default(autoincrement())
+  recipeTitle       String
+  recipeUrl         String
+  recipeDescription String
+  foodImageUrls     String[]
+  keywords          String[]
+  totalTime         Int
+  recipeIngredients String[]
 }
