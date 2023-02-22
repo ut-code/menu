@@ -1,7 +1,53 @@
-import requests, json, datetime, isodate
+import requests, re, json, datetime, isodate, sys
 from bs4 import BeautifulSoup
 
 from crawlTophits import crawlTophits
+
+
+def is_json(json_str):
+    """
+    json_strがjson.loads可能か判定
+    """
+    result = False
+    try:
+        json.loads(json_str)
+        result = True
+    except json.JSONDecodeError as jde:
+        print("[", json_str, "] is not in json format. \n", sys.exc_info())
+
+    return result
+
+
+def fixjson(data_text):
+    """
+    json形式の文字列に整えて、Pythonらしく辞書型に変換
+    """
+
+    # 空白を削除
+    data_text = data_text.replace(" ", "")
+
+    # "/r" "/n" "/t" を削除
+    data_text = data_text.replace("\r", "")
+    data_text = data_text.replace("\n", "")
+    data_text = data_text.replace("\t", "")
+
+    # レシピ形式じゃなかったら標準化しにくいので無視
+    if '"@type":"recipe"' not in data_text and '"@type":"Recipe"' not in data_text:
+        return None
+
+    # 最初の文字が '{"' ではない場合は、その手前までの文字を取得
+    if len(data_text) > 2 and data_text[:2] != '{"':
+        prefix_num = data_text.find('{"')
+        data_text = data_text[prefix_num:-prefix_num]
+
+    # json形式に合わせるため、すべての末尾のカンマを削除
+    # data_text = re.sub(r",\s*}", "}", data_text)
+    # data_text = re.sub(r",\s*]", "]", data_text)
+
+    if not is_json(data_text):
+        return None
+    else:
+        return json.loads(data_text)
 
 
 def extractRecipes(urls: list) -> list:
@@ -15,26 +61,39 @@ def extractRecipes(urls: list) -> list:
         datas = soup.select("script[type='application/ld+json']")
 
         for data in datas:
-            # JSON形式の文字列を、Pythonらしく辞書型に変換
-            data_dict = json.loads(data.text)
+            # ----------------------------------------------------------------
+            # json形式の文字列を、Pythonらしく辞書型に変換
+            # ----------------------------------------------------------------
+            data_dict = fixjson(data.text)
 
             # ----------------------------------------------------------------
             # 構造化データがRecipeの場合に記録
             # ----------------------------------------------------------------
-            if "@type" not in data_dict:  # Keyがない場合を考えて念のため
+            if type(data_dict) != dict:
+                continue
+            if "@type" not in data_dict.keys():  # Keyがない場合を考えて念のため
                 continue
             if data_dict["@type"].lower() != "recipe":
                 continue
-            
+
             # ----------------------------------------------------------------
             # dict型に直す際に形式をなるべく整える
             # ----------------------------------------------------------------
             # URLはdata_dictに含まれないので別途追加
             data_dict["recipeUrl"] = url
 
+            # image の型がstrならlist[str]に変換
+            if "image" in data_dict:
+                if type(data_dict["image"]) == str:
+                    data_dict["image"] = [data_dict["image"]]
+            else:
+                continue
+
             # keywords はカンマ区切りなのでリストに変換
             if "keywords" in data_dict:
                 data_dict["keywords"] = data_dict["keywords"].split(",")
+            else:  # keywordsがない場合は空リストを追加
+                data_dict["keywords"] = []
 
             if "totalTime" in data_dict:
                 # totalTime は表記が ISO 8601 形式なので datatime.timedelta 形式に変換
