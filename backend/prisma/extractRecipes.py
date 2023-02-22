@@ -56,8 +56,8 @@ def extractRecipes(urls: list) -> list:
         # ----------------------------------------------------------------
         # url先のHTMLから、"<script type="application/ld+json">" のタグで囲まれた場所を取得
         # ----------------------------------------------------------------
-        request = requests.get(url)
-        soup = BeautifulSoup(request.text, "html.parser")
+        request = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
+        soup = BeautifulSoup(request.content, "html.parser")
         datas = soup.select("script[type='application/ld+json']")
 
         for data in datas:
@@ -65,6 +65,8 @@ def extractRecipes(urls: list) -> list:
             # json形式の文字列を、Pythonらしく辞書型に変換
             # ----------------------------------------------------------------
             data_dict = fixjson(data.text)
+            if not data_dict:
+                continue
 
             # ----------------------------------------------------------------
             # 構造化データがRecipeの場合に記録
@@ -83,7 +85,7 @@ def extractRecipes(urls: list) -> list:
             data_dict["recipeUrl"] = url
 
             # image の型がstrならlist[str]に変換
-            if "image" in data_dict:
+            if "image" in data_dict.keys():
                 if type(data_dict["image"]) == str:
                     data_dict["image"] = [data_dict["image"]]
             else:
@@ -113,7 +115,8 @@ def extractRecipes(urls: list) -> list:
             else:
                 # totalTimeも cookTime + prepTime もない場合は追加しない
                 # が、そこまで totalTime の有無に厳しくする必要があるかは不明
-                continue
+                data_dict["totalTime"] = -1
+                pass
 
             # recipeIngredient に余計な記号が入っていたら削除
             new = []
