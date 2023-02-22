@@ -47,8 +47,8 @@ def getCategories() -> list[str]:
 
 
 category_names = getCategories() # max=2434に変更
-for category_name in category_names[8:]:
-    site_urls = crawlTophits(search_word=category_name+"+レシピ", pages_num=40)
+for category_name in category_names[37:]:
+    site_urls = crawlTophits(search_word=category_name+"+レシピ", pages_num=100)
     print(len(site_urls), "件のURLを取得しました。")
     recipe_dicts = extractRecipes(site_urls)
     print(len(recipe_dicts), "件の構造化データを取得しました。")

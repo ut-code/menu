@@ -2,7 +2,7 @@
 参考・引用したサイト(大変助かりました。ありがとうございました)
 https://rurukblog.com/post/WebScraping-Google-Top/
 """
-import requests, urllib.parse
+import requests, urllib.parse, time
 from bs4 import BeautifulSoup
 
 # schema.org/recipe の構造化データを取得できるサイト
@@ -12,13 +12,13 @@ whitelist = [
     "www.lettuceclub.net",
     "www.tablemark.co.jp",
     "www.ebarafoods.com",
-    "www.marukome.co.jp",
     "park.ajinomoto.co.jp",
     "www.ntv.co.jp/3min/",
     "www.meg-snow.com",
     "www.salad-cafe.com",
     "dancyu.jp",
     "www.yutori.co.jp",
+    # "www.marukome.co.jp", o
     # "www.mizkan.co.jp", o
     # "kumiko-jp.com", o
     # "recipe.yamasa.com", o
@@ -53,6 +53,7 @@ def crawlTophits(search_word: str, pages_num: int) -> list:
     except Exception as e:
         print(e)
         return []
+    time.sleep(3)
 
     # ----------------------------------------------------------------
     # Googleのページ解析を行う
@@ -90,7 +91,7 @@ def ignoreLists(domain: str, url: str) -> bool:
         if "corner" in url:
             return True
     elif domain=="www.lettuceclub.net":
-        if "ingredient" in url or "category" in url:
+        if "ingredient" in url or "category" in url or "coordinator" in url:
             return True
     elif domain=="www.kurashiru.com":
         if "articles" in url:
