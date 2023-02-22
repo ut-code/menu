@@ -1,4 +1,4 @@
-import requests, re, json, datetime, isodate, sys
+import requests, re, json, datetime, isodate, sys, time
 from bs4 import BeautifulSoup
 
 from crawlTophits import crawlTophits
@@ -57,6 +57,7 @@ def extractRecipes(urls: list) -> list:
         # url先のHTMLから、"<script type="application/ld+json">" のタグで囲まれた場所を取得
         # ----------------------------------------------------------------
         request = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
+        time.sleep(3)
         soup = BeautifulSoup(request.content, "html.parser")
         datas = soup.select("script[type='application/ld+json']")
 
@@ -81,6 +82,9 @@ def extractRecipes(urls: list) -> list:
             # ----------------------------------------------------------------
             # dict型に直す際に形式をなるべく整える
             # ----------------------------------------------------------------
+            if "recipeIngredient" not in data_dict.keys():
+                continue
+            
             # URLはdata_dictに含まれないので別途追加
             data_dict["recipeUrl"] = url
 
