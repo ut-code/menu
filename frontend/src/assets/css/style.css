@@ -31,3 +31,18 @@ a {
   text-decoration: none;
   color: var(--Black);
 }
+
+/* css animation */
+.style1,
+.style2 {
+  animation: fadeIn 1s;
+  animation-fill-mode: forwards;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
