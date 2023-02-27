@@ -21,6 +21,7 @@ type recipe = {
 }
 
 // 二回マウントするので8個表示されるけど気にしない
+//ここに質問の答えが入っている
 const answers: string[] = []
 
 export default function Result() {
@@ -39,6 +40,8 @@ export default function Result() {
       }
     }
     unmounted = true
+
+    // answersを使ってfetchAPI
   }, [])
 
   const [categoryId, setCategoryId] = useState<string>("12-102")
