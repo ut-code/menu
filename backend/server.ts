@@ -1,4 +1,4 @@
-import express from "express"
+import express, { response } from "express"
 import cors from "cors"
 import { PrismaClient } from "@prisma/client"
 
@@ -43,9 +43,12 @@ app.get("/selectRecipes", async (request, response) => {
   })
 })
 
-// app.post("/send", async (request, response) => {
-
-// })
+//recipeにアクセスできません。
+/*app.post("", async (request, response) => {
+  await client.recipes.findMany()
+  response.send()
+})
+*/
 
 //----------------------------------------------------------------
 // 回答からカテゴリを絞る
