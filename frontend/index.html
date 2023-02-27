@@ -6,6 +6,23 @@
     <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>献立提案システム（仮）</title>
+    <!--pwa化-->
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" sizes="180x180" href="icon-192x192.png" />
+    <script>
+      window.addEventListener("load", function () {
+        if ("serviceWorker" in navigator) {
+          navigator.serviceWorker
+            .register("/sw.js")
+            .then(function (registration) {
+              console.log("serviceWorker registed.")
+            })
+            .catch(function (error) {
+              console.warn("serviceWorker error.", error)
+            })
+        }
+      })
+    </script>
   </head>
   <body style="margin: 0; padding: 0">
     <div id="root"></div>
