@@ -2,7 +2,7 @@
 参考・引用したサイト(大変助かりました。ありがとうございました)
 https://rurukblog.com/post/WebScraping-Google-Top/
 """
-import requests, urllib.parse, time
+import requests, urllib.parse, time, random
 from bs4 import BeautifulSoup
 
 # schema.org/recipe の構造化データを取得できるサイト
@@ -53,7 +53,7 @@ def crawlTophits(search_word: str, pages_num: int) -> list:
     except Exception as e:
         print(e)
         return []
-    time.sleep(3)
+    time.sleep(random.randint(1, 5))
 
     # ----------------------------------------------------------------
     # Googleのページ解析を行う
@@ -91,7 +91,7 @@ def ignoreLists(domain: str, url: str) -> bool:
         if "corner" in url:
             return True
     elif domain=="www.lettuceclub.net":
-        if "ingredient" in url or "category" in url or "coordinator" in url:
+        if "ingredient" in url or "category" in url or "coordinator" in url or "event" in url or "coordinator" in url:
             return True
     elif domain=="www.kurashiru.com":
         if "articles" in url:
