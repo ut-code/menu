@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>献立提案システム（仮）</title>
     <!--pwa化-->
-    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="manifest" href="/manifest/manifest.webmanifest" />
     <link rel="apple-touch-icon" sizes="180x180" href="icon-192x192.png" />
     <script>
       window.addEventListener("load", function () {
         if ("serviceWorker" in navigator) {
           navigator.serviceWorker
-            .register("/sw.js")
+            .register("../sw.js")
             .then(function (registration) {
               console.log("serviceWorker registed.")
             })
