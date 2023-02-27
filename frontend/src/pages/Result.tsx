@@ -8,6 +8,8 @@ import "@/assets/css/card.css"
 import { FaArrowLeft } from "react-icons/fa"
 import Reference from "@/components/reference"
 
+const getSelectRecipeApi = `${import.meta.env.VITE_API_ENDPOINT}/selectRecipes`
+
 // 人気レシピ4件を取得できるAPIから、必要なキーの情報のみを取得する
 type recipe = {
   foodImageUrl: string
@@ -45,8 +47,13 @@ export default function Result() {
     // ここでfetchAPIを実行して、レシピを取得する
     // その後、レシピを表示する
     //fetch recipes
-    const [recipes, setRecipes] = useState<recipe[]>([])
-    const addRecipe = (recipe: recipe) => setRecipes((prev) => [...prev, recipe])
+
+    const fetchSelectedRecipes = async () => {
+      const response = await fetch(getSelectRecipeApi)
+      setRecipes(await response.json())
+    }
+
+    fetchSelectedRecipes()
   }, [])
 
   const [categoryId, setCategoryId] = useState<string>("12-102")
@@ -60,34 +67,34 @@ export default function Result() {
   // res.jsonは{ "result": [] }の形式で返ってくる
   // 今回 recipe 型の配列に整形するため、 results の配列をループして recipe型 の配列に変換してから addRecipe する
   //----------------------------------------------------------------
-  useEffect(() => {
-    const fetchRecipes = async () => {
-      const res: Response = await fetch(
-        "https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426?applicationId=1032749498491273405&categoryId=" +
-          categoryId
-      )
-      const datas = await res.json()
-      const results = datas.result
+  // useEffect(() => {
+  //   const fetchRecipes = async () => {
+  //     const res: Response = await fetch(
+  //       "https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426?applicationId=1032749498491273405&categoryId=" +
+  //         categ333oryId
+  //     )
+  //     const datas = await res.json()
+  //     const results = datas.result
 
-      results.forEach((result: object) => {
-        // resultの型はrecipeより拡張されているから、recipe型に変換する
-        // tmp: recipe = ...と明示的に書いてみた
-        const tmp: recipe = result as recipe
+  //     results.forEach((result: object) => {
+  //       // resultの型はrecipeより拡張されているから、recipe型に変換する
+  //       // tmp: recipe = ...と明示的に書いてみた
+  //       const tmp: recipe = result as recipe
 
-        // recipeMaterialConverted は、recipeMaterial の配列を"・"で連結したもの
-        // 例: ["豚肉", "玉ねぎ", "にんにく"] -> "豚肉・玉ねぎ・にんにく"
-        tmp.recipeMaterialConverted = tmp.recipeMaterial.join("・")
-        addRecipe(tmp)
-      }, [])
-    }
+  //       // recipeMaterialConverted は、recipeMaterial の配列を"・"で連結したもの
+  //       // 例: ["豚肉", "玉ねぎ", "にんにく"] -> "豚肉・玉ねぎ・にんにく"
+  //       tmp.recipeMaterialConverted = tmp.recipeMaterial.join("・")
+  //       addRecipe(tmp)
+  //     }, [])
+  //   }
 
-    fetchRecipes()
-    /*
-    詰まった箇所のメモ
-    await res.json()で受け取ったjsonの形式を調べるために、Object.keys()とObject.values()を使用
-    しかし、本来はリンク先の情報を見ればわかることだった
-    */
-  }, [])
+  //   fetchRecipes()
+  //   /*
+  //   詰まった箇所のメモ
+  //   await res.json()で受け取ったjsonの形式を調べるために、Object.keys()とObject.values()を使用
+  //   しかし、本来はリンク先の情報を見ればわかることだった
+  //   */
+  // }, [])
 
   return (
     <>

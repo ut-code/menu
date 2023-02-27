@@ -30,14 +30,23 @@ app.post("/send", async (request, response) => {
 
 //----------------------------------------------------------------
 // Result.tsx用
-/*app.get("/addRecipe", async (request, response) => {
-
+app.get("/selectRecipes", async (request, response) => {
+  response.json({
+    Id: 100,
+    recipeTitle: "String",
+    recipeUrl: "String",
+    recipeDescription: "String",
+    foodImageUrls: "String[]",
+    keywords: "String[]",
+    totalTime: "Int",
+    recipeIngredients: "String[]",
+  })
 })
 
-app.post("/send", async (request, response) => {
-  
-})
-*/
+// app.post("/send", async (request, response) => {
+
+// })
+
 //----------------------------------------------------------------
 // 回答からカテゴリを絞る
 
