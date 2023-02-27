@@ -30,15 +30,14 @@ app.post("/send", async (request, response) => {
 
 //----------------------------------------------------------------
 // Result.tsx用
-/*const food: string = "水";
-app.get("/food",  async (request, response) => {
-  //response.json(await client.recipes.find(food))
+/*app.get("/addRecipe", async (request, response) => {
+
 })
 
 app.post("/send", async (request, response) => {
+  
 })
 */
-
 //----------------------------------------------------------------
 // 回答からカテゴリを絞る
 
