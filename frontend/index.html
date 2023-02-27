@@ -3,26 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <!-- <link rel="icon" href="/favicon.ico" /> ファビコンできたらを変更 -->
-    <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
+    <!-- <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>献立提案システム（仮）</title>
     <!--pwa化-->
-    <link rel="manifest" href="../manifest/manifest.webmanifest" />
-    <link rel="apple-touch-icon" sizes="180x180" href="../manifest/icon-192x192.png" />
-    <script>
-      window.addEventListener("load", function () {
-        if ("serviceWorker" in navigator) {
-          navigator.serviceWorker
-            .register("../backend/sw.js")
-            .then(function (registration) {
-              console.log("serviceWorker registed.")
-            })
-            .catch(function (error) {
-              console.warn("serviceWorker error.", error)
-            })
-        }
-      })
-    </script>
+    <link rel="apple-touch-icon" sizes="180x180" href="/manifest/icon-192x192.png" />
+    <link rel="manifest" href="/manifest/manifest.webmanifest" crossorigin="use-credentials" />
   </head>
   <body style="margin: 0; padding: 0">
     <div id="root"></div>
