@@ -42,6 +42,11 @@ export default function Result() {
     unmounted = true
 
     // answersを使ってfetchAPI
+    // ここでfetchAPIを実行して、レシピを取得する
+    // その後、レシピを表示する
+    //fetch recipes
+    const [recipes, setRecipes] = useState<recipe[]>([])
+    const addRecipe = (recipe: recipe) => setRecipes((prev) => [...prev, recipe])
   }, [])
 
   const [categoryId, setCategoryId] = useState<string>("12-102")
