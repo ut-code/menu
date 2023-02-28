@@ -5,6 +5,7 @@ import { motion, useAnimation } from "framer-motion"
 import "@/assets/css/style.css"
 import "@/assets/css/home.css"
 import "@/assets/css/choice.css"
+import FadeIn from "@/components/FadeIn"
 
 import { FaRegQuestionCircle } from "react-icons/fa"
 import { FaArrowLeft } from "react-icons/fa"
@@ -166,18 +167,8 @@ export default function Questions() {
   //----------------------------------------------------------------
   const controls = useAnimation()
   useEffect(() => {
-    // 前回のアニメーションをストップ
-    controls.stop()
-    // 透明度を一旦0にしてからフェードイン
-    controls.set({ opacity: 0 })
-    // 1秒かけてフェードイン、今回はイージングはない方がいいかも
-    controls.start({
-      opacity: 1,
-      transition: {
-        duration: 1,
-        // ease: "easeOut"
-      },
-    })
+    // FadeInを実行、propsとしてcontrolsを渡す
+    FadeIn({ controls })
   }, [currentQuestion.questionNumber])
 
   return (
