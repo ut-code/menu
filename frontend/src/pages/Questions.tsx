@@ -2,10 +2,10 @@ import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { motion, useAnimation } from "framer-motion"
 
+import FadeIn from "@/components/FadeIn"
 import "@/assets/css/style.css"
 import "@/assets/css/home.css"
 import "@/assets/css/choice.css"
-import FadeIn from "@/components/FadeIn"
 
 import { FaRegQuestionCircle } from "react-icons/fa"
 import { FaArrowLeft } from "react-icons/fa"

@@ -10,8 +10,8 @@ export default function FadeIn(props: Props = { controls: useAnimation() }) {
   props.controls.start({
     opacity: 1,
     transition: {
-      duration: 1,
-      // ease: "easeOut"
+      duration: 0.7,
+      ease: "easeOut",
     },
   })
 }

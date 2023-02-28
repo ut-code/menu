@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
+import { motion, useAnimation } from "framer-motion"
 
+import FadeIn from "@/components/FadeIn"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import "@/assets/css/style.css"
@@ -35,36 +37,43 @@ export default function Message() {
     }
   }, [])
 
+  const controls = useAnimation()
+  useEffect(() => {
+    FadeIn({ controls })
+  }, [])
+
   return (
     <>
-      <Header />
-      <Link to={"/home"}>戻る</Link>
+      <motion.div animate={controls}>
+        <Header />
+        <Link to={"/home"}>戻る</Link>
 
-      <ul>
-        {messages.map((message) => (
-          <li key={message.id}>{message.content}</li>
-        ))}
-      </ul>
-      <input
-        value={newMessageContent}
-        onChange={(e) => {
-          setNewMessageContent(e.target.value)
-        }}
-      />
-      <button
-        type="button"
-        onClick={async () => {
-          await fetch(postSendApi, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ content: newMessageContent }),
-          })
-        }}
-      >
-        送信
-      </button>
+        <ul>
+          {messages.map((message) => (
+            <li key={message.id}>{message.content}</li>
+          ))}
+        </ul>
+        <input
+          value={newMessageContent}
+          onChange={(e) => {
+            setNewMessageContent(e.target.value)
+          }}
+        />
+        <button
+          type="button"
+          onClick={async () => {
+            await fetch(postSendApi, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ content: newMessageContent }),
+            })
+          }}
+        >
+          送信
+        </button>
 
-      <Footer />
+        <Footer />
+      </motion.div>
     </>
   )
 }
