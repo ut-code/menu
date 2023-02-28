@@ -8,9 +8,43 @@ export default defineConfig({
   plugins: [
     react(),
     tsconfigPaths(),
-    // use vitepwa to generate manifest.json and service-worker.js
     VitePWA({
       registerType: "autoUpdate",
+      includeAssets: ["favicon.ico"],
+      manifest: {
+        theme_color: "#FBA01D",
+        background_color: "#fff",
+        lang: "ja",
+        display: "standalone",
+        scope: "/",
+        start_url: "/",
+        short_name: "だるめし",
+        name: "だるめし Dull Meshi",
+        description: "献立提案システム",
+        icons: [
+          {
+            src: "./icon-192x192.png",
+            sizes: "192x192",
+            type: "image/png",
+          },
+          {
+            src: "./icon-256x256.png",
+            sizes: "256x256",
+            type: "image/png",
+          },
+          {
+            src: "./icon-384x384.png",
+            sizes: "384x384",
+            type: "image/png",
+          },
+          {
+            src: "./icon-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "any maskable",
+          },
+        ],
+      },
     }),
   ],
 })
