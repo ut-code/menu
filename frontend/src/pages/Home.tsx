@@ -62,9 +62,9 @@ export default function Home() {
     <>
       <Header />
 
-      <div className="tmpImage">
+      {/* <div className="tmpImage">
         <img src="https://placehold.jp/300x300.png" alt="tmpImage" />
-      </div>
+      </div> */}
 
       <ul>
         {recipes.map((recipe, index) => (
