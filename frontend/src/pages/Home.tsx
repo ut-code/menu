@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
+import { motion, useAnimation } from "framer-motion"
 
+import FadeIn from "@/components/FadeIn"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import "@/assets/css/style.css"
@@ -58,28 +60,35 @@ export default function Home() {
     */
   }, [])
 
+  const controls = useAnimation()
+  useEffect(() => {
+    FadeIn({ controls })
+  }, [])
+
   return (
     <>
-      <Header />
+      <motion.div animate={controls}>
+        <Header />
 
-      <div className="tmpImage">
+        {/* <div className="tmpImage">
         <img src="https://placehold.jp/300x300.png" alt="tmpImage" />
-      </div>
+      </div> */}
 
-      <ul>
-        {recipes.map((recipe, index) => (
-          <div key={index}>
-            <li>{recipe.recipeTitle}</li>
-          </div>
-        ))}
-      </ul>
+        <ul>
+          {recipes.map((recipe, index) => (
+            <div key={index}>
+              <li>{recipe.recipeTitle}</li>
+            </div>
+          ))}
+        </ul>
 
-      <Link to={"/questions"}>はじめる ←ボタンになってます</Link>
-      <br></br>
-      <Link to={"/result"}>検索結果 ←ボタンになってます</Link>
-      <br></br>
-      <Link to={"/message"}>掲示板 ←ボタンになってます</Link>
-      <Footer />
+        <Link to={"/questions"}>はじめる ←ボタンになってます</Link>
+        <br></br>
+        <Link to={"/result"}>検索結果 ←ボタンになってます</Link>
+        <br></br>
+        <Link to={"/message"}>掲示板 ←ボタンになってます</Link>
+        <Footer />
+      </motion.div>
     </>
   )
 }

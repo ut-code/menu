@@ -1,6 +1,8 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
+import { motion, useAnimation } from "framer-motion"
 
+import FadeIn from "@/components/FadeIn"
 import "@/assets/css/style.css"
 import "@/assets/css/home.css"
 import "@/assets/css/card.css"
@@ -96,35 +98,42 @@ export default function Result() {
   //   */
   // }, [])
 
+  const controls = useAnimation()
+  useEffect(() => {
+    FadeIn({ controls })
+  }, [])
+
   return (
     <>
-      <div className="style1">
-        <div className="backButton-b" onClick={() => Navigate("/questions")}>
-          <FaArrowLeft size="1.5rem" />
-        </div>
-        <div className="result">検索結果</div>
-        {recipes.map((recipe, index) => (
-          <div key={index} className="card">
-            {/* click anywhere and it opens recipe.recipeUrl but you don't make texts blue with underline */}
-            <a href={recipe.recipeUrl} target="_blank" rel="noreferrer">
-              <img className="card__imgframe" src={recipe.foodImageUrl} />
-              <div className="card__textbox">
-                <div className="card__titletext">{recipe.recipeTitle}</div>
-                <div className="card__overviewtext">{recipe.recipeMaterialConverted}</div>
-                <Reference url={recipe.recipeUrl} />
-              </div>
-            </a>
+      <motion.div animate={controls}>
+        <div className="style1">
+          <div className="backButton-b" onClick={() => Navigate("/questions")}>
+            <FaArrowLeft size="1.5rem" />
           </div>
-        ))}
+          <div className="result">検索結果</div>
+          {recipes.map((recipe, index) => (
+            <div key={index} className="card">
+              {/* click anywhere and it opens recipe.recipeUrl but you don't make texts blue with underline */}
+              <a href={recipe.recipeUrl} target="_blank" rel="noreferrer">
+                <img className="card__imgframe" src={recipe.foodImageUrl} />
+                <div className="card__textbox">
+                  <div className="card__titletext">{recipe.recipeTitle}</div>
+                  <div className="card__overviewtext">{recipe.recipeMaterialConverted}</div>
+                  <Reference url={recipe.recipeUrl} />
+                </div>
+              </a>
+            </div>
+          ))}
 
-        <Link to={"/home"}>ホーム ←ボタンになってます</Link>
-        {answers.map((answer, index) => (
-          <div key={index}>
-            {index + 1}
-            {answer}
-          </div>
-        ))}
-      </div>
+          <Link to={"/home"}>ホーム ←ボタンになってます</Link>
+          {answers.map((answer, index) => (
+            <div key={index}>
+              {index + 1}
+              {answer}
+            </div>
+          ))}
+        </div>
+      </motion.div>
     </>
   )
 }

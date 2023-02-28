@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
+import { motion, useAnimation } from "framer-motion"
 
+import FadeIn from "@/components/FadeIn"
 import "@/assets/css/style.css"
 import "@/assets/css/home.css"
 import "@/assets/css/choice.css"
@@ -160,9 +162,18 @@ export default function Questions() {
     setCurrentQuestion(questions[currentNumber])
   }
 
+  //----------------------------------------------------------------
+  // 問題番号の変更を検知してフェードインアニメーションを実行
+  //----------------------------------------------------------------
+  const controls = useAnimation()
+  useEffect(() => {
+    // FadeInを実行、propsとしてcontrolsを渡す
+    FadeIn({ controls })
+  }, [currentQuestion.questionNumber])
+
   return (
     <>
-      <div className={style}>
+      <motion.div className={style} animate={controls}>
         {currentQuestion.questionNumber === 0 && (
           <div className="title" onClick={() => Navigate("/home")}>
             <p>だるめし Dull Meshi</p>
@@ -222,7 +233,7 @@ export default function Questions() {
         <div className="nextButton" onClick={onClickNextPage}>
           Next
         </div>
-      </div>
+      </motion.div>
     </>
   )
 }
