@@ -32,5 +32,5 @@ model Recipes {
   foodImageUrls     String[]
   keywords          String[]
   totalTime         Int
-  recipeIngredients String[]
+  recipeMaterial    String[]
 }
