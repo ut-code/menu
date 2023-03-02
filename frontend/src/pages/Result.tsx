@@ -30,7 +30,7 @@ type Answer = {
   content: string
 }
 
-// 検索に使用する情報
+// 検索に使用する情報 @@@@@
 type SearchInfo = {
   ingredient: string[]
   // あとで増やす
@@ -42,10 +42,23 @@ export default function Result() {
 
   const [answers, setAnswers] = useState<Answer[]>([])
   // const addAnswer = (answer: Answer) => setAnswers((prev) => [...prev, answer])
-  const searchInfo: SearchInfo = { ingredient: [] }
-  const [categoryId, setCategoryId] = useState<string>("12-103")
+  // const [categoryId, setCategoryId] = useState<string>("12-103")
   const [recipes, setRecipes] = useState<Recipe[]>([])
   const addRecipe = (recipe: Recipe) => setRecipes((prev) => [...prev, recipe])
+
+  const convertAnswersToSearchInfo = (newAnswers: Answer[]): SearchInfo => {
+    // @@@@@
+    const info: SearchInfo = { ingredient: [] }
+    if (newAnswers) {
+      newAnswers.forEach((answer: Answer) => {
+        // answer.contentをingredientに追加
+        if (answer.answerNumber === 0) {
+          info.ingredient.push(answer.content)
+        }
+      })
+    }
+    return info
+  }
 
   // localStorageに保存出来ているか確認
   // 無駄に unmounted で一回しか実行されないようにコントロール
@@ -66,29 +79,24 @@ export default function Result() {
     }
     setAnswers(newAnswers)
 
-    // newAnswersをfindManyの検索に使いやすいように整形
-    if (newAnswers) {
-      newAnswers.forEach((answer) => {
-        // answer.contentをingredientに追加
-        if (answer.answerNumber === 0) {
-          searchInfo.ingredient.push(answer.content)
-        }
-      })
-    }
-    // answersを使ってfetchAPI
-    const fetchSearchedRecipes = async (searchInfo: SearchInfo) => {
+    // newAnswers をfindManyの検索に使いやすいように searchInfo に整形
+    const searchInfo: SearchInfo = convertAnswersToSearchInfo(newAnswers)
+
+    // searchInfo を使ってfetchAPI
+    const fetchSearchedRecipes = async (info: SearchInfo) => {
+      // searchInfo を載せてPOSTリクエスト、返ってきた内容がresponse
       const response = await fetch(postSelectRecipeApi, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content: searchInfo }),
+        body: JSON.stringify({ content: info }),
       })
       const results = await response.json()
 
       // undefinedエラー回避
       if (results) {
         results.forEach((result: any) => {
-          // resultの型は欠損ありRecipe
-          // recipeMaterialConverted は、recipeMaterial の配列を"・"で連結したもの
+          // result の型は欠損あり Recipe なので any型 で受けて、 Recipe型 に変換する
+          // recipeMaterialConverted は、 recipeMaterial の配列を "・" で連結したもの
           // 例: ["豚肉", "玉ねぎ", "にんにく"] -> "豚肉・玉ねぎ・にんにく"
           result.recipeMaterialConverted = result.recipeMaterial.join("・")
           addRecipe(result)

@@ -33,9 +33,17 @@ app.post("/send", async (request, response) => {
 //----------------------------------------------------------------
 app.post("/searchRecipes", async (request, response) => {
   const searchInfo = request.body.content
+
+  console.log(searchInfo) // こういう風にデバッグできます。backendのターミナルで見てみてください
+  // @@@@@ ここに検索処理を書く
+  // await client.message.findMany(
+  //   {
+  //     where: {
+  //   }
+  // )
   response.json([
     {
-      recipeTitle: "String",
+      recipeTitle: "豚肉と玉ねぎの炒め物",
       recipeUrl: "https://www.kurashiru.com/recipes/f5ae0ab0-52b9-419b-8da9-aa8e004ee8d2",
       recipeDescription: "String",
       foodImageUrls: [
