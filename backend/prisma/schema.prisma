@@ -34,3 +34,14 @@ model Recipes {
   totalTime         Int
   recipeMaterial    String[]
 }
+
+model RecipesTmp {
+  id                Int      @id @default(autoincrement())
+  recipeTitle       String
+  recipeUrl         String
+  recipeDescription String
+  foodImageUrls     String[]
+  keywords          String[]
+  totalTime         Int
+  recipeMaterial    String[]
+}
