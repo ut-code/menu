@@ -56,5 +56,4 @@ app.post("/searchRecipes", async (request, response) => {
   ])
 })
 
-// Vite が標準で 3000 番ポートを使うので 3001 しておく
-app.listen(3001)
+app.listen(3000)

@@ -27,7 +27,7 @@ services:
     startCommand: npm run start
     envVars:
       - key: PORT
-        value: 3001
+        value: 3000
       - key: DATABASE_URL
         sync: false
       - key: WEB_ORIGIN
