@@ -59,7 +59,7 @@ Terminal をもう一つ開く
 npm run dev
 ```
 
-ブラウザで [`http://localhost:3000/home`](http://localhost:3000/home) にアクセスすると、表示されるはずです。
+ブラウザで [`http://localhost:5173/home`](http://localhost:5173/home) にアクセスすると、表示されるはずです。
 
 ## ディレクトリ構成
 
