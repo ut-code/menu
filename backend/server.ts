@@ -36,6 +36,7 @@ app.post("/searchRecipes", async (request, response) => {
 
   console.log(searchInfo) // こういう風にデバッグできます。backendのターミナルで見てみてください
   // @@@@@ ここに検索処理を書く
+  const { data, error } = await searchInfo.from("Recipes").select("*").in("priority", searchInfo)
   // await client.recipesTmp.findMany( 本番はRecipesTmpではなくRecipesを使うことになります
   //   {
   //     where: {

@@ -47,7 +47,7 @@ export default function Result() {
   const addRecipe = (recipe: Recipe) => setRecipes((prev) => [...prev, recipe])
 
   const convertAnswersToSearchInfo = (newAnswers: Answer[]): SearchInfo => {
-    // @@@@@
+    //
     const info: SearchInfo = { ingredient: [] }
     if (newAnswers) {
       newAnswers.forEach((answer: Answer) => {
