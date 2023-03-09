@@ -5,6 +5,7 @@ import { motion, useAnimation } from "framer-motion"
 import FadeIn from "@/components/FadeIn"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
+import Suggestion from "@/components/suggestion"
 import "@/assets/css/style.css"
 
 export default function Home() {
@@ -30,6 +31,8 @@ export default function Home() {
         <Link to={"/result"}>検索結果 ←ボタンになってます</Link>
         <br></br>
         <Link to={"/message"}>掲示板 ←ボタンになってます</Link>
+        <Suggestion ingridientName="トマト" ingridientImage="tomato.jpg" />
+        <Suggestion ingridientName="ブロッコリー" ingridientImage="broccoli.jpg" />
         <Footer />
       </motion.div>
     </>

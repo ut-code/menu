@@ -2,8 +2,9 @@
 
 .style1 {
   padding: 1em;
-  background-color: var(--Orange);
-  color: white;
+  background-color: var(--LightBrown);
+  color: var(--Black);
+  height: 100vh;
 
   /* everything in middle */
   display: flex;
@@ -18,6 +19,7 @@
   background-color: white;
   width: 90%;
   border-radius: 50rem; /* make a circle border */
+  box-shadow: var(--Black) 2px 2px 0 0;
   border: var(--Black) 1px solid;
 }
 
@@ -29,7 +31,6 @@
   text-align: center;
   font-weight: bold;
   border-radius: 10rem; /* make a circle border */
-  border: var(--Black) 1px solid;
 }
 
 .backButton {
@@ -53,15 +54,16 @@
 }
 
 .suggestIngredient .box_pic {
-  background-image: url(../image/tomato.jpg);
-
   /* 文字 */
-  color: white;
+  color: var(--Black);
   font-weight: bold;
 
   /* 縁 */
   border: solid 2px var(--Black);
-  border-radius: 0.5em;
+  border-radius: 30px;
+
+  /* 影 */
+  box-shadow: var(--Black) 2px 2px 0 0;
 
   /* crop image */
   background-size: cover;
@@ -74,6 +76,18 @@
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
+}
+
+.heading {
+  width: 100%;
+  border-top: solid 2px #1c1c1c;
+  border-radius: 0px 0px 30px 30px;
+  color: #1c1c1c;
+  font-weight: bold;
+  padding: 0.8em;
+  z-index: 2;
+  margin-top: 100%;
+  background-color: white;
 }
 
 .q_white {

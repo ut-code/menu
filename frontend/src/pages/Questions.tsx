@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import { motion, useAnimation } from "framer-motion"
 
 import FadeIn from "@/components/FadeIn"
+import Suggestion from "@/components/suggestion"
 import "@/assets/css/style.css"
 import "@/assets/css/home.css"
 import "@/assets/css/choice.css"
@@ -15,7 +16,12 @@ import { FaArrowLeft } from "react-icons/fa"
 // https://dev.classmethod.jp/articles/react-survey-app-to-proceed-to-the-next-question-without-having-to-reload-the-page/
 //----------------------------------------------------------------
 
-type Choices = { [key: number]: string }
+type Choices = {
+  [key: number]: {
+    choiceText: string
+    choiceImage: string
+  }
+}
 
 type Question = {
   questionNumber: number
@@ -29,13 +35,17 @@ type Question = {
 const questions: Question[] = [
   {
     questionNumber: 0,
-    questionText: "使いたい食材・調味料は何ですか？",
+    questionText: "使いたい食材はなんですか？",
     userInput: true,
     choices: {
-      1: "トマト",
-      2: "ブロッコリー",
-      3: "牛乳",
-      4: "卵",
+      1: { choiceText: "トマト", choiceImage: "/src/assets/image/tomato.jpg" },
+      2: { choiceText: "ブロッコリー", choiceImage: "/src/assets/image/broccoli.jpg" },
+      3: { choiceText: "牛乳", choiceImage: "/src/assets/image/milk.jpg" },
+      4: { choiceText: "卵", choiceImage: "/src/assets/image/egg.jpg" },
+      // 1: "トマト",
+      // 2: "ブロッコリー",
+      // 3: "牛乳",
+      // 4: "卵",
     },
   },
   {
@@ -43,10 +53,10 @@ const questions: Question[] = [
     questionText: "分類はどれですか？",
     userInput: false,
     choices: {
-      1: "主食",
-      2: "主菜・副菜",
-      3: "汁物",
-      4: "その他",
+      1: { choiceText: "主食", choiceImage: "" },
+      2: { choiceText: "主菜・副菜", choiceImage: "" },
+      3: { choiceText: "汁物", choiceImage: "" },
+      4: { choiceText: "その他", choiceImage: "" },
     },
   },
   {
@@ -54,9 +64,9 @@ const questions: Question[] = [
     questionText: "調理時間はどのくらいかけられますか？",
     userInput: false,
     choices: {
-      1: "時短",
-      2: "普通",
-      3: "じっくり",
+      1: { choiceText: "時短", choiceImage: "" },
+      2: { choiceText: "普通", choiceImage: "" },
+      3: { choiceText: "じっくり", choiceImage: "" },
     },
   },
   {
@@ -64,7 +74,7 @@ const questions: Question[] = [
     questionText: "他に使いたい食材・調味料はありますか？",
     userInput: true,
     choices: {
-      1: "ここどうしよう",
+      1: { choiceText: "ここどうしよう", choiceImage: "" },
     },
   },
 ]
@@ -127,10 +137,13 @@ export default function Questions() {
   //----------------------------------------------------------------
   const onChangeHandler = (index: number) => {
     // 選んだ選択肢をinputContentにセット (0-indexed を 1-indexed に変換)
-    setInputContent(currentQuestion.choices[index + 1])
+    setInputContent(currentQuestion.choices[index + 1].choiceText)
 
     // 問題番号をキーにして、選んだ選択肢をlocalStorageに保存
-    localStorage.setItem("answer-" + currentQuestion.questionNumber.toString(), currentQuestion.choices[index + 1])
+    localStorage.setItem(
+      "answer-" + currentQuestion.questionNumber.toString(),
+      currentQuestion.choices[index + 1].choiceText
+    )
 
     // localStorageの保存状況を確認
     // const answer = localStorage.getItem("answer-" + currentQuestion.questionNumber.toString())
@@ -216,13 +229,13 @@ export default function Questions() {
             <label key={index} className={box}>
               <input
                 type="radio"
-                value={choice}
+                value={choice.choiceText}
                 onChange={() => onChangeHandler(index)}
-                checked={inputContent === choice}
+                checked={inputContent === choice.choiceText}
               />
-              <span>
-                {choice} {1 * Number(inputContent === choice)}
-              </span>
+              <div className="heading">
+                {choice.choiceText} {1 * Number(inputContent === choice.choiceText)}
+              </div>
             </label>
             // <button className={box} key={index} onClick={() => onChangeHandler(index)}>
             //   {choice}

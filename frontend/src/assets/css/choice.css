@@ -38,8 +38,11 @@
   font-weight: bold;
 
   /* 縁 */
-  border-radius: 0.5em;
-  border: solid 2px var(--Black);
+  border: solid 2px #1c1c1c;
+  border-radius: 20px;
+
+  /* 影 */
+  box-shadow: #1c1c1c 2px 2px 0 0;
 
   /* boxのサイズ */
   width: 150px;
