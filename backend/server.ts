@@ -31,17 +31,42 @@ app.post("/send", async (request, response) => {
 //----------------------------------------------------------------
 // Result.tsx用
 //----------------------------------------------------------------
+
 app.post("/searchRecipes", async (request, response) => {
   const searchInfo = request.body.content
-
-  console.log(searchInfo) // こういう風にデバッグできます。backendのターミナルで見てみてください
+  //console.log(searchInfo) // こういう風にデバッグできます。backendのターミナルで見てみてください
   // @@@@@ ここに検索処理を書く
-  const { data, error } = await searchInfo.from("Recipes").select("*").in("priority", searchInfo)
   // await client.recipesTmp.findMany( 本番はRecipesTmpではなくRecipesを使うことになります
   //   {
-  //     where: {
+  //     where: {s
+
   //   }
   // )
+  //for (const food of searchInfo.ingredient) {
+  //  console.log(food)
+  //}
+  for (const food of searchInfo.ingredient) {
+    console.log(food)
+    //await client.recipesTmp.findMany({
+    //})
+    const recipes = await client.recipesTmp.findMany()
+    //console.log(data)
+    //ここを調整すれば選ぶ料理の数を変えられる
+    let cnt = 0
+    //reciptesTmpの中から食材(material)が一致するものを探す
+    for (const recipe of recipes) {
+      for (const material of recipe.recipeMaterial) {
+        if (material == food) {
+          console.log(recipe.recipeTitle)
+          cnt += 1
+          break
+        }
+      }
+      if (cnt == 3) {
+        break
+      }
+    }
+  }
   response.json([
     {
       recipeTitle: "豚肉と玉ねぎの炒め物",
