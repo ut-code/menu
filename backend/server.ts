@@ -50,23 +50,19 @@ app.post("/searchRecipes", async (request, response) => {
     //await client.recipesTmp.findMany({
     //})
     const recipes = await client.recipesTmp.findMany()
-    //console.log(data)
-    //ここを調整すれば選ぶ料理の数を変えられる
-    let cnt = 0
-    //reciptesTmpの中から食材(material)が一致するものを探す
-    for (const recipe of recipes) {
-      for (const material of recipe.recipeMaterial) {
-        if (material == food) {
-          console.log(recipe.recipeTitle)
-          cnt += 1
-          break
-        }
-      }
-      if (cnt == 3) {
-        break
-      }
-    }
+    const posts = await client.recipesTmp.findMany({
+      where: {
+        OR: {
+          recipeMaterial: {
+            hasSome: food,
+          },
+        },
+      },
+      take: 3,
+    })
+    console.log(posts)
   }
+
   response.json([
     {
       recipeTitle: "豚肉と玉ねぎの炒め物",
