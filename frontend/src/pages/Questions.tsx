@@ -8,6 +8,13 @@ import "@/assets/css/style.css"
 import "@/assets/css/home.css"
 import "@/assets/css/choice.css"
 
+// 画像ファイルをimport
+import imgBroccoli from "@/assets/image/broccoli.jpg"
+import imgEgg from "@/assets/image/egg.jpg"
+import imgMilk from "@/assets/image/milk.jpg"
+import imgPork from "@/assets/image/pork.jpeg"
+import imgTomato from "@/assets/image/tomato.jpg"
+
 import { FaRegQuestionCircle } from "react-icons/fa"
 import { FaArrowLeft } from "react-icons/fa"
 
@@ -38,14 +45,10 @@ const questions: Question[] = [
     questionText: "使いたい食材はなんですか？",
     userInput: true,
     choices: {
-      1: { choiceText: "トマト", choiceImage: "/src/assets/image/tomato.jpg" },
-      2: { choiceText: "ブロッコリー", choiceImage: "/src/assets/image/broccoli.jpg" },
-      3: { choiceText: "牛乳", choiceImage: "/src/assets/image/milk.jpg" },
-      4: { choiceText: "卵", choiceImage: "/src/assets/image/egg.jpg" },
-      // 1: "トマト",
-      // 2: "ブロッコリー",
-      // 3: "牛乳",
-      // 4: "卵",
+      1: { choiceText: "トマト", choiceImage: imgTomato },
+      2: { choiceText: "ブロッコリー", choiceImage: imgBroccoli },
+      3: { choiceText: "牛乳", choiceImage: imgMilk },
+      4: { choiceText: "卵", choiceImage: imgEgg },
     },
   },
   {
@@ -74,7 +77,7 @@ const questions: Question[] = [
     questionText: "他に使いたい食材・調味料はありますか？",
     userInput: true,
     choices: {
-      1: { choiceText: "ここどうしよう", choiceImage: "" },
+      1: { choiceText: "豚肉", choiceImage: imgPork },
     },
   },
 ]
@@ -202,7 +205,7 @@ export default function Questions() {
 
         {style === "style2" && (
           <div className="tmpImage">
-            <img src="/src/assets/image/pork.jpeg" alt="tmpImage" />
+            <img src={imgPork} alt="tmpImage" />
           </div>
         )}
 
@@ -226,7 +229,7 @@ export default function Questions() {
 
         <div className="suggestIngredient">
           {Object.values(currentQuestion.choices).map((choice, index) => (
-            <label key={index} className={box}>
+            <label key={index} className={box} style={{ backgroundImage: `url(${choice.choiceImage})` }}>
               <input
                 type="radio"
                 value={choice.choiceText}
