@@ -1,10 +1,27 @@
 import styles from "@/assets/css/reference.module.css"
-import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal } from "react"
+interface dict {
+  [key: string]: string
+}
+
+const urlDomainToName: dict = {
+  "www.kurashiru.com": "クラシル",
+  "www.kyounoryouri.jp": "みんなのきょうの料理",
+  "www.lettuceclub.net": "レタスクラブ",
+  "www.tablemark.co.jp": "テーブルマーク",
+  "www.ebarafoods.com": "エバラ食品",
+  "park.ajinomoto.co.jp": "味の素パーク",
+  "www.ntv.co.jp/3min/": "キユーピー",
+  "www.meg-snow.com": "雪印メグミルク",
+  "www.salad-cafe.com": "サラダカフェ",
+  "dancyu.jp": "dancyu",
+  "www.yutori.co.jp": "ゆとりの空間",
+}
 
 // turn url into a domein name
-const changeUrl = (url: string) => {
-  const urlArray = url.split("/")
-  return urlArray[2]
+const changeUrl = (url: string): string => {
+  const urlArray: string[] = url.split("/")
+  const urlDomain: string = urlArray[2]
+  return urlDomainToName[urlDomain]
 }
 
 export default function Reference(props: { url: string }) {

@@ -182,11 +182,11 @@ export default function Questions() {
   useEffect(() => {
     // FadeInを実行、propsとしてcontrolsを渡す
     FadeIn({ controls })
-  }, [currentQuestion.questionNumber])
+  }, [])
 
   return (
     <>
-      <motion.div className={style} animate={controls}>
+      <motion.div className={style} key={currentQuestion.questionNumber} animate={controls}>
         {currentQuestion.questionNumber === 0 && (
           <div className="title" onClick={() => Navigate("/home")}>
             <p>だるめし Dull Meshi</p>
