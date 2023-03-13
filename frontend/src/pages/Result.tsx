@@ -7,7 +7,7 @@ import "@/assets/css/style.css"
 import "@/assets/css/home.css"
 import "@/assets/css/card.css"
 
-import { FaArrowLeft } from "react-icons/fa"
+import { BsArrowLeft } from "react-icons/bs"
 import Reference from "@/components/reference"
 
 const postSelectRecipeApi = `${import.meta.env.VITE_API_ENDPOINT}/searchRecipes`
@@ -159,9 +159,14 @@ export default function Result() {
       <motion.div animate={controls}>
         <div className="style1">
           <div className="backButton-b" onClick={() => Navigate("/questions")}>
-            <FaArrowLeft size="1.5rem" />
+            <BsArrowLeft size="1.2rem" color="white" />
           </div>
-          <div className="result">検索結果</div>
+          <div className="inputIngredient" color="var(--Gray)">
+            入力されたキーワード:
+            {answers.map((answer, index) => (
+              <span key={index}>{answer.content}</span>
+            ))}
+          </div>
           {recipes.map((recipe, index) => (
             <div key={index} className="card">
               {/* click anywhere and it opens recipe.recipeUrl but you don't make texts blue with underline */}
@@ -177,12 +182,6 @@ export default function Result() {
           ))}
 
           <Link to={"/home"}>ホーム ←ボタンになってます</Link>
-          {answers.map((answer, index) => (
-            <div key={index}>
-              {index + 1}
-              {answer.content}
-            </div>
-          ))}
         </div>
       </motion.div>
     </>

@@ -14,10 +14,10 @@
 /* https://eclair.blog/examples-of-card/ */
 .card {
   color: black;
-  width: auto;
+  width: 90%;
   /* height: 500px; */
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 20px;
 
   /* everything in middle */
   display: flex;
@@ -26,8 +26,8 @@
   align-items: center;
 
   /* 角を丸める */
-  border: solid 2px var(--Black);
-  border-radius: 0.5em;
+  box-shadow: var(--Black) 2px 2px 0 0;
+  border: var(--Black) 1px solid;
 
   /* 色 */
   background-color: white;
@@ -38,16 +38,9 @@
 .card__imgframe {
   /* 画像を指定のサイズでトリミング */
   width: 100%;
-  height: 200px;
-  object-fit: cover;
 
-  background: no-repeat center;
-  background-size: cover;
-  background-color: var(--Blue);
-
-  /* 角を丸める */
+  /* 枠線 */
   border-bottom: solid 2px var(--Black);
-  border-radius: 0.5em;
 }
 .card__textbox {
   width: 100%;
