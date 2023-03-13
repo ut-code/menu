@@ -2,8 +2,9 @@
 
 .style2 {
   padding: 1em;
-  background-color: white;
+  background-color: var(--LightBrown);
   color: white;
+  height: 100vh;
 
   /* everything in middle */
   display: flex;
@@ -81,22 +82,30 @@
 }
 
 .backButton {
+  /*強制的に左上に配置*/
+  position: absolute;
+  left: 5%;
+  top: 2%;
   /* make a square*/
-  padding: 0.8em;
-  padding-bottom: 0.5em;
-  background-color: var(--Brown);
+  padding: 0.5em;
+  padding-bottom: 0.2em;
+  background-color: white;
   border-radius: 100%;
-  border: solid 2px var(--Black);
+  border: solid 1.5px var(--Black);
   text-align: center;
 }
 
 .backButton-b {
+  /*強制的に左上に配置*/
+  position: absolute;
+  left: 5%;
+  top: 2%;
   /* make a square*/
-  padding: 0.8em;
-  padding-bottom: 0.5em;
+  padding: 0.5em;
+  padding-bottom: 0.2em;
   background-color: var(--Blue);
   border-radius: 100%;
-  border: solid 2px var(--Black);
+  border: solid 1.5px var(--Black);
   text-align: center;
 }
 

@@ -15,8 +15,8 @@ import imgMilk from "@/assets/image/milk.jpg"
 import imgPork from "@/assets/image/pork.jpeg"
 import imgTomato from "@/assets/image/tomato.jpg"
 
-import { FaRegQuestionCircle } from "react-icons/fa"
-import { FaArrowLeft } from "react-icons/fa"
+import { BsQuestion } from "react-icons/bs"
+import { BsArrowLeft } from "react-icons/bs"
 
 //----------------------------------------------------------------
 // 参考
@@ -53,7 +53,7 @@ const questions: Question[] = [
   },
   {
     questionNumber: 1,
-    questionText: "分類はどれですか？",
+    questionText: "料理のジャンルを選択してください",
     userInput: false,
     choices: {
       1: { choiceText: "主食", choiceImage: "" },
@@ -64,7 +64,7 @@ const questions: Question[] = [
   },
   {
     questionNumber: 2,
-    questionText: "調理時間はどのくらいかけられますか？",
+    questionText: "調理時間を選択してください",
     userInput: false,
     choices: {
       1: { choiceText: "時短", choiceImage: "" },
@@ -74,7 +74,7 @@ const questions: Question[] = [
   },
   {
     questionNumber: 3,
-    questionText: "他に使いたい食材・調味料はありますか？",
+    questionText: "他に使いたい食材はありますか？",
     userInput: true,
     choices: {
       1: { choiceText: "豚肉", choiceImage: imgPork },
@@ -193,19 +193,19 @@ export default function Questions() {
         {currentQuestion.questionNumber === 0 && (
           <div className="title" onClick={() => Navigate("/home")}>
             <p>だるめし Dull Meshi</p>
-            <FaRegQuestionCircle size="2rem" />
+            <BsQuestion size="2rem" />
           </div>
         )}
 
         {currentQuestion.questionNumber > 0 && (
           <div className="backButton" onClick={onClickPreviousPage}>
-            <FaArrowLeft size="1.5rem" />
+            <BsArrowLeft size="1.2rem" color="var(--Black)" />
           </div>
         )}
 
         {style === "style2" && (
-          <div className="tmpImage">
-            <img src={imgPork} alt="tmpImage" />
+          <div className="inputIngredient" color="var(--Gray)">
+            入力されたキーワード:
           </div>
         )}
 
