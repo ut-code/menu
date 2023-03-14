@@ -229,9 +229,16 @@ export default function Questions() {
                 onChange={() => onChangeHandler(index)}
                 checked={inputContent === choice.choiceText}
               />
-              <div className="heading">
-                {choice.choiceText} {1 * Number(inputContent === choice.choiceText)}
-              </div>
+              {currentQuestion.userInput === true && (
+                <div className="heading">
+                  {choice.choiceText} {1 * Number(inputContent === choice.choiceText)}
+                </div>
+              )}
+              {currentQuestion.userInput === false && (
+                <div>
+                  {choice.choiceText} {1 * Number(inputContent === choice.choiceText)}
+                </div>
+              )}
             </label>
             // <button className={box} key={index} onClick={() => onChangeHandler(index)}>
             //   {choice}
