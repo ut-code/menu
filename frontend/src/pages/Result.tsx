@@ -12,6 +12,7 @@ const postSelectRecipeApi = `${import.meta.env.VITE_API_ENDPOINT}/searchRecipes`
 
 // 人気レシピ4件を取得できるAPIから、必要なキーの情報のみを取得する
 type Recipe = {
+  id: number
   recipeTitle: string
   recipeUrl: string
   recipeDescription: string
@@ -88,6 +89,7 @@ export default function Result() {
         body: JSON.stringify({ content: info }),
       })
       const results = await response.json()
+      console.log(results)
 
       // undefinedエラー回避
       if (results) {
@@ -95,6 +97,7 @@ export default function Result() {
           // result の型は欠損あり Recipe なので any型 で受けて、 Recipe型 に変換する
           // recipeMaterialConverted は、 recipeMaterial の配列を "・" で連結したもの
           // 例: ["豚肉", "玉ねぎ", "にんにく"] -> "豚肉・玉ねぎ・にんにく"
+          console.log(result.recipeMaterial)
           result.recipeMaterialConverted = result.recipeMaterial.join("・")
           addRecipe(result)
         })

@@ -31,26 +31,15 @@ app.post("/send", async (request, response) => {
 //----------------------------------------------------------------
 // Result.tsx用
 //----------------------------------------------------------------
-
+// request.bodyのsearchInfoを利用して検索結果を返す
+// 一旦は楽天レシピオンリーで検索
 app.post("/searchRecipes", async (request, response) => {
   const searchInfo = request.body.content
-  //console.log(searchInfo) // こういう風にデバッグできます。backendのターミナルで見てみてください
+  console.log(searchInfo) // こういう風にデバッグできます。backendのターミナルで見てみてください
   // @@@@@ ここに検索処理を書く
-  // await client.recipesTmp.findMany( 本番はRecipesTmpではなくRecipesを使うことになります
-  //   {
-  //     where: {s
-
-  //   }
-  // )
-  //for (const food of searchInfo.ingredient) {
-  //  console.log(food)
-  //}
+  let results: any[] = []
   for (const food of searchInfo.ingredient) {
-    console.log(food)
-    //await client.recipesTmp.findMany({
-    //})
-    const recipes = await client.recipesTmp.findMany()
-    const posts = await client.recipesTmp.findMany({
+    const searchResults = await client.recipesTmp.findMany({
       where: {
         OR: {
           recipeMaterial: {
@@ -58,24 +47,26 @@ app.post("/searchRecipes", async (request, response) => {
           },
         },
       },
-      take: 3,
+      take: 8,
     })
-    console.log(posts)
-  }
 
-  response.json([
-    {
-      recipeTitle: "豚肉と玉ねぎの炒め物",
-      recipeUrl: "https://www.kurashiru.com/recipes/f5ae0ab0-52b9-419b-8da9-aa8e004ee8d2",
-      recipeDescription: "String",
-      foodImageUrls: [
-        "https://recipe.r10s.jp/recipe-space/d/strg/ctrl/3/e077438a9b2b2bcd4a101714556aeda732b37b2f.05.9.3.3.jpg?interpolation=lanczos-none&fit=around|716:716&crop=716:716;*,*",
-      ],
-      keywords: ["String"],
-      totalTime: 100,
-      recipeMaterial: ["豚肉", "玉ねぎ", "にんにく"],
-    },
-  ])
+    results = results.concat(searchResults)
+  }
+  response.json(results)
+
+  // response.json([
+  //   {
+  //     recipeTitle: "豚肉と玉ねぎの炒め物",
+  //     recipeUrl: "https://www.kurashiru.com/recipes/f5ae0ab0-52b9-419b-8da9-aa8e004ee8d2",
+  //     recipeDescription: "String",
+  //     foodImageUrls: [
+  //       "https://recipe.r10s.jp/recipe-space/d/strg/ctrl/3/e077438a9b2b2bcd4a101714556aeda732b37b2f.05.9.3.3.jpg?interpolation=lanczos-none&fit=around|716:716&crop=716:716;*,*",
+  //     ],
+  //     keywords: ["String"],
+  //     totalTime: 100,
+  //     recipeMaterial: ["豚肉", "玉ねぎ", "にんにく"],
+  //   },
+  // ])
 })
 
 app.listen(3000)
