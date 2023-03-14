@@ -97,7 +97,6 @@ export default function Result() {
           // result の型は欠損あり Recipe なので any型 で受けて、 Recipe型 に変換する
           // recipeMaterialConverted は、 recipeMaterial の配列を "・" で連結したもの
           // 例: ["豚肉", "玉ねぎ", "にんにく"] -> "豚肉・玉ねぎ・にんにく"
-          console.log(result.recipeMaterial)
           result.recipeMaterialConverted = result.recipeMaterial.join("・")
           addRecipe(result)
         })
@@ -151,7 +150,7 @@ export default function Result() {
 
   return (
     <>
-      <div className="style1">
+      <div className="style1" style={{ height: "auto" }}>
         <div className="backButton-b" onClick={() => Navigate("/questions")}>
           <BsArrowLeft size="1.2rem" color="white" />
         </div>

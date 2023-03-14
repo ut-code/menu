@@ -15,6 +15,7 @@ const urlDomainToName: dict = {
   "www.salad-cafe.com": "サラダカフェ",
   "dancyu.jp": "dancyu",
   "www.yutori.co.jp": "ゆとりの空間",
+  "recipe.rakuten.co.jp": "楽天レシピ",
 }
 
 // turn url into a domein name
