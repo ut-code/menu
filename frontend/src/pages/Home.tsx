@@ -6,8 +6,8 @@ import Footer from "@/components/Footer"
 import Suggestion from "@/components/suggestion"
 import "@/assets/css/style.css"
 
-import imgTomato from "@/assets/image/tomato.jpg"
-import imgBroccoli from "@/assets/image/broccoli.jpg"
+import imgTomato from "@/assets/image/tomato.webp"
+import imgBroccoli from "@/assets/image/broccoli.webp"
 
 export default function Home() {
   // 永続的に残るので、localStorageから問題への回答を消しておく
