@@ -184,9 +184,13 @@ export default function Questions() {
     <>
       <div className={style} key={currentQuestion.questionNumber}>
         {currentQuestion.questionNumber === 0 && (
-          <div className="title" onClick={() => Navigate("/home")}>
-            <p>だるめし Dull Meshi</p>
-            <BsQuestion size="2rem" />
+          <div className="title">
+            <div className="titleApp" onClick={() => Navigate("/home")}>
+              だるめし Dull Meshi
+            </div>
+            <div className="titleHowTo">
+              <BsQuestion size="1.2rem" />
+            </div>
           </div>
         )}
 

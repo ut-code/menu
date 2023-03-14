@@ -84,7 +84,7 @@
 
 .q_white {
   text-align: center;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: bold;
 
   margin: 0.8em 0em;
@@ -96,14 +96,30 @@
 }
 
 .title {
-  /* two side flex */
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 93%;
 }
 
-.title p {
+.titleApp {
+  /* 左寄せ */
+  margin-right: auto;
+
   font-size: 0.5rem;
   font-weight: bold;
+}
+
+.titleHowTo {
+  /* 右寄せ */
+  margin-left: auto;
+
+  /* アイコン内を上下中央揃え */
+  display: flex;
+  align-items: center;
+
+  padding: 0.5em;
+
+  background-color: white;
+  border-radius: 50%;
+  border: solid 1.5px var(--Black);
 }
