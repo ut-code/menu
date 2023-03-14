@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom"
 import { useEffect } from "react"
-import { motion, useAnimation } from "framer-motion"
 
-import FadeIn from "@/components/FadeIn"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import Suggestion from "@/components/suggestion"
@@ -19,14 +17,9 @@ export default function Home() {
     }
   }, [])
 
-  const controls = useAnimation()
-  useEffect(() => {
-    FadeIn({ controls })
-  }, [])
-
   return (
     <>
-      <motion.div animate={controls}>
+      <div className="style1">
         <Header />
 
         <Link to={"/questions"}>はじめる ←ボタンになってます</Link>
@@ -37,7 +30,7 @@ export default function Home() {
         <Suggestion ingridientName="トマト" ingridientImage={imgTomato} />
         <Suggestion ingridientName="ブロッコリー" ingridientImage={imgBroccoli} />
         <Footer />
-      </motion.div>
+      </div>
     </>
   )
 }

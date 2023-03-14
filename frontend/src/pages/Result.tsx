@@ -1,8 +1,6 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
-import { motion, useAnimation } from "framer-motion"
 
-import FadeIn from "@/components/FadeIn"
 import "@/assets/css/style.css"
 import "@/assets/css/home.css"
 import "@/assets/css/card.css"
@@ -149,41 +147,34 @@ export default function Result() {
   //   */
   // }, [])
 
-  const controls = useAnimation()
-  useEffect(() => {
-    FadeIn({ controls })
-  }, [])
-
   return (
     <>
-      <motion.div animate={controls}>
-        <div className="style1">
-          <div className="backButton-b" onClick={() => Navigate("/questions")}>
-            <BsArrowLeft size="1.2rem" color="white" />
-          </div>
-          <div className="inputIngredient" color="var(--Gray)">
-            入力されたキーワード:
-            {answers.map((answer, index) => (
-              <span key={index}>{answer.content}</span>
-            ))}
-          </div>
-          {recipes.map((recipe, index) => (
-            <div key={index} className="card">
-              {/* click anywhere and it opens recipe.recipeUrl but you don't make texts blue with underline */}
-              <a href={recipe.recipeUrl} target="_blank" rel="noreferrer">
-                <img className="card__imgframe" src={recipe.foodImageUrls[0]} />
-                <div className="card__textbox">
-                  <div className="card__titletext">{recipe.recipeTitle}</div>
-                  <div className="card__overviewtext">{recipe.recipeMaterialConverted}</div>
-                  <Reference url={recipe.recipeUrl} />
-                </div>
-              </a>
-            </div>
-          ))}
-
-          <Link to={"/home"}>ホーム ←ボタンになってます</Link>
+      <div className="style1">
+        <div className="backButton-b" onClick={() => Navigate("/questions")}>
+          <BsArrowLeft size="1.2rem" color="white" />
         </div>
-      </motion.div>
+        <div className="inputIngredient" color="var(--Gray)">
+          入力されたキーワード:
+          {answers.map((answer, index) => (
+            <span key={index}>{answer.content}</span>
+          ))}
+        </div>
+        {recipes.map((recipe, index) => (
+          <div key={index} className="card">
+            {/* click anywhere and it opens recipe.recipeUrl but you don't make texts blue with underline */}
+            <a href={recipe.recipeUrl} target="_blank" rel="noreferrer">
+              <img className="card__imgframe" src={recipe.foodImageUrls[0]} />
+              <div className="card__textbox">
+                <div className="card__titletext">{recipe.recipeTitle}</div>
+                <div className="card__overviewtext">{recipe.recipeMaterialConverted}</div>
+                <Reference url={recipe.recipeUrl} />
+              </div>
+            </a>
+          </div>
+        ))}
+
+        <Link to={"/home"}>ホーム ←ボタンになってます</Link>
+      </div>
     </>
   )
 }

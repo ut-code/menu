@@ -9,7 +9,6 @@
   /* everything in middle */
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 
@@ -17,6 +16,8 @@
   color: var(--Black);
   text-align: center;
   font-weight: bold;
+
+  margin: 2em 0em;
 }
 
 /*----------------------------------------------------------------
@@ -82,31 +83,35 @@
 }
 
 .backButton {
-  /*強制的に左上に配置*/
-  position: absolute;
-  left: 5%;
-  top: 2%;
-  /* make a square*/
+  /* 左寄せ */
+  align-self: flex-start;
+
+  /* アイコン内を上下中央揃え */
+  display: flex;
+  align-items: center;
+
   padding: 0.5em;
-  padding-bottom: 0.2em;
+  margin-bottom: 1em;
+
   background-color: white;
-  border-radius: 100%;
+  border-radius: 50%;
   border: solid 1.5px var(--Black);
-  text-align: center;
 }
 
 .backButton-b {
-  /*強制的に左上に配置*/
-  position: absolute;
-  left: 5%;
-  top: 2%;
-  /* make a square*/
+  /* 左寄せ */
+  align-self: flex-start;
+
+  /* アイコン内を上下中央揃え */
+  display: flex;
+  align-items: center;
+
   padding: 0.5em;
-  padding-bottom: 0.2em;
+  margin-bottom: 1em;
+
   background-color: var(--Blue);
-  border-radius: 100%;
+  border-radius: 50%;
   border: solid 1.5px var(--Black);
-  text-align: center;
 }
 
 /*----------------------------------------------------------------

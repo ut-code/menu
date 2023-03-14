@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
-import { motion, useAnimation } from "framer-motion"
 
-import FadeIn from "@/components/FadeIn"
 import Suggestion from "@/components/suggestion"
 import "@/assets/css/style.css"
 import "@/assets/css/home.css"
@@ -181,19 +179,18 @@ export default function Questions() {
   //----------------------------------------------------------------
   // 問題番号の変更を検知してフェードインアニメーションを実行
   //----------------------------------------------------------------
-  const controls = useAnimation()
-  useEffect(() => {
-    // FadeInを実行、propsとしてcontrolsを渡す
-    FadeIn({ controls })
-  }, [])
 
   return (
     <>
-      <motion.div className={style} key={currentQuestion.questionNumber} animate={controls}>
+      <div className={style} key={currentQuestion.questionNumber}>
         {currentQuestion.questionNumber === 0 && (
-          <div className="title" onClick={() => Navigate("/home")}>
-            <p>だるめし Dull Meshi</p>
-            <BsQuestion size="2rem" />
+          <div className="title">
+            <div className="titleApp" onClick={() => Navigate("/home")}>
+              だるめし Dull Meshi
+            </div>
+            <div className="titleHowTo">
+              <BsQuestion size="1.2rem" />
+            </div>
           </div>
         )}
 
@@ -236,9 +233,16 @@ export default function Questions() {
                 onChange={() => onChangeHandler(index)}
                 checked={inputContent === choice.choiceText}
               />
-              <div className="heading">
-                {choice.choiceText} {1 * Number(inputContent === choice.choiceText)}
-              </div>
+              {currentQuestion.userInput === true && (
+                <div className="heading">
+                  {choice.choiceText} {1 * Number(inputContent === choice.choiceText)}
+                </div>
+              )}
+              {currentQuestion.userInput === false && (
+                <div>
+                  {choice.choiceText} {1 * Number(inputContent === choice.choiceText)}
+                </div>
+              )}
             </label>
             // <button className={box} key={index} onClick={() => onChangeHandler(index)}>
             //   {choice}
@@ -249,7 +253,7 @@ export default function Questions() {
         <div className="nextButton" onClick={onClickNextPage}>
           Next
         </div>
-      </motion.div>
+      </div>
     </>
   )
 }

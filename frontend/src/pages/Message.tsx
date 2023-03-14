@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
-import { motion, useAnimation } from "framer-motion"
 
-import FadeIn from "@/components/FadeIn"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import "@/assets/css/style.css"
@@ -37,14 +35,9 @@ export default function Message() {
     }
   }, [])
 
-  const controls = useAnimation()
-  useEffect(() => {
-    FadeIn({ controls })
-  }, [])
-
   return (
     <>
-      <motion.div animate={controls}>
+      <div className="style1">
         <Header />
         <Link to={"/home"}>戻る</Link>
 
@@ -73,7 +66,7 @@ export default function Message() {
         </button>
 
         <Footer />
-      </motion.div>
+      </div>
     </>
   )
 }
