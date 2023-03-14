@@ -152,7 +152,7 @@ export default function Result() {
         <div className="backButton-b" onClick={() => Navigate("/questions")}>
           <BsArrowLeft size="1.2rem" color="white" />
         </div>
-        <div className="inputIngredient" color="var(--Gray)">
+        <div className="inputIngredient" style={{ color: "var(--Gray)" }}>
           入力されたキーワード:
           {answers.map((answer, index) => (
             <span key={index}>{answer.content}</span>

@@ -232,7 +232,7 @@ export default function Questions() {
           </div>
         )}
         {currentQuestion.userInput === false && (
-          <div className="inputIngredient" color="var(--Gray)">
+          <div className="inputIngredient" style={{ color: "var(--Gray)" }}>
             入力されたキーワード:
             {answers.map((answer, index) => (
               <span key={index}>{answer.content}</span>
