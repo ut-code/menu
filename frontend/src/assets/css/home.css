@@ -29,13 +29,7 @@
   margin: 5%;
   text-align: center;
   font-weight: bold;
-  border-radius: 10rem; /* make a circle border */
-}
-
-.backButton {
-  padding: 1em;
-  background-color: var(--Brown);
-  border-radius: 50%;
+  border-radius: 10rem;
 }
 
 /*----------------------------------------------------------------

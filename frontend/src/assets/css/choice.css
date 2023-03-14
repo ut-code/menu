@@ -16,6 +16,7 @@
   color: var(--Black);
   text-align: center;
   font-weight: bold;
+  margin: 2em 0em;
 }
 
 /*----------------------------------------------------------------
@@ -84,10 +85,15 @@
   /* 左寄せ */
   align-self: flex-start;
 
+  /* アイコン内を上下中央揃え */
+  display: flex;
+  align-items: center;
+
   padding: 0.5em;
-  padding-bottom: 0.2em;
+  margin-bottom: 1em;
+
   background-color: white;
-  border-radius: 100%;
+  border-radius: 50%;
   border: solid 1.5px var(--Black);
 }
 
@@ -95,10 +101,15 @@
   /* 左寄せ */
   align-self: flex-start;
 
+  /* アイコン内を上下中央揃え */
+  display: flex;
+  align-items: center;
+
   padding: 0.5em;
-  padding-bottom: 0.2em;
+  margin-bottom: 1em;
+
   background-color: var(--Blue);
-  border-radius: 100%;
+  border-radius: 50%;
   border: solid 1.5px var(--Black);
 }
 
