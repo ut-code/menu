@@ -12,6 +12,7 @@ const postSelectRecipeApi = `${import.meta.env.VITE_API_ENDPOINT}/searchRecipes`
 
 // 人気レシピ4件を取得できるAPIから、必要なキーの情報のみを取得する
 type Recipe = {
+  id: number
   recipeTitle: string
   recipeUrl: string
   recipeDescription: string
@@ -88,6 +89,7 @@ export default function Result() {
         body: JSON.stringify({ content: info }),
       })
       const results = await response.json()
+      console.log(results)
 
       // undefinedエラー回避
       if (results) {
@@ -148,7 +150,7 @@ export default function Result() {
 
   return (
     <>
-      <div className="style1">
+      <div className="style1" style={{ height: "auto" }}>
         <div className="backButton-b" onClick={() => Navigate("/questions")}>
           <BsArrowLeft size="1.2rem" color="white" />
         </div>
