@@ -22,7 +22,6 @@ type Recipe = {
   recipeMaterialConverted: string
 }
 
-// 二回マウントするので8個表示されるけど気にしない
 type Answer = {
   answerNumber: number
   content: string

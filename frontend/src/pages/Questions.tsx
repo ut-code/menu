@@ -80,11 +80,17 @@ const questions: Question[] = [
   },
 ]
 
+type Answer = {
+  answerNumber: number
+  content: string
+}
+
 export default function Questions() {
   const [currentQuestion, setCurrentQuestion] = useState<Question>(questions[0])
   const [inputContent, setInputContent] = useState<string>("")
   const [style, setStyle] = useState<string>("style1")
   const [box, setBox] = useState<string>("box_brown")
+  const [answers, setAnswers] = useState<Answer[]>([])
 
   // useNavigate を Navigate に変化させる呪文
   const Navigate = useNavigate()
@@ -176,9 +182,18 @@ export default function Questions() {
     setCurrentQuestion(questions[currentNumber])
   }
 
-  //----------------------------------------------------------------
-  // 問題番号の変更を検知してフェードインアニメーションを実行
-  //----------------------------------------------------------------
+  useEffect(() => {
+    // localStorageから解答を取り出してanswersに入れる
+    const newAnswers: Answer[] = []
+    for (let i = 0; i < questions.length; i++) {
+      const answer = localStorage.getItem("answer-" + i.toString())
+      if (answer !== null) {
+        // addAnswer({ answerNumber: i, content: answer })
+        newAnswers.push({ answerNumber: i, content: answer })
+      }
+    }
+    setAnswers(newAnswers)
+  }, [currentQuestion])
 
   return (
     <>
@@ -200,16 +215,9 @@ export default function Questions() {
           </div>
         )}
 
-        {style === "style2" && (
-          <div className="inputIngredient" color="var(--Gray)">
-            入力されたキーワード:
-          </div>
-        )}
-
         {currentQuestion.userInput === true && <div className="q_white">{currentQuestion.questionText}</div>}
         {currentQuestion.userInput === false && <div className="q_black">{currentQuestion.questionText}</div>}
 
-        {currentQuestion.userInput === true && <div className="letsInputIngredient"></div>}
         {currentQuestion.userInput === true && (
           <div className="inputIngredient">
             <input
@@ -221,6 +229,14 @@ export default function Questions() {
                 setInputContent(e.target.value)
               }}
             />
+          </div>
+        )}
+        {currentQuestion.userInput === false && (
+          <div className="inputIngredient" color="var(--Gray)">
+            入力されたキーワード:
+            {answers.map((answer, index) => (
+              <span key={index}>{answer.content}</span>
+            ))}
           </div>
         )}
 
