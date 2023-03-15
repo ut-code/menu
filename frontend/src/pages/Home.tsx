@@ -20,15 +20,23 @@ export default function Home() {
   return (
     <>
       <div className="style1">
-        <Header />
-
-        <Link to={"/questions"}>はじめる ←ボタンになってます</Link>
+        <div style={{ display: "flex" }}>
+          <Link to={"/questions"}>
+            <button>はじめる</button>
+          </Link>
+          <br></br>
+          <Link to={"/result"}>
+            <button>検索結果</button>
+          </Link>
+          <br></br>
+          <Link to={"/message"}>
+            <button>掲示板</button>
+          </Link>
+        </div>
         <br></br>
-        <Link to={"/result"}>検索結果 ←ボタンになってます</Link>
-        <br></br>
-        <Link to={"/message"}>掲示板 ←ボタンになってます</Link>
         <Suggestion ingridientName="トマト" ingridientImage={imgTomato} />
         <Suggestion ingridientName="ブロッコリー" ingridientImage={imgBroccoli} />
+        <br></br>
         <Footer />
       </div>
     </>
