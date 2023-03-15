@@ -53,20 +53,6 @@ app.post("/searchRecipes", async (request, response) => {
     results = results.concat(searchResults)
   }
   response.json(results)
-
-  // response.json([
-  //   {
-  //     recipeTitle: "豚肉と玉ねぎの炒め物",
-  //     recipeUrl: "https://www.kurashiru.com/recipes/f5ae0ab0-52b9-419b-8da9-aa8e004ee8d2",
-  //     recipeDescription: "String",
-  //     foodImageUrls: [
-  //       "https://recipe.r10s.jp/recipe-space/d/strg/ctrl/3/e077438a9b2b2bcd4a101714556aeda732b37b2f.05.9.3.3.jpg?interpolation=lanczos-none&fit=around|716:716&crop=716:716;*,*",
-  //     ],
-  //     keywords: ["String"],
-  //     totalTime: 100,
-  //     recipeMaterial: ["豚肉", "玉ねぎ", "にんにく"],
-  //   },
-  // ])
 })
 
 app.listen(3000)

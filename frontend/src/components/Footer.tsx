@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer>
-      <p>フッター</p>
+      <hr />
       <p>© Copyright {new Date().getFullYear()} ut.code();</p>
     </footer>
   )
