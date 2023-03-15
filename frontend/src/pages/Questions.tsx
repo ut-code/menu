@@ -7,11 +7,11 @@ import "@/assets/css/home.css"
 import "@/assets/css/choice.css"
 
 // 画像ファイルをimport
-import imgBroccoli from "@/assets/image/broccoli.jpg"
-import imgEgg from "@/assets/image/egg.jpg"
-import imgMilk from "@/assets/image/milk.jpg"
-import imgPork from "@/assets/image/pork.jpeg"
-import imgTomato from "@/assets/image/tomato.jpg"
+import imgBroccoli from "@/assets/image/broccoli.webp"
+import imgEgg from "@/assets/image/egg.webp"
+import imgMilk from "@/assets/image/milk.webp"
+import imgPork from "@/assets/image/pork.webp"
+import imgTomato from "@/assets/image/tomato.webp"
 
 import { BsQuestion } from "react-icons/bs"
 import { BsArrowLeft } from "react-icons/bs"
