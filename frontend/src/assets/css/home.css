@@ -17,9 +17,36 @@
   margin: 5%;
   background-color: white;
   width: 90%;
-  border-radius: 50rem; /* make a circle border */
-  box-shadow: var(--Black) 2px 2px 0 0;
+  border-radius: 50em; /* make a circle border */
   border: var(--Black) 1px solid;
+  box-shadow: #1c1c1c 2px 2px 0 0;
+  font-size: 0.85em;
+  /*はみ出した文字は「…」で省略*/
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.notInput {
+  border-radius: 20px;
+  border: solid 2px var(--Black);
+  box-shadow: none;
+  padding: 1.4em 1.5em;
+  width: 80%;
+}
+.inputIngredient_title {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  color: #1c1c1c;
+  font-weight: bold;
+  font-size: large;
+  background: linear-gradient(transparent 65%, var(--Orange) 65%);
+}
+.inputIngredient_input {
+  font-size: 0.85em;
+  /*はみ出した文字は「…」で省略*/
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .nextButton {
@@ -37,6 +64,13 @@
   一旦styleによって異なるようにしてみた
   結局 choice.css の方と同じ内容になりそうだけど
 ----------------------------------------------------------------*/
+.suggestIngredient_title {
+  font-weight: bold;
+  margin-top: 10%;
+  margin-left: 1.3rem;
+  margin-right: auto;
+}
+
 .style1 .suggestIngredient {
   padding: 1em;
 
@@ -105,7 +139,7 @@
   /* 左寄せ */
   margin-right: auto;
 
-  font-size: 0.5rem;
+  font-size: 10px;
   font-weight: bold;
 }
 

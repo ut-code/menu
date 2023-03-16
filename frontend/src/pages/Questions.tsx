@@ -232,13 +232,17 @@ export default function Questions() {
           </div>
         )}
         {currentQuestion.userInput === false && (
-          <div className="inputIngredient" style={{ color: "var(--Gray)" }}>
-            入力されたキーワード<br></br>
-            {answers.map((answer, index) => (
-              <span key={index}>{answer.content}</span>
-            ))}
+          <div className="inputIngredient notInput" style={{ color: "var(--Gray)" }}>
+            <span className="inputIngredient_title">Keywords&nbsp;&nbsp;</span>
+            <br></br>
+            <span className="inputIngredient_input">
+              {answers.map((answer, index) => (
+                <span key={index}>{answer.content}&nbsp;</span>
+              ))}
+            </span>
           </div>
         )}
+        {currentQuestion.questionNumber === 0 && <div className="suggestIngredient_title">Recommend</div>}
 
         <div className="suggestIngredient">
           {Object.values(currentQuestion.choices).map((choice, index) => (
