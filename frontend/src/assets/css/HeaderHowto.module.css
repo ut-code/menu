@@ -1,0 +1,28 @@
+.title {
+  display: flex;
+  align-items: center;
+  width: 93%;
+}
+
+.titleApp {
+  /* 左寄せ */
+  margin-right: auto;
+
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.titleHowTo {
+  /* 右寄せ */
+  margin-left: auto;
+
+  /* アイコン内を上下中央揃え */
+  display: flex;
+  align-items: center;
+
+  padding: 0.5em;
+
+  background-color: white;
+  border-radius: 50%;
+  border: solid 1.5px var(--Black);
+}

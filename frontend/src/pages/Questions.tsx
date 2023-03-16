@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
 import Suggestion from "@/components/suggestion"
+import HeaderHowTo from "@/components/HeaderHowTo"
 import "@/assets/css/home.css"
 import "@/assets/css/choice.css"
 
@@ -12,7 +13,6 @@ import imgMilk from "@/assets/image/milk.webp"
 import imgPork from "@/assets/image/pork.webp"
 import imgTomato from "@/assets/image/tomato.webp"
 
-import { BsQuestion } from "react-icons/bs"
 import { BsArrowLeft } from "react-icons/bs"
 
 //----------------------------------------------------------------
@@ -197,16 +197,7 @@ export default function Questions() {
   return (
     <>
       <div className={style} key={currentQuestion.questionNumber}>
-        {currentQuestion.questionNumber === 0 && (
-          <div className="title">
-            <div className="titleApp" onClick={() => Navigate("/home")}>
-              だるめし Dull Meshi
-            </div>
-            <div className="titleHowTo">
-              <BsQuestion size="1.2rem" />
-            </div>
-          </div>
-        )}
+        {currentQuestion.questionNumber === 0 && <HeaderHowTo />}
 
         {currentQuestion.questionNumber > 0 && (
           <div className="backButton" onClick={onClickPreviousPage}>
