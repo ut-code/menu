@@ -2,7 +2,10 @@ import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
 import Suggestion from "@/components/suggestion"
-import "@/assets/css/style.css"
+import HeaderHowTo from "@/components/HeaderHowTo"
+import BackButton from "@/components/BackButton"
+import NextButton from "@/components/NextButton"
+import QuestionText from "@/components/QuestionText"
 import "@/assets/css/home.css"
 import "@/assets/css/choice.css"
 
@@ -12,9 +15,6 @@ import imgEgg from "@/assets/image/egg.webp"
 import imgMilk from "@/assets/image/milk.webp"
 import imgPork from "@/assets/image/pork.webp"
 import imgTomato from "@/assets/image/tomato.webp"
-
-import { BsQuestion } from "react-icons/bs"
-import { BsArrowLeft } from "react-icons/bs"
 
 //----------------------------------------------------------------
 // 参考
@@ -198,25 +198,11 @@ export default function Questions() {
   return (
     <>
       <div className={style} key={currentQuestion.questionNumber}>
-        {currentQuestion.questionNumber === 0 && (
-          <div className="title">
-            <div className="titleApp" onClick={() => Navigate("/home")}>
-              だるめし Dull Meshi
-            </div>
-            <div className="titleHowTo">
-              <BsQuestion size="1.2rem" />
-            </div>
-          </div>
-        )}
+        {currentQuestion.questionNumber === 0 && <HeaderHowTo />}
 
-        {currentQuestion.questionNumber > 0 && (
-          <div className="backButton" onClick={onClickPreviousPage}>
-            <BsArrowLeft size="1.2rem" color="var(--Black)" />
-          </div>
-        )}
+        {currentQuestion.questionNumber > 0 && <BackButton onClick={onClickPreviousPage} />}
 
-        {currentQuestion.userInput === true && <div className="q_white">{currentQuestion.questionText}</div>}
-        {currentQuestion.userInput === false && <div className="q_black">{currentQuestion.questionText}</div>}
+        <QuestionText content={currentQuestion.questionText} userInput={currentQuestion.userInput} />
 
         {currentQuestion.userInput === true && (
           <div className="inputIngredient">
@@ -242,7 +228,7 @@ export default function Questions() {
             </span>
           </div>
         )}
-        {currentQuestion.questionNumber === 0 && <div className="suggestIngredient_title">Recommend</div>}
+        {currentQuestion.userInput === true && <div className="suggestIngredient_title">Recommend</div>}
 
         <div className="suggestIngredient">
           {Object.values(currentQuestion.choices).map((choice, index) => (
@@ -264,15 +250,10 @@ export default function Questions() {
                 </div>
               )}
             </label>
-            // <button className={box} key={index} onClick={() => onChangeHandler(index)}>
-            //   {choice}
-            // </button>
           ))}
         </div>
 
-        <div className="nextButton" onClick={onClickNextPage}>
-          Next
-        </div>
+        <NextButton onClick={onClickNextPage} />
       </div>
     </>
   )

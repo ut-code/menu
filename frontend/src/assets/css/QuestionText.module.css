@@ -1,0 +1,23 @@
+.root {
+  /* layout */
+  text-align: center;
+
+  /* text */
+  font-weight: bold;
+}
+
+.big {
+  /* layout */
+  margin: 0.8em 0em;
+
+  /* text */
+  font-size: 1.4rem;
+}
+
+.small {
+  /* layout */
+  margin: 1.6em 0em;
+
+  /* text */
+  font-size: 1rem;
+}

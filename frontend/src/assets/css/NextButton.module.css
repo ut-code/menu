@@ -1,0 +1,15 @@
+.button {
+  /* layout */
+  padding: 1em;
+  margin: 5%;
+  text-align: center;
+
+  /* box */
+  background-color: var(--Blue);
+  border-radius: 10rem;
+  width: 93%;
+
+  /* text */
+  font-weight: bold;
+  color: white;
+}

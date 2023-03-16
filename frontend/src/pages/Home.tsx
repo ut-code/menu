@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom"
 import { useEffect } from "react"
 
-import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import Suggestion from "@/components/suggestion"
-import "@/assets/css/style.css"
 
 import imgTomato from "@/assets/image/tomato.webp"
 import imgBroccoli from "@/assets/image/broccoli.webp"

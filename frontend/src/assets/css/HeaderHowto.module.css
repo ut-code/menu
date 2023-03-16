@@ -1,0 +1,29 @@
+.root {
+  /* layout */
+  display: flex; /* 横並び + 全体を上下中央揃え */
+  align-items: center; /* 全体を上下中央揃え */
+  width: 93%;
+}
+
+.logo {
+  /* layout */
+  margin-right: auto; /* 左寄せ */
+
+  /* text */
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.howto {
+  /* layout */
+  margin-left: auto; /* 右寄せ */
+
+  /* icon */
+  padding: 0.5em;
+  display: flex; /* アイコン内を上下中央揃え */
+
+  /* circle */
+  background-color: white;
+  border-radius: 50%;
+  border: solid 1.5px var(--Black);
+}

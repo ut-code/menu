@@ -2,7 +2,6 @@ import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 
 import Footer from "@/components/Footer"
-import "@/assets/css/style.css"
 
 import { BsArrowLeft } from "react-icons/bs"
 
