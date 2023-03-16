@@ -174,7 +174,9 @@ export default function Result() {
           </div>
         ))}
 
-        <Link to={"/home"}>ホーム ←ボタンになってます</Link>
+        <Link to={"/home"}>
+          <button>ホーム</button>
+        </Link>
       </div>
     </>
   )

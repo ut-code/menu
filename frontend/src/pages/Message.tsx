@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 
-import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import "@/assets/css/style.css"
+
+import { BsArrowLeft } from "react-icons/bs"
 
 /*
  * Vite はトランスパイル時に import.meta.env のプロパティを VITE_ から始まる環境変数に置換する
@@ -13,7 +14,7 @@ import "@/assets/css/style.css"
 const getMessagesApi = `${import.meta.env.VITE_API_ENDPOINT}/messages`
 const postSendApi = `${import.meta.env.VITE_API_ENDPOINT}/send`
 
-type Message = { id: number; content: string }
+type Message = { id: number; content: string; created_at: string }
 
 export default function Message() {
   const [messages, setMessages] = useState<Message[]>([])
@@ -30,6 +31,7 @@ export default function Message() {
     }, 1000 * 5)
 
     // useEffect フックに指定した関数の戻り値に指定した関数はコンポーネントの破棄時に実行される
+    // クリーンアップ関数で残留を防ぐ
     return () => {
       clearInterval(timerId)
     }
@@ -38,32 +40,50 @@ export default function Message() {
   return (
     <>
       <div className="style1">
-        <Header />
-        <Link to={"/home"}>戻る</Link>
+        <Link to={"/home"} className="backButton">
+          <BsArrowLeft size="1.2rem" color="var(--Black)" />
+        </Link>
 
-        <ul>
-          {messages.map((message) => (
-            <li key={message.id}>{message.content}</li>
-          ))}
-        </ul>
-        <input
-          value={newMessageContent}
-          onChange={(e) => {
-            setNewMessageContent(e.target.value)
-          }}
-        />
-        <button
-          type="button"
-          onClick={async () => {
-            await fetch(postSendApi, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ content: newMessageContent }),
-            })
-          }}
+        <div>
+          <p>画面は5秒おきに更新されます</p>
+        </div>
+
+        <div style={{ margin: "0 auto 0 0" }}>
+          <ul>
+            {messages.map((message: Message) => (
+              <li key={message.id}>
+                {message.content} - {message.created_at.slice(0, 10)}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div
+          className="messageForm"
+          style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "100%" }}
         >
-          送信
-        </button>
+          <input
+            value={newMessageContent}
+            onChange={(e) => {
+              setNewMessageContent(e.target.value)
+            }}
+            className="inputIngredient"
+          />
+          <button
+            type="button"
+            onClick={async () => {
+              await fetch(postSendApi, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ content: newMessageContent }),
+              })
+              setNewMessageContent("")
+            }}
+            style={{ width: "100px" }}
+          >
+            送信
+          </button>
+        </div>
 
         <Footer />
       </div>
