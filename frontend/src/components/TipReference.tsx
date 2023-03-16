@@ -1,4 +1,5 @@
-import styles from "@/assets/css/reference.module.css"
+import styles from "@/assets/css/TipReference.module.css"
+
 interface dict {
   [key: string]: string
 }
@@ -18,17 +19,14 @@ const urlDomainToName: dict = {
   "recipe.rakuten.co.jp": "楽天レシピ",
 }
 
-// turn url into a domain
-const changeUrl = (url: string): string => {
+const translateUrlToSiteName = (url: string): string => {
   const urlArray: string[] = url.split("/")
+  if (urlArray.length < 3) return url // 例外処理
+
   const urlDomain: string = urlArray[2]
   return urlDomainToName[urlDomain]
 }
 
 export default function Reference(props: { url: string }) {
-  return (
-    <div className={styles.tag}>
-      <p>{changeUrl(props.url)}</p>
-    </div>
-  )
+  return <div className={styles.tip}>{translateUrlToSiteName(props.url)}</div>
 }

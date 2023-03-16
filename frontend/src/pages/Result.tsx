@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
-import Reference from "@/components/reference"
+import TipReference from "@/components/TipReference"
 import BackButton from "@/components/BackButton"
 import "@/assets/css/home.css"
 import "@/assets/css/card.css"
@@ -160,14 +160,14 @@ export default function Result() {
         {recipes.map((recipe, index) => (
           <div key={index} className="card">
             {/* click anywhere and it opens recipe.recipeUrl but you don't make texts blue with underline */}
-            <a href={recipe.recipeUrl} target="_blank" rel="noreferrer">
+            <Link to={recipe.recipeUrl} target="_blank" rel="noopener noreferrer">
               <img className="card__imgframe" src={recipe.foodImageUrls[0]} />
               <div className="card__textbox">
                 <div className="card__titletext">{recipe.recipeTitle}</div>
                 <div className="card__overviewtext">{recipe.recipeMaterialConverted}</div>
-                <Reference url={recipe.recipeUrl} />
+                <TipReference url={recipe.recipeUrl} />
               </div>
-            </a>
+            </Link>
           </div>
         ))}
 

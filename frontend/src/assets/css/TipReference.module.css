@@ -1,0 +1,14 @@
+.tip {
+  /* layout */
+  padding: 0.5em 1.5em;
+  margin-top: 20px;
+
+  /* box */
+  background: var(--LightBrown);
+  border-radius: 2rem;
+  border: solid 1px black;
+  width: fit-content;
+
+  /* text */
+  font-weight: bold;
+}
