@@ -1,16 +1,17 @@
 import { useNavigate } from "react-router-dom"
+
 import { BsQuestion } from "react-icons/bs"
-import styles from "@/assets/css/headerHowTo.module.css"
+import styles from "@/assets/css/HeaderHowTo.module.css"
 
 export default function HeaderHowTo() {
-  const navigate = useNavigate()
+  const Navigate = useNavigate()
 
   return (
-    <div className={styles.title}>
-      <div className={styles.titleApp} onClick={() => navigate("/home")}>
+    <div className={styles.root}>
+      <div className={styles.logo} onClick={() => Navigate("/home")}>
         だるめし Dull Meshi
       </div>
-      <div className={styles.titleHowTo}>
+      <div className={styles.howto}>
         <BsQuestion size="1.2rem" />
       </div>
     </div>

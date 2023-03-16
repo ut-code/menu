@@ -20,6 +20,7 @@ var(--変数名)で使える
 
 html {
   font-family: var(--Font);
+  color: var(--Black);
 }
 
 /* a href の文字が変な色にならない */

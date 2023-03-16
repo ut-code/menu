@@ -4,15 +4,6 @@
 
   /* text */
   font-weight: bold;
-  color: var(--Black);
-}
-
-.small {
-  /* layout */
-  margin: 2em 0em;
-
-  /* text */
-  font-size: 1rem;
 }
 
 .big {
@@ -21,4 +12,12 @@
 
   /* text */
   font-size: 1.4rem;
+}
+
+.small {
+  /* layout */
+  margin: 1.6em 0em;
+
+  /* text */
+  font-size: 1rem;
 }

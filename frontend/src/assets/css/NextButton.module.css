@@ -1,10 +1,15 @@
-.nextButton {
-  color: white;
+.button {
+  /* layout */
   padding: 1em;
-  background-color: var(--Blue);
-  width: 90%;
   margin: 5%;
   text-align: center;
-  font-weight: bold;
+
+  /* box */
+  background-color: var(--Blue);
   border-radius: 10rem;
+  width: 93%;
+
+  /* text */
+  font-weight: bold;
+  color: white;
 }
