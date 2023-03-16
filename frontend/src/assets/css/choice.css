@@ -72,12 +72,3 @@
 .suggestIngredient .box:has(input[type="radio"]:checked) {
   background-color: var(--Orange);
 }
-
-/*----------------------------------------------------------------
-  進む・戻るボタン（基本共通）
-----------------------------------------------------------------*/
-.nextButton {
-  padding: 1em;
-  background-color: var(--Blue);
-  color: white;
-}

@@ -49,16 +49,6 @@
   text-overflow: ellipsis;
 }
 
-.nextButton {
-  padding: 1em;
-  background-color: var(--Blue);
-  width: 90%;
-  margin: 5%;
-  text-align: center;
-  font-weight: bold;
-  border-radius: 10rem;
-}
-
 /*----------------------------------------------------------------
   選択肢の表示
   一旦styleによって異なるようにしてみた

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import Suggestion from "@/components/suggestion"
 import HeaderHowTo from "@/components/HeaderHowTo"
 import BackButton from "@/components/BackButton"
+import NextButton from "@/components/NextButton"
 import "@/assets/css/home.css"
 import "@/assets/css/choice.css"
 
@@ -227,7 +228,7 @@ export default function Questions() {
             </span>
           </div>
         )}
-        {currentQuestion.questionNumber === 0 && <div className="suggestIngredient_title">Recommend</div>}
+        {currentQuestion.userInput === true && <div className="suggestIngredient_title">Recommend</div>}
 
         <div className="suggestIngredient">
           {Object.values(currentQuestion.choices).map((choice, index) => (
@@ -252,9 +253,7 @@ export default function Questions() {
           ))}
         </div>
 
-        <div className="nextButton" onClick={onClickNextPage}>
-          Next
-        </div>
+        <NextButton onClick={onClickNextPage} />
       </div>
     </>
   )
