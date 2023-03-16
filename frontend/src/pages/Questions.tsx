@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
 import Suggestion from "@/components/suggestion"
-import "@/assets/css/style.css"
 import "@/assets/css/home.css"
 import "@/assets/css/choice.css"
 

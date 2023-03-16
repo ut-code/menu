@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
-import "@/assets/css/style.css"
 import "@/assets/css/home.css"
 import "@/assets/css/card.css"
 
