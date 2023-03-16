@@ -242,6 +242,7 @@ export default function Questions() {
             </span>
           </div>
         )}
+        {currentQuestion.questionNumber === 0 && <div className="suggestIngredient_title">Recommend</div>}
 
         <div className="suggestIngredient">
           {Object.values(currentQuestion.choices).map((choice, index) => (

@@ -64,6 +64,13 @@
   一旦styleによって異なるようにしてみた
   結局 choice.css の方と同じ内容になりそうだけど
 ----------------------------------------------------------------*/
+.suggestIngredient_title {
+  font-weight: bold;
+  margin-top: 10%;
+  margin-left: 1.3rem;
+  margin-right: auto;
+}
+
 .style1 .suggestIngredient {
   padding: 1em;
 
