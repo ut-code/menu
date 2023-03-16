@@ -5,6 +5,7 @@ import Suggestion from "@/components/suggestion"
 import HeaderHowTo from "@/components/HeaderHowTo"
 import BackButton from "@/components/BackButton"
 import NextButton from "@/components/NextButton"
+import QuestionText from "@/components/QuestionText"
 import "@/assets/css/home.css"
 import "@/assets/css/choice.css"
 
@@ -201,8 +202,7 @@ export default function Questions() {
 
         {currentQuestion.questionNumber > 0 && <BackButton onClick={onClickPreviousPage} />}
 
-        {currentQuestion.userInput === true && <div className="q_white">{currentQuestion.questionText}</div>}
-        {currentQuestion.userInput === false && <div className="q_black">{currentQuestion.questionText}</div>}
+        <QuestionText content={currentQuestion.questionText} userInput={currentQuestion.userInput} />
 
         {currentQuestion.userInput === true && (
           <div className="inputIngredient">

@@ -3,7 +3,6 @@ import { useState, useEffect } from "react"
 
 import Reference from "@/components/reference"
 import BackButton from "@/components/BackButton"
-import { BsArrowLeft } from "react-icons/bs"
 import "@/assets/css/home.css"
 import "@/assets/css/card.css"
 

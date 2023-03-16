@@ -12,14 +12,6 @@
   align-items: center;
 }
 
-.q_black {
-  color: var(--Black);
-  text-align: center;
-  font-weight: bold;
-
-  margin: 2em 0em;
-}
-
 /*----------------------------------------------------------------
   選択肢の表示 (材料を提案しない用途にも...)
   一旦styleによって異なるようにしてみた

@@ -1,0 +1,24 @@
+.root {
+  /* layout */
+  text-align: center;
+
+  /* text */
+  font-weight: bold;
+  color: var(--Black);
+}
+
+.small {
+  /* layout */
+  margin: 2em 0em;
+
+  /* text */
+  font-size: 1rem;
+}
+
+.big {
+  /* layout */
+  margin: 0.8em 0em;
+
+  /* text */
+  font-size: 1.4rem;
+}
