@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 
 import Suggestion from "@/components/suggestion"
 import HeaderHowTo from "@/components/HeaderHowTo"
+import BackButton from "@/components/BackButton"
 import "@/assets/css/home.css"
 import "@/assets/css/choice.css"
 
@@ -12,8 +13,6 @@ import imgEgg from "@/assets/image/egg.webp"
 import imgMilk from "@/assets/image/milk.webp"
 import imgPork from "@/assets/image/pork.webp"
 import imgTomato from "@/assets/image/tomato.webp"
-
-import { BsArrowLeft } from "react-icons/bs"
 
 //----------------------------------------------------------------
 // 参考
@@ -199,11 +198,7 @@ export default function Questions() {
       <div className={style} key={currentQuestion.questionNumber}>
         {currentQuestion.questionNumber === 0 && <HeaderHowTo />}
 
-        {currentQuestion.questionNumber > 0 && (
-          <div className="backButton" onClick={onClickPreviousPage}>
-            <BsArrowLeft size="1.2rem" color="var(--Black)" />
-          </div>
-        )}
+        {currentQuestion.questionNumber > 0 && <BackButton onClick={onClickPreviousPage} />}
 
         {currentQuestion.userInput === true && <div className="q_white">{currentQuestion.questionText}</div>}
         {currentQuestion.userInput === false && <div className="q_black">{currentQuestion.questionText}</div>}
@@ -254,9 +249,6 @@ export default function Questions() {
                 </div>
               )}
             </label>
-            // <button className={box} key={index} onClick={() => onChangeHandler(index)}>
-            //   {choice}
-            // </button>
           ))}
         </div>
 

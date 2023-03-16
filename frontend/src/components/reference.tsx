@@ -18,7 +18,7 @@ const urlDomainToName: dict = {
   "recipe.rakuten.co.jp": "楽天レシピ",
 }
 
-// turn url into a domein name
+// turn url into a domain
 const changeUrl = (url: string): string => {
   const urlArray: string[] = url.split("/")
   const urlDomain: string = urlArray[2]

@@ -1,0 +1,15 @@
+.backButton {
+  /* 左寄せ */
+  align-self: flex-start;
+
+  /* アイコン内を上下中央揃え */
+  display: flex;
+  align-items: center;
+
+  padding: 0.5em;
+  margin-bottom: 1em;
+
+  background-color: white;
+  border-radius: 50%;
+  border: solid 1.5px var(--Black);
+}

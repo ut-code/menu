@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
+import Reference from "@/components/reference"
+import BackButton from "@/components/BackButton"
+import { BsArrowLeft } from "react-icons/bs"
 import "@/assets/css/home.css"
 import "@/assets/css/card.css"
-
-import { BsArrowLeft } from "react-icons/bs"
-import Reference from "@/components/reference"
 
 const postSelectRecipeApi = `${import.meta.env.VITE_API_ENDPOINT}/searchRecipes`
 
@@ -150,9 +150,8 @@ export default function Result() {
   return (
     <>
       <div className="style1" style={{ height: "auto" }}>
-        <div className="backButton-b" onClick={() => Navigate("/questions")}>
-          <BsArrowLeft size="1.2rem" color="white" />
-        </div>
+        <BackButton onClick={() => Navigate("/questions")} />
+
         <div className="inputIngredient" style={{ color: "var(--Gray)", height: "auto" }}>
           入力されたキーワード：
           {answers.map((answer, index) => (
