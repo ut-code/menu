@@ -23,16 +23,10 @@ export default function RadioButton(props: {
         {props.userInput === true && (
           <div>
             <img className={styles.pic_iframe} src={props.ingredientImage} />
-            <div className={styles.pic_heading}>
-              {props.value} {1 * Number(props.inputContent === props.value)}
-            </div>
+            <div className={styles.pic_heading}>{props.value}</div>
           </div>
         )}
-        {props.userInput === false && (
-          <div className={styles.nopic_text}>
-            {props.value} {1 * Number(props.inputContent === props.value)}
-          </div>
-        )}
+        {props.userInput === false && <div className={styles.nopic_text}>{props.value}</div>}
       </label>
     </div>
   )

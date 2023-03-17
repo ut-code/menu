@@ -173,17 +173,15 @@ export default function Questions() {
         <QuestionText content={currentQuestion.questionText} userInput={currentQuestion.userInput} />
 
         {currentQuestion.userInput === true && (
-          <div className="inputIngredient">
-            <input
-              className="input"
-              type="text"
-              placeholder="食材の名前を入力してみましょう"
-              value={inputContent}
-              onChange={(e) => {
-                setInputContent(e.target.value)
-              }}
-            />
-          </div>
+          <input
+            className="inputIngredient"
+            type="text"
+            placeholder="食材の名前を入力してみましょう"
+            value={inputContent}
+            onChange={(e) => {
+              setInputContent(e.target.value)
+            }}
+          />
         )}
         {currentQuestion.userInput === false && (
           <div className="inputIngredient notInput" style={{ color: "var(--Gray)" }}>

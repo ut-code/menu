@@ -51,6 +51,12 @@
   background-color: white;
 }
 
+.pic:has(input[type="radio"]:checked) {
+  border: var(--Orange) 2px solid;
+  box-shadow: var(--Orange) 2px 2px 0 0;
+  outline: 0;
+}
+
 .pic_iframe {
   /* box */
   border-bottom: solid 2px var(--Black);

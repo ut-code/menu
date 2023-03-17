@@ -5,12 +5,18 @@
   width: 90%;
   border-radius: 50em; /* make a circle border */
   border: var(--Black) 1px solid;
-  box-shadow: #1c1c1c 2px 2px 0 0;
+  box-shadow: var(--Black) 2px 2px 0 0;
   font-size: 0.85em;
   /*はみ出した文字は「…」で省略*/
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+input[type="text"]:focus {
+  border: var(--Orange) 1px solid;
+  box-shadow: var(--Orange) 2px 2px 0 0;
+  outline: 0;
 }
 
 .notInput {
