@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
-import Recommendation from "@/components/Recommendation"
 import HeaderHowTo from "@/components/HeaderHowTo"
 import BackButton from "@/components/BackButton"
 import NextButton from "@/components/NextButton"
 import QuestionText from "@/components/QuestionText"
+import RadioGroup from "@/components/RadioGroup"
 import "@/assets/css/home.css"
 import "@/assets/css/choice.css"
 
@@ -43,10 +43,10 @@ const questions: Question[] = [
     questionText: "使いたい食材はなんですか？",
     userInput: true,
     choices: {
+      0: { choiceText: "卵", choiceImage: imgEgg },
       1: { choiceText: "トマト", choiceImage: imgTomato },
       2: { choiceText: "ブロッコリー", choiceImage: imgBroccoli },
       3: { choiceText: "牛乳", choiceImage: imgMilk },
-      4: { choiceText: "卵", choiceImage: imgEgg },
     },
   },
   {
@@ -54,10 +54,10 @@ const questions: Question[] = [
     questionText: "料理のジャンルを選択してください",
     userInput: false,
     choices: {
-      1: { choiceText: "主食", choiceImage: "" },
-      2: { choiceText: "主菜・副菜", choiceImage: "" },
-      3: { choiceText: "汁物", choiceImage: "" },
-      4: { choiceText: "その他", choiceImage: "" },
+      0: { choiceText: "主食", choiceImage: "" },
+      1: { choiceText: "主菜・副菜", choiceImage: "" },
+      2: { choiceText: "汁物", choiceImage: "" },
+      3: { choiceText: "その他", choiceImage: "" },
     },
   },
   {
@@ -65,9 +65,9 @@ const questions: Question[] = [
     questionText: "調理時間を選択してください",
     userInput: false,
     choices: {
-      1: { choiceText: "時短", choiceImage: "" },
-      2: { choiceText: "普通", choiceImage: "" },
-      3: { choiceText: "じっくり", choiceImage: "" },
+      0: { choiceText: "時短", choiceImage: "" },
+      1: { choiceText: "普通", choiceImage: "" },
+      2: { choiceText: "じっくり", choiceImage: "" },
     },
   },
   {
@@ -75,7 +75,7 @@ const questions: Question[] = [
     questionText: "他に使いたい食材はありますか？",
     userInput: true,
     choices: {
-      1: { choiceText: "豚肉", choiceImage: imgPork },
+      0: { choiceText: "豚肉", choiceImage: imgPork },
     },
   },
 ]
@@ -142,20 +142,12 @@ export default function Questions() {
   //----------------------------------------------------------------
   // 選択肢のボタンが押されたときの処理
   //----------------------------------------------------------------
-  const onChangeHandler = (index: number) => {
-    // 選んだ選択肢をinputContentにセット (0-indexed を 1-indexed に変換)
-    setInputContent(currentQuestion.choices[index + 1].choiceText)
+  const onChangeHandler = (e) => {
+    // 選んだ選択肢をinputContentにセット
+    setInputContent(e.target.value)
 
     // 問題番号をキーにして、選んだ選択肢をlocalStorageに保存
-    localStorage.setItem(
-      "answer-" + currentQuestion.questionNumber.toString(),
-      currentQuestion.choices[index + 1].choiceText
-    )
-
-    // localStorageの保存状況を確認
-    // const answer = localStorage.getItem("answer-" + currentQuestion.questionNumber.toString())
-    // const answer = currentQuestion.choices[index + 1]
-    // alert("選択肢「" + answer + "」が選択されました")
+    localStorage.setItem("answer-" + currentQuestion.questionNumber.toString(), e.target.value)
   }
 
   //----------------------------------------------------------------
@@ -221,22 +213,29 @@ export default function Questions() {
           <div className="inputIngredient notInput" style={{ color: "var(--Gray)" }}>
             <span className="inputIngredient_title">Keywords&nbsp;&nbsp;</span>
             <br></br>
-            <span className="inputIngredient_input">
+            <p className="inputIngredient_input">
               {answers.map((answer, index) => (
                 <span key={index}>{answer.content}&nbsp;</span>
               ))}
-            </span>
+            </p>
           </div>
         )}
         {currentQuestion.userInput === true && <div className="suggestIngredient_title">Recommend</div>}
 
-        <div className="suggestIngredient">
+        <RadioGroup
+          options={currentQuestion.choices}
+          onChange={onChangeHandler}
+          inputContent={inputContent}
+          userInput={currentQuestion.userInput}
+        />
+
+        {/* <div className="suggestIngredient">
           {Object.values(currentQuestion.choices).map((choice, index) => (
             <label key={index} className={box} style={{ backgroundImage: `url(${choice.choiceImage})` }}>
               <input
                 type="radio"
                 value={choice.choiceText}
-                onChange={() => onChangeHandler(index)}
+                onChange={onChangeHandler}
                 checked={inputContent === choice.choiceText}
               />
               {currentQuestion.userInput === true && (
@@ -251,7 +250,7 @@ export default function Questions() {
               )}
             </label>
           ))}
-        </div>
+        </div> */}
 
         <NextButton onClick={onClickNextPage} />
       </div>
