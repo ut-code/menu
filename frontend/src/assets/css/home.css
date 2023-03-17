@@ -1,16 +1,3 @@
-/*--- 使いたい食材を入力する ---*/
-
-.style1 {
-  padding: 1em;
-  background-color: var(--LightBrown);
-  height: 100vh;
-
-  /* everything in middle */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .inputIngredient {
   padding: 0.6em 1em;
   margin: 5%;
@@ -25,6 +12,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
 .notInput {
   border-radius: 20px;
   border: solid 2px var(--Black);
@@ -32,6 +20,7 @@
   padding: 1.4em 1.5em;
   width: 80%;
 }
+
 .inputIngredient_title {
   display: inline-block;
   margin-bottom: 0.5rem;
@@ -40,69 +29,13 @@
   font-size: large;
   background: linear-gradient(transparent 65%, var(--Orange) 65%);
 }
+
 .inputIngredient_input {
   font-size: 0.85em;
-  /*はみ出した文字は「…」で省略*/
+  /* はみ出した文字は「…」で省略 */
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-}
-
-/*----------------------------------------------------------------
-  選択肢の表示
-  一旦styleによって異なるようにしてみた
-  結局 choice.css の方と同じ内容になりそうだけど
-----------------------------------------------------------------*/
-.suggestIngredient_title {
-  font-weight: bold;
-  margin-top: 10%;
-  margin-left: 1.3rem;
-  margin-right: auto;
-}
-
-.style1 .suggestIngredient {
-  padding: 1em;
-
-  /* 2x2に並べる */
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2em;
-}
-
-.suggestIngredient .box_pic {
-  /* 文字 */
-  color: var(--Black);
-  font-weight: bold;
-
-  /* 縁 */
-  border: solid 2px var(--Black);
-  border-radius: 30px;
-
-  /* 影 */
-  box-shadow: var(--Black) 2px 2px 0 0;
-
-  /* crop image */
-  background-size: cover;
-
-  /* boxのサイズ */
-  width: 150px;
-  height: 150px;
-
-  /* text in bottom left */
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-}
-
-.heading {
-  width: 100%;
-  border-top: solid 2px #1c1c1c;
-  border-radius: 0px 0px 30px 30px;
-  color: #1c1c1c;
-  font-weight: bold;
-  padding: 0.8em;
-  z-index: 2;
-  background-color: white;
 }
 
 .input {

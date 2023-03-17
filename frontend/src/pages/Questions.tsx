@@ -7,7 +7,6 @@ import NextButton from "@/components/NextButton"
 import QuestionText from "@/components/QuestionText"
 import RadioGroup from "@/components/RadioGroup"
 import "@/assets/css/home.css"
-import "@/assets/css/choice.css"
 
 // 画像ファイルをimport
 import imgBroccoli from "@/assets/image/broccoli.webp"
@@ -88,8 +87,6 @@ type Answer = {
 export default function Questions() {
   const [currentQuestion, setCurrentQuestion] = useState<Question>(questions[0])
   const [inputContent, setInputContent] = useState<string>("")
-  const [style, setStyle] = useState<string>("style1")
-  const [box, setBox] = useState<string>("box_brown")
   const [answers, setAnswers] = useState<Answer[]>([])
 
   // useNavigate を Navigate に変化させる呪文
@@ -109,30 +106,9 @@ export default function Questions() {
   }, [])
 
   //----------------------------------------------------------------
-  // CSS用の関数
-  // userInput が true なら className="style1" をセット
-  // questionNumber が 0以外 なら box-pic をセット
-  //----------------------------------------------------------------
-  const changeStyles = () => {
-    if (currentQuestion.userInput === true) {
-      setStyle("style1")
-    } else {
-      setStyle("style2")
-    }
-
-    if (currentQuestion.userInput === true) {
-      setBox("box_pic")
-    } else {
-      setBox("box")
-    }
-  }
-
-  //----------------------------------------------------------------
   // currentQuestionの変更をフックにして回答状況を復元
   //----------------------------------------------------------------
   useEffect(() => {
-    changeStyles()
-
     const answer = localStorage.getItem("answer-" + currentQuestion.questionNumber.toString())
     if (answer !== null) {
       setInputContent(answer)
@@ -189,7 +165,7 @@ export default function Questions() {
 
   return (
     <>
-      <div className={style} key={currentQuestion.questionNumber}>
+      <div className="style_lightbrown" key={currentQuestion.questionNumber}>
         {currentQuestion.questionNumber === 0 && <HeaderHowTo />}
 
         {currentQuestion.questionNumber > 0 && <BackButton onClick={onClickPreviousPage} />}
@@ -220,7 +196,6 @@ export default function Questions() {
             </p>
           </div>
         )}
-        {currentQuestion.userInput === true && <div className="suggestIngredient_title">Recommend</div>}
 
         <RadioGroup
           options={currentQuestion.choices}
@@ -228,29 +203,6 @@ export default function Questions() {
           inputContent={inputContent}
           userInput={currentQuestion.userInput}
         />
-
-        {/* <div className="suggestIngredient">
-          {Object.values(currentQuestion.choices).map((choice, index) => (
-            <label key={index} className={box} style={{ backgroundImage: `url(${choice.choiceImage})` }}>
-              <input
-                type="radio"
-                value={choice.choiceText}
-                onChange={onChangeHandler}
-                checked={inputContent === choice.choiceText}
-              />
-              {currentQuestion.userInput === true && (
-                <div className="heading">
-                  {choice.choiceText} {1 * Number(inputContent === choice.choiceText)}
-                </div>
-              )}
-              {currentQuestion.userInput === false && (
-                <div>
-                  {choice.choiceText} {1 * Number(inputContent === choice.choiceText)}
-                </div>
-              )}
-            </label>
-          ))}
-        </div> */}
 
         <NextButton onClick={onClickNextPage} />
       </div>

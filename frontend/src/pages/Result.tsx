@@ -147,7 +147,7 @@ export default function Result() {
 
   return (
     <>
-      <div className="style1" style={{ height: "auto" }}>
+      <div className="style_lightbrown" style={{ height: "auto" }}>
         <BackButton onClick={() => Navigate("/questions")} />
 
         <div className="inputIngredient" style={{ color: "var(--Gray)", height: "auto" }}>

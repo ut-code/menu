@@ -1,9 +1,8 @@
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
 import Footer from "@/components/Footer"
-
-import { BsArrowLeft } from "react-icons/bs"
+import BackButton from "@/components/BackButton"
 
 /*
  * Vite はトランスパイル時に import.meta.env のプロパティを VITE_ から始まる環境変数に置換する
@@ -16,6 +15,9 @@ const postSendApi = `${import.meta.env.VITE_API_ENDPOINT}/send`
 type Message = { id: number; content: string; created_at: string }
 
 export default function Message() {
+  // useNavigate を Navigate に変化させる呪文
+  const Navigate = useNavigate()
+
   const [messages, setMessages] = useState<Message[]>([])
   const [newMessageContent, setNewMessageContent] = useState("")
 
@@ -38,10 +40,8 @@ export default function Message() {
 
   return (
     <>
-      <div className="style1">
-        <Link to={"/home"} className="backButton">
-          <BsArrowLeft size="1.2rem" color="var(--Black)" />
-        </Link>
+      <div className="style_lightbrown">
+        <BackButton onClick={() => Navigate("/home")} />
 
         <div>
           <p>画面は5秒おきに更新されます</p>

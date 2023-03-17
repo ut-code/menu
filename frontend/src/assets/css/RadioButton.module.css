@@ -1,6 +1,7 @@
 /*
 共通: box
-
+画像なし: nopic
+画像あり: pic
 */
 .box {
   /* box */
@@ -17,7 +18,7 @@
 }
 
 .nopic {
-  /* 背景色 */
+  /* box */
   background-color: var(--Brown);
 
   /* text */
@@ -26,21 +27,23 @@
 }
 
 .nopic:has(input[type="radio"]:checked) {
+  /* box */
   background-color: var(--Orange);
 }
 
 .nopic_text {
-  /* text */
-  color: white;
-  font-weight: bold;
-
-  height: 150px;
-  width: 150px;
-
-  /* text in center */
+  /* layout */
   display: flex;
   align-items: center;
   justify-content: center;
+
+  /* box */
+  height: 150px;
+  width: 150px;
+
+  /* text */
+  color: white;
+  font-weight: bold;
 }
 
 .pic {

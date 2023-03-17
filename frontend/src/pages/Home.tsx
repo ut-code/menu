@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { useEffect } from "react"
 
 import Footer from "@/components/Footer"
+import "@/assets/css/home.css"
 
 export default function Home() {
   // 永続的に残るので、localStorageから問題への回答を消しておく
@@ -13,7 +14,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="style1">
+      <div className="style_lightbrown">
         <div style={{ display: "flex" }}>
           <Link to={"/questions"}>
             <button>はじめる</button>
