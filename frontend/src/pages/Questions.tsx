@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
-import Suggestion from "@/components/suggestion"
+import Recommendation from "@/components/Recommendation"
 import HeaderHowTo from "@/components/HeaderHowTo"
 import BackButton from "@/components/BackButton"
 import NextButton from "@/components/NextButton"

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { useEffect } from "react"
 
 import Footer from "@/components/Footer"
-import Suggestion from "@/components/suggestion"
+import Recommendation from "@/components/Recommendation"
 
 import imgTomato from "@/assets/image/tomato.webp"
 import imgBroccoli from "@/assets/image/broccoli.webp"
@@ -32,8 +32,10 @@ export default function Home() {
           </Link>
         </div>
         <br></br>
-        <Suggestion ingridientName="トマト" ingridientImage={imgTomato} />
-        <Suggestion ingridientName="ブロッコリー" ingridientImage={imgBroccoli} />
+        <div style={{ display: "flex" }}>
+          <Recommendation ingredientName="トマト" ingredientImage={imgTomato} />
+          <Recommendation ingredientName="ブロッコリー" ingredientImage={imgBroccoli} />
+        </div>
         <br></br>
         <Footer />
       </div>
