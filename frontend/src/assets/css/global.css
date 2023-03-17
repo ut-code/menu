@@ -19,19 +19,29 @@ var(--変数名)で使える
 }
 
 html {
+  /* text */
   font-family: var(--Font);
   color: var(--Black);
 }
 
-/* a href の文字が変な色にならない */
 a {
+  /* a href / Link の文字が変な色にならないようにする */
   text-decoration: none;
   color: var(--Black);
 }
 
-/* css animation */
-.style1,
-.style2 {
+.style_lightbrown {
+  /* layout */
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* box */
+  background-color: var(--LightBrown);
+  height: 100vh;
+
+  /* transition */
   animation: fadeIn 1s;
   animation-fill-mode: forwards;
 }

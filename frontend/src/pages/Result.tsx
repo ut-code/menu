@@ -1,10 +1,9 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
-import Reference from "@/components/reference"
 import BackButton from "@/components/BackButton"
+import RecipeCard from "@/components/RecipeCard"
 import "@/assets/css/home.css"
-import "@/assets/css/card.css"
 
 const postSelectRecipeApi = `${import.meta.env.VITE_API_ENDPOINT}/searchRecipes`
 
@@ -148,7 +147,7 @@ export default function Result() {
 
   return (
     <>
-      <div className="style1" style={{ height: "auto" }}>
+      <div className="style_lightbrown" style={{ height: "auto" }}>
         <BackButton onClick={() => Navigate("/questions")} />
 
         <div className="inputIngredient" style={{ color: "var(--Gray)", height: "auto" }}>
@@ -158,17 +157,13 @@ export default function Result() {
           ))}
         </div>
         {recipes.map((recipe, index) => (
-          <div key={index} className="card">
-            {/* click anywhere and it opens recipe.recipeUrl but you don't make texts blue with underline */}
-            <a href={recipe.recipeUrl} target="_blank" rel="noreferrer">
-              <img className="card__imgframe" src={recipe.foodImageUrls[0]} />
-              <div className="card__textbox">
-                <div className="card__titletext">{recipe.recipeTitle}</div>
-                <div className="card__overviewtext">{recipe.recipeMaterialConverted}</div>
-                <Reference url={recipe.recipeUrl} />
-              </div>
-            </a>
-          </div>
+          <RecipeCard
+            key={index}
+            recipeUrl={recipe.recipeUrl}
+            foodImageUrl={recipe.foodImageUrls[0]}
+            title={recipe.recipeTitle}
+            material={recipe.recipeMaterialConverted}
+          />
         ))}
 
         <Link to={"/home"}>

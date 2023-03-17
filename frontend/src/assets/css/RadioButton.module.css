@@ -1,0 +1,69 @@
+/*
+共通: box
+画像なし: nopic
+画像あり: pic
+*/
+.box {
+  /* box */
+  border-radius: 20px;
+  border: solid 2px var(--Black);
+  box-shadow: var(--Black) 2px 2px 0 0;
+  height: 150px;
+  width: 150px;
+  overflow: hidden; /* 丸めた枠からのはみ出しを隠す */
+}
+
+.box input[type="radio"] {
+  display: none;
+}
+
+.nopic {
+  /* box */
+  background-color: var(--Brown);
+
+  /* text */
+  color: white;
+  font-weight: bold;
+}
+
+.nopic:has(input[type="radio"]:checked) {
+  /* box */
+  background-color: var(--Orange);
+}
+
+.nopic_text {
+  /* layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* box */
+  height: 150px;
+  width: 150px;
+
+  /* text */
+  color: white;
+  font-weight: bold;
+}
+
+.pic {
+  /* box */
+  background-color: white;
+}
+
+.pic_iframe {
+  /* box */
+  border-bottom: solid 2px var(--Black);
+  height: 100px;
+  width: 100%;
+}
+
+.pic_heading {
+  /* layout */
+  padding: 0.35em 0.6em 0em 0.6em;
+
+  /* text */
+  color: var(--Black);
+  font-weight: bold;
+  font-size: 1rem;
+}

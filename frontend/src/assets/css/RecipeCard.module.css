@@ -1,0 +1,48 @@
+/* https://eclair.blog/examples-of-card/ */
+.root {
+  /* layout */
+  margin: 2.5% 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* box */
+  background-color: white;
+  border-radius: 20px;
+  border: var(--Black) 1px solid;
+  box-shadow: var(--Black) 2px 2px 0 0;
+  width: 90%;
+  /* height: 500px; 高さ上限どうしますか？ */
+  overflow: hidden; /* 丸めた枠からのはみ出しを隠す */
+}
+
+.iframe {
+  /* box */
+  width: 100%; /* 親要素の幅に合わせる */
+  border-bottom: solid 1px var(--Black);
+}
+
+.textbox {
+  /* layout */
+  padding: 0.4em 1.2em 1em 1.2em;
+
+  /* box */
+  width: 100%; /* 親要素の幅に合わせる */
+  /* height: auto; 高さ上限どうしますか？ */
+  box-sizing: border-box; /* はみ出し阻止 */
+}
+
+.text_title {
+  /* text */
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.text_material {
+  /* layout */
+  margin: 0.5em 0 1em 0;
+
+  /* text */
+  font-size: 0.8em;
+}
