@@ -5,6 +5,7 @@ import HeaderHowTo from "@/components/HeaderHowTo"
 import BackButton from "@/components/BackButton"
 import NextButton from "@/components/NextButton"
 import QuestionText from "@/components/QuestionText"
+import InputIngredient from "@/components/InputIngredient"
 import RadioGroup from "@/components/RadioGroup"
 import "@/assets/css/home.css"
 
@@ -116,7 +117,7 @@ export default function Questions() {
   }, [currentQuestion])
 
   //----------------------------------------------------------------
-  // 選択肢のボタンが押されたときの処理
+  // 選択肢のボタンが押されたとき / 入力欄に入れたときの処理
   //----------------------------------------------------------------
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     // 選んだ選択肢をinputContentにセット
@@ -173,14 +174,10 @@ export default function Questions() {
         <QuestionText content={currentQuestion.questionText} userInput={currentQuestion.userInput} />
 
         {currentQuestion.userInput === true && (
-          <input
-            className="inputIngredient"
-            type="text"
+          <InputIngredient
+            onChange={onChangeHandler}
+            inputContent={inputContent}
             placeholder="食材の名前を入力してみましょう"
-            value={inputContent}
-            onChange={(e) => {
-              setInputContent(e.target.value)
-            }}
           />
         )}
         {currentQuestion.userInput === false && (
