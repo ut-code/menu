@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 import BackButton from "@/components/BackButton"
 import InputIngredient from "@/components/InputIngredient"
 import RecipeCard from "@/components/RecipeCard"
-import "@/assets/css/home.css"
 
 const postSelectRecipeApi = `${import.meta.env.VITE_API_ENDPOINT}/searchRecipes`
 

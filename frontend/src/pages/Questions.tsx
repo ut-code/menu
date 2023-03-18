@@ -6,8 +6,8 @@ import BackButton from "@/components/BackButton"
 import NextButton from "@/components/NextButton"
 import QuestionText from "@/components/QuestionText"
 import InputIngredient from "@/components/InputIngredient"
+import Keywords from "@/components/Keywords"
 import RadioGroup from "@/components/RadioGroup"
-import "@/assets/css/home.css"
 
 // 画像ファイルをimport
 import imgBroccoli from "@/assets/image/broccoli.webp"
@@ -180,17 +180,7 @@ export default function Questions() {
             placeholder="食材の名前を入力してみましょう"
           />
         )}
-        {currentQuestion.userInput === false && (
-          <div className="inputIngredient notInput" style={{ color: "var(--Gray)" }}>
-            <span className="inputIngredient_title">Keywords&nbsp;&nbsp;</span>
-            <br></br>
-            <p className="inputIngredient_input">
-              {answers.map((answer, index) => (
-                <span key={index}>{answer.content}&nbsp;</span>
-              ))}
-            </p>
-          </div>
-        )}
+        {currentQuestion.userInput === false && <Keywords answers={answers} />}
 
         <RadioGroup
           options={currentQuestion.choices}
