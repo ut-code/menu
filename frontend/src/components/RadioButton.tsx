@@ -1,25 +1,27 @@
 import styles from "@/assets/css/RadioButton.module.css"
 
-export default function RadioButton(props: {
+interface Props {
   index: number
   value: string
   ingredientImage: string
-  onChange
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   inputContent: string
   userInput: boolean
-}) {
+}
+
+export default function RadioButton(props: Props) {
   const className = props.userInput ? styles.pic : styles.nopic
 
   return (
     <div className={`${styles.box} ${className}`}>
       <input
-        id={props.index}
+        id={props.index.toString()}
         type="radio"
         defaultValue={props.value}
         onChange={props.onChange}
         checked={props.inputContent === props.value}
       />
-      <label htmlFor={props.index}>
+      <label htmlFor={props.index.toString()}>
         {props.userInput === true && (
           <div>
             <img className={styles.pic_iframe} src={props.ingredientImage} />

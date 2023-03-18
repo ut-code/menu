@@ -3,12 +3,14 @@ import { Link } from "react-router-dom"
 import TipReference from "@/components/TipReference"
 import styles from "@/assets/css/RecipeCard.module.css"
 
-export default function RecipeCard(props: {
+interface Props {
   recipeUrl: string
   foodImageUrl: string
   title: string
   material: string
-}) {
+}
+
+export default function RecipeCard(props: Props) {
   return (
     <div className={styles.root}>
       <Link to={props.recipeUrl} target="_blank" rel="noopener noreferrer">

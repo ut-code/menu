@@ -118,7 +118,7 @@ export default function Questions() {
   //----------------------------------------------------------------
   // 選択肢のボタンが押されたときの処理
   //----------------------------------------------------------------
-  const onChangeHandler = (e) => {
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     // 選んだ選択肢をinputContentにセット
     setInputContent(e.target.value)
 
