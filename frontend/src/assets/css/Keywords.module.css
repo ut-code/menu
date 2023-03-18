@@ -1,0 +1,38 @@
+.box {
+  /* layout */
+  margin: 5%;
+  padding: 1.4em 1.5em;
+
+  /* box */
+  background-color: white;
+  width: 80%;
+  border: solid 2px var(--Black);
+  border-radius: 20px;
+  box-shadow: none;
+}
+
+.title {
+  /* layout */
+  margin-bottom: 0.5rem;
+
+  /* text */
+  color: var(--Black);
+  font-weight: bold;
+  font-size: large;
+
+  /* underline */
+  display: inline-block;
+  background: linear-gradient(transparent 65%, var(--Orange) 65%);
+}
+
+.text {
+  /* layout */
+  margin: 1.4em 0;
+
+  /* text */
+  color: "var(--Gray)";
+  font-size: 0.85rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; /* はみ出した文字は「…」で省略 */
+}

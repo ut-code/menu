@@ -2,8 +2,8 @@ import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
 import BackButton from "@/components/BackButton"
+import InputIngredient from "@/components/InputIngredient"
 import RecipeCard from "@/components/RecipeCard"
-import "@/assets/css/home.css"
 
 const postSelectRecipeApi = `${import.meta.env.VITE_API_ENDPOINT}/searchRecipes`
 
@@ -35,6 +35,7 @@ export default function Result() {
   // useNavigate を Navigate に変化させる呪文
   const Navigate = useNavigate()
 
+  const [inputContent, setInputContent] = useState<string>("")
   const [answers, setAnswers] = useState<Answer[]>([])
   // const addAnswer = (answer: Answer) => setAnswers((prev) => [...prev, answer])
   // const [categoryId, setCategoryId] = useState<string>("12-103")
@@ -42,7 +43,6 @@ export default function Result() {
   const addRecipe = (recipe: Recipe) => setRecipes((prev) => [...prev, recipe])
 
   const convertAnswersToSearchInfo = (newAnswers: Answer[]): SearchInfo => {
-    //
     const info: SearchInfo = { ingredient: [] }
     if (newAnswers) {
       newAnswers.forEach((answer: Answer) => {
@@ -74,6 +74,11 @@ export default function Result() {
     }
     setAnswers(newAnswers)
 
+    // inputContent の初期値を設定
+    // newAnswers を空白区切りで連結したものをsetInputContent
+    // 例: ["豚肉", "玉ねぎ", "にんにく"] -> "豚肉 玉ねぎ にんにく"
+    setInputContent(newAnswers.map((answer) => answer.content).join(" "))
+
     // newAnswers をfindManyの検索に使いやすいように searchInfo に整形
     const searchInfo: SearchInfo = convertAnswersToSearchInfo(newAnswers)
 
@@ -102,6 +107,17 @@ export default function Result() {
 
     fetchSearchedRecipes(searchInfo)
   }, [])
+
+  //----------------------------------------------------------------
+  // 選択肢のボタンが押されたとき / 入力欄に入れたときの処理
+  //----------------------------------------------------------------
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // 選んだ選択肢をinputContentにセット
+    setInputContent(e.target.value)
+
+    // 問題番号をキーにして、選んだ選択肢をlocalStorageに保存
+    // localStorage.setItem("answer-" + currentQuestion.questionNumber.toString(), e.target.value)
+  }
 
   //----------------------------------------------------------------
   // 指定したカテゴリの人気レシピ上位4件を取得する。小カテゴリまで指定すれば十分な精度になるのでは？
@@ -150,12 +166,8 @@ export default function Result() {
       <div className="style_lightbrown" style={{ height: "auto" }}>
         <BackButton onClick={() => Navigate("/questions")} />
 
-        <div className="inputIngredient" style={{ color: "var(--Gray)", height: "auto" }}>
-          入力されたキーワード：
-          {answers.map((answer, index) => (
-            <span key={index}>{answer.content}&nbsp;</span>
-          ))}
-        </div>
+        <InputIngredient onChange={onChangeHandler} inputContent={inputContent} placeholder="" />
+
         {recipes.map((recipe, index) => (
           <RecipeCard
             key={index}

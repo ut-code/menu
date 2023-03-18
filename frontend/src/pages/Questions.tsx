@@ -5,8 +5,9 @@ import HeaderHowTo from "@/components/HeaderHowTo"
 import BackButton from "@/components/BackButton"
 import NextButton from "@/components/NextButton"
 import QuestionText from "@/components/QuestionText"
+import InputIngredient from "@/components/InputIngredient"
+import Keywords from "@/components/Keywords"
 import RadioGroup from "@/components/RadioGroup"
-import "@/assets/css/home.css"
 
 // 画像ファイルをimport
 import imgBroccoli from "@/assets/image/broccoli.webp"
@@ -116,9 +117,9 @@ export default function Questions() {
   }, [currentQuestion])
 
   //----------------------------------------------------------------
-  // 選択肢のボタンが押されたときの処理
+  // 選択肢のボタンが押されたとき / 入力欄に入れたときの処理
   //----------------------------------------------------------------
-  const onChangeHandler = (e) => {
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     // 選んだ選択肢をinputContentにセット
     setInputContent(e.target.value)
 
@@ -173,29 +174,13 @@ export default function Questions() {
         <QuestionText content={currentQuestion.questionText} userInput={currentQuestion.userInput} />
 
         {currentQuestion.userInput === true && (
-          <div className="inputIngredient">
-            <input
-              className="input"
-              type="text"
-              placeholder="食材の名前を入力してみましょう"
-              value={inputContent}
-              onChange={(e) => {
-                setInputContent(e.target.value)
-              }}
-            />
-          </div>
+          <InputIngredient
+            onChange={onChangeHandler}
+            inputContent={inputContent}
+            placeholder="食材の名前を入力してみましょう"
+          />
         )}
-        {currentQuestion.userInput === false && (
-          <div className="inputIngredient notInput" style={{ color: "var(--Gray)" }}>
-            <span className="inputIngredient_title">Keywords&nbsp;&nbsp;</span>
-            <br></br>
-            <p className="inputIngredient_input">
-              {answers.map((answer, index) => (
-                <span key={index}>{answer.content}&nbsp;</span>
-              ))}
-            </p>
-          </div>
-        )}
+        {currentQuestion.userInput === false && <Keywords answers={answers} />}
 
         <RadioGroup
           options={currentQuestion.choices}

@@ -8,7 +8,14 @@ type Choices = {
   }
 }
 
-export default function RadioGroup(props: { options: Choices; onChange; inputContent: string; userInput: boolean }) {
+interface Props {
+  options: Choices
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  inputContent: string
+  userInput: boolean
+}
+
+export default function RadioGroup(props: Props) {
   return (
     <div>
       {props.userInput && <div className={styles.text}>Recommend</div>}
