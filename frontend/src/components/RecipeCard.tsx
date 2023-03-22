@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
-import TipReference from "../TipReference/TipReference"
-import styles from "./RecipeCard.module.css"
+import TipReference from "../components/TipReference"
+import styles from "../assets/css/RecipeCard.module.css"
 
 interface Props {
   recipeUrl: string

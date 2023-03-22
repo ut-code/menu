@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { useEffect } from "react"
 
-import Footer from "../components/Footer/Footer"
+import Footer from "../components/Footer"
 
 export default function Home() {
   // 永続的に残るので、localStorageから問題への回答を消しておく
