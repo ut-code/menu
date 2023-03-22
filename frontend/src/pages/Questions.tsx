@@ -1,20 +1,20 @@
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
-import HeaderHowTo from "@/components/HeaderHowTo"
-import BackButton from "@/components/BackButton"
-import NextButton from "@/components/NextButton"
-import QuestionText from "@/components/QuestionText"
-import InputIngredient from "@/components/InputIngredient"
-import Keywords from "@/components/Keywords"
-import RadioGroup from "@/components/RadioGroup"
+import HeaderHowTo from "../components/HeaderHowTo"
+import BackButton from "../components/BackButton"
+import NextButton from "../components/NextButton"
+import QuestionText from "../components/QuestionText"
+import InputIngredient from "../components/InputIngredient"
+import Keywords from "../components/Keywords"
+import RadioGroup from "../components/RadioGroup"
 
 // 画像ファイルをimport
-import imgBroccoli from "@/assets/image/broccoli.webp"
-import imgEgg from "@/assets/image/egg.webp"
-import imgMilk from "@/assets/image/milk.webp"
-import imgPork from "@/assets/image/pork.webp"
-import imgTomato from "@/assets/image/tomato.webp"
+import imgBroccoli from "../assets/image/broccoli.webp"
+import imgEgg from "../assets/image/egg.webp"
+import imgMilk from "../assets/image/milk.webp"
+import imgPork from "../assets/image/pork.webp"
+import imgTomato from "../assets/image/tomato.webp"
 
 //----------------------------------------------------------------
 // 参考
