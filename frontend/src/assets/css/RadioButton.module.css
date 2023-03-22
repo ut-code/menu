@@ -51,11 +51,11 @@
   background-color: white;
 }
 
-.pic:has(input[type="radio"]:checked) {
+/* .pic:has(input[type="radio"]:checked) {
   border: var(--Orange) 2px solid;
   box-shadow: var(--Orange) 2px 2px 0 0;
   outline: 0;
-}
+} */
 
 .pic_iframe {
   /* box */
@@ -72,4 +72,17 @@
   color: var(--Black);
   font-weight: bold;
   font-size: 1rem;
+}
+
+.pic_filter {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  background: var(--Orange);
+  box-shadow: var(--Black) 2px 2px 0 0;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

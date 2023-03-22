@@ -1,4 +1,5 @@
 import styles from "@/assets/css/RadioButton.module.css"
+import { BsCheckLg } from "react-icons/bs"
 
 interface Props {
   index: number
@@ -24,8 +25,18 @@ export default function RadioButton(props: Props) {
       <label htmlFor={props.index.toString()}>
         {props.userInput === true && (
           <div>
-            <img className={styles.pic_iframe} src={props.ingredientImage} />
-            <div className={styles.pic_heading}>{props.value}</div>
+            {props.inputContent === props.value && ( //選択された時
+              <div className={styles.pic_filter}>
+                <BsCheckLg size="2rem" />
+              </div>
+            )}
+
+            {props.inputContent !== props.value && ( //選択されていない時
+              <div>
+                <img className={styles.pic_iframe} src={props.ingredientImage} />
+                <div className={styles.pic_heading}>{props.value}</div>
+              </div>
+            )}
           </div>
         )}
         {props.userInput === false && <div className={styles.nopic_text}>{props.value}</div>}
