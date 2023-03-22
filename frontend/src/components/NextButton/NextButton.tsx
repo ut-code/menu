@@ -1,4 +1,4 @@
-import styles from "../assets/css/NextButton.module.css"
+import styles from "./NextButton.module.css"
 
 export default function NextButton(props: { onClick: () => void }) {
   return (

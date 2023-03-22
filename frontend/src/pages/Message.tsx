@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
-import Footer from "../components/Footer"
-import BackButton from "../components/BackButton"
+import Footer from "../components/Footer/Footer"
+import BackButton from "../components/BackButton/BackButton"
 
 /*
  * Vite はトランスパイル時に import.meta.env のプロパティを VITE_ から始まる環境変数に置換する

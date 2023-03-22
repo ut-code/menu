@@ -1,5 +1,5 @@
 import { BsArrowLeft } from "react-icons/bs"
-import styles from "../assets/css/BackButton.module.css"
+import styles from "./BackButton.module.css"
 
 export default function BackButton(props: { onClick: () => void }) {
   return (
