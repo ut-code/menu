@@ -6,7 +6,7 @@ import Message from "@/pages/Message"
 import Questions from "@/pages/Questions"
 import Result from "@/pages/Result"
 
-import "@/assets/css/global.css"
+import "@/components/css/global.css"
 
 export default function App() {
   return (

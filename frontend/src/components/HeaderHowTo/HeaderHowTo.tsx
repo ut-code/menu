@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 
 import { BsQuestion } from "react-icons/bs"
-import styles from "@/assets/css/HeaderHowTo.module.css"
+import styles from "./HeaderHowTo.module.css"
 
 export default function HeaderHowTo() {
   const Navigate = useNavigate()

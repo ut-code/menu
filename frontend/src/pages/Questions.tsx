@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
-import HeaderHowTo from "@/components/HeaderHowTo"
-import BackButton from "@/components/BackButton"
-import NextButton from "@/components/NextButton"
-import QuestionText from "@/components/QuestionText"
-import InputIngredient from "@/components/InputIngredient"
-import Keywords from "@/components/Keywords"
-import RadioGroup from "@/components/RadioGroup"
+import HeaderHowTo from "@/components/HeaderHowTo/HeaderHowTo"
+import BackButton from "@/components/BackButton/BackButton"
+import NextButton from "@/components/NextButton/NextButton"
+import QuestionText from "@/components/QuestionText/QuestionText"
+import InputIngredient from "@/components/InputIngredient/InputIngredient"
+import Keywords from "@/components/Keywords/Keywords"
+import RadioGroup from "@/components/RadioGroup/RadioGroup"
 
 // 画像ファイルをimport
 import imgBroccoli from "@/assets/image/broccoli.webp"
