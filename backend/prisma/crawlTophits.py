@@ -53,7 +53,7 @@ def crawlTophits(search_word: str, pages_num: int) -> list:
     except Exception as e:
         print(e)
         return []
-    time.sleep(random.randint(1, 5))
+    time.sleep(random.randint(1, 2))
 
     # ----------------------------------------------------------------
     # Googleのページ解析を行う

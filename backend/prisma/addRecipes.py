@@ -28,7 +28,7 @@ def addRecipes(recipe_dicts: list[dict]) -> None:
             "foodImageUrls": recipe_dict["image"],
             "keywords": recipe_dict["keywords"],
             "totalTime": int(recipe_dict["totalTime"]),
-            "recipeIngredients": recipe_dict["recipeIngredient"],
+            "recipeMaterial": recipe_dict["recipeIngredient"],
         }
 
         try:
@@ -47,11 +47,9 @@ def getCategories() -> list[str]:
 
 
 category_names = getCategories() # max=2434に変更
-for category_name in category_names[76:]:
+for category_name in category_names[16:]:
     site_urls = crawlTophits(search_word=category_name+"+レシピ", pages_num=50)
     print(len(site_urls), "件のURLを取得しました。")
     recipe_dicts = extractRecipes(site_urls)
     print(len(recipe_dicts), "件の構造化データを取得しました。")
     addRecipes(recipe_dicts)
-    
-    time.sleep(3)
