@@ -1,4 +1,4 @@
-import styles from "@/assets/css/TipReference.module.css"
+import styles from "../assets/css/TipReference.module.css"
 
 interface dict {
   [key: string]: string
