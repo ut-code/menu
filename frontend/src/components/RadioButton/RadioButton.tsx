@@ -1,4 +1,4 @@
-import styles from "../assets/css/RadioButton.module.css"
+import styles from "./RadioButton.module.css"
 
 interface Props {
   index: number

@@ -1,5 +1,5 @@
-import RadioButton from "../components/RadioButton"
-import styles from "../assets/css/RadioGroup.module.css"
+import RadioButton from "../RadioButton/RadioButton"
+import styles from "./RadioGroup.module.css"
 
 type Choices = {
   [key: number]: {
