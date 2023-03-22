@@ -18,8 +18,7 @@
 }
 
 input[type="text"]:focus.box {
-  /* box */
-  border: var(--Orange) 1px solid;
-  box-shadow: var(--Orange) 2px 2px 0 0;
+  border: var(--Orange) 2px solid;
+  box-shadow: none;
   outline: 0;
 }
