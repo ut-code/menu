@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import "@/assets/css/swiper.css"
+import "@/components/css/swiper.css"
 
 import { Pagination } from "swiper"
 import { Swiper, SwiperSlide } from "swiper/react"
