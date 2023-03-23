@@ -36,10 +36,5 @@
     "prettier": "^2.8.3",
     "vite-plugin-pwa": "^0.14.4"
   },
-  "build": "tsc && vite build",
-  "rollupOptions": {
-    "external": [
-      "@/assets/css/HeaderHowTo.module.css?used"
-    ]
-  }
+  "build": "tsc && vite build"
 }

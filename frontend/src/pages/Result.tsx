@@ -1,9 +1,9 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
-import BackButton from "@/components/BackButton"
-import InputIngredient from "@/components/InputIngredient"
-import RecipeCard from "@/components/RecipeCard"
+import BackButton from "@/components/BackButton/BackButton"
+import InputIngredient from "@/components/InputIngredient/InputIngredient"
+import RecipeCard from "@/components/RecipeCard/RecipeCard"
 
 const postSelectRecipeApi = `${import.meta.env.VITE_API_ENDPOINT}/searchRecipes`
 

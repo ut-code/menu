@@ -1,4 +1,4 @@
-import styles from "@/assets/css/InputIngredient.module.css"
+import styles from "./InputIngredient.module.css"
 
 interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void

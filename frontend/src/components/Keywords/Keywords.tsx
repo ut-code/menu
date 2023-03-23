@@ -1,4 +1,4 @@
-import styles from "@/assets/css/Keywords.module.css"
+import styles from "./Keywords.module.css"
 
 type Answer = {
   answerNumber: number
