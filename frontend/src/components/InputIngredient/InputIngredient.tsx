@@ -1,4 +1,5 @@
 import styles from "./InputIngredient.module.css"
+import { FiSearch } from "react-icons/fi"
 
 interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -8,12 +9,15 @@ interface Props {
 
 export default function InputIngredient(props: Props) {
   return (
-    <input
-      className={styles.box}
-      type="text"
-      placeholder={props.placeholder}
-      value={props.inputContent}
-      onChange={props.onChange}
-    />
+    <div className={styles.search}>
+      <input
+        className={styles.box}
+        type="text"
+        placeholder={props.placeholder}
+        value={props.inputContent}
+        onChange={props.onChange}
+      />
+      <FiSearch className={styles.icon} />
+    </div>
   )
 }

@@ -1,12 +1,19 @@
+.search {
+  position: relative;
+  display: flex;
+  width: 98%;
+  margin: 5%;
+}
+
 .box {
   /* layout */
+  flex-grow: 1;
   padding: 0.6em 1em;
-  margin: 5%;
 
   /* box */
   background-color: white;
-  width: 90%;
-  border-radius: 50em; /* make a circle border */
+  border-radius: 50em;
+  /* make a circle border */
   border: var(--Black) 1px solid;
   box-shadow: var(--Black) 2px 2px 0 0;
 
@@ -14,11 +21,18 @@
   font-size: 0.85rem;
   overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis; /* はみ出した文字は「…」で省略 */
+  text-overflow: ellipsis;
+  /* はみ出した文字は「…」で省略 */
 }
 
 input[type="text"]:focus.box {
   border: var(--Orange) 2px solid;
   box-shadow: none;
   outline: 0;
+}
+
+.icon {
+  position: absolute;
+  top: 0.6em;
+  right: 1em;
 }
