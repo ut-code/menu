@@ -8,6 +8,12 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 import "swiper/css/pagination"
 
+/* import image */
+import img1 from "@/assets/image/howto1.png"
+import img2 from "@/assets/image/howto2.png"
+import img3 from "@/assets/image/howto3.png"
+import icon from "@/assets/image/icon.png"
+
 export default function HowTo() {
   return (
     <>
@@ -16,7 +22,7 @@ export default function HowTo() {
           <p className="heading">
             まずは使いたい食材を<br></br>入力してみましょう
           </p>
-          <Smartphone />
+          <img src={icon} alt="アイコン" />
           <div className="bottom">
             <NextButton
               onClick={function (): void {
@@ -32,7 +38,7 @@ export default function HowTo() {
           <p className="heading">
             まずは使いたい食材を<br></br>入力してみましょう
           </p>
-          <Smartphone />
+          <Smartphone img={img1} />
           <div className="bottom">
             <NextButton
               onClick={function (): void {
@@ -48,7 +54,7 @@ export default function HowTo() {
           <p className="heading">
             いくつかの質問に<br></br>答えてみましょう
           </p>
-          <Smartphone />
+          <Smartphone img={img2} />
           <div className="bottom">
             <NextButton
               onClick={function (): void {
@@ -64,7 +70,7 @@ export default function HowTo() {
           <p className="heading">
             あなたにぴったりの<br></br>レシピを検索可能
           </p>
-          <Smartphone />
+          <Smartphone img={img3} />
           <div className="bottom">
             <NextButton
               onClick={function (): void {
