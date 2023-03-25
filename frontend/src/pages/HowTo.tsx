@@ -13,18 +13,69 @@ export default function HowTo() {
     <>
       <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
         <SwiperSlide>
-          <p>まずは使いたい食材を入力してみましょう</p>
+          <p className="heading">
+            まずは使いたい食材を<br></br>入力してみましょう
+          </p>
           <Smartphone />
-          <NextButton
-            onClick={function (): void {
-              throw new Error("Function not implemented.")
-            }}
-          />
-          <Link to={"/home"}>Skip</Link>
+          <div className="bottom">
+            <NextButton
+              onClick={function (): void {
+                throw new Error("Function not implemented.")
+              }}
+            />
+            <Link to={"/home"} className="skip">
+              Skip
+            </Link>
+          </div>
         </SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
+        <SwiperSlide>
+          <p className="heading">
+            まずは使いたい食材を<br></br>入力してみましょう
+          </p>
+          <Smartphone />
+          <div className="bottom">
+            <NextButton
+              onClick={function (): void {
+                throw new Error("Function not implemented.")
+              }}
+            />
+            <Link to={"/home"} className="skip">
+              Skip
+            </Link>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <p className="heading">
+            いくつかの質問に<br></br>答えてみましょう
+          </p>
+          <Smartphone />
+          <div className="bottom">
+            <NextButton
+              onClick={function (): void {
+                throw new Error("Function not implemented.")
+              }}
+            />
+            <Link to={"/home"} className="skip">
+              Skip
+            </Link>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <p className="heading">
+            あなたにぴったりの<br></br>レシピを検索可能
+          </p>
+          <Smartphone />
+          <div className="bottom">
+            <NextButton
+              onClick={function (): void {
+                throw new Error("Function not implemented.")
+              }}
+            />
+            <Link to={"/home"} className="skip">
+              Skip
+            </Link>
+          </div>
+        </SwiperSlide>
       </Swiper>
     </>
   )

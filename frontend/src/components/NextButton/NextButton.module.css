@@ -1,13 +1,13 @@
 .button {
   /* layout */
   padding: 1em;
-  margin: 5%;
+  margin: 5% 0;
   text-align: center;
 
   /* box */
   background-color: var(--Blue);
   border-radius: 10rem;
-  width: 93%;
+  width: 90%;
 
   /* text */
   font-weight: bold;

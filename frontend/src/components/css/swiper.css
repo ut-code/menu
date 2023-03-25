@@ -4,12 +4,32 @@
 }
 
 .swiper {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
 }
 
 .swiper-slide {
   background-color: var(--LightBrown);
+  color: var(--Black);
   text-align: center;
   font-weight: bold;
+}
+
+.heading {
+  font-family: Yu Gothic;
+  font-size: 1.4em;
+  line-height: 180%;
+}
+
+.bottom {
+  width: 90%;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, 70%);
+}
+
+.skip {
+  color: #7e7e7e;
+  font-size: 0.8em;
 }

@@ -1,9 +1,15 @@
 .frame {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, 10%);
+  z-index: -2;
   width: 70%;
   height: auto;
   background-color: #fff;
   border-radius: 10px;
-  padding: 3% 0;
+  padding: 5% 0;
+  box-shadow: 10px 10px 17px -12px rgba(217, 217, 217, 0.8);
 }
 .frame img {
   width: 90%;
