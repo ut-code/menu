@@ -1,17 +1,35 @@
 .frame {
+  /* layout */
+  padding: 5% 0;
   position: absolute;
   top: 10%;
   left: 50%;
   transform: translate(-50%, 10%);
   z-index: -2;
+
+  /* box */
   width: 70%;
   height: auto;
   background-color: #fff;
   border-radius: 10px;
-  padding: 5% 0;
   box-shadow: 10px 10px 17px -12px rgba(217, 217, 217, 0.8);
 }
+
 .frame img {
-  width: 90%;
+  /* box */
+  width: 80%;
   height: auto;
+}
+
+/* スマホの欠け部分 */
+.notch {
+  /* layout */
+  margin: auto;
+  transform: translate(0, -7%);
+
+  /* box */
+  width: 20%;
+  height: 2.5%;
+  border-radius: 6px;
+  background-color: #fff;
 }
