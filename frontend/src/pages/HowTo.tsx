@@ -26,7 +26,7 @@ export default function HowTo() {
           <img src={icon} alt="アイコン" className="icon" />
           <div className="bottom">
             <NextButton
-              onClick={function (): void {
+              onClick={() => {
                 throw new Error("Function not implemented.")
               }}
             />
@@ -45,7 +45,7 @@ export default function HowTo() {
           <Smartphone img={img1} />
           <div className="bottom">
             <NextButton
-              onClick={function (): void {
+              onClick={() => {
                 throw new Error("Function not implemented.")
               }}
             />
@@ -64,7 +64,7 @@ export default function HowTo() {
           <Smartphone img={img2} />
           <div className="bottom">
             <NextButton
-              onClick={function (): void {
+              onClick={() => {
                 throw new Error("Function not implemented.")
               }}
             />
@@ -83,7 +83,7 @@ export default function HowTo() {
           <Smartphone img={img3} />
           <div className="bottom">
             <NextButton
-              onClick={function (): void {
+              onClick={() => {
                 throw new Error("Function not implemented.")
               }}
             />
