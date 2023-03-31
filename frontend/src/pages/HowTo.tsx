@@ -19,10 +19,11 @@ export default function HowTo() {
     <>
       <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
         <SwiperSlide>
-          <p className="heading">
-            まずは使いたい食材を<br></br>入力してみましょう
-          </p>
-          <img src={icon} alt="アイコン" />
+          <div className="title_div">
+            <p className="description">質問に答えていくだけで献立を提案してくれるアプリ</p>
+            <h1 className="title">だるめし</h1>
+          </div>
+          <img src={icon} alt="アイコン" className="icon" />
           <div className="bottom">
             <NextButton
               onClick={function (): void {
@@ -34,6 +35,7 @@ export default function HowTo() {
             </Link>
           </div>
         </SwiperSlide>
+
         <SwiperSlide>
           <p className="heading">
             まずは使いたい食材を<br></br>入力してみましょう
@@ -50,6 +52,7 @@ export default function HowTo() {
             </Link>
           </div>
         </SwiperSlide>
+
         <SwiperSlide>
           <p className="heading">
             いくつかの質問に<br></br>答えてみましょう
@@ -66,6 +69,7 @@ export default function HowTo() {
             </Link>
           </div>
         </SwiperSlide>
+
         <SwiperSlide>
           <p className="heading">
             あなたにぴったりの<br></br>レシピを検索可能

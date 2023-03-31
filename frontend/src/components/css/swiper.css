@@ -16,12 +16,26 @@
 }
 
 .heading {
-  font-family: Yu Gothic;
+  /* text */
+  font-family: Yu Gothic; /* フォントはglobal.cssで管理するはずでは？ */
   font-size: 1.4em;
   line-height: 180%;
 }
 
+.title_div {
+  margin-top: 3.2em;
+}
+
+.title {
+  font-size: 2.3em;
+}
+
+.description {
+  font-size: 0.8em;
+}
+
 .bottom {
+  /* layout */
   width: 90%;
   position: absolute;
   top: 70%;
@@ -30,6 +44,11 @@
 }
 
 .skip {
-  color: #7e7e7e;
+  /* text */
+  color: var(--Gray);
   font-size: 0.8em;
+}
+
+.icon {
+  width: 80%;
 }
