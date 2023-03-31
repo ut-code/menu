@@ -19,7 +19,7 @@ export default function HowTo() {
     <>
       <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
         <SwiperSlide>
-          <div className="text_div">
+          <div className="title_div">
             <p className="description">質問に答えていくだけで献立を提案してくれるアプリ</p>
             <h1 className="title">だるめし</h1>
           </div>

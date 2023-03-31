@@ -24,8 +24,10 @@
 /* スマホの欠け部分 */
 .notch {
   /* layout */
-  margin: auto;
-  transform: translate(0, -7%);
+  position: absolute;
+  left: 40%;
+  top: 16.7%;
+  z-index: 1;
 
   /* box */
   width: 20%;
