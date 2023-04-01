@@ -1,9 +1,10 @@
+import { useRef } from "react"
 import { Link } from "react-router-dom"
 import "@/components/css/swiper.css"
 import NextButton from "@/components/NextButton/NextButton"
 import Smartphone from "@/components/Smartphone/Smartphone"
 
-import { Pagination } from "swiper"
+import { Pagination, type Swiper as SwiperRef } from "swiper"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 import "swiper/css/pagination"
@@ -15,9 +16,18 @@ import img3 from "@/assets/image/howto3.png"
 import icon from "@/assets/image/icon.png"
 
 export default function HowTo() {
+  const swiperRef = useRef<SwiperRef>()
+
   return (
     <>
-      <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
+      <Swiper
+        onSwiper={(swiper) => {
+          swiperRef.current = swiper
+        }}
+        pagination={true}
+        modules={[Pagination]}
+        className="mySwiper"
+      >
         <SwiperSlide>
           <div className="title_div">
             <p className="description">質問に答えていくだけで献立を提案してくれるアプリ</p>
@@ -25,11 +35,7 @@ export default function HowTo() {
           </div>
           <img src={icon} alt="アイコン" className="icon" />
           <div className="bottom">
-            <NextButton
-              onClick={() => {
-                throw new Error("Function not implemented.")
-              }}
-            />
+            <NextButton onClick={() => swiperRef.current?.slideNext()} />
             <Link to={"/home"} className="skip">
               Skip
             </Link>
@@ -44,11 +50,7 @@ export default function HowTo() {
           </div>
           <Smartphone img={img1} />
           <div className="bottom">
-            <NextButton
-              onClick={() => {
-                throw new Error("Function not implemented.")
-              }}
-            />
+            <NextButton onClick={() => swiperRef.current?.slideNext()} />
             <Link to={"/home"} className="skip">
               Skip
             </Link>
@@ -63,11 +65,7 @@ export default function HowTo() {
           </div>
           <Smartphone img={img2} />
           <div className="bottom">
-            <NextButton
-              onClick={() => {
-                throw new Error("Function not implemented.")
-              }}
-            />
+            <NextButton onClick={() => swiperRef.current?.slideNext()} />
             <Link to={"/home"} className="skip">
               Skip
             </Link>
@@ -82,11 +80,7 @@ export default function HowTo() {
           </div>
           <Smartphone img={img3} />
           <div className="bottom">
-            <NextButton
-              onClick={() => {
-                throw new Error("Function not implemented.")
-              }}
-            />
+            <NextButton onClick={() => swiperRef.current?.slideNext()} />
             <Link to={"/home"} className="skip">
               Skip
             </Link>
