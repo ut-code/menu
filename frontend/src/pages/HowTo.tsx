@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "@/components/css/swiper.css"
 import NextButton from "@/components/NextButton/NextButton"
 import Smartphone from "@/components/Smartphone/Smartphone"
@@ -17,6 +17,7 @@ import icon from "@/assets/image/icon.png"
 
 export default function HowTo() {
   const swiperRef = useRef<SwiperRef>()
+  const Navigate = useNavigate()
 
   return (
     <>
@@ -80,7 +81,7 @@ export default function HowTo() {
           </div>
           <Smartphone img={img3} />
           <div className="bottom">
-            <NextButton onClick={() => swiperRef.current?.slideNext()} />
+            <NextButton onClick={() => Navigate("/home")} />
             <Link to={"/home"} className="skip">
               Skip
             </Link>
