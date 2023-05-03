@@ -95,6 +95,7 @@ export default function Result() {
 
       // undefinedエラー回避
       if (results) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         results.forEach((result: any) => {
           // result の型は欠損あり Recipe なので any型 で受けて、 Recipe型 に変換する
           // recipeMaterialConverted は、 recipeMaterial の配列を "・" で連結したもの
