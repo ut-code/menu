@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node dist/server.js",
-    "dev": "ts-node server.ts",
+    "dev": "ts-node src/server.ts",
     "build": "tsc",
     "setup:env": "cp .env.sample .env",
     "setup": "npm run setup:install",
