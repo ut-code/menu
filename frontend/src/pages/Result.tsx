@@ -36,7 +36,7 @@ export default function Result() {
   const Navigate = useNavigate()
 
   const [inputContent, setInputContent] = useState<string>("")
-  const [answers, setAnswers] = useState<Answer[]>([])
+  const [, setAnswers] = useState<Answer[]>([])
   // const addAnswer = (answer: Answer) => setAnswers((prev) => [...prev, answer])
   // const [categoryId, setCategoryId] = useState<string>("12-103")
   const [recipes, setRecipes] = useState<Recipe[]>([])
