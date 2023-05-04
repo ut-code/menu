@@ -1,4 +1,4 @@
-import express, { response } from "express"
+import express from "express"
 import cors from "cors"
 import { PrismaClient } from "@prisma/client"
 
@@ -37,6 +37,7 @@ app.post("/searchRecipes", async (request, response) => {
   const searchInfo = request.body.content
   console.log(searchInfo) // こういう風にデバッグできます。backendのターミナルで見てみてください
   // @@@@@ ここに検索処理を書く
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let results: any[] = []
   for (const food of searchInfo.ingredient) {
     const searchResults = await client.recipesTmp.findMany({
