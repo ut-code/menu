@@ -1,5 +1,6 @@
 from supabase import create_client, Client
 import time
+from typing import List, Dict,Any
 
 from crawlTophits import crawlTophits
 from extractRecipes import extractRecipes
@@ -16,7 +17,7 @@ supabase: Client = create_client(url, key)
 # ----------------------------------------------------------------
 # Recipesテーブルにレシピ情報を追加する
 # ----------------------------------------------------------------
-def addRecipes(recipe_dicts: list[dict]) -> None:
+def addRecipes(recipe_dicts: List[Dict[str]]) -> None:
     """
     recipe_dicts: 必要以上の情報が含まれるdict型の配列
     """
@@ -38,7 +39,7 @@ def addRecipes(recipe_dicts: list[dict]) -> None:
     print(len(recipe_dicts), "件のレシピを追加しました。")
 
 
-def getCategories() -> list[str]:
+def getCategories() -> List[str]:
     category_names = []
     response = supabase.table("Categories").select("*").execute()
     for category in response.data:
