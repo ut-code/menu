@@ -33,26 +33,23 @@ app.post("/send", async (request, response) => {
 //----------------------------------------------------------------
 // request.bodyのsearchInfoを利用して検索結果を返す
 // 一旦は楽天レシピオンリーで検索
-app.post("/searchRecipes", async (request, response) => {
-  const searchInfo = request.body.content
-  console.log(searchInfo) // こういう風にデバッグできます。backendのターミナルで見てみてください
-  // @@@@@ ここに検索処理を書く
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let results: any[] = []
-  for (const food of searchInfo.ingredient) {
-    const searchResults = await client.recipesTmp.findMany({
-      where: {
-        OR: {
-          recipeMaterial: {
-            hasSome: food,
-          },
-        },
-      },
-      take: 8,
-    })
+type SearchInfo = {
+  ingredient: string[]
+  // あとで増やす
+}
 
-    results = results.concat(searchResults)
-  }
+app.post("/searchRecipes", async (request, response) => {
+  const searchInfo: SearchInfo = request.body.content
+  console.log(searchInfo.ingredient) // こういう風にデバッグできます。backendのターミナルで見てみてください
+
+  const results = await client.recipesTmp.findMany({
+    where: {
+      recipeMaterial: {
+        hasEvery: searchInfo.ingredient,
+      },
+    },
+    take: 8,
+  })
   response.json(results)
 })
 
