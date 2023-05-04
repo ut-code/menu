@@ -47,9 +47,8 @@ export default function Result() {
     if (newAnswers) {
       newAnswers.forEach((answer: Answer) => {
         // answer.contentをingredientに追加
-        if (answer.answerNumber === 0) {
-          info.ingredient.push(answer.content)
-        }
+        if (answer.answerNumber === 0) info.ingredient.push(answer.content)
+        if (answer.answerNumber === 3) info.ingredient.push(answer.content)
       })
     }
     return info
