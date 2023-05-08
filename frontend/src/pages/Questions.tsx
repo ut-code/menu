@@ -25,7 +25,7 @@ import imgTofu from "@/assets/image/tofu.webp"
 import imgShiiTake from "@/assets/image/shiitake.webp"
 import imgEggPlant from "@/assets/image/eggplant.webp"
 import imgEbi from "@/assets/image/ebi.webp"
-import imgBeanSprout from "@/assets/image/bean-sprout.webp"
+import imgBeanSprout from "@/assets/image/moyashi.webp"
 import imgCabbage from "@/assets/image/cabbage.webp"
 import imgDaikon from "@/assets/image/daikon.webp"
 import imgGobou from "@/assets/image/burdock.webp"
@@ -108,6 +108,8 @@ const questions: Question[] = [
     },
   },
 ]
+
+//ランダムでchoicesから重複なく4つを選ぶ
 
 type Answer = {
   answerNumber: number
