@@ -15,6 +15,20 @@ import imgEgg from "@/assets/image/egg.webp"
 import imgMilk from "@/assets/image/milk.webp"
 import imgPork from "@/assets/image/pork.webp"
 import imgTomato from "@/assets/image/tomato.webp"
+import imgOnion from "@/assets/image/onion.webp"
+import imgCarrot from "@/assets/image/carrot.webp"
+import imgChicken from "@/assets/image/chicken.webp"
+import imgBeef from "@/assets/image/beaf.webp"
+import imgLettuce from "@/assets/image/lettuce.webp"
+import imgPotato from "@/assets/image/potato.webp"
+import imgTofu from "@/assets/image/tofu.webp"
+import imgShiiTake from "@/assets/image/shiitake.webp"
+import imgEggPlant from "@/assets/image/eggplant.webp"
+import imgEbi from "@/assets/image/ebi.webp"
+import imgBeanSprout from "@/assets/image/bean-sprout.webp"
+import imgCabbage from "@/assets/image/cabbage.webp"
+import imgDaikon from "@/assets/image/daikon.webp"
+import imgGobou from "@/assets/image/burdock.webp"
 
 //----------------------------------------------------------------
 // 参考
@@ -47,6 +61,21 @@ const questions: Question[] = [
       1: { choiceText: "トマト", choiceImage: imgTomato },
       2: { choiceText: "ブロッコリー", choiceImage: imgBroccoli },
       3: { choiceText: "牛乳", choiceImage: imgMilk },
+      4: { choiceText: "玉ねぎ", choiceImage: imgOnion },
+      5: { choiceText: "人参", choiceImage: imgCarrot },
+      6: { choiceText: "鶏肉", choiceImage: imgChicken },
+      7: { choiceText: "牛肉", choiceImage: imgBeef },
+      8: { choiceText: "レタス", choiceImage: imgLettuce },
+      9: { choiceText: "じゃがいも", choiceImage: imgPotato },
+      10: { choiceText: "豆腐", choiceImage: imgTofu },
+      11: { choiceText: "しいたけ", choiceImage: imgShiiTake },
+      12: { choiceText: "豚肉", choiceImage: imgPork },
+      13: { choiceText: "なす", choiceImage: imgEggPlant },
+      14: { choiceText: "えび", choiceImage: imgEbi },
+      15: { choiceText: "もやし", choiceImage: imgBeanSprout },
+      16: { choiceText: "キャベツ", choiceImage: imgCabbage },
+      17: { choiceText: "大根", choiceImage: imgDaikon },
+      18: { choiceText: "ごぼう", choiceImage: imgGobou },
     },
   },
   {
