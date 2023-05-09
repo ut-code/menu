@@ -51,6 +51,37 @@ type Question = {
 //----------------------------------------------------------------
 // 質問を配列で定義
 //----------------------------------------------------------------
+
+type foodsType = {
+  choiceText: string
+  choiceImage: string
+}
+
+const foods: foodsType[] = [
+  { choiceText: "卵", choiceImage: imgEgg },
+  { choiceText: "トマト", choiceImage: imgTomato },
+  { choiceText: "ブロッコリー", choiceImage: imgBroccoli },
+  { choiceText: "牛乳", choiceImage: imgMilk },
+  { choiceText: "玉ねぎ", choiceImage: imgOnion },
+  { choiceText: "人参", choiceImage: imgCarrot },
+  { choiceText: "鶏肉", choiceImage: imgChicken },
+  { choiceText: "牛肉", choiceImage: imgBeef },
+  { choiceText: "レタス", choiceImage: imgLettuce },
+  { choiceText: "じゃがいも", choiceImage: imgPotato },
+  { choiceText: "豆腐", choiceImage: imgTofu },
+  { choiceText: "しいたけ", choiceImage: imgShiiTake },
+  { choiceText: "豚肉", choiceImage: imgPork },
+  { choiceText: "なす", choiceImage: imgEggPlant },
+  { choiceText: "えび", choiceImage: imgEbi },
+  { choiceText: "もやし", choiceImage: imgBeanSprout },
+  { choiceText: "キャベツ", choiceImage: imgCabbage },
+  { choiceText: "大根", choiceImage: imgDaikon },
+  { choiceText: "ごぼう", choiceImage: imgGobou },
+]
+
+//ランダムに重複なく４つの選択肢を選ぶ
+const randomFoods = foods.sort(() => Math.random() - 0.5).slice(0, 4)
+
 const questions: Question[] = [
   {
     questionNumber: 0,
@@ -108,9 +139,6 @@ const questions: Question[] = [
     },
   },
 ]
-
-//ランダムでchoicesから重複なく4つを選ぶ
-
 type Answer = {
   answerNumber: number
   content: string
