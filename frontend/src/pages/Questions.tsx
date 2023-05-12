@@ -79,8 +79,18 @@ const foods: foodsType[] = [
   { choiceText: "ごぼう", choiceImage: imgGobou },
 ]
 
-//ランダムに重複なく４つの選択肢を選ぶ
-const randomFoods = foods.sort(() => Math.random() - 0.5).slice(0, 4)
+//ランダムに重複なく４つの選択肢を選ぶ これで { choiceText: "ごぼう", choiceImage: imgGobou }みたいなデータが４つ入った配列ができるはず
+const shuffle = (array: foodsType[]) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j: number = Math.floor(Math.random() * (i + 1))
+    const temp: foodsType = array[i]
+    array[i] = array[j]
+    array[j] = temp
+  }
+  return array.slice(0, 4)
+}
+
+console.log(shuffle(foods))
 
 const questions: Question[] = [
   {
