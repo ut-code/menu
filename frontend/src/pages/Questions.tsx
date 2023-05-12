@@ -51,6 +51,47 @@ type Question = {
 //----------------------------------------------------------------
 // 質問を配列で定義
 //----------------------------------------------------------------
+
+type foodsType = {
+  choiceText: string
+  choiceImage: string
+}
+
+const foods: foodsType[] = [
+  { choiceText: "卵", choiceImage: imgEgg },
+  { choiceText: "トマト", choiceImage: imgTomato },
+  { choiceText: "ブロッコリー", choiceImage: imgBroccoli },
+  { choiceText: "牛乳", choiceImage: imgMilk },
+  { choiceText: "玉ねぎ", choiceImage: imgOnion },
+  { choiceText: "人参", choiceImage: imgCarrot },
+  { choiceText: "鶏肉", choiceImage: imgChicken },
+  { choiceText: "牛肉", choiceImage: imgBeef },
+  { choiceText: "レタス", choiceImage: imgLettuce },
+  { choiceText: "じゃがいも", choiceImage: imgPotato },
+  { choiceText: "豆腐", choiceImage: imgTofu },
+  { choiceText: "しいたけ", choiceImage: imgShiiTake },
+  { choiceText: "豚肉", choiceImage: imgPork },
+  { choiceText: "なす", choiceImage: imgEggPlant },
+  { choiceText: "えび", choiceImage: imgEbi },
+  { choiceText: "もやし", choiceImage: imgBeanSprout },
+  { choiceText: "キャベツ", choiceImage: imgCabbage },
+  { choiceText: "大根", choiceImage: imgDaikon },
+  { choiceText: "ごぼう", choiceImage: imgGobou },
+]
+
+//ランダムに重複なく４つの選択肢を選ぶ これで { choiceText: "ごぼう", choiceImage: imgGobou }みたいなデータが４つ入った配列ができるはず
+const shuffle = (array: foodsType[]) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j: number = Math.floor(Math.random() * (i + 1))
+    const temp: foodsType = array[i]
+    array[i] = array[j]
+    array[j] = temp
+  }
+  return array.slice(0, 4)
+}
+
+console.log(shuffle(foods))
+
 const questions: Question[] = [
   {
     questionNumber: 0,
@@ -61,21 +102,6 @@ const questions: Question[] = [
       1: { choiceText: "トマト", choiceImage: imgTomato },
       2: { choiceText: "ブロッコリー", choiceImage: imgBroccoli },
       3: { choiceText: "牛乳", choiceImage: imgMilk },
-      4: { choiceText: "玉ねぎ", choiceImage: imgOnion },
-      5: { choiceText: "人参", choiceImage: imgCarrot },
-      6: { choiceText: "鶏肉", choiceImage: imgChicken },
-      7: { choiceText: "牛肉", choiceImage: imgBeef },
-      8: { choiceText: "レタス", choiceImage: imgLettuce },
-      9: { choiceText: "じゃがいも", choiceImage: imgPotato },
-      10: { choiceText: "豆腐", choiceImage: imgTofu },
-      11: { choiceText: "しいたけ", choiceImage: imgShiiTake },
-      12: { choiceText: "豚肉", choiceImage: imgPork },
-      13: { choiceText: "なす", choiceImage: imgEggPlant },
-      14: { choiceText: "えび", choiceImage: imgEbi },
-      15: { choiceText: "もやし", choiceImage: imgBeanSprout },
-      16: { choiceText: "キャベツ", choiceImage: imgCabbage },
-      17: { choiceText: "大根", choiceImage: imgDaikon },
-      18: { choiceText: "ごぼう", choiceImage: imgGobou },
     },
   },
   {
@@ -108,9 +134,6 @@ const questions: Question[] = [
     },
   },
 ]
-
-//ランダムでchoicesから重複なく4つを選ぶ
-
 type Answer = {
   answerNumber: number
   content: string
