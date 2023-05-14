@@ -1,6 +1,6 @@
 from supabase import create_client, Client
 import time
-from typing import List, Dict,Any
+from typing import List, Dict
 
 from crawlTophits import crawlTophits
 from extractRecipes import extractRecipes
