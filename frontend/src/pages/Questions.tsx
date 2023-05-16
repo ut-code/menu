@@ -90,7 +90,7 @@ const shuffle = (array: foodsType[]) => {
   return array.slice(0, 4)
 }
 
-console.log(shuffle(foods))
+const randomFoods: foodsType[] = shuffle(foods)
 
 const questions: Question[] = [
   {
@@ -98,10 +98,10 @@ const questions: Question[] = [
     questionText: "使いたい食材はなんですか？",
     userInput: true,
     choices: {
-      0: { choiceText: "卵", choiceImage: imgEgg },
-      1: { choiceText: "トマト", choiceImage: imgTomato },
-      2: { choiceText: "ブロッコリー", choiceImage: imgBroccoli },
-      3: { choiceText: "牛乳", choiceImage: imgMilk },
+      0: { choiceText: randomFoods[0].choiceText, choiceImage: randomFoods[0].choiceImage },
+      1: { choiceText: randomFoods[1].choiceText, choiceImage: randomFoods[1].choiceImage },
+      2: { choiceText: randomFoods[2].choiceText, choiceImage: randomFoods[2].choiceImage },
+      3: { choiceText: randomFoods[3].choiceText, choiceImage: randomFoods[3].choiceImage },
     },
   },
   {
@@ -218,6 +218,7 @@ export default function Questions() {
     setAnswers(newAnswers)
   }, [currentQuestion])
 
+  console.log(currentQuestion.choices)
   return (
     <>
       <div className="style_lightbrown" key={currentQuestion.questionNumber}>
