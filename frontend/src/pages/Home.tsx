@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom"
 import { useEffect } from "react"
 
-import Copyright from "../components/Copyright/Copyright"
-
 export default function Home() {
   // 永続的に残るので、localStorageから問題への回答を消しておく
   useEffect(() => {
@@ -14,17 +12,13 @@ export default function Home() {
   return (
     <>
       <div className="style_lightbrown">
-        <div style={{ display: "flex" }}>
-          <Link to={"/questions"}>
-            <button>はじめる</button>
-          </Link>
-          <br></br>
-          <Link to={"/result"}>
-            <button>検索結果</button>
-          </Link>
-        </div>
+        <Link to={"/questions"}>
+          <button>はじめる</button>
+        </Link>
         <br></br>
-        <Copyright />
+        <Link to={"/result"}>
+          <button>検索結果</button>
+        </Link>
       </div>
     </>
   )
