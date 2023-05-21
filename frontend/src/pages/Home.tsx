@@ -22,10 +22,6 @@ export default function Home() {
           <Link to={"/result"}>
             <button>検索結果</button>
           </Link>
-          <br></br>
-          <Link to={"/message"}>
-            <button>掲示板</button>
-          </Link>
         </div>
         <br></br>
         <Copyright />
