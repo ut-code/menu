@@ -15,20 +15,6 @@ app.use(cors())
 app.use(express.json())
 
 //----------------------------------------------------------------
-// Message.tsx用
-//----------------------------------------------------------------
-// データベースからメッセージの一覧を取得
-app.get("/messages", async (request, response) => {
-  response.json(await client.message.findMany())
-})
-
-// request.body.content に含まれるメッセージをデータベースに保存
-app.post("/send", async (request, response) => {
-  await client.message.create({ data: { content: request.body.content } })
-  response.send()
-})
-
-//----------------------------------------------------------------
 // Result.tsx用
 //----------------------------------------------------------------
 // request.bodyのsearchInfoを利用して検索結果を返す
