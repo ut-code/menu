@@ -39,4 +39,6 @@ app.post("/searchRecipes", async (request, response) => {
   response.json(results)
 })
 
-app.listen(3000)
+const server = app.listen(3000)
+
+export default server
