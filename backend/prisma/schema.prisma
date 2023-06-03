@@ -41,3 +41,9 @@ model RecipesTmp {
   totalTime         Int
   recipeMaterial    String[]
 }
+
+model Urls {
+  id Int @id @default(autoincrement())
+  url String
+  structured Boolean
+}
