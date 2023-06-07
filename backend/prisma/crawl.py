@@ -97,8 +97,8 @@ def submitRecipeUrls(recipe_urls: list[str]) -> None:
         supabase.table("Urls").insert({"url": recipe_url, "structured": True}).execute()
 
 category_names = getCategories()
-for i, category_name in enumerate(category_names[142+557:]):
+for i, category_name in enumerate(category_names):
     recipe_urls = crawlRecipeUrls(search_word=category_name, pages_num=1)
     submitRecipeUrls(recipe_urls=recipe_urls)
     time.sleep(1)
-    print(f"{i+1} / {len(category_names[142+557:])}: {category_name} is done.")
+    print(f"{i+1} / {len(category_names)}: {category_name} is done.")
