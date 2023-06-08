@@ -36,6 +36,38 @@ def getRecipeUrls() -> list[dict]:
     return recipe_urls
 
 
+def fixJsonLoadError(data_text: str) -> str or None:
+    """json.loads()でエラーが出る場合に修正する
+    
+    Parameters
+    ----------
+    data_text : str
+    
+    Returns
+    -------
+    data_text : str or None
+    """
+
+    # 空白を削除
+    data_text = data_text.replace(" ", "")
+
+    # "/r" "/n" "/t" を削除
+    data_text = data_text.replace("\r", "")
+    data_text = data_text.replace("\n", "")
+    data_text = data_text.replace("\t", "")
+    
+    # <ahrefが含まれる場合はNoneを返す
+    if '<ahref' in data_text:
+        return None
+
+    # 最初の文字が '{"' ではない場合は、その手前までの文字を取得
+    if len(data_text) > 2 and data_text[:2] != '{"':
+        prefix_num = data_text.find('{"')
+        data_text = data_text[prefix_num:-prefix_num]
+    
+    return data_text
+
+
 def findStructuredData(soup: BeautifulSoup) -> dict:
     """構造化データを取得する
 
@@ -51,7 +83,10 @@ def findStructuredData(soup: BeautifulSoup) -> dict:
     datas = soup.select("script[type='application/ld+json']")
     for data in datas:
         # json形式のデータを辞書型に変換
-        data = json.loads(data.string)
+        data = fixJsonLoadError(data.text)
+        if data is None:
+            continue
+        data = json.loads(data)
         if type(data) == dict and data["@type"].lower() == "recipe":
             structured_data = data
             break
@@ -179,6 +214,8 @@ for i, recipe_url in enumerate(recipe_urls):
     soup = convertUrlToSoup(recipe_url["url"])
     if recipe_url["structured"]:
         data = findStructuredData(soup)
+        if data == {}:
+            continue
         print(data)
         submitRecipe(recipe=data, recipe_url=recipe_url["url"])
     else:
