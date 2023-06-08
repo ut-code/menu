@@ -50,10 +50,11 @@ def crawlRecipeUrls(search_word: str, pages_num: int) -> list[str]:
     """
     recipe_urls = []
     # url = f"http://www.kyounoryouri.jp/search/recipe?keyword={search_word}&pg="
-    url = f"https://www.lettuceclub.net/recipe/search/{search_word}/p"
+    # url = f"https://www.lettuceclub.net/recipe/search/{search_word}/p"
+    url = f"https://www.ebarafoods.com/recipe/results.html?q={search_word}&page="
     for page in range(1, pages_num+1):
         request = requests.get(url+str(page))
-        if request.status_code==404 or request.status_code==301:
+        if request.status_code < 200 or request.status_code >= 300:
             break
         assert request.status_code==200
         soup = BeautifulSoup(request.content, "html.parser")
@@ -74,11 +75,12 @@ def scrapeRecipeUrls(soup: BeautifulSoup) -> list[str]:
     """
     recipe_urls = []
     # <div class="recipe--category-recipe"> から <a> タグを取得
-    links = soup.select("li.p-items__item a[href]")
+    # <li data-mh="list-results-item"> から <a> タグを取得
+    links = soup.select("li[data-mh='list-results-item'] a[href]")
     for link in links:
         # link["href"]が"/recipe"から始まるURLのみを取得
         if link["href"].startswith("/recipe"):
-            recipe_urls.append("https://www.lettuceclub.net" + link["href"])
+            recipe_urls.append("https://www.ebarafoods.com" + link["href"])
     return recipe_urls
 
 
