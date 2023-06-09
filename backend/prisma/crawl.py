@@ -51,7 +51,8 @@ def crawlRecipeUrls(search_word: str, pages_num: int) -> list[str]:
     recipe_urls = []
     # url = f"http://www.kyounoryouri.jp/search/recipe?keyword={search_word}&pg="
     # url = f"https://www.lettuceclub.net/recipe/search/{search_word}/p"
-    url = f"https://www.ebarafoods.com/recipe/results.html?q={search_word}&page="
+    # url = f"https://www.ebarafoods.com/recipe/results.html?q={search_word}&page="
+    url = f"https://park.ajinomoto.co.jp/recipe/search/?search_word={search_word}&tab=pop&o="
     for page in range(1, pages_num+1):
         request = requests.get(url+str(page))
         if request.status_code < 200 or request.status_code >= 300:
@@ -74,13 +75,13 @@ def scrapeRecipeUrls(soup: BeautifulSoup) -> list[str]:
     recipe_urls : list[str]
     """
     recipe_urls = []
-    # <div class="recipe--category-recipe"> から <a> タグを取得
-    # <li data-mh="list-results-item"> から <a> タグを取得
-    links = soup.select("li[data-mh='list-results-item'] a[href]")
+    links = soup.select("li.linkHover.rank div.img a[href]")
+
     for link in links:
         # link["href"]が"/recipe"から始まるURLのみを取得
-        if link["href"].startswith("/recipe"):
-            recipe_urls.append("https://www.ebarafoods.com" + link["href"])
+        # if link["href"].startswith("/recipe"):
+            # recipe_urls.append("" + link["href"])
+        recipe_urls.append(link["href"])
     return recipe_urls
 
 
@@ -99,6 +100,7 @@ def submitRecipeUrls(recipe_urls: list[str]) -> None:
         supabase.table("Urls").insert({"url": recipe_url, "structured": True}).execute()
 
 category_names = getCategories()
+category_names = category_names[0:]
 for i, category_name in enumerate(category_names):
     recipe_urls = crawlRecipeUrls(search_word=category_name, pages_num=1)
     submitRecipeUrls(recipe_urls=recipe_urls)
