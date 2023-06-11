@@ -28,7 +28,7 @@ app.post("/searchRecipes", async (request, response) => {
   const searchInfo: SearchInfo = request.body.content
   console.log(searchInfo.ingredient) // こういう風にデバッグできます。backendのターミナルで見てみてください
 
-  const results = await client.recipesTmp.findMany({
+  const results = await client.recipes.findMany({
     where: {
       recipeMaterial: {
         hasEvery: searchInfo.ingredient,
