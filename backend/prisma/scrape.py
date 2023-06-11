@@ -87,7 +87,7 @@ def findStructuredData(soup: BeautifulSoup) -> dict:
         if data is None:
             continue
         data = json.loads(data)
-        if type(data) == dict and data["@type"].lower() == "recipe":
+        if type(data) == dict and "@type" in data and data["@type"].lower() == "recipe":
             structured_data = data
             break
     return structured_data
@@ -178,7 +178,10 @@ def fixRecipeKeywords(recipe: dict) -> list[str]:
     keywords : list[str]
     """
     if "keywords" in recipe:
-        return recipe["keywords"].split(",")
+        if type(recipe["keywords"]) == list:
+            return recipe["keywords"]
+        else:
+            return recipe["keywords"].split(",")
     else:
         return []
 
