@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
-import HeaderHowTo from "@/components/HeaderHowTo/HeaderHowTo"
-import BackButton from "@/components/BackButton/BackButton"
-import NextButton from "@/components/NextButton/NextButton"
-import QuestionText from "@/components/QuestionText/QuestionText"
-import InputIngredient from "@/components/InputIngredient/InputIngredient"
-import Keywords from "@/components/Keywords/Keywords"
-import RadioGroup from "@/components/RadioGroup/RadioGroup"
+import { QuestionHeader } from "@/components/question/QuestionHeader"
+import { BackButton } from "@/components/elements/button/BackButton"
+import { NextButton } from "@/components/elements/button/NextButton"
+import { QuestionText } from "@/components/question/QuestionText"
+import { InputIngredient } from "@/components/question/InputIngredient"
+import { Keywords } from "@/components/question/Keywords"
+import { RadioGroup } from "@/components/question/RadioGroup"
 
 // 画像ファイルをimport
 import imgBroccoli from "@/assets/image/broccoli.webp"
@@ -222,7 +222,7 @@ export default function Questions() {
   return (
     <>
       <div className="style_lightbrown" key={currentQuestion.questionNumber}>
-        {currentQuestion.questionNumber === 0 && <HeaderHowTo />}
+        {currentQuestion.questionNumber === 0 && <QuestionHeader />}
 
         {currentQuestion.questionNumber > 0 && <BackButton onClick={onClickPreviousPage} />}
 

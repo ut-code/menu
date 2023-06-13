@@ -27,6 +27,6 @@ const translateUrlToSiteName = (url: string): string => {
   return urlDomainToName[urlDomain]
 }
 
-export default function Reference(props: { url: string }) {
+export const TipReference = (props: { url: string }) => {
   return <div className={styles.tip}>{translateUrlToSiteName(props.url)}</div>
 }

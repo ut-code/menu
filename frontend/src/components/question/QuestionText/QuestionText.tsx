@@ -1,6 +1,6 @@
 import styles from "./QuestionText.module.css"
 
-export default function QuestionText(props: { content: string; userInput: boolean }) {
+export const QuestionText = (props: { content: string; userInput: boolean }) => {
   const { content, userInput } = props
   const className = userInput ? styles.big : styles.small
 

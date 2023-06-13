@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom"
 
 import { BsQuestion } from "react-icons/bs"
-import styles from "./HeaderHowTo.module.css"
+import styles from "./QuestionHeader.module.css"
 
-export default function HeaderHowTo() {
+export const QuestionHeader = () => {
   const Navigate = useNavigate()
 
   return (

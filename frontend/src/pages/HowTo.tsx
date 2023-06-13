@@ -1,9 +1,9 @@
 import { useRef } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import "@/components/css/swiper.css"
-import NextButton from "@/components/NextButton/NextButton"
-import Smartphone from "@/components/Smartphone/Smartphone"
+import { NextButton } from "@/components/elements/button/NextButton"
+import { Smartphone } from "@/components/howto/Smartphone"
 
+import "@/components/css/swiper.css"
 import { Pagination, type Swiper as SwiperRef } from "swiper"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"

@@ -10,7 +10,7 @@ interface Props {
   userInput: boolean
 }
 
-export default function RadioButton(props: Props) {
+export const RadioButton = (props: Props) => {
   const className = props.userInput ? styles.pic : styles.nopic
 
   return (
