@@ -7,7 +7,7 @@ interface Props {
   placeholder: string
 }
 
-export default function InputIngredient(props: Props) {
+export const InputIngredient = (props: Props) => {
   return (
     <div className={styles.search}>
       <input

@@ -5,7 +5,7 @@ type Answer = {
   content: string
 }
 
-export default function Keywords(props: { answers: Answer[] }) {
+export const Keywords = (props: { answers: Answer[] }) => {
   return (
     <div className={styles.box}>
       <span className={styles.title}>Keywords&nbsp;&nbsp;</span>

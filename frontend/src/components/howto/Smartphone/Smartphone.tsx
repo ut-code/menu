@@ -1,6 +1,6 @@
 import styles from "./Smartphone.module.css"
 
-export default function Smartphone(props: { img: string }) {
+export const Smartphone = (props: { img: string }) => {
   return (
     <>
       <div className={styles.notch}></div>

@@ -1,4 +1,4 @@
-import RadioButton from "@/components/RadioButton/RadioButton"
+import { RadioButton } from "@/components/question/RadioButton"
 import styles from "./RadioGroup.module.css"
 
 type Choices = {
@@ -15,7 +15,7 @@ interface Props {
   userInput: boolean
 }
 
-export default function RadioGroup(props: Props) {
+export const RadioGroup = (props: Props) => {
   return (
     <div>
       {props.userInput && <div className={styles.text}>Recommend</div>}
