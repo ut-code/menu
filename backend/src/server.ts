@@ -34,7 +34,7 @@ app.post("/searchRecipes", async (request, response) => {
         hasEvery: searchInfo.ingredient,
       },
     },
-    take: 8,
+    take: 20,
   })
   response.json(results)
 })
