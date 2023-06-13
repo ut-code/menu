@@ -6,16 +6,21 @@
     "✅park.ajinomoto.co.jp",
     "✅www.ntv.co.jp/3min/",
     "✅www.salad-cafe.com",
-    "👹www.mizkan.co.jp",
-    "kumiko-jp.com",
-    "recipe.yamasa.com",
-    "www.nipponham.co.jp",
-    "www.kikkoman.co.jp",
+    "✅www.mizkan.co.jp",
     "www.sirogohan.com",
-    "www.tablemark.co.jp"
+    "kumiko-jp.com",
+    "www.nipponham.co.jp"
   ],
-  "selenium": ["www.marukome.co.jp", "dancyu.jp", "www.meg-snow.com", "www.kurashiru.com"],
+  "selenium": [
+    "www.tablemark.co.jp",
+    "www.kikkoman.co.jp",
+    "www.marukome.co.jp",
+    "dancyu.jp",
+    "www.meg-snow.com",
+    "www.kurashiru.com"
+  ],
   "unstructured": [
+    "!?recipe.yamasa.com",
     "erecipe.woman.excite.co.jp",
     "www.momoya.co.jp",
     "www.yamaki.co.jp",
