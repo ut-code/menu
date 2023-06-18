@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
 import { QuestionHeader } from "@/components/question/QuestionHeader"
-import { BackButton } from "@/components/elements/button/BackButton"
+import { Hamburger } from "@/components/Hamburger"
 import { NextButton } from "@/components/elements/button/NextButton"
 import { QuestionText } from "@/components/question/QuestionText"
 import { InputIngredient } from "@/components/question/InputIngredient"
@@ -143,6 +143,7 @@ export default function Questions() {
   const [currentQuestion, setCurrentQuestion] = useState<Question>(questions[0])
   const [inputContent, setInputContent] = useState<string>("")
   const [answers, setAnswers] = useState<Answer[]>([])
+  const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
 
   // useNavigate を Navigate に変化させる呪文
   const Navigate = useNavigate()
@@ -205,6 +206,16 @@ export default function Questions() {
     setCurrentQuestion(questions[currentNumber])
   }
 
+  //----------------------------------------------------------------
+  // ハンバーガーを開く・閉じる
+  //----------------------------------------------------------------
+  const onClickOpenHamburger = () => {
+    setIsOpenHamburger(true)
+  }
+  const onClickCloseHamburger = () => {
+    setIsOpenHamburger(false)
+  }
+
   useEffect(() => {
     // localStorageから解答を取り出してanswersに入れる
     const newAnswers: Answer[] = []
@@ -222,9 +233,12 @@ export default function Questions() {
   return (
     <>
       <div className="style_lightbrown" key={currentQuestion.questionNumber}>
-        {currentQuestion.questionNumber === 0 && <QuestionHeader />}
-
-        {currentQuestion.questionNumber > 0 && <BackButton onClick={onClickPreviousPage} />}
+        <QuestionHeader
+          questionNumber={currentQuestion.questionNumber}
+          onClickPreviousPage={onClickPreviousPage}
+          onClickOpenHamburger={onClickOpenHamburger}
+        />
+        {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
 
         <QuestionText content={currentQuestion.questionText} userInput={currentQuestion.userInput} />
 
