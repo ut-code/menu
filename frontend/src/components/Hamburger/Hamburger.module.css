@@ -23,4 +23,9 @@
   /* ボーダー */
   border-radius: 10px;
   border: 1px solid var(--Black);
+
+  /* 縦につなげるようにする */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
