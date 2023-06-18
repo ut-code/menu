@@ -239,7 +239,6 @@ export default function Questions() {
               onClickPreviousPage={onClickPreviousPage}
               onClickOpenHamburger={onClickOpenHamburger}
             />
-            {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
 
             <QuestionText content={currentQuestion.questionText} userInput={currentQuestion.userInput} />
 
@@ -255,6 +254,7 @@ export default function Questions() {
         )}
       </div>
       <div className="style_lightbrown" key={currentQuestion.questionNumber}>
+        {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
         {currentQuestion.userInput === false && <Keywords answers={answers} />}
 
         <RadioGroup
