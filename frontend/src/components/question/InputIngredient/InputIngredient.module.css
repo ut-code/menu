@@ -1,13 +1,11 @@
 .search {
   display: flex;
-  width: 98%;
-  margin: 5%;
 }
 
 .box {
   /* layout */
   flex-grow: 1;
-  padding: 0.6em 1em;
+  padding: 0.7em 1.3em;
 
   /* box */
   background-color: white;
@@ -17,7 +15,7 @@
   box-shadow: var(--Black) 2px 2px 0 0;
 
   /* text */
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

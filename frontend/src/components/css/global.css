@@ -29,7 +29,10 @@ a {
   text-decoration: none;
   color: var(--Black);
 }
-
+.base {
+  /* 背景をLightBrownで塗りつぶしておく */
+  background-color: var(--LightBrown);
+}
 .style_lightbrown {
   /* layout */
   padding: 1em;
@@ -44,6 +47,15 @@ a {
   /* transition */
   animation: fadeIn 1s;
   animation-fill-mode: forwards;
+}
+.greenBack {
+  padding: 1em 1.5em 3em 1.5em;
+  background-color: var(--Green);
+  color: white;
+  border-radius: 0px 0px 18px 18px;
+}
+.greenBack svg {
+  color: #1c1c1c;
 }
 @keyframes fadeIn {
   0% {

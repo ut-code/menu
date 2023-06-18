@@ -2,7 +2,6 @@
   /* layout */
   display: flex; /* 横並び + 全体を上下中央揃え */
   align-items: center; /* 全体を上下中央揃え */
-  width: 93%;
 }
 
 .logo {
@@ -10,7 +9,7 @@
   margin-right: auto; /* 左寄せ */
 
   /* text */
-  font-size: 10px;
+  font-size: 8px;
   font-weight: bold;
 }
 
