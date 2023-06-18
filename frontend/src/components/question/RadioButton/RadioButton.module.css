@@ -78,7 +78,7 @@
   position: relative;
   width: 150px;
   height: 150px;
-  background: var(--Orange);
+  background: var(--Red);
   box-shadow: var(--Black) 2px 2px 0 0;
   font-weight: bold;
   color: white;
