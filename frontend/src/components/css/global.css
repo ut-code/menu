@@ -7,9 +7,9 @@ CSS変数代入について
 var(--変数名)で使える
 ----------------------------------------------------------------*/
 :root {
-  --Blue: #1f5c70;
-  --Orange: #fba01d;
-  --Yellow: #fcbc49;
+  --Red: #e95122;
+  --Yellow: #f5b72e;
+  --Green: #517e55;
   --Brown: #b29476;
   --LightBrown: #f1ece6;
   --Gray: #7e7e7e;
