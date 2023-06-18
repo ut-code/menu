@@ -28,7 +28,7 @@
 
 .nopic:has(input[type="radio"]:checked) {
   /* box */
-  background-color: var(--Orange);
+  background-color: var(--Yellow);
 }
 
 .nopic_text {
@@ -52,8 +52,8 @@
 }
 
 /* .pic:has(input[type="radio"]:checked) {
-  border: var(--Orange) 2px solid;
-  box-shadow: var(--Orange) 2px 2px 0 0;
+  border: var(--Red) 2px solid;
+  box-shadow: var(--Red) 2px 2px 0 0;
   outline: 0;
 } */
 
@@ -78,7 +78,7 @@
   position: relative;
   width: 150px;
   height: 150px;
-  background: var(--Red);
+  background: var(--Yellow);
   box-shadow: var(--Black) 2px 2px 0 0;
   font-weight: bold;
   color: white;

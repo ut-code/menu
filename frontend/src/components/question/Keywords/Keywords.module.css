@@ -22,7 +22,7 @@
 
   /* underline */
   display: inline-block;
-  background: linear-gradient(transparent 65%, var(--Orange) 65%);
+  background: linear-gradient(transparent 65%, var(--Yellow) 65%);
 }
 
 .text {
