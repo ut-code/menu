@@ -1,2 +1,10 @@
-.root {
+.green {
+  padding: 1em 1.5em 3em 1.5em;
+  background-color: var(--Green);
+  color: white;
+  border-radius: 0px 0px 18px 18px;
+}
+
+.notgreen {
+  padding: 1em 1.5em 3em 1.5em;
 }

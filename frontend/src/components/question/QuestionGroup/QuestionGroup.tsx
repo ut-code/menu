@@ -17,8 +17,10 @@ interface Props {
 }
 
 export const QuestionGroup = (props: Props) => {
+  const className = props.userInput ? styles.green : styles.notgreen
+
   return (
-    <div className={styles.root}>
+    <div className={className}>
       <QuestionHeader
         questionNumber={props.questionNumber}
         onClickPreviousPage={props.onClickPreviousPage}
