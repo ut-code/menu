@@ -205,6 +205,9 @@ export default function Questions() {
     }
     setCurrentQuestion(questions[currentNumber])
   }
+  const onClickResultPage = () => {
+    Navigate("/result")
+  }
 
   //----------------------------------------------------------------
   // ハンバーガーを開く・閉じる
@@ -244,6 +247,7 @@ export default function Questions() {
 
         {currentQuestion.userInput === true && (
           <InputIngredient
+            onClickResultPage={onClickResultPage}
             onChange={onChangeHandler}
             inputContent={inputContent}
             placeholder="食材の名前を入力してみましょう"
