@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { useEffect } from "react"
 
-export default function Home() {
+export const Home = () => {
   // 永続的に残るので、localStorageから問題への回答を消しておく
   useEffect(() => {
     for (let i = 0; i < 4; i++) {

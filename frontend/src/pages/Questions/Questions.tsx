@@ -135,7 +135,7 @@ type Answer = {
   content: string
 }
 
-export default function Questions() {
+export const Questions = () => {
   const [currentQuestion, setCurrentQuestion] = useState<Question>(questions[0])
   const [inputContent, setInputContent] = useState<string>("")
   const [answers, setAnswers] = useState<Answer[]>([])

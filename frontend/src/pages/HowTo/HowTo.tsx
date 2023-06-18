@@ -15,7 +15,7 @@ import img2 from "@/assets/image/howto2.png"
 import img3 from "@/assets/image/howto3.png"
 import icon from "@/assets/image/icon.png"
 
-export default function HowTo() {
+export const HowTo = () => {
   const swiperRef = useRef<SwiperRef>()
   const Navigate = useNavigate()
 
