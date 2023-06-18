@@ -9,20 +9,15 @@ export const Hamburger = (props: Props) => {
   return (
     <>
       <div className={styles.overlay}>
+        {/* react-iconsの置き換えは任せた！ */}
+        <button onClick={props.onClickClose} className={styles.close}>
+          x
+        </button>
         <div className={styles.content}>
-          <button onClick={props.onClickClose}>閉じる</button>
-          <Link to={"/home"}>
-            <button>ホーム</button>
-          </Link>
-          <Link to={"/questions"}>
-            <button>検索する</button>
-          </Link>
-          <Link to={"/"}>
-            <button>このアプリの使い方</button>
-          </Link>
-          <Link to={"/home"}>
-            <button>設定</button>
-          </Link>
+          <Link to={"/home"}>ホーム</Link>
+          <Link to={"/questions"}>検索する</Link>
+          <Link to={"/"}>このアプリの使い方</Link>
+          <Link to={"/home"}>設定</Link>
           <button>English</button>
           ©だるめし Dull Meshi
         </div>

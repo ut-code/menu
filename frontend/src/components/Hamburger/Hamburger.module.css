@@ -10,12 +10,16 @@
 
   /*　画面の中央に要素を表示させる設定　*/
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
 .content {
+  /* 奥行き */
   z-index: 2;
+
+  /* box */
   width: 70%;
   height: 85%;
   padding: 1em;
@@ -29,4 +33,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.close {
+  /* 奥行き */
+  z-index: 3;
+
+  /* display: none; */
+  color: white;
+
+  /* 丸でくくる */
+  border-radius: 50%;
+  border: 1px solid var(--Black);
+  width: 4em;
+  height: 4em;
+
+  /* positionを2emだけ下に下げる */
+  position: relative;
+  top: 2em;
+
+  background-color: var(--Red);
 }
