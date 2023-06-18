@@ -18,16 +18,16 @@
   /* text */
   color: var(--Black);
   font-weight: bold;
-  font-size: large;
+  font-size: 1.2em;
 
   /* underline */
   display: inline-block;
-  background: linear-gradient(transparent 65%, var(--Yellow) 65%);
+  background: linear-gradient(transparent 70%, var(--Yellow) 0%);
 }
 
 .text {
   /* layout */
-  margin: 1.4em 0;
+  margin: 1em 0 1.4em 0;
 
   /* text */
   color: "var(--Gray)";
