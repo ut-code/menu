@@ -221,19 +221,26 @@ export default function Questions() {
   console.log(currentQuestion.choices)
   return (
     <>
+      <div className="base">
+        {currentQuestion.questionNumber === 0 && (
+          <div className="greenBack" key={currentQuestion.questionNumber}>
+            {currentQuestion.questionNumber === 0 && <QuestionHeader />}
+            <QuestionText content={currentQuestion.questionText} userInput={currentQuestion.userInput} />
+
+            {currentQuestion.userInput === true && (
+              <InputIngredient
+                onChange={onChangeHandler}
+                inputContent={inputContent}
+                placeholder="食材の名前を入力してみましょう"
+              />
+            )}
+          </div>
+        )}
+      </div>
       <div className="style_lightbrown" key={currentQuestion.questionNumber}>
-        {currentQuestion.questionNumber === 0 && <QuestionHeader />}
-
         {currentQuestion.questionNumber > 0 && <BackButton onClick={onClickPreviousPage} />}
-
-        <QuestionText content={currentQuestion.questionText} userInput={currentQuestion.userInput} />
-
-        {currentQuestion.userInput === true && (
-          <InputIngredient
-            onChange={onChangeHandler}
-            inputContent={inputContent}
-            placeholder="食材の名前を入力してみましょう"
-          />
+        {currentQuestion.questionNumber > 0 && (
+          <QuestionText content={currentQuestion.questionText} userInput={currentQuestion.userInput} />
         )}
         {currentQuestion.userInput === false && <Keywords answers={answers} />}
 
