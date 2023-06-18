@@ -1,7 +1,7 @@
 .box {
   /* layout */
   margin: 5%;
-  padding: 1.4em 1.5em;
+  padding: 1.4em 1.5em 0.5em 1.5em;
 
   /* box */
   background-color: white;
@@ -13,7 +13,7 @@
 
 .title {
   /* layout */
-  margin-bottom: 0.5rem;
+  margin-bottom: 0rem;
 
   /* text */
   color: var(--Black);
@@ -22,7 +22,7 @@
 
   /* underline */
   display: inline-block;
-  background: linear-gradient(transparent 65%, var(--Orange) 65%);
+  background: linear-gradient(transparent 65%, var(--Yellow) 65%);
 }
 
 .text {
