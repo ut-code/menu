@@ -10,12 +10,14 @@
     "setup:env": "cp .env.sample .env",
     "setup": "npm run setup:install",
     "setup:db_push": "npx prisma db push",
-    "setup:install": "npm ci && npm run setup:db_push"
+    "setup:install": "npm ci && npm run setup:db_push",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/translate": "^7.2.1",
     "@prisma/client": "^3.15.1",
     "express": "^4.18.1",
     "typescript": "^4.9.5"
@@ -24,7 +26,11 @@
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "cors": "^2.8.5",
+    "jest": "^29.5.0",
+    "jsdom": "^22.1.0",
     "prisma": "^3.15.1",
-    "ts-node": "^10.8.1"
+    "ts-node": "^10.8.1",
+    "vi-fetch": "^0.8.0",
+    "vitest": "^0.32.2"
   }
 }
