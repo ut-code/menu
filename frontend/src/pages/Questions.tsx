@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
 import { QuestionHeader } from "@/components/question/QuestionHeader"
-import { BackButton } from "@/components/elements/button/BackButton"
+import { Hamburger } from "@/components/Hamburger"
 import { NextButton } from "@/components/elements/button/NextButton"
 import { QuestionText } from "@/components/question/QuestionText"
 import { InputIngredient } from "@/components/question/InputIngredient"
@@ -139,6 +139,7 @@ export default function Questions() {
   const [currentQuestion, setCurrentQuestion] = useState<Question>(questions[0])
   const [inputContent, setInputContent] = useState<string>("")
   const [answers, setAnswers] = useState<Answer[]>([])
+  const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
 
   // useNavigate を Navigate に変化させる呪文
   const Navigate = useNavigate()
@@ -200,6 +201,19 @@ export default function Questions() {
     }
     setCurrentQuestion(questions[currentNumber])
   }
+  const onClickResultPage = () => {
+    Navigate("/result")
+  }
+
+  //----------------------------------------------------------------
+  // ハンバーガーを開く・閉じる
+  //----------------------------------------------------------------
+  const onClickOpenHamburger = () => {
+    setIsOpenHamburger(true)
+  }
+  const onClickCloseHamburger = () => {
+    setIsOpenHamburger(false)
+  }
 
   useEffect(() => {
     // localStorageから解答を取り出してanswersに入れる
@@ -217,37 +231,51 @@ export default function Questions() {
   console.log(currentQuestion.choices)
   return (
     <>
-      <div className="base">
-        {currentQuestion.questionNumber === 0 && (
-          <div className="greenBack" key={currentQuestion.questionNumber}>
-            {currentQuestion.questionNumber === 0 && <QuestionHeader />}
+      <div key={currentQuestion.questionNumber}>
+        {currentQuestion.userInput === true && (
+          <div className="greenBack">
+            <QuestionHeader
+              questionNumber={currentQuestion.questionNumber}
+              onClickPreviousPage={onClickPreviousPage}
+              onClickOpenHamburger={onClickOpenHamburger}
+            />
+
             <QuestionText content={currentQuestion.questionText} userInput={currentQuestion.userInput} />
 
-            {currentQuestion.userInput === true && (
-              <InputIngredient
-                onChange={onChangeHandler}
-                inputContent={inputContent}
-                placeholder="食材の名前を入力してみましょう"
-              />
-            )}
+            <InputIngredient
+              onClickResultPage={onClickResultPage}
+              onChange={onChangeHandler}
+              inputContent={inputContent}
+              placeholder="食材の名前を入力してみましょう"
+            />
           </div>
         )}
-      </div>
-      <div className="style_lightbrown" key={currentQuestion.questionNumber}>
-        {currentQuestion.questionNumber > 0 && <BackButton onClick={onClickPreviousPage} />}
-        {currentQuestion.questionNumber > 0 && (
-          <QuestionText content={currentQuestion.questionText} userInput={currentQuestion.userInput} />
+
+        {currentQuestion.userInput !== true && (
+          <div>
+            <QuestionHeader
+              questionNumber={currentQuestion.questionNumber}
+              onClickPreviousPage={onClickPreviousPage}
+              onClickOpenHamburger={onClickOpenHamburger}
+            />
+
+            <QuestionText content={currentQuestion.questionText} userInput={currentQuestion.userInput} />
+          </div>
         )}
-        {currentQuestion.userInput === false && <Keywords answers={answers} />}
 
-        <RadioGroup
-          options={currentQuestion.choices}
-          onChange={onChangeHandler}
-          inputContent={inputContent}
-          userInput={currentQuestion.userInput}
-        />
+        <div className="style_lightbrown">
+          {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
+          {currentQuestion.userInput === false && <Keywords answers={answers} />}
 
-        <NextButton onClick={onClickNextPage} />
+          <RadioGroup
+            options={currentQuestion.choices}
+            onChange={onChangeHandler}
+            inputContent={inputContent}
+            userInput={currentQuestion.userInput}
+          />
+
+          <NextButton onClick={onClickNextPage} />
+        </div>
       </div>
     </>
   )

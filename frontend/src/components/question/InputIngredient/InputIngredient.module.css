@@ -1,5 +1,4 @@
 .search {
-  position: relative;
   display: flex;
 }
 
@@ -24,13 +23,13 @@
 }
 
 input[type="text"]:focus.box {
-  border: var(--Orange) 2px solid;
+  border: var(--Red) 2px solid;
   box-shadow: none;
   outline: 0;
 }
 
 .icon {
-  position: absolute;
-  top: 0.5em;
+  position: absolute; /* ここやばい */
+  top: 0.6em;
   right: 1em;
 }

@@ -161,12 +161,21 @@ export default function Result() {
   //   */
   // }, [])
 
+  const onClickResultPage = () => {
+    Navigate("/result")
+  }
+
   return (
     <>
       <div className="style_lightbrown" style={{ height: "auto" }}>
         <BackButton onClick={() => Navigate("/questions")} />
 
-        <InputIngredient onChange={onChangeHandler} inputContent={inputContent} placeholder="" />
+        <InputIngredient
+          onClickResultPage={onClickResultPage}
+          onChange={onChangeHandler}
+          inputContent={inputContent}
+          placeholder=""
+        />
 
         {recipes.map((recipe, index) => (
           <RecipeCard
