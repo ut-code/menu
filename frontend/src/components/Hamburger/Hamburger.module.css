@@ -17,7 +17,7 @@
 
 .content {
   /* 奥行き */
-  z-index: 2;
+  z-index: 3;
 
   /* box */
   width: 70%;
@@ -40,7 +40,7 @@
 
 .close {
   /* 奥行き */
-  z-index: 3;
+  z-index: 4;
 
   /* display: none; */
   color: white;
@@ -70,8 +70,6 @@
   /* layout */
   margin: 1em;
 }
-
-/* .icon {} */
 
 .language {
   /* box */

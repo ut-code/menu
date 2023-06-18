@@ -6,14 +6,14 @@ import styles from "./Hamburger.module.css"
 import { FaBars } from "react-icons/fa"
 
 interface Props {
-  onClickClose: () => void
+  onClickCloseHamburger: () => void
 }
 
 export const Hamburger = (props: Props) => {
   return (
     <>
       <div className={styles.overlay}>
-        <button onClick={props.onClickClose} className={styles.close}>
+        <button onClick={props.onClickCloseHamburger} className={styles.close}>
           x
         </button>
         <div className={styles.content}>
