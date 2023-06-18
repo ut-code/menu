@@ -31,7 +31,7 @@ type SearchInfo = {
   // あとで増やす
 }
 
-export default function Result() {
+export const Result = () => {
   // useNavigate を Navigate に変化させる呪文
   const Navigate = useNavigate()
 
