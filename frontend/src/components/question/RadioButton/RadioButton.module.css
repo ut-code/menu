@@ -75,7 +75,6 @@
 }
 
 .pic_filter {
-  position: relative;
   width: 150px;
   height: 150px;
   background: var(--Yellow);

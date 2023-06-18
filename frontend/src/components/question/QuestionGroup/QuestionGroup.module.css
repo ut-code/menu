@@ -1,0 +1,16 @@
+.green {
+  /* layout */
+  padding: 1em 1.5em 3em 1.5em;
+
+  /* box */
+  background-color: var(--Green);
+  border-radius: 0px 0px 18px 18px;
+
+  /* text */
+  color: white;
+}
+
+.notgreen {
+  /* layout */
+  padding: 1em 1.5em 0em 1.5em;
+}
