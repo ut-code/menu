@@ -22,16 +22,13 @@ html {
   /* text */
   font-family: var(--Font);
   color: var(--Black);
+  background-color: var(--LightBrown);
 }
 
 a {
   /* a href / Link の文字が変な色にならないようにする */
   text-decoration: none;
   color: var(--Black);
-}
-.base {
-  /* 背景をLightBrownで塗りつぶしておく */
-  background-color: var(--LightBrown);
 }
 .style_lightbrown {
   /* layout */
@@ -41,7 +38,6 @@ a {
   align-items: center;
 
   /* box */
-  background-color: var(--LightBrown);
   height: 100vh;
 
   /* transition */
