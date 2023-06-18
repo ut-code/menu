@@ -21,9 +21,4 @@
   /* icon */
   padding: 0.5em;
   display: flex; /* アイコン内を上下中央揃え */
-
-  /* circle */
-  background-color: white;
-  border-radius: 50%;
-  border: solid 1.5px var(--Black);
 }
