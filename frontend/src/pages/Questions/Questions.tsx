@@ -1,13 +1,11 @@
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
-import { QuestionHeader } from "@/components/question/QuestionHeader"
 import { Hamburger } from "@/components/Hamburger"
 import { NextButton } from "@/components/elements/button/NextButton"
-import { QuestionText } from "@/components/question/QuestionText"
-import { InputIngredient } from "@/components/question/InputIngredient"
 import { Keywords } from "@/components/question/Keywords"
 import { RadioGroup } from "@/components/question/RadioGroup"
+import { QuestionGroup } from "@/components/question/QuestionGroup"
 
 // 画像ファイルをimport
 import imgBroccoli from "@/assets/image/broccoli.webp"
@@ -232,36 +230,17 @@ export const Questions = () => {
   return (
     <>
       <div key={currentQuestion.questionNumber}>
-        {currentQuestion.userInput === true && (
-          <div className="greenBack">
-            <QuestionHeader
-              questionNumber={currentQuestion.questionNumber}
-              onClickPreviousPage={onClickPreviousPage}
-              onClickOpenHamburger={onClickOpenHamburger}
-            />
-
-            <QuestionText content={currentQuestion.questionText} userInput={currentQuestion.userInput} />
-
-            <InputIngredient
-              onClickResultPage={onClickResultPage}
-              onChange={onChangeHandler}
-              inputContent={inputContent}
-              placeholder="食材の名前を入力してみましょう"
-            />
-          </div>
-        )}
-
-        {currentQuestion.userInput !== true && (
-          <div>
-            <QuestionHeader
-              questionNumber={currentQuestion.questionNumber}
-              onClickPreviousPage={onClickPreviousPage}
-              onClickOpenHamburger={onClickOpenHamburger}
-            />
-
-            <QuestionText content={currentQuestion.questionText} userInput={currentQuestion.userInput} />
-          </div>
-        )}
+        <QuestionGroup
+          questionNumber={currentQuestion.questionNumber}
+          questionText={currentQuestion.questionText}
+          userInput={currentQuestion.userInput}
+          onClickPreviousPage={onClickPreviousPage}
+          onClickOpenHamburger={onClickOpenHamburger}
+          onClickResultPage={onClickResultPage}
+          onChange={onChangeHandler}
+          inputContent={inputContent}
+          placeholder="食材の名前を入力してみましょう"
+        />
 
         <div className="style_lightbrown">
           {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
