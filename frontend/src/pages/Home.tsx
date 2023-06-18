@@ -1,9 +1,19 @@
 import { Link } from "react-router-dom"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 import { Hamburger } from "@/components/Hamburger"
 
 export default function Home() {
+  const [isOpen, setIsOpen] = useState<boolean>(true)
+
+  const onClickClose = () => {
+    setIsOpen(false)
+  }
+
+  const onClickOpen = () => {
+    setIsOpen(true)
+  }
+
   // 永続的に残るので、localStorageから問題への回答を消しておく
   useEffect(() => {
     for (let i = 0; i < 4; i++) {
@@ -21,7 +31,9 @@ export default function Home() {
         <Link to={"/result"}>
           <button>検索結果</button>
         </Link>
-        <Hamburger />
+        <br></br>
+        <button onClick={onClickOpen}>ハンバーガーメニュー</button>
+        {isOpen && <Hamburger onClickClose={onClickClose} />}
       </div>
     </>
   )

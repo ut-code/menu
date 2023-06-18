@@ -1,11 +1,16 @@
 import { Link } from "react-router-dom"
 import styles from "./Hamburger.module.css"
 
-export const Hamburger = () => {
+interface Props {
+  onClickClose: () => void
+}
+
+export const Hamburger = (props: Props) => {
   return (
     <>
       <div className={styles.overlay}>
         <div className={styles.content}>
+          <button onClick={props.onClickClose}>閉じる</button>
           <Link to={"/home"}>
             <button>ホーム</button>
           </Link>
