@@ -18,7 +18,7 @@ interface Props {
 export const RadioGroup = (props: Props) => {
   return (
     <div>
-      {props.userInput && <div className={styles.text}>Recommend</div>}
+      {props.userInput && <div className={styles.text}>あなたへのおすすめ</div>}
 
       <div className={styles.root}>
         {Object.values(props.options).map((option, index) => (
