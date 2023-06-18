@@ -234,11 +234,18 @@ export default function Questions() {
       <div className="base">
         {currentQuestion.questionNumber === 0 && (
           <div className="greenBack" key={currentQuestion.questionNumber}>
-            {currentQuestion.questionNumber === 0 && <QuestionHeader />}
+            <QuestionHeader
+              questionNumber={currentQuestion.questionNumber}
+              onClickPreviousPage={onClickPreviousPage}
+              onClickOpenHamburger={onClickOpenHamburger}
+            />
+            {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
+
             <QuestionText content={currentQuestion.questionText} userInput={currentQuestion.userInput} />
 
             {currentQuestion.userInput === true && (
               <InputIngredient
+                onClickResultPage={onClickResultPage}
                 onChange={onChangeHandler}
                 inputContent={inputContent}
                 placeholder="食材の名前を入力してみましょう"
@@ -248,23 +255,6 @@ export default function Questions() {
         )}
       </div>
       <div className="style_lightbrown" key={currentQuestion.questionNumber}>
-        <QuestionHeader
-          questionNumber={currentQuestion.questionNumber}
-          onClickPreviousPage={onClickPreviousPage}
-          onClickOpenHamburger={onClickOpenHamburger}
-        />
-        {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
-
-        <QuestionText content={currentQuestion.questionText} userInput={currentQuestion.userInput} />
-
-        {currentQuestion.userInput === true && (
-          <InputIngredient
-            onClickResultPage={onClickResultPage}
-            onChange={onChangeHandler}
-            inputContent={inputContent}
-            placeholder="食材の名前を入力してみましょう"
-          />
-        )}
         {currentQuestion.userInput === false && <Keywords answers={answers} />}
 
         <RadioGroup
