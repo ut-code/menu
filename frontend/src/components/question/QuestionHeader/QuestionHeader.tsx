@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 
-import { FaBars } from "react-icons/fa"
+import { BsFilterLeft } from "react-icons/bs"
 import styles from "./QuestionHeader.module.css"
 
 import { BackButton } from "@/components/elements/button/BackButton"
@@ -23,7 +23,7 @@ export const QuestionHeader = (props: Props) => {
       )}
       {props.questionNumber > 0 && <BackButton onClick={props.onClickPreviousPage} />}
       <div className={styles.howto} onClick={props.onClickOpenHamburger}>
-        <FaBars size="1.2rem" />
+        <BsFilterLeft size="1.8rem" />
       </div>
     </div>
   )

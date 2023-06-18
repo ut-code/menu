@@ -32,4 +32,5 @@ input[type="text"]:focus.box {
   position: relative;
   top: 0.55em;
   right: 2em;
+  color: var(--Black) !important;
 }
