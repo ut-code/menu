@@ -8,7 +8,7 @@ type Answer = {
 export const Keywords = (props: { answers: Answer[] }) => {
   return (
     <div className={styles.box}>
-      <span className={styles.title}>Keywords&nbsp;&nbsp;</span>
+      <span className={styles.title}>あなたの検索ワード🔍&nbsp;&nbsp;</span>
       <br></br>
       <div className={styles.text}>
         {props.answers.map((answer, index) => (

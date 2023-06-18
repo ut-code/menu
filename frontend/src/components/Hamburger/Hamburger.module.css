@@ -27,7 +27,7 @@
 
   /* ボーダー */
   border-radius: 10px;
-  border: 1px solid var(--Black);
+  border: 2px solid var(--Black);
 
   /* 縦につなげるようにする */
   display: flex;
@@ -47,7 +47,7 @@
 
   /* 丸でくくる */
   border-radius: 50%;
-  border: 1px solid var(--Black);
+  border: 2px solid var(--Black);
   width: 4em;
   height: 4em;
 
@@ -67,8 +67,18 @@
 }
 
 .link {
+  font-size: 0.9em;
   /* layout */
-  margin: 1em;
+  margin: 0.5em;
+  display: flex;
+  /*縦を揃える*/
+  align-items: center;
+}
+
+.link svg {
+  font-size: 2rem;
+  /* box */
+  margin-right: 1.1em;
 }
 
 .language {

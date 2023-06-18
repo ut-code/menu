@@ -29,7 +29,8 @@ input[type="text"]:focus.box {
 }
 
 .icon {
-  position: absolute; /* ここやばい */
-  top: 0.6em;
-  right: 1em;
+  position: relative;
+  top: 0.55em;
+  right: 2em;
+  color: var(--Black) !important;
 }

@@ -51,7 +51,7 @@ a {
   border-radius: 0px 0px 18px 18px;
 }
 .greenBack svg {
-  color: #1c1c1c;
+  color: white;
 }
 @keyframes fadeIn {
   0% {
