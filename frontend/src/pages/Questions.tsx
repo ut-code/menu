@@ -17,14 +17,12 @@ import imgPork from "@/assets/image/pork.webp"
 import imgTomato from "@/assets/image/tomato.webp"
 import imgOnion from "@/assets/image/onion.webp"
 import imgCarrot from "@/assets/image/carrot.webp"
-import imgChicken from "@/assets/image/chicken.webp"
-import imgBeef from "@/assets/image/beaf.webp"
+import imgChicken from "@/assets/image/chicken.jpg"
 import imgLettuce from "@/assets/image/lettuce.webp"
 import imgPotato from "@/assets/image/potato.webp"
 import imgTofu from "@/assets/image/tofu.webp"
 import imgShiiTake from "@/assets/image/shiitake.webp"
 import imgEggPlant from "@/assets/image/eggplant.webp"
-import imgEbi from "@/assets/image/ebi.webp"
 import imgBeanSprout from "@/assets/image/moyashi.webp"
 import imgCabbage from "@/assets/image/cabbage.webp"
 import imgDaikon from "@/assets/image/daikon.webp"
@@ -65,14 +63,12 @@ const foods: foodsType[] = [
   { choiceText: "玉ねぎ", choiceImage: imgOnion },
   { choiceText: "人参", choiceImage: imgCarrot },
   { choiceText: "鶏肉", choiceImage: imgChicken },
-  { choiceText: "牛肉", choiceImage: imgBeef },
   { choiceText: "レタス", choiceImage: imgLettuce },
   { choiceText: "じゃがいも", choiceImage: imgPotato },
   { choiceText: "豆腐", choiceImage: imgTofu },
   { choiceText: "しいたけ", choiceImage: imgShiiTake },
   { choiceText: "豚肉", choiceImage: imgPork },
   { choiceText: "なす", choiceImage: imgEggPlant },
-  { choiceText: "えび", choiceImage: imgEbi },
   { choiceText: "もやし", choiceImage: imgBeanSprout },
   { choiceText: "キャベツ", choiceImage: imgCabbage },
   { choiceText: "大根", choiceImage: imgDaikon },
