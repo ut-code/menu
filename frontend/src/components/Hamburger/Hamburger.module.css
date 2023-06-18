@@ -33,6 +33,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  /* text */
+  font-size: 1.1em;
 }
 
 .close {
@@ -53,4 +56,38 @@
   top: 2em;
 
   background-color: var(--Red);
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+
+  /* 上にmargin */
+  margin-top: 2em;
+}
+
+.link {
+  /* layout */
+  margin: 1em;
+}
+
+/* .icon {} */
+
+.language {
+  /* box */
+  border-radius: 100px;
+  border: none;
+  height: 7%;
+  width: 100%;
+  background: var(--Green);
+  color: white;
+  margin: 2em 0;
+
+  /* text */
+  font-size: 0.9em;
+}
+
+.footer {
+  /* text */
+  font-size: 0.6em;
 }
