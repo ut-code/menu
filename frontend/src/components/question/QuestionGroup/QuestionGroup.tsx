@@ -27,12 +27,14 @@ export const QuestionGroup = (props: Props) => {
         onClickOpenHamburger={props.onClickOpenHamburger}
       />
       <QuestionText questionText={props.questionText} userInput={props.userInput} />
-      <InputIngredient
-        onClickResultPage={props.onClickResultPage}
-        onChange={props.onChange}
-        inputContent={props.inputContent}
-        placeholder="食材の名前を入力してみましょう"
-      />
+      {props.userInput && (
+        <InputIngredient
+          onClickResultPage={props.onClickResultPage}
+          onChange={props.onChange}
+          inputContent={props.inputContent}
+          placeholder="食材の名前を入力してみましょう"
+        />
+      )}
     </div>
   )
 }
