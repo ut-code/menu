@@ -231,9 +231,9 @@ export default function Questions() {
   console.log(currentQuestion.choices)
   return (
     <>
-      <div className="base">
-        {currentQuestion.questionNumber === 0 && (
-          <div className="greenBack" key={currentQuestion.questionNumber}>
+      <div key={currentQuestion.questionNumber}>
+        {currentQuestion.userInput === true && (
+          <div className="greenBack">
             <QuestionHeader
               questionNumber={currentQuestion.questionNumber}
               onClickPreviousPage={onClickPreviousPage}
@@ -242,29 +242,40 @@ export default function Questions() {
 
             <QuestionText content={currentQuestion.questionText} userInput={currentQuestion.userInput} />
 
-            {currentQuestion.userInput === true && (
-              <InputIngredient
-                onClickResultPage={onClickResultPage}
-                onChange={onChangeHandler}
-                inputContent={inputContent}
-                placeholder="食材の名前を入力してみましょう"
-              />
-            )}
+            <InputIngredient
+              onClickResultPage={onClickResultPage}
+              onChange={onChangeHandler}
+              inputContent={inputContent}
+              placeholder="食材の名前を入力してみましょう"
+            />
           </div>
         )}
-      </div>
-      <div className="style_lightbrown" key={currentQuestion.questionNumber}>
-        {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
-        {currentQuestion.userInput === false && <Keywords answers={answers} />}
 
-        <RadioGroup
-          options={currentQuestion.choices}
-          onChange={onChangeHandler}
-          inputContent={inputContent}
-          userInput={currentQuestion.userInput}
-        />
+        {currentQuestion.userInput !== true && (
+          <div>
+            <QuestionHeader
+              questionNumber={currentQuestion.questionNumber}
+              onClickPreviousPage={onClickPreviousPage}
+              onClickOpenHamburger={onClickOpenHamburger}
+            />
 
-        <NextButton onClick={onClickNextPage} />
+            <QuestionText content={currentQuestion.questionText} userInput={currentQuestion.userInput} />
+          </div>
+        )}
+
+        <div className="style_lightbrown">
+          {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
+          {currentQuestion.userInput === false && <Keywords answers={answers} />}
+
+          <RadioGroup
+            options={currentQuestion.choices}
+            onChange={onChangeHandler}
+            inputContent={inputContent}
+            userInput={currentQuestion.userInput}
+          />
+
+          <NextButton onClick={onClickNextPage} />
+        </div>
       </div>
     </>
   )
