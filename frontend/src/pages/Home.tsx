@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom"
 import { useEffect } from "react"
 
+import { Hamburger } from "@/components/Hamburger"
+
 export default function Home() {
   // 永続的に残るので、localStorageから問題への回答を消しておく
   useEffect(() => {
@@ -19,6 +21,7 @@ export default function Home() {
         <Link to={"/result"}>
           <button>検索結果</button>
         </Link>
+        <Hamburger />
       </div>
     </>
   )
