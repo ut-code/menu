@@ -24,7 +24,7 @@ export const Hamburger = (props: Props) => {
             <button>設定</button>
           </Link>
           <button>English</button>
-          だるめし Dull Meshi
+          ©だるめし Dull Meshi
         </div>
       </div>
     </>

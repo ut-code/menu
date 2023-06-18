@@ -6,6 +6,10 @@ import { Hamburger } from "@/components/Hamburger"
 export default function Home() {
   const [isOpen, setIsOpen] = useState<boolean>(true)
 
+  useEffect(() => {
+    onClickClose()
+  }, [])
+
   const onClickClose = () => {
     setIsOpen(false)
   }
