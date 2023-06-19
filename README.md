@@ -65,31 +65,20 @@ npm run dev
 
 - `/root`
 
-  - `/frontend` フロントエンド関係
+  - `/frontend` フロントエンド
 
     - `/src`
 
       - `/assets`
-        画像や CSS など
 
       - `/components`
-        コンポーネント
 
       - `/pages`
-        ホームページ
 
-        - `Home.tsx`
-          開発の都合で設置。困ったら/home
+  - `/backend` バックエンド
 
-        - `Message.tsx`
-          [`https://github.com/ut-code/typescript-react-node-template`](https://github.com/ut-code/typescript-react-node-template)
-        - `Questions.tsx`
-          質問形式で条件を聞き出す。/questions
+    - `/src`
+    
+      - `server.ts`
 
-    - `/dist` ビルド時に自動で作られる? 編集はしない。
-
-  - `/backend` バックエンド関係
-
-    - `server.ts` メイン
-
-    - `/prisma` Prisma のファイル
+    - `/prisma` Prisma の構成ファイルと Python
