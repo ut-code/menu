@@ -1,0 +1,21 @@
+.footprint svg {
+  color: var(--Brown);
+  position: absolute;
+}
+
+.footprint {
+  position: relative;
+  width: 70px;
+  height: 67px;
+}
+
+.left {
+  top: 0;
+  left: 0;
+  rotate: 15deg;
+}
+.right {
+  top: 40px;
+  left: 45px;
+  rotate: -20deg;
+}
