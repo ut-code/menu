@@ -8,6 +8,9 @@ import { BsSearch } from "react-icons/bs"
 import { BsQuestionLg } from "react-icons/bs"
 import { BsGearFill } from "react-icons/bs"
 
+// components
+import { Footprint } from "@/components/footprint/Footprint"
+
 interface Props {
   onClickCloseHamburger: () => void
 }
@@ -39,6 +42,9 @@ export const Hamburger = (props: Props) => {
             </Link>
           </div>
           <button className={styles.language}>English</button>
+
+          <Footprint />
+
           <div className={styles.footer}>©だるめし Dull Meshi</div>
         </div>
       </div>
