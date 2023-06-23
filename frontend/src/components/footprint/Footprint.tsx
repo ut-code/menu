@@ -7,7 +7,8 @@ export const Footprint = () => {
   return (
     <>
       <div className={styles.footprint}>
-        <FaPaw size="1.2rem" />
+        <FaPaw size="45px" className={styles.left} />
+        <FaPaw size="25px" className={styles.right} />
       </div>
     </>
   )
