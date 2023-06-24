@@ -8,7 +8,8 @@
     "preview": "vite preview",
     "setup:env": "cp .env.sample .env",
     "setup": "npm run setup:install",
-    "setup:install": "npm ci"
+    "setup:install": "npm ci",
+    "test": "npx vitest"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
@@ -21,6 +22,7 @@
     "typescript": "^4.9.5"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.2",
     "@types/react": "^18.0.0",
