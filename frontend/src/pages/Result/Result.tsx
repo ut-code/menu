@@ -38,7 +38,6 @@ export const Result = () => {
   const [inputContent, setInputContent] = useState<string>("")
   const [, setAnswers] = useState<Answer[]>([])
   // const addAnswer = (answer: Answer) => setAnswers((prev) => [...prev, answer])
-  // const [categoryId, setCategoryId] = useState<string>("12-103")
   const [recipes, setRecipes] = useState<Recipe[]>([])
   const addRecipe = (recipe: Recipe) => setRecipes((prev) => [...prev, recipe])
 
@@ -118,48 +117,6 @@ export const Result = () => {
     // 問題番号をキーにして、選んだ選択肢をlocalStorageに保存
     // localStorage.setItem("answer-" + currentQuestion.questionNumber.toString(), e.target.value)
   }
-
-  //----------------------------------------------------------------
-  // 指定したカテゴリの人気レシピ上位4件を取得する。小カテゴリまで指定すれば十分な精度になるのでは？
-  // 例として categoryId=18-189 の結果を表示している
-  // res.jsonは{ "result": [] }の形式で返ってくる
-  // 今回 Recipe 型の配列に整形するため、 results の配列をループして recipe型 の配列に変換してから addRecipe する
-  //----------------------------------------------------------------
-  // useEffect(() => {
-  //   const fetchRecipes = async (categoryId: string) => {
-  //     const response: Response = await fetch(
-  //       "https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426?applicationId=1032749498491273405&categoryId=" +
-  //         categoryId
-  //     )
-  //     const datas = await response.json()
-  //     const results = datas.result
-
-  //     if (results) {
-  //       // undefinedエラー回避
-  //       results.forEach((result: any) => {
-  //         // resultの型はrecipeより拡張されているから、recipe型に変換する
-  //         // tmp: recipe = ...と明示的に書いてみた
-  //         const tmp: Recipe = result as Recipe
-
-  //         // recipeMaterialConverted は、recipeMaterial の配列を"・"で連結したもの
-  //         // 例: ["豚肉", "玉ねぎ", "にんにく"] -> "豚肉・玉ねぎ・にんにく"
-  //         tmp.recipeMaterialConverted = tmp.recipeMaterial.join("・")
-  //         tmp.foodImageUrls = [result.foodImageUrl]
-  //         tmp.totalTime = 30
-  //         // console.log(result)
-  //         console.log(tmp)
-  //         addRecipe(tmp)
-  //       })
-  //     }
-  //   }
-
-  //   fetchRecipes(categoryId)
-  //   /*
-  //   詰まった箇所のメモ
-  //   await res.json()で受け取ったjsonの形式を調べるために、Object.keys()とObject.values()を使用
-  //   しかし、本来はリンク先の情報を見ればわかることだった
-  //   */
-  // }, [])
 
   const onClickResultPage = () => {
     Navigate("/result")
