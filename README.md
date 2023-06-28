@@ -78,7 +78,7 @@ npm run dev
   - `/backend` バックエンド
 
     - `/src`
-    
+
       - `server.ts`
 
     - `/prisma` Prisma の構成ファイルと Python
