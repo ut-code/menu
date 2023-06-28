@@ -226,7 +226,6 @@ export const Questions = () => {
     setAnswers(newAnswers)
   }, [currentQuestion])
 
-  console.log(currentQuestion.choices)
   return (
     <>
       <div key={currentQuestion.questionNumber}>

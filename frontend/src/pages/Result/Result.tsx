@@ -28,7 +28,9 @@ type Answer = {
 // 検索に使用する情報 @@@@@
 type SearchInfo = {
   ingredient: string[]
-  // あとで増やす
+  time?: string
+  dish?: string // 主菜・副菜など
+  keywords?: string[]
 }
 
 export const Result = () => {
@@ -40,6 +42,7 @@ export const Result = () => {
   // const addAnswer = (answer: Answer) => setAnswers((prev) => [...prev, answer])
   const [recipes, setRecipes] = useState<Recipe[]>([])
   const addRecipe = (recipe: Recipe) => setRecipes((prev) => [...prev, recipe])
+  const [runEffect, setRunEffect] = useState<boolean>(false)
 
   const convertAnswersToSearchInfo = (newAnswers: Answer[]): SearchInfo => {
     const info: SearchInfo = { ingredient: [] }
@@ -52,6 +55,8 @@ export const Result = () => {
     }
     return info
   }
+
+  // const convertInputContentToSearchInfo = (newInputContent: string): SearchInfo => {
 
   // localStorageに保存出来ているか確認
   // 無駄に unmounted で一回しか実行されないようにコントロール
@@ -107,6 +112,16 @@ export const Result = () => {
     fetchSearchedRecipes(searchInfo)
   }, [])
 
+  useEffect(() => {
+    if (!runEffect) return
+    setRunEffect(false)
+
+    // inputContentを使ったフリーワード検索を行う
+    // じっくりなどの特定の単語なら、構造化検索も
+    // const searchInfo: SearchInfo = convertInputContentToSearchInfo(inputContent)
+    alert("フリーワード検索: " + inputContent)
+  }, [runEffect])
+
   //----------------------------------------------------------------
   // 選択肢のボタンが押されたとき / 入力欄に入れたときの処理
   //----------------------------------------------------------------
@@ -118,8 +133,8 @@ export const Result = () => {
     // localStorage.setItem("answer-" + currentQuestion.questionNumber.toString(), e.target.value)
   }
 
-  const onClickResultPage = () => {
-    Navigate("/result")
+  const onClickRunEffect = () => {
+    setRunEffect(true)
   }
 
   return (
@@ -128,7 +143,7 @@ export const Result = () => {
         <BackButton onClick={() => Navigate("/questions")} />
 
         <InputIngredient
-          onClickResultPage={onClickResultPage}
+          onClickResultPage={onClickRunEffect}
           onChange={onChangeHandler}
           inputContent={inputContent}
           placeholder=""
