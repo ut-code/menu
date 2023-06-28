@@ -145,7 +145,7 @@ export const Result = () => {
         <BackButton onClick={() => Navigate("/questions")} />
 
         <InputIngredient
-          onClickResultPage={onClickRunEffect}
+          onClickHandler={onClickRunEffect}
           onChange={onChangeHandler}
           inputContent={inputContent}
           placeholder=""
