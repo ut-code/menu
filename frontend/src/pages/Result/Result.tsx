@@ -7,7 +7,6 @@ import { RecipeCard } from "@/components/result/RecipeCard"
 
 const postSelectRecipeApi = `${import.meta.env.VITE_API_ENDPOINT}/searchRecipes`
 
-// 人気レシピ4件を取得できるAPIから、必要なキーの情報のみを取得する
 type Recipe = {
   id: number
   recipeTitle: string
@@ -25,12 +24,11 @@ type Answer = {
   content: string
 }
 
-// 検索に使用する情報 @@@@@
 type SearchInfo = {
   ingredient: string[]
   time?: string
   dish?: string // 主菜・副菜など
-  keywords?: string[]
+  keywords: string[]
 }
 
 export const Result = () => {
@@ -43,7 +41,7 @@ export const Result = () => {
   const [runEffect, setRunEffect] = useState<boolean>(false)
 
   const convertAnswersToSearchInfo = (answers: Answer[]): SearchInfo => {
-    const info: SearchInfo = { ingredient: [] }
+    const info: SearchInfo = { ingredient: [], keywords: [] }
     if (answers) {
       answers.forEach((answer: Answer) => {
         // answer.contentをingredientに追加
@@ -54,13 +52,9 @@ export const Result = () => {
     return info
   }
 
-  // const convertInputContentToSearchInfo = (newInputContent: string): SearchInfo => {
-
-  // localStorageに保存出来ているか確認
   // 無駄に unmounted で一回しか実行されないようにコントロール
   let unmounted = false
   useEffect(() => {
-    // 二度実行しないようにflagを立てる
     if (unmounted) return
     unmounted = true
 
@@ -108,14 +102,30 @@ export const Result = () => {
     fetchSearchedRecipes(searchInfo)
   }, [])
 
+  //----------------------------------------------------------------
+  // フリーワード検索機能
+  //----------------------------------------------------------------
+  const convertInputContentToSearchInfo = (newInputContent: string): SearchInfo => {
+    // inputContentを使ったフリーワード検索を行う
+    const info: SearchInfo = { ingredient: [], keywords: [] }
+    // newInputContentを空白区切りで配列にする
+    const searchWords: string[] = newInputContent.split(" ")
+
+    if (searchWords) {
+      searchWords.forEach((word: string) => {
+        // wordをkeywordsに追加
+        info.keywords.push(word)
+      })
+    }
+    return info
+  }
+
   useEffect(() => {
     if (!runEffect) return
     setRunEffect(false)
 
-    // inputContentを使ったフリーワード検索を行う
-    // じっくりなどの特定の単語なら、構造化検索も
-    // const searchInfo: SearchInfo = convertInputContentToSearchInfo(inputContent)
-    alert("フリーワード検索: " + inputContent)
+    const searchInfo: SearchInfo = convertInputContentToSearchInfo(inputContent)
+    alert("フリーワード検索: " + searchInfo.keywords)
   }, [runEffect])
 
   const onClickRunEffect = () => {
