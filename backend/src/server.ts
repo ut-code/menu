@@ -18,10 +18,11 @@ app.use(express.json())
 // Result.tsx用
 //----------------------------------------------------------------
 // request.bodyのsearchInfoを利用して検索結果を返す
-// 一旦は楽天レシピオンリーで検索
 type SearchInfo = {
   ingredient: string[]
-  // あとで増やす
+  time?: string
+  dish?: string // 主菜・副菜など
+  keywords?: string[]
 }
 
 app.post("/searchRecipes", async (request, response) => {
