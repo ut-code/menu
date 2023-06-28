@@ -38,16 +38,14 @@ export const Result = () => {
   const Navigate = useNavigate()
 
   const [inputContent, setInputContent] = useState<string>("")
-  const [, setAnswers] = useState<Answer[]>([])
-  // const addAnswer = (answer: Answer) => setAnswers((prev) => [...prev, answer])
   const [recipes, setRecipes] = useState<Recipe[]>([])
   const addRecipe = (recipe: Recipe) => setRecipes((prev) => [...prev, recipe])
   const [runEffect, setRunEffect] = useState<boolean>(false)
 
-  const convertAnswersToSearchInfo = (newAnswers: Answer[]): SearchInfo => {
+  const convertAnswersToSearchInfo = (answers: Answer[]): SearchInfo => {
     const info: SearchInfo = { ingredient: [] }
-    if (newAnswers) {
-      newAnswers.forEach((answer: Answer) => {
+    if (answers) {
+      answers.forEach((answer: Answer) => {
         // answer.contentをingredientに追加
         if (answer.answerNumber === 0) info.ingredient.push(answer.content)
         if (answer.answerNumber === 3) info.ingredient.push(answer.content)
@@ -67,23 +65,21 @@ export const Result = () => {
     unmounted = true
 
     // localStorageから解答を取り出してanswersに入れる
-    const newAnswers: Answer[] = []
+    const answers: Answer[] = []
     for (let i = 0; i < 4; i++) {
       const answer = localStorage.getItem("answer-" + i.toString())
       if (answer !== null) {
-        // addAnswer({ answerNumber: i, content: answer })
-        newAnswers.push({ answerNumber: i, content: answer })
+        answers.push({ answerNumber: i, content: answer })
       }
     }
-    setAnswers(newAnswers)
 
     // inputContent の初期値を設定
-    // newAnswers を空白区切りで連結したものをsetInputContent
+    // answers を空白区切りで連結したものをsetInputContent
     // 例: ["豚肉", "玉ねぎ", "にんにく"] -> "豚肉 玉ねぎ にんにく"
-    setInputContent(newAnswers.map((answer) => answer.content).join(" "))
+    setInputContent(answers.map((answer) => answer.content).join(" "))
 
-    // newAnswers をfindManyの検索に使いやすいように searchInfo に整形
-    const searchInfo: SearchInfo = convertAnswersToSearchInfo(newAnswers)
+    // answers をfindManyの検索に使いやすいように searchInfo に整形
+    const searchInfo: SearchInfo = convertAnswersToSearchInfo(answers)
 
     // searchInfo を使ってfetchAPI
     const fetchSearchedRecipes = async (info: SearchInfo) => {
@@ -122,19 +118,15 @@ export const Result = () => {
     alert("フリーワード検索: " + inputContent)
   }, [runEffect])
 
-  //----------------------------------------------------------------
-  // 選択肢のボタンが押されたとき / 入力欄に入れたときの処理
-  //----------------------------------------------------------------
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // 選んだ選択肢をinputContentにセット
-    setInputContent(e.target.value)
-
-    // 問題番号をキーにして、選んだ選択肢をlocalStorageに保存
-    // localStorage.setItem("answer-" + currentQuestion.questionNumber.toString(), e.target.value)
-  }
-
   const onClickRunEffect = () => {
     setRunEffect(true)
+  }
+
+  //----------------------------------------------------------------
+  // 入力欄に入れたときの処理
+  //----------------------------------------------------------------
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputContent(e.target.value)
   }
 
   return (
