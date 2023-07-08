@@ -9,7 +9,7 @@ import { BsQuestionLg } from "react-icons/bs"
 import { BsGearFill } from "react-icons/bs"
 
 // components
-import { Footprint } from "@/components/footprint/Footprint"
+import { Footprint } from "@/components/elements/footprint/Footprint"
 
 interface Props {
   onClickCloseHamburger: () => void

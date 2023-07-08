@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-import { TipReference } from "@/components/result/TipReference"
+import { TipReference } from "../TipReference"
 import styles from "./RecipeCard.module.css"
 
 interface Props {
