@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom"
 
-import { Home } from "@/pages/Home"
-import { HowTo } from "@/pages/HowTo"
-import { Questions } from "@/pages/Questions"
-import { Result } from "@/pages/Result"
+import { Home } from "@/features/Home"
+import { HowTo } from "@/features/HowTo"
+import { Questions } from "@/features/Questions"
+import { Result } from "@/features/Result"
 
 import "@/components/css/global.css"
 
