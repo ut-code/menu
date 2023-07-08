@@ -30,6 +30,11 @@ a {
   text-decoration: none;
   color: var(--Black);
 }
+
+body {
+  height: 100vh;
+}
+
 .style_lightbrown {
   /* layout */
   padding: 1em;
@@ -38,7 +43,7 @@ a {
   align-items: center;
 
   /* box */
-  height: 100vh;
+  /* height: 100vh; */
 
   /* transition */
   animation: fadeIn 1s;

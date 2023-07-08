@@ -1,9 +1,9 @@
 .overlay {
   /*　画面全体を覆う設定　*/
   position: fixed;
-  top: -10%;
+  top: -12%;
   left: -10%;
-  width: 120%;
+  width: 120%; /* カスの実装かもしれません。コードレビュー求む */
   height: 120%;
   /* background-color は半透明の白 */
   background-color: rgba(255, 255, 255, 0.7);
@@ -24,7 +24,7 @@
 
   /* box */
   width: 58%;
-  height: 71%;
+  height: 65%;
   padding: 1em;
   background: white;
 
