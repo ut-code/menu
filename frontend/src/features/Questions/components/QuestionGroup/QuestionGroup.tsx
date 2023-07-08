@@ -1,11 +1,11 @@
 import styles from "./QuestionGroup.module.css"
 
-import { QuestionHeader } from "@/components/QuestionHeader"
+import { Head } from "@/components/Head"
 import { QuestionText } from "../QuestionText"
 import { InputIngredient } from "@/components/InputIngredient"
 
 interface Props {
-  questionNumber: number
+  showBackButton: boolean
   questionText: string
   userInput: boolean
   onClickPreviousPage: () => void
@@ -21,8 +21,8 @@ export const QuestionGroup = (props: Props) => {
 
   return (
     <div className={className}>
-      <QuestionHeader
-        questionNumber={props.questionNumber}
+      <Head
+        showBackButton={props.showBackButton}
         onClickPreviousPage={props.onClickPreviousPage}
         onClickOpenHamburger={props.onClickOpenHamburger}
       />
