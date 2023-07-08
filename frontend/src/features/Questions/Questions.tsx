@@ -3,9 +3,9 @@ import { useState, useEffect } from "react"
 
 import { Hamburger } from "@/components/Hamburger"
 import { NextButton } from "@/components/elements/button/NextButton"
-import { Keywords } from "@/components/question/Keywords"
-import { RadioGroup } from "@/components/question/RadioGroup"
-import { QuestionGroup } from "@/components/question/QuestionGroup"
+import { Keywords } from "./components/Keywords"
+import { RadioGroup } from "./components/RadioGroup"
+import { QuestionGroup } from "./components/QuestionGroup"
 
 // 画像ファイルをimport
 import imgBroccoli from "@/assets/image/broccoli.webp"

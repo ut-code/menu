@@ -1,8 +1,8 @@
 import styles from "./QuestionGroup.module.css"
 
-import { QuestionHeader } from "../QuestionHeader/QuestionHeader"
-import { QuestionText } from "../QuestionText/QuestionText"
-import { InputIngredient } from "../InputIngredient/InputIngredient"
+import { QuestionHeader } from "@/components/QuestionHeader"
+import { QuestionText } from "../QuestionText"
+import { InputIngredient } from "@/components/InputIngredient"
 
 interface Props {
   questionNumber: number

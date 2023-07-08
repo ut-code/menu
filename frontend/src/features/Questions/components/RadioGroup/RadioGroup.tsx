@@ -1,4 +1,4 @@
-import { RadioButton } from "@/components/question/RadioButton"
+import { RadioButton } from "../RadioButton"
 import styles from "./RadioGroup.module.css"
 
 type Choices = {
