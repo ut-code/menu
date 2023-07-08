@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 
 import { BackButton } from "@/components/elements/button/BackButton"
 import { InputIngredient } from "@/components/question/InputIngredient"
-import { RecipeCard } from "@/components/result/RecipeCard"
+import { RecipeCard } from "./components/RecipeCard"
 
 const postSelectRecipeApi = `${import.meta.env.VITE_API_ENDPOINT}/searchRecipes`
 
