@@ -42,9 +42,6 @@ body {
   flex-direction: column;
   align-items: center;
 
-  /* box */
-  /* height: 100vh; */
-
   /* transition */
   animation: fadeIn 1s;
   animation-fill-mode: forwards;
