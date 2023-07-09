@@ -6,6 +6,7 @@
   /* layout */
   flex-grow: 1;
   padding: 0.7em 1.3em;
+  margin-left: 1em;
 
   /* box */
   background-color: white;
