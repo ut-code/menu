@@ -141,7 +141,7 @@ export const Result = () => {
 
   return (
     <>
-      <div>
+      <div style={{ padding: "1em 1.5em 3em 1.5em" }}>
         <Head
           showBackButton={true}
           onClickPreviousPage={() => Navigate("/questions")}
@@ -157,7 +157,16 @@ export const Result = () => {
 
         {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
 
-        <div className="style_lightbrown" style={{ height: "auto", position: "relative", zIndex: -1 }}>
+        <div
+          style={{
+            height: "auto",
+            position: "relative",
+            zIndex: -1,
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
           {recipes.map((recipe, index) => (
             <RecipeCard
               key={index}

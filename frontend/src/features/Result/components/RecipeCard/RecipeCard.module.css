@@ -12,8 +12,7 @@
   border-radius: 20px;
   border: var(--Black) 1px solid;
   box-shadow: var(--Black) 2px 2px 0 0;
-  width: 90%;
-  /* height: 500px; 高さ上限どうしますか？ */
+  /* height: 500px; /* 高さ上限どうしますか？ */
   overflow: hidden; /* 丸めた枠からのはみ出しを隠す */
 }
 
