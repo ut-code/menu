@@ -230,7 +230,7 @@ export const Questions = () => {
     <>
       <div key={currentQuestion.questionNumber}>
         <QuestionGroup
-          questionNumber={currentQuestion.questionNumber}
+          showBackButton={currentQuestion.questionNumber > 0}
           questionText={currentQuestion.questionText}
           userInput={currentQuestion.userInput}
           onClickPreviousPage={onClickPreviousPage}

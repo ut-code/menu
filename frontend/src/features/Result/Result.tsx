@@ -1,7 +1,8 @@
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
-import { BackButton } from "@/components/elements/button/BackButton"
+import { Hamburger } from "@/components/Hamburger"
+import { Head } from "@/components/Head"
 import { InputIngredient } from "@/components/InputIngredient"
 import { RecipeCard } from "./components/RecipeCard"
 
@@ -39,6 +40,7 @@ export const Result = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([])
   const addRecipe = (recipe: Recipe) => setRecipes((prev) => [...prev, recipe])
   const [runEffect, setRunEffect] = useState<boolean>(false)
+  const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
 
   const convertAnswersToSearchInfo = (answers: Answer[]): SearchInfo => {
     const info: SearchInfo = { ingredient: [], keywords: [] }
@@ -128,42 +130,55 @@ export const Result = () => {
     alert("フリーワード検索: " + searchInfo.keywords)
   }, [runEffect])
 
-  const onClickRunEffect = () => {
-    setRunEffect(true)
-  }
+  const onClickRunEffect = () => setRunEffect(true)
 
-  //----------------------------------------------------------------
-  // 入力欄に入れたときの処理
-  //----------------------------------------------------------------
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputContent(e.target.value)
   }
 
+  const onClickOpenHamburger = () => setIsOpenHamburger(true)
+  const onClickCloseHamburger = () => setIsOpenHamburger(false)
+
   return (
     <>
-      <div className="style_lightbrown" style={{ height: "auto" }}>
-        <BackButton onClick={() => Navigate("/questions")} />
-
-        <InputIngredient
-          onClickHandler={onClickRunEffect}
-          onChange={onChangeHandler}
-          inputContent={inputContent}
-          placeholder=""
-        />
-
-        {recipes.map((recipe, index) => (
-          <RecipeCard
-            key={index}
-            recipeUrl={recipe.recipeUrl}
-            foodImageUrl={recipe.foodImageUrls[0]}
-            title={recipe.recipeTitle}
-            material={recipe.recipeMaterialConverted}
+      <div className="style_lightbrown">
+        <div style={{ width: "100%", margin: "0 0 0.8em 0" }}>
+          <Head
+            showBackButton={true}
+            onClickPreviousPage={() => Navigate("/questions")}
+            onClickOpenHamburger={onClickOpenHamburger}
           />
-        ))}
 
-        <Link to={"/home"}>
-          <button>ホーム</button>
-        </Link>
+          <InputIngredient
+            onClickHandler={onClickRunEffect}
+            onChange={onChangeHandler}
+            inputContent={inputContent}
+            placeholder=""
+          />
+        </div>
+
+        {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
+
+        <div
+          style={{
+            height: "auto",
+            position: "relative",
+            zIndex: -1,
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
+          {recipes.map((recipe, index) => (
+            <RecipeCard
+              key={index}
+              recipeUrl={recipe.recipeUrl}
+              foodImageUrl={recipe.foodImageUrls[0]}
+              title={recipe.recipeTitle}
+              material={recipe.recipeMaterialConverted}
+            />
+          ))}
+        </div>
       </div>
     </>
   )
