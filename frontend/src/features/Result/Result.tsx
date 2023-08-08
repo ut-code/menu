@@ -141,19 +141,21 @@ export const Result = () => {
 
   return (
     <>
-      <div style={{ padding: "1em 1.5em 3em 1.5em" }}>
-        <Head
-          showBackButton={true}
-          onClickPreviousPage={() => Navigate("/questions")}
-          onClickOpenHamburger={onClickOpenHamburger}
-        />
+      <div className="style_lightbrown">
+        <div style={{ width: "100%", margin: "0 0 0.8em 0" }}>
+          <Head
+            showBackButton={true}
+            onClickPreviousPage={() => Navigate("/questions")}
+            onClickOpenHamburger={onClickOpenHamburger}
+          />
 
-        <InputIngredient
-          onClickHandler={onClickRunEffect}
-          onChange={onChangeHandler}
-          inputContent={inputContent}
-          placeholder=""
-        />
+          <InputIngredient
+            onClickHandler={onClickRunEffect}
+            onChange={onChangeHandler}
+            inputContent={inputContent}
+            placeholder=""
+          />
+        </div>
 
         {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
 
