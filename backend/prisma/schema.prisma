@@ -22,14 +22,15 @@ model Categories {
 }
 
 model Recipes {
-  id                Int      @id @default(autoincrement())
-  recipeTitle       String
-  recipeUrl         String
-  recipeDescription String
-  foodImageUrls     String[]
-  keywords          String[]
-  totalTime         Int
-  recipeMaterial    String[]
+  id                      Int      @id @default(autoincrement())
+  recipeTitle             String
+  recipeUrl               String
+  recipeDescription       String
+  foodImageUrls           String[]
+  keywords                String[]
+  totalTime               Int
+  recipeMaterial          String[]
+  recipeMaterialConverted String?
 }
 
 model RecipesTmp {
