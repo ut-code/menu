@@ -29,10 +29,11 @@ app.post("/searchRecipes", async (request, response) => {
   const searchInfo: SearchInfo = request.body.content
   console.log(searchInfo.ingredient) // こういう風にデバッグできます。backendのターミナルで見てみてください
 
+  const ingredientsAndQuery: string = searchInfo.ingredient.join(" & ")
   const results = await client.recipes.findMany({
     where: {
-      recipeMaterial: {
-        hasEvery: searchInfo.ingredient,
+      recipeMaterialConverted: {
+        search: ingredientsAndQuery,
       },
     },
     take: 20,
