@@ -7,13 +7,14 @@ import { HowTo } from "@/features/HowTo"
 import { Questions } from "@/features/Questions"
 import { Result } from "@/features/Result"
 import { Auth } from "@/features/Auth"
-import { SignIn } from "@/features/Auth/SignIn"
+import { Favorite } from "@/features/Favorite"
 import { supabase } from "@/features/Auth/supabaseClient"
 
 import "@/components/css/global.css"
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)
+  const isLoggedIn = session !== null
 
   useEffect(() => {
     const initialize = async () => {
@@ -39,9 +40,8 @@ export default function App() {
         <Route path="/home" element={<Home />}></Route>
         <Route path="/questions" element={<Questions />}></Route>
         <Route path="/result" element={<Result />}></Route>
-        <Route path="/auth" element={<Auth />}>
-          <Route path="signin" element={<SignIn />}></Route>
-        </Route>
+        <Route path="/favorite" element={<Favorite isLoggedIn={isLoggedIn} />}></Route>
+        <Route path="/auth" element={<Auth session={session} />}></Route>
       </Routes>
     </>
   )

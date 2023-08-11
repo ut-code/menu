@@ -1,18 +1,9 @@
-import { useEffect } from "react"
-// import { supabase } from "../supabaseClient"
-import { useNavigate } from "react-router-dom"
+import { Session } from "@supabase/supabase-js"
+import { SignIn } from "./SignIn"
+interface Props {
+  session: Session
+}
 
-export const Auth = () => {
-  const Navigate = useNavigate()
-  useEffect(() => {
-    Navigate("/auth/signin")
-  })
-
-  return (
-    <div className="row flex flex-center">
-      <div className="col-6 form-widget">
-        <h1 className="header">Supabase + React</h1>
-      </div>
-    </div>
-  )
+export const Auth = (props: Props) => {
+  return !props.session ? <SignIn /> : <div>Already logged in</div>
 }
