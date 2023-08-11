@@ -5,7 +5,7 @@ export const SignIn = () => {
   const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState("")
 
-  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     setLoading(true)
@@ -38,7 +38,7 @@ export const SignIn = () => {
     <>
       <h1>ログイン</h1>
       <p>Sign in via magic link with your email below</p>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleSignIn}>
         <input
           type="email"
           placeholder="Your email"
