@@ -19,29 +19,37 @@ export const SignIn = () => {
     setLoading(false)
   }
 
+  const onClickLoginWithGoogle = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        queryParams: {
+          access_type: "offline",
+          prompt: "consent",
+        },
+      },
+    })
+    if (error) {
+      alert(error.message)
+    }
+  }
+
   return (
-    <div className="row flex flex-center">
-      <div className="col-6 form-widget">
-        <h1 className="header">Supabase + React</h1>
-        <p className="description">Sign in via magic link with your email below</p>
-        <form className="form-widget" onSubmit={handleLogin}>
-          <div>
-            <input
-              className="inputField"
-              type="email"
-              placeholder="Your email"
-              value={email}
-              required={true}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div>
-            <button className={"button block"} disabled={loading}>
-              {loading ? <span>Loading</span> : <span>Send magic link</span>}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <>
+      <h1>ログイン</h1>
+      <p>Sign in via magic link with your email below</p>
+      <form onSubmit={handleLogin}>
+        <input
+          type="email"
+          placeholder="Your email"
+          value={email}
+          required={true}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <button disabled={loading}>{loading ? <span>Loading</span> : <span>Send magic link</span>}</button>
+      </form>
+      <p>or</p>
+      <button onClick={onClickLoginWithGoogle}>Sign in with Google Account</button>
+    </>
   )
 }
