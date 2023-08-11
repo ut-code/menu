@@ -1,6 +1,7 @@
 import { Session } from "@supabase/supabase-js"
 import { SignIn } from "./SignIn"
 import { SignOut } from "./SignOut"
+import { DeleteAccount } from "./DeleteAccount"
 
 interface Props {
   session: Session | null
@@ -13,6 +14,8 @@ export const Auth = (props: Props) => {
     <div>
       <p>Already logged in</p>
       <SignOut />
+      <br />
+      <DeleteAccount />
     </div>
   )
 }
