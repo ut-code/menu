@@ -29,10 +29,6 @@ export default function App() {
     initialize()
   }, [])
 
-  useEffect(() => {
-    console.log(session)
-  }, [session])
-
   return (
     <>
       <Routes>
