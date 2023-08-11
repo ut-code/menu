@@ -1,16 +1,26 @@
 import { useState } from "react"
-// import { supabase } from "../supabaseClient"
+import { Session } from "@supabase/supabase-js"
+import { supabase } from "../supabaseClient"
 
-export const DeleteAccount = () => {
+interface Props {
+  session: Session | null
+}
+
+export const DeleteAccount = (props: Props) => {
   const [loading, setLoading] = useState(false)
 
   const handleDeleteAccount = async () => {
     setLoading(true)
-    // const { error } = await supabase.auth.signOut()
+    const userId = props.session?.user?.id
+    if (!userId) return
 
-    // if (error) {
-    //   alert(error.message)
-    // }
+    const [deleteResult, signOutResult] = await Promise.all([
+      supabase.from("Users").delete().eq("id", userId),
+      supabase.auth.signOut(),
+    ])
+    if (deleteResult.error) alert(deleteResult.error.message)
+    if (signOutResult.error) alert(signOutResult.error.message)
+
     setLoading(false)
   }
 

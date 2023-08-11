@@ -15,7 +15,7 @@ export const Auth = (props: Props) => {
       <p>Already logged in</p>
       <SignOut />
       <br />
-      <DeleteAccount />
+      <DeleteAccount session={props.session} />
     </div>
   )
 }
