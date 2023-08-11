@@ -49,3 +49,11 @@ model Urls {
   url String
   structured Boolean
 }
+
+model Users {
+	id String @id
+	email String @unique
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
+	favorites Int[]
+}
