@@ -119,14 +119,6 @@ const questions: Question[] = [
       2: { choiceText: "じっくり", choiceImage: "" },
     },
   },
-  {
-    questionNumber: 3,
-    questionText: "他に使いたい食材はありますか？",
-    userInput: true,
-    choices: {
-      0: { choiceText: "豚肉", choiceImage: imgPork },
-    },
-  },
 ]
 type Answer = {
   answerNumber: number
