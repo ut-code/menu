@@ -11,18 +11,18 @@ interface Props {
   onClickOpenHamburger: () => void
 }
 
-export const Head = (props: Props) => {
+export const Head = ({ showBackButton, onClickPreviousPage, onClickOpenHamburger }: Props) => {
   const Navigate = useNavigate()
 
   return (
     <div className={styles.root}>
-      {!props.showBackButton && (
+      {!showBackButton && (
         <div className={styles.logo} onClick={() => Navigate("/home")}>
           だるめし Dull Meshi
         </div>
       )}
-      {props.showBackButton && <BackButton onClick={props.onClickPreviousPage} />}
-      <div className={styles.howto} onClick={props.onClickOpenHamburger}>
+      {showBackButton && <BackButton onClick={onClickPreviousPage} />}
+      <div className={styles.howto} onClick={onClickOpenHamburger}>
         <BsFilterLeft size="1.8rem" />
       </div>
     </div>
