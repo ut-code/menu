@@ -21,7 +21,7 @@ jobs:
           node-version: latest
 
       - name: Install npm dependencies
-        run: npm ci
+        run: cd frontend && npm ci
         shell: bash
 
       - name: Save npm cache
@@ -49,14 +49,12 @@ jobs:
           path: "~/.npm"
           key: "${{ runner.os }}-${{ hashFiles('package-lock.json') }}"
 
-      - run: cd frontend
-
       - name: Install npm dependencies
-        run: npm ci
+        run: cd frontend && npm ci
         shell: bash
 
       - name: Build
-        run: npm run build
+        run: cd frontend && npm run build
         shell: bash
 
   Test:
@@ -78,12 +76,10 @@ jobs:
           path: "~/.npm"
           key: "${{ runner.os }}-${{ hashFiles('package-lock.json') }}"
 
-      - run: cd frontend
-
       - name: Install npm dependencies
-        run: npm ci
+        run: cd frontend && npm ci
         shell: bash
 
       - name: Test frontend
-        run: npx vitest
+        run: cd frontend && npx vitest
         shell: bash
