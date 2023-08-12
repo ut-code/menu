@@ -11,37 +11,23 @@ Node.js のインストール
 git clone git@github.com:ut-code/menu.git
 ```
 
-```shell
-cd menu
-```
-
-```shell
-npm ci
-```
-
-`backend` ディレクトリに移動（`cd backend`）
-
-```shell
-npm run setup:env
-```
-
-`.env` ファイルに `DATABASE_URL="データベースのURL"` となるように書く。
-
-```shell
+```shell(in your_path/menu directory)
 npm run setup
 ```
 
-`frontend` ディレクトリに移動（`cd frontend`）
+### 環境変数
 
-```shell
-npm run setup:env
+frontend と backend でそれぞれ`.env`ファイルを作成してください。
+frontend の`.env`ファイルには以下のように記述してください。
+
+```
+WEB_ORIGIN=http://localhost:5173
+VITE_API_ENDPOINT=http://localhost:3000
+VITE_SUPABASE_URL="supabaseのURL"
+VITE_SUPABASE_ANON_KEY="supabaseのanon_key"
 ```
 
-`.env` ファイルには何もしなくてよい。
-
-```shell
-npm run setup
-```
+現状では、`backend`の`.env`は何も記述する必要はありません。
 
 ## サーバの起動
 
@@ -78,7 +64,7 @@ npm run dev
   - `/backend` バックエンド
 
     - `/src`
-    
+
       - `server.ts`
 
     - `/prisma` Prisma の構成ファイルと Python
