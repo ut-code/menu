@@ -1,0 +1,79 @@
+name: NodeJS Test Backend
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  SaveNpmCache:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: latest
+
+      - name: Install npm dependencies
+        run: cd backend && npm ci
+        shell: bash
+
+      - name: Save npm cache
+        uses: actions/cache/save@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: latest
+
+      - name: Restore npm cache
+        uses: "actions/cache/restore@v3"
+        with:
+          path: "~/.npm"
+          key: "${{ runner.os }}-${{ hashFiles('package-lock.json') }}"
+
+      - name: Install npm dependencies
+        run: cd backend && npm ci
+        shell: bash
+
+      - name: Build
+        run: cd backend && npm run build
+        shell: bash
+
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: latest
+
+      - name: Restore npm cache
+        uses: "actions/cache/restore@v3"
+        with:
+          path: "~/.npm"
+          key: "${{ runner.os }}-${{ hashFiles('package-lock.json') }}"
+
+      - name: Install npm dependencies
+        run: cd backend && npm ci
+        shell: bash
+
+      - name: Test backend
+        run: cd backend && npx jest
+        shell: bash
