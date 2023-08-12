@@ -25,7 +25,7 @@ npm ci
 npm run setup:env
 ```
 
-`.env` ファイルに `DATABASE_URL="データベースのURL"` となるように書く。
+`.env` ファイルに `DATABASE_URL` と `SUPABASE_URL` と `SUPABASE_ANON_KEY` を埋める。
 
 ```shell
 npm run setup
@@ -37,7 +37,7 @@ npm run setup
 npm run setup:env
 ```
 
-`.env` ファイルには何もしなくてよい。
+`.env` ファイルに `VITE_SUPABASE_URL` と `VITE_SUPABASE_ANON_KEY` を埋める。
 
 ```shell
 npm run setup
@@ -59,7 +59,7 @@ Terminal をもう一つ開く
 npm run dev
 ```
 
-ブラウザで [`http://localhost:5173/home`](http://localhost:5173/home) にアクセスすると、表示されるはずです。
+ブラウザで [`http://localhost:5173`](http://localhost:5173) にアクセスすると、表示されるはずです。
 
 ## ディレクトリ構成
 
@@ -73,7 +73,7 @@ npm run dev
 
       - `/components`
 
-      - `/pages`
+      - `/features`
 
   - `/backend` バックエンド
 
@@ -81,4 +81,4 @@ npm run dev
 
       - `server.ts`
 
-    - `/prisma` Prisma の構成ファイルと Python
+    - `/prisma`
