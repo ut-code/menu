@@ -7,7 +7,8 @@
     "lint": "eslint --fix frontend/src && eslint --fix backend/src",
     "format": "prettier --write .",
     "fix": "npm run lint && npm run format",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "setup": "npm ci && cd backend && npm run setup:env && cd ../frontend && npm run setup:env"
   },
   "husky": {
     "hooks": {
