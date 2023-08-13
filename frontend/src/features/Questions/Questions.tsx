@@ -43,6 +43,7 @@ type Question = {
   questionText: string
   userInput: boolean
   choices: Choices
+  questionType: "ingredients" | "genre" | "cookingTime"
 }
 //----------------------------------------------------------------
 // 質問を配列で定義
@@ -97,6 +98,7 @@ const questions: Question[] = [
       2: { choiceText: randomFoods[2].choiceText, choiceImage: randomFoods[2].choiceImage },
       3: { choiceText: randomFoods[3].choiceText, choiceImage: randomFoods[3].choiceImage },
     },
+    questionType: "ingredients",
   },
   {
     questionNumber: 1,
@@ -108,6 +110,7 @@ const questions: Question[] = [
       2: { choiceText: "汁物", choiceImage: "" },
       3: { choiceText: "その他", choiceImage: "" },
     },
+    questionType: "genre",
   },
   {
     questionNumber: 2,
@@ -118,18 +121,29 @@ const questions: Question[] = [
       1: { choiceText: "普通", choiceImage: "" },
       2: { choiceText: "じっくり", choiceImage: "" },
     },
+    questionType: "cookingTime",
   },
 ]
-type Answer = {
-  answerNumber: number
-  content: string
+
+type Answers = {
+  ingredients: string[]
+  genre: string
+  cookingTime: string
 }
 
 export const Questions = () => {
   const [currentQuestion, setCurrentQuestion] = useState<Question>(questions[0])
   const [inputContent, setInputContent] = useState<string>("")
-  const [answers, setAnswers] = useState<Answer[]>([])
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
+
+  const [ingredients, setIngredients] = useState<string[]>([])
+  const [genre, setGenre] = useState<string>("")
+  const [cookingTime, setCookingTime] = useState<string>("")
+  const answers: Answers = {
+    ingredients: ingredients,
+    genre: genre,
+    cookingTime: cookingTime,
+  }
 
   // useNavigate を Navigate に変化させる呪文
   const Navigate = useNavigate()
@@ -138,20 +152,29 @@ export const Questions = () => {
   // localStorage を使って inputContent と currentQuestion を設定する
   //----------------------------------------------------------------
   useEffect(() => {
-    for (let i = 0; i < questions.length; i++) {
-      const answer = localStorage.getItem("answer-" + i.toString())
+    questions.forEach((question) => {
+      const answer = localStorage.getItem(question.questionType)
       if (answer !== null) {
-        setCurrentQuestion(questions[i])
-        setInputContent(answer)
+        setCurrentQuestion(question)
+        switch (question.questionType) {
+          case "ingredients":
+            setIngredients(JSON.parse(answer))
+            break
+          case "genre":
+            setGenre(answer)
+            break
+          case "cookingTime":
+            setCookingTime(answer)
+        }
       }
-    }
+    })
   }, [])
 
   //----------------------------------------------------------------
   // currentQuestionの変更をフックにして回答状況を復元
   //----------------------------------------------------------------
   useEffect(() => {
-    const answer = localStorage.getItem("answer-" + currentQuestion.questionNumber.toString())
+    const answer = localStorage.getItem(currentQuestion.questionType)
     if (answer !== null) {
       setInputContent(answer)
     }
@@ -165,7 +188,16 @@ export const Questions = () => {
     setInputContent(e.target.value)
 
     // 問題番号をキーにして、選んだ選択肢をlocalStorageに保存
-    localStorage.setItem("answer-" + currentQuestion.questionNumber.toString(), e.target.value)
+    switch (currentQuestion.questionType) {
+      case "ingredients":
+        setIngredients([e.target.value])
+        break
+      case "genre":
+        setGenre(e.target.value)
+        break
+      case "cookingTime":
+        setCookingTime(e.target.value)
+    }
   }
 
   //----------------------------------------------------------------
@@ -181,7 +213,16 @@ export const Questions = () => {
       alert("選択肢を選んでください")
       return
     } else {
-      localStorage.setItem("answer-" + currentQuestion.questionNumber.toString(), inputContent)
+      switch (currentQuestion.questionType) {
+        case "ingredients":
+          localStorage.setItem(currentQuestion.questionType, JSON.stringify(ingredients))
+          break
+        case "genre":
+          localStorage.setItem(currentQuestion.questionType, genre)
+          break
+        case "cookingTime":
+          localStorage.setItem(currentQuestion.questionType, cookingTime)
+      }
     }
     setInputContent("")
 
@@ -205,18 +246,24 @@ export const Questions = () => {
     setIsOpenHamburger(false)
   }
 
-  useEffect(() => {
-    // localStorageから解答を取り出してanswersに入れる
-    const newAnswers: Answer[] = []
-    for (let i = 0; i < questions.length; i++) {
-      const answer = localStorage.getItem("answer-" + i.toString())
-      if (answer !== null) {
-        // addAnswer({ answerNumber: i, content: answer })
-        newAnswers.push({ answerNumber: i, content: answer })
-      }
-    }
-    setAnswers(newAnswers)
-  }, [currentQuestion])
+  // useEffect(() => {
+  //   // localStorageから解答を取り出してanswersに入れる
+  //   questions.forEach((question) => {
+  //     const answer = localStorage.getItem(question.questionType)
+  //     if (answer !== null) {
+  //       switch (question.questionType) {
+  //         case "ingredients":
+  //           setIngredients(JSON.parse(answer))
+  //           break
+  //         case "genre":
+  //           setGenre(answer)
+  //           break
+  //         case "cookingTime":
+  //           setCookingTime(answer)
+  //       }
+  //     }
+  //   })
+  // }, [currentQuestion])
 
   return (
     <>

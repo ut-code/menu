@@ -19,7 +19,7 @@ app.use(express.json())
 //----------------------------------------------------------------
 // request.bodyのsearchInfoを利用して検索結果を返す
 type SearchInfo = {
-  ingredient: string[]
+  ingredients: string[]
   time?: string
   dish?: string // 主菜・副菜など
   keywords?: string[]
@@ -27,9 +27,9 @@ type SearchInfo = {
 
 app.post("/searchRecipes", async (request, response) => {
   const searchInfo: SearchInfo = request.body.content
-  console.log(searchInfo.ingredient) // こういう風にデバッグできます。backendのターミナルで見てみてください
+  console.log(searchInfo.ingredients) // こういう風にデバッグできます。backendのターミナルで見てみてください
 
-  const ingredientsAndQuery: string = searchInfo.ingredient.join(" & ")
+  const ingredientsAndQuery: string = searchInfo.ingredients.join(" & ")
   const results = await client.recipes.findMany({
     where: {
       recipeMaterialConverted: {
