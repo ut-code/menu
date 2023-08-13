@@ -20,13 +20,14 @@ type Recipe = {
   recipeMaterialConverted: string
 }
 
-type Answer = {
-  answerNumber: number
-  content: string
+type Answers = {
+  ingredients: string[]
+  genre: string
+  cookingTime: string
 }
 
 type SearchInfo = {
-  ingredient: string[]
+  ingredients: string[]
   time?: string
   dish?: string // 主菜・副菜など
   keywords: string[]
@@ -42,14 +43,10 @@ export const Result = () => {
   const [runEffect, setRunEffect] = useState<boolean>(false)
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
 
-  const convertAnswersToSearchInfo = (answers: Answer[]): SearchInfo => {
-    const info: SearchInfo = { ingredient: [], keywords: [] }
+  const convertAnswersToSearchInfo = (answers: Answers): SearchInfo => {
+    const info: SearchInfo = { ingredients: [], keywords: [] }
     if (answers) {
-      answers.forEach((answer: Answer) => {
-        // answer.contentをingredientに追加
-        if (answer.answerNumber === 0) info.ingredient.push(answer.content)
-        if (answer.answerNumber === 3) info.ingredient.push(answer.content)
-      })
+      info.ingredients = answers.ingredients
     }
     return info
   }
@@ -61,18 +58,16 @@ export const Result = () => {
     unmounted = true
 
     // localStorageから解答を取り出してanswersに入れる
-    const answers: Answer[] = []
-    for (let i = 0; i < 4; i++) {
-      const answer = localStorage.getItem("answer-" + i.toString())
-      if (answer !== null) {
-        answers.push({ answerNumber: i, content: answer })
-      }
+    const answers: Answers = {
+      ingredients: JSON.parse(localStorage.getItem("ingredients") || "[]"),
+      genre: localStorage.getItem("genre") || "",
+      cookingTime: localStorage.getItem("cookingTime") || "",
     }
 
     // inputContent の初期値を設定
     // answers を空白区切りで連結したものをsetInputContent
     // 例: ["豚肉", "玉ねぎ", "にんにく"] -> "豚肉 玉ねぎ にんにく"
-    setInputContent(answers.map((answer) => answer.content).join(" "))
+    setInputContent([...answers.ingredients, answers.genre, answers.cookingTime].join(" "))
 
     // answers をfindManyの検索に使いやすいように searchInfo に整形
     const searchInfo: SearchInfo = convertAnswersToSearchInfo(answers)
@@ -109,7 +104,7 @@ export const Result = () => {
   //----------------------------------------------------------------
   const convertInputContentToSearchInfo = (newInputContent: string): SearchInfo => {
     // inputContentを使ったフリーワード検索を行う
-    const info: SearchInfo = { ingredient: [], keywords: [] }
+    const info: SearchInfo = { ingredients: [], keywords: [] }
     // newInputContentを空白区切りで配列にする
     const searchWords: string[] = newInputContent.split(" ")
 

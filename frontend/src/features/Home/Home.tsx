@@ -4,9 +4,9 @@ import { useEffect } from "react"
 export const Home = () => {
   // 永続的に残るので、localStorageから問題への回答を消しておく
   useEffect(() => {
-    for (let i = 0; i < 4; i++) {
-      localStorage.removeItem("answer-" + i.toString())
-    }
+    localStorage.removeItem("ingredients")
+    localStorage.removeItem("genre")
+    localStorage.removeItem("cookingTime")
   }, [])
 
   return (
