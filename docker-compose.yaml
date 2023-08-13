@@ -1,0 +1,30 @@
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+
+  backend:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    container_name: menu-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgrespassword
+      - POSTGRES_DB=menudatabase
+    ports:
+      - "5432:5432"
+    volumes:
+      - menu-volume:/var/lib/postgresql/data
+volumes:
+  menu-volume: {}
