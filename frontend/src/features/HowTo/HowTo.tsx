@@ -27,7 +27,6 @@ export const HowTo = () => {
         }}
         pagination={true}
         modules={[Pagination]}
-        className="mySwiper"
       >
         <SwiperSlide>
           <div className="title_div">
