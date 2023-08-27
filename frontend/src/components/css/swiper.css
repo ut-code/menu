@@ -1,16 +1,9 @@
-.mySwiper {
-  position: relative;
-  height: 100%;
-}
-
 .swiper {
   width: 100vw;
   height: 100vh;
 }
 
 .swiper-slide {
-  background-color: var(--LightBrown);
-  color: var(--Black);
   text-align: center;
   font-weight: bold;
 }
@@ -44,11 +37,21 @@
 
 .bottom {
   /* layout */
-  width: 90%;
   position: absolute;
-  top: 70%;
+  /* top: 70%; */
+  bottom: 17%;
   left: 50%;
   transform: translate(-50%, 70%);
+
+  /* box */
+  /* height: 6%; */
+  width: 90%;
+  flex-direction: column;
+  /* align-items: center; */
+  margin: 0 auto;
+  /* 下に寄せる */
+  /* display: flex;
+  justify-content: flex-end; */
 }
 
 .skip {

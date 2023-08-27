@@ -1,20 +1,19 @@
 import styles from "./Keywords.module.css"
 
-type Answer = {
-  answerNumber: number
-  content: string
+interface Props {
+  answers: {
+    ingredients: string[]
+    genre: string
+    cookingTime: string
+  }
 }
 
-export const Keywords = (props: { answers: Answer[] }) => {
+export const Keywords = ({ answers }: Props) => {
   return (
     <div className={styles.box}>
       <span className={styles.title}>あなたの検索ワード🔍&nbsp;&nbsp;</span>
       <br></br>
-      <div className={styles.text}>
-        {props.answers.map((answer, index) => (
-          <span key={index}>{answer.content}&nbsp;</span>
-        ))}
-      </div>
+      <div className={styles.text}>{[...answers.ingredients, answers.genre, answers.cookingTime].join(" ")}</div>
     </div>
   )
 }

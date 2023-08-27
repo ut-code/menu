@@ -5,7 +5,7 @@
   top: 10%;
   left: 50%;
   transform: translate(-50%, 10%);
-  z-index: -2;
+  z-index: -1;
 
   /* box */
   width: 70%;
@@ -16,22 +16,26 @@
 }
 
 .frame img {
+  /* layout */
+  position: relative;
+  z-index: -3;
+  overflow: hidden;
+
   /* box */
   width: 80%;
-  height: auto;
 }
 
 /* スマホの欠け部分 */
-.notch {
+.frame .notch {
   /* layout */
-  position: absolute;
+  position: relative;
   left: 40%;
-  top: 16.7%;
-  z-index: 1;
+  top: 6px;
+  z-index: -2;
 
   /* box */
   width: 20%;
-  height: 2.5%;
+  height: 11px;
   border-radius: 6px;
   background-color: #fff;
 }
