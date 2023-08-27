@@ -10,6 +10,7 @@
   /* box */
   width: 70%;
   height: auto;
+  /* max-height: 50%; */
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 10px 10px 17px -12px rgba(217, 217, 217, 0.8);
@@ -19,10 +20,11 @@
   /* layout */
   position: relative;
   z-index: -3;
+  overflow: hidden;
 
   /* box */
   width: 80%;
-  height: auto;
+  /* height: auto; */
 }
 
 /* スマホの欠け部分 */
