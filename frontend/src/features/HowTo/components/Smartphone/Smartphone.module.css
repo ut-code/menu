@@ -10,7 +10,6 @@
   /* box */
   width: 70%;
   height: auto;
-  /* max-height: 50%; */
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 10px 10px 17px -12px rgba(217, 217, 217, 0.8);
@@ -24,20 +23,19 @@
 
   /* box */
   width: 80%;
-  /* height: auto; */
 }
 
 /* スマホの欠け部分 */
 .frame .notch {
   /* layout */
-  position: absolute;
+  position: relative;
   left: 40%;
-  top: 2.3%;
+  top: 6px;
   z-index: -2;
 
   /* box */
   width: 20%;
-  height: 2.5%;
+  height: 11px;
   border-radius: 6px;
   background-color: #fff;
 }
