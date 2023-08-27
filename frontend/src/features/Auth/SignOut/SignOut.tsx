@@ -7,10 +7,7 @@ export const SignOut = () => {
   const handleSignOut = async () => {
     setLoading(true)
     const { error } = await supabase.auth.signOut()
-
-    if (error) {
-      alert(error.message)
-    }
+    if (error) alert(error.message)
     setLoading(false)
   }
 
