@@ -1,16 +1,15 @@
 import { Link } from "react-router-dom"
 
 import { TipReference } from "@/components/TipReference"
-import styles from "./RecipeCard.module.css"
+import styles from "./RecipeCardMedium.module.css"
 
 interface Props {
   recipeUrl: string
   foodImageUrl: string
   title: string
-  material: string
 }
 
-export const RecipeCard = (props: Props) => {
+export const RecipeCardMedium = (props: Props) => {
   return (
     <div className={styles.root}>
       <Link to={props.recipeUrl} target="_blank" rel="noopener noreferrer">
@@ -21,7 +20,6 @@ export const RecipeCard = (props: Props) => {
 
         <div className={styles.textbox}>
           <div className={styles.text_title}>{props.title}</div>
-          <div className={styles.text_material}>{props.material}</div>
           <TipReference url={props.recipeUrl} />
         </div>
       </Link>

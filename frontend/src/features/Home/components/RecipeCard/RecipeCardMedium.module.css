@@ -1,0 +1,64 @@
+/* https://eclair.blog/examples-of-card/ */
+.root {
+  /* layout */
+  margin: 2.5% 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* box */
+  background-color: white;
+  border-radius: 20px;
+  border: var(--Black) 1px solid;
+  box-shadow: var(--Black) 2px 2px 0 0;
+  /* height: 500px; /* 高さ上限どうしますか？ */
+  overflow: hidden; /* 丸めた枠からのはみ出しを隠す */
+}
+
+.imagebox {
+  position: relative;
+}
+
+.iframe_blur {
+  /* box */
+  width: 100%; /* 親要素の幅に合わせる */
+  height: 174px; /* ぼかしを入れたらなんか高さがずれちゃう */
+  filter: blur(10px); /* ぼかし */
+}
+
+.iframe {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0%); /* 中央を支点に配置 */
+  z-index: 2;
+  /* box */
+  width: auto; /* 元画像の縦横比に合わせる */
+  height: 180px; /* 高さ固定 */
+}
+
+.textbox {
+  border-top: var(--Black) 1px solid;
+  /* layout */
+  padding: 1em 1.2em 1em 1.2em;
+
+  /* box */
+  width: 100%; /* 親要素の幅に合わせる */
+  /* height: auto; 高さ上限どうしますか？ */
+  box-sizing: border-box; /* はみ出し阻止 */
+}
+
+.text_title {
+  /* text */
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.text_material {
+  /* layout */
+  margin: 0.5em 0 1em 0;
+
+  /* text */
+  font-size: 0.8em;
+}
