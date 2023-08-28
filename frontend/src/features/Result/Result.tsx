@@ -17,7 +17,6 @@ type Recipe = {
   keywords: string[]
   totalTime: number
   recipeMaterial: string[]
-  recipeMaterialConverted: string
 }
 
 type Answers = {
@@ -39,7 +38,6 @@ export const Result = () => {
 
   const [inputContent, setInputContent] = useState<string>("")
   const [recipes, setRecipes] = useState<Recipe[]>([])
-  const addRecipe = (recipe: Recipe) => setRecipes((prev) => [...prev, recipe])
   const [runEffect, setRunEffect] = useState<boolean>(false)
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
 
@@ -51,20 +49,13 @@ export const Result = () => {
     return info
   }
 
-  // 無駄に unmounted で一回しか実行されないようにコントロール
-  let unmounted = false
   useEffect(() => {
-    if (unmounted) return
-    unmounted = true
-
-    // localStorageから解答を取り出してanswersに入れる
     const answers: Answers = {
       ingredients: JSON.parse(localStorage.getItem("ingredients") || "[]"),
       genre: localStorage.getItem("genre") || "",
       cookingTime: localStorage.getItem("cookingTime") || "",
     }
 
-    // inputContent の初期値を設定
     // answers を空白区切りで連結したものをsetInputContent
     // 例: ["豚肉", "玉ねぎ", "にんにく"] -> "豚肉 玉ねぎ にんにく"
     setInputContent([...answers.ingredients, answers.genre, answers.cookingTime].join(" "))
@@ -81,18 +72,11 @@ export const Result = () => {
         body: JSON.stringify({ content: info }),
       })
       const results = await response.json()
-      console.log(results)
-
-      // undefinedエラー回避
-      if (results) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        results.forEach((result: any) => {
-          // result の型は欠損あり Recipe なので any型 で受けて、 Recipe型 に変換する
-          // recipeMaterialConverted は、 recipeMaterial の配列を "・" で連結したもの
-          // 例: ["豚肉", "玉ねぎ", "にんにく"] -> "豚肉・玉ねぎ・にんにく"
-          result.recipeMaterialConverted = result.recipeMaterial.join("・")
-          addRecipe(result)
-        })
+      try {
+        setRecipes(results)
+        console.log(results)
+      } catch (error) {
+        console.log(error)
       }
     }
 
@@ -170,7 +154,7 @@ export const Result = () => {
               recipeUrl={recipe.recipeUrl}
               foodImageUrl={recipe.foodImageUrls[0]}
               title={recipe.recipeTitle}
-              material={recipe.recipeMaterialConverted}
+              material={recipe.recipeMaterial.join("・")}
             />
           ))}
         </div>
