@@ -1,3 +1,5 @@
+export const postSearchRecipesApi = `${import.meta.env.VITE_API_ENDPOINT}/searchRecipes`
+
 export type Recipe = {
   id: number
   recipeTitle: string
@@ -20,4 +22,12 @@ export type SearchInfo = {
   time?: string
   dish?: string // 主菜・副菜など
   keywords: string[]
+}
+
+export const convertAnswersToSearchInfo = (answers: Answers): SearchInfo => {
+  const info: SearchInfo = { ingredients: [], keywords: [] }
+  if (answers) {
+    info.ingredients = answers.ingredients
+  }
+  return info
 }

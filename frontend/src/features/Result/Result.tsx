@@ -5,9 +5,7 @@ import { Hamburger } from "@/components/Hamburger"
 import { Head } from "@/components/Head"
 import { Searchbox } from "@/components/Searchbox"
 import { RecipeCard } from "./components/RecipeCard"
-import { Recipe, Answers, SearchInfo } from "@/utils/recipes"
-
-const postSelectRecipeApi = `${import.meta.env.VITE_API_ENDPOINT}/searchRecipes`
+import { Recipe, Answers, SearchInfo, convertAnswersToSearchInfo, postSearchRecipesApi } from "@/utils/recipes"
 
 export const Result = () => {
   // useNavigate を Navigate に変化させる呪文
@@ -17,14 +15,6 @@ export const Result = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([])
   const [runEffect, setRunEffect] = useState<boolean>(false)
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
-
-  const convertAnswersToSearchInfo = (answers: Answers): SearchInfo => {
-    const info: SearchInfo = { ingredients: [], keywords: [] }
-    if (answers) {
-      info.ingredients = answers.ingredients
-    }
-    return info
-  }
 
   useEffect(() => {
     const answers: Answers = {
@@ -43,15 +33,15 @@ export const Result = () => {
     // searchInfo を使ってfetchAPI
     const fetchSearchedRecipes = async (info: SearchInfo) => {
       // searchInfo を載せてPOSTリクエスト、返ってきた内容がresponse
-      const response = await fetch(postSelectRecipeApi, {
+      const response = await fetch(postSearchRecipesApi, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ content: info }),
       })
-      const results = await response.json()
+      const recipes: Recipe[] = await response.json()
       try {
-        setRecipes(results)
-        console.log(results)
+        setRecipes(recipes)
+        console.log(recipes)
       } catch (error) {
         console.log(error)
       }
