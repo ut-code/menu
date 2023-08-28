@@ -164,9 +164,9 @@ export const Result = () => {
             flexDirection: "column",
           }}
         >
-          {recipes.map((recipe, index) => (
+          {recipes.map((recipe) => (
             <RecipeCard
-              key={index}
+              key={recipe.id}
               recipeUrl={recipe.recipeUrl}
               foodImageUrl={recipe.foodImageUrls[0]}
               title={recipe.recipeTitle}
