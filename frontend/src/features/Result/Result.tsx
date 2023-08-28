@@ -5,32 +5,9 @@ import { Hamburger } from "@/components/Hamburger"
 import { Head } from "@/components/Head"
 import { Searchbox } from "@/components/Searchbox"
 import { RecipeCard } from "./components/RecipeCard"
+import { Recipe, Answers, SearchInfo } from "@/utils/recipes"
 
 const postSelectRecipeApi = `${import.meta.env.VITE_API_ENDPOINT}/searchRecipes`
-
-type Recipe = {
-  id: number
-  recipeTitle: string
-  recipeUrl: string
-  recipeDescription: string
-  foodImageUrls: string[]
-  keywords: string[]
-  totalTime: number
-  recipeMaterial: string[]
-}
-
-type Answers = {
-  ingredients: string[]
-  genre: string
-  cookingTime: string
-}
-
-type SearchInfo = {
-  ingredients: string[]
-  time?: string
-  dish?: string // 主菜・副菜など
-  keywords: string[]
-}
 
 export const Result = () => {
   // useNavigate を Navigate に変化させる呪文
