@@ -2,7 +2,7 @@ import styles from "./QuestionGroup.module.css"
 
 import { Head } from "@/components/Head"
 import { QuestionText } from "../QuestionText"
-import { InputIngredient } from "@/components/InputIngredient"
+import { Searchbox } from "@/components/Searchbox"
 
 interface Props {
   showBackButton: boolean
@@ -28,7 +28,7 @@ export const QuestionGroup = (props: Props) => {
       />
       <QuestionText questionText={props.questionText} userInput={props.userInput} />
       {props.userInput && (
-        <InputIngredient
+        <Searchbox
           onClickHandler={props.onClickResultPage}
           onChange={props.onChange}
           inputContent={props.inputContent}

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 
 import { Hamburger } from "@/components/Hamburger"
 import { Head } from "@/components/Head"
-import { InputIngredient } from "@/components/InputIngredient"
+import { Searchbox } from "@/components/Searchbox"
 import { RecipeCard } from "./components/RecipeCard"
 
 const postSelectRecipeApi = `${import.meta.env.VITE_API_ENDPOINT}/searchRecipes`
@@ -144,7 +144,7 @@ export const Result = () => {
             onClickOpenHamburger={onClickOpenHamburger}
           />
 
-          <InputIngredient
+          <Searchbox
             onClickHandler={onClickRunEffect}
             onChange={onChangeHandler}
             inputContent={inputContent}
