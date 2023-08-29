@@ -26,8 +26,8 @@ export type SearchInfo = {
   keywords?: string[]
 }
 
-app.post("/searchRecipes", async (request, response) => {
-  const searchInfo: SearchInfo = request.body.content
+app.post("/searchRecipes", async (req, res) => {
+  const searchInfo: SearchInfo = req.body.content
   console.log(searchInfo.ingredients) // こういう風にデバッグできます。backendのターミナルで見てみてください
 
   const ingredientsAndQuery: string = searchInfo.ingredients.join(" & ")
@@ -39,11 +39,11 @@ app.post("/searchRecipes", async (request, response) => {
     },
     take: 20,
   })
-  response.json(recipes)
+  res.json(recipes)
 })
 
-app.get("/favorites/:id", async (request, response) => {
-  const userId = request.params.id
+app.get("/favorites/:id", async (req, res) => {
+  const userId = req.params.id
   const recipes = await client.userFavorites.findMany({
     where: {
       userId: userId,
@@ -52,7 +52,19 @@ app.get("/favorites/:id", async (request, response) => {
       favoriteRecipe: true,
     },
   })
-  response.json(recipes)
+  res.json(recipes)
+})
+
+app.post("/favorites", async (req, res) => {
+  const { userId, recipeId } = req.body
+  const userFavorite = await client.userFavorites.create({
+    data: {
+      userId: userId,
+      recipeId: recipeId,
+    },
+  })
+
+  res.json(userFavorite)
 })
 
 export default app
