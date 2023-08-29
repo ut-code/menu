@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { Recipe, SearchInfo, getUserFavoritesApi } from "@/utils/recipes"
-// import { RecipeCardMedium } from "./components/RecipeCardMedium"
 
 interface Props {
   userId: string | undefined
