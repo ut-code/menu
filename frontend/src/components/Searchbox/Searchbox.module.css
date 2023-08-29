@@ -27,8 +27,8 @@
 }
 
 input[type="text"]:focus.box {
-  border: var(--Red) 2px solid;
-  box-shadow: none;
+  border: var(--Red) 1px solid;
+  box-shadow: var(--Red) 2px 2px 0 0;
   outline: 0;
 }
 

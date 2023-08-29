@@ -3,35 +3,9 @@ import { useState, useEffect } from "react"
 
 import { Hamburger } from "@/components/Hamburger"
 import { Head } from "@/components/Head"
-import { InputIngredient } from "@/components/InputIngredient"
+import { Searchbox } from "@/components/Searchbox"
 import { RecipeCard } from "./components/RecipeCard"
-
-const postSelectRecipeApi = `${import.meta.env.VITE_API_ENDPOINT}/searchRecipes`
-
-type Recipe = {
-  id: number
-  recipeTitle: string
-  recipeUrl: string
-  recipeDescription: string
-  foodImageUrls: string[]
-  keywords: string[]
-  totalTime: number
-  recipeMaterial: string[]
-  recipeMaterialConverted: string
-}
-
-type Answers = {
-  ingredients: string[]
-  genre: string
-  cookingTime: string
-}
-
-type SearchInfo = {
-  ingredients: string[]
-  time?: string
-  dish?: string // 主菜・副菜など
-  keywords: string[]
-}
+import { Recipe, Answers, SearchInfo, convertAnswersToSearchInfo, postSearchRecipesApi } from "@/utils/recipes"
 
 export const Result = () => {
   // useNavigate を Navigate に変化させる呪文
@@ -39,32 +13,16 @@ export const Result = () => {
 
   const [inputContent, setInputContent] = useState<string>("")
   const [recipes, setRecipes] = useState<Recipe[]>([])
-  const addRecipe = (recipe: Recipe) => setRecipes((prev) => [...prev, recipe])
   const [runEffect, setRunEffect] = useState<boolean>(false)
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
 
-  const convertAnswersToSearchInfo = (answers: Answers): SearchInfo => {
-    const info: SearchInfo = { ingredients: [], keywords: [] }
-    if (answers) {
-      info.ingredients = answers.ingredients
-    }
-    return info
-  }
-
-  // 無駄に unmounted で一回しか実行されないようにコントロール
-  let unmounted = false
   useEffect(() => {
-    if (unmounted) return
-    unmounted = true
-
-    // localStorageから解答を取り出してanswersに入れる
     const answers: Answers = {
       ingredients: JSON.parse(localStorage.getItem("ingredients") || "[]"),
       genre: localStorage.getItem("genre") || "",
       cookingTime: localStorage.getItem("cookingTime") || "",
     }
 
-    // inputContent の初期値を設定
     // answers を空白区切りで連結したものをsetInputContent
     // 例: ["豚肉", "玉ねぎ", "にんにく"] -> "豚肉 玉ねぎ にんにく"
     setInputContent([...answers.ingredients, answers.genre, answers.cookingTime].join(" "))
@@ -75,24 +33,17 @@ export const Result = () => {
     // searchInfo を使ってfetchAPI
     const fetchSearchedRecipes = async (info: SearchInfo) => {
       // searchInfo を載せてPOSTリクエスト、返ってきた内容がresponse
-      const response = await fetch(postSelectRecipeApi, {
+      const response = await fetch(postSearchRecipesApi(), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ content: info }),
       })
-      const results = await response.json()
-      console.log(results)
-
-      // undefinedエラー回避
-      if (results) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        results.forEach((result: any) => {
-          // result の型は欠損あり Recipe なので any型 で受けて、 Recipe型 に変換する
-          // recipeMaterialConverted は、 recipeMaterial の配列を "・" で連結したもの
-          // 例: ["豚肉", "玉ねぎ", "にんにく"] -> "豚肉・玉ねぎ・にんにく"
-          result.recipeMaterialConverted = result.recipeMaterial.join("・")
-          addRecipe(result)
-        })
+      const recipes: Recipe[] = await response.json()
+      try {
+        setRecipes(recipes)
+        console.log(recipes)
+      } catch (error) {
+        console.log(error)
       }
     }
 
@@ -144,7 +95,7 @@ export const Result = () => {
             onClickOpenHamburger={onClickOpenHamburger}
           />
 
-          <InputIngredient
+          <Searchbox
             onClickHandler={onClickRunEffect}
             onChange={onChangeHandler}
             inputContent={inputContent}
@@ -164,13 +115,13 @@ export const Result = () => {
             flexDirection: "column",
           }}
         >
-          {recipes.map((recipe, index) => (
+          {recipes.map((recipe) => (
             <RecipeCard
-              key={index}
+              key={recipe.id}
               recipeUrl={recipe.recipeUrl}
               foodImageUrl={recipe.foodImageUrls[0]}
               title={recipe.recipeTitle}
-              material={recipe.recipeMaterialConverted}
+              material={recipe.recipeMaterial.join("・")}
             />
           ))}
         </div>

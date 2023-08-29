@@ -13,6 +13,7 @@ const app = express()
 app.use(cors())
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 //----------------------------------------------------------------
 // Result.tsx用
@@ -25,12 +26,12 @@ export type SearchInfo = {
   keywords?: string[]
 }
 
-app.post("/searchRecipes", async (request, response) => {
-  const searchInfo: SearchInfo = request.body.content
+app.post("/searchRecipes", async (req, res) => {
+  const searchInfo: SearchInfo = req.body.content
   console.log(searchInfo.ingredients) // こういう風にデバッグできます。backendのターミナルで見てみてください
 
   const ingredientsAndQuery: string = searchInfo.ingredients.join(" & ")
-  const results = await client.recipes.findMany({
+  const recipes = await client.recipes.findMany({
     where: {
       recipeMaterialConverted: {
         search: ingredientsAndQuery,
@@ -38,7 +39,32 @@ app.post("/searchRecipes", async (request, response) => {
     },
     take: 20,
   })
-  response.json(results)
+  res.json(recipes)
+})
+
+app.get("/favorites/:id", async (req, res) => {
+  const userId = req.params.id
+  const recipes = await client.userFavorites.findMany({
+    where: {
+      userId: userId,
+    },
+    include: {
+      favoriteRecipe: true,
+    },
+  })
+  res.json(recipes)
+})
+
+app.post("/favorites", async (req, res) => {
+  const { userId, recipeId } = req.body
+  const userFavorite = await client.userFavorites.create({
+    data: {
+      userId: userId,
+      recipeId: recipeId,
+    },
+  })
+
+  res.json(userFavorite)
 })
 
 export default app

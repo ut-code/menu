@@ -1,4 +1,4 @@
-import styles from "./InputIngredient.module.css"
+import styles from "./Searchbox.module.css"
 import { FiSearch } from "react-icons/fi"
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
   placeholder: string
 }
 
-export const InputIngredient = (props: Props) => {
+export const Searchbox = (props: Props) => {
   return (
     <div className={styles.search}>
       <input
