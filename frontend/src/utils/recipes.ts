@@ -8,6 +8,10 @@ export const getUserFavoritesApi = (id: string): string => {
   return `${API_BASE_URL}/favorites/${id}`
 }
 
+export const postUserFavoritesApi = (): string => {
+  return `${API_BASE_URL}/favorites`
+}
+
 export type Recipe = {
   id: number
   recipeTitle: string
