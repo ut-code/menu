@@ -33,7 +33,7 @@ export const Result = () => {
     // searchInfo を使ってfetchAPI
     const fetchSearchedRecipes = async (info: SearchInfo) => {
       // searchInfo を載せてPOSTリクエスト、返ってきた内容がresponse
-      const response = await fetch(postSearchRecipesApi, {
+      const response = await fetch(postSearchRecipesApi(), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ content: info }),

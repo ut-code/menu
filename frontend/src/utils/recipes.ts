@@ -1,4 +1,12 @@
-export const postSearchRecipesApi = `${import.meta.env.VITE_API_ENDPOINT}/searchRecipes`
+const API_BASE_URL = import.meta.env.VITE_API_ENDPOINT
+
+export const postSearchRecipesApi = (): string => {
+  return `${API_BASE_URL}/searchRecipes`
+}
+
+export const getUserFavoritesApi = (id: string): string => {
+  return `${API_BASE_URL}/favorites/${id}`
+}
 
 export type Recipe = {
   id: number

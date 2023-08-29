@@ -13,6 +13,7 @@ const app = express()
 app.use(cors())
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 //----------------------------------------------------------------
 // Result.tsx用
@@ -30,7 +31,7 @@ app.post("/searchRecipes", async (request, response) => {
   console.log(searchInfo.ingredients) // こういう風にデバッグできます。backendのターミナルで見てみてください
 
   const ingredientsAndQuery: string = searchInfo.ingredients.join(" & ")
-  const results = await client.recipes.findMany({
+  const recipes = await client.recipes.findMany({
     where: {
       recipeMaterialConverted: {
         search: ingredientsAndQuery,
@@ -38,7 +39,20 @@ app.post("/searchRecipes", async (request, response) => {
     },
     take: 20,
   })
-  response.json(results)
+  response.json(recipes)
+})
+
+app.get("/favorites/:id", async (request, response) => {
+  const userId = request.params.id
+  const recipes = await client.userFavorites.findMany({
+    where: {
+      userId: userId,
+    },
+    include: {
+      favoriteRecipe: true,
+    },
+  })
+  response.json(recipes)
 })
 
 export default app
