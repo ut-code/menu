@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
-import { Recipe, getUserFavoritesApi, postUserFavoritesApi } from "@/utils/recipes"
+import { Recipe, getUserFavoritesApi, postUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/recipes"
 
 interface Props {
   userId: string | undefined
@@ -38,8 +38,21 @@ export const Home = (props: Props) => {
   }, [runEffect])
 
   const onClickAddFavorite = (recipeId: number) => async () => {
+    if (!props.userId) return
     const response = await fetch(postUserFavoritesApi(), {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId: props.userId, recipeId: recipeId }),
+    })
+    const userFavorite = await response.json()
+    console.log(userFavorite)
+    setRunEffect((prev) => !prev)
+  }
+
+  const onClickDeleteFavorite = (recipeId: number) => async () => {
+    if (!props.userId) return
+    const response = await fetch(deleteUserFavoritesApi(props.userId, recipeId), {
+      method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userId: props.userId, recipeId: recipeId }),
     })
@@ -59,13 +72,22 @@ export const Home = (props: Props) => {
           <button>検索結果</button>
         </Link>
         <br></br>
+        <Link to={"/home/favorites"}>
+          <button>お気に入り</button>
+        </Link>
+        <br></br>
         <input onChange={(e) => setTmp(Number(e.target.value))} type="number" />
         <button onClick={onClickAddFavorite(tmp)} type="submit">
           お気に入りに追加
         </button>
+        <br></br>
+        <button onClick={() => setRunEffect((prev) => !prev)}>更新</button>
         <ul>
           {favoriteRecipes.map((recipe) => (
-            <li key={recipe.id}>{recipe.recipeTitle}</li>
+            <span key={recipe.id}>
+              <li>{recipe.recipeTitle}</li>
+              <button onClick={onClickDeleteFavorite(recipe.id)}>お気に入りから削除</button>
+            </span>
           ))}
         </ul>
       </div>
