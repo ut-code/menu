@@ -8,6 +8,7 @@ import { Questions } from "@/features/Questions"
 import { Result } from "@/features/Result"
 import { Auth } from "@/features/Auth"
 import { Favorite } from "@/features/Favorite"
+import { NotFound } from "@/features/NotFound"
 import { supabase } from "@/features/Auth/supabaseClient"
 
 import "@/components/css/global.css"
@@ -39,6 +40,7 @@ export default function App() {
         <Route path="/search" element={<Result />}></Route>
         <Route path="/favorite" element={<Favorite isLoggedIn={isLoggedIn} />}></Route>
         <Route path="/auth" element={<Auth session={session} />}></Route>
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </>
   )
