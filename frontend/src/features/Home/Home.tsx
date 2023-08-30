@@ -55,7 +55,7 @@ export const Home = (props: Props) => {
           <button>はじめる</button>
         </Link>
         <br></br>
-        <Link to={"/result"}>
+        <Link to={"/search"}>
           <button>検索結果</button>
         </Link>
         <br></br>
