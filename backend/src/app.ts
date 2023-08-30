@@ -67,4 +67,19 @@ app.post("/favorites", async (req, res) => {
   res.json(userFavorite)
 })
 
+app.delete("/favorites/:id/recipes/:recipeId", async (req, res) => {
+  const id = req.params.id
+  const recipeId = Number(req.params.recipeId)
+  const userFavorite = await client.userFavorites.delete({
+    where: {
+      userId_recipeId: {
+        userId: id,
+        recipeId: recipeId,
+      },
+    },
+  })
+
+  res.json(userFavorite)
+})
+
 export default app
