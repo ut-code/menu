@@ -212,17 +212,17 @@ export const Questions = () => {
     if (inputContent === "") {
       alert("選択肢を選んでください")
       return
-    } else {
-      switch (currentQuestion.questionType) {
-        case "ingredients":
-          localStorage.setItem(currentQuestion.questionType, JSON.stringify(ingredients))
-          break
-        case "genre":
-          localStorage.setItem(currentQuestion.questionType, genre)
-          break
-        case "cookingTime":
-          localStorage.setItem(currentQuestion.questionType, cookingTime)
-      }
+    }
+
+    switch (currentQuestion.questionType) {
+      case "ingredients":
+        localStorage.setItem(currentQuestion.questionType, JSON.stringify(ingredients))
+        break
+      case "genre":
+        localStorage.setItem(currentQuestion.questionType, genre)
+        break
+      case "cookingTime":
+        localStorage.setItem(currentQuestion.questionType, cookingTime)
     }
     setInputContent("")
 
