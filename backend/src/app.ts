@@ -57,14 +57,26 @@ app.get("/favorites/:id", async (req, res) => {
 
 app.post("/favorites", async (req, res) => {
   const { userId, recipeId } = req.body
-  const userFavorite = await client.userFavorites.create({
-    data: {
-      userId: userId,
-      recipeId: recipeId,
+
+  const existingFavorite = await client.userFavorites.findUnique({
+    where: {
+      userId_recipeId: {
+        userId: userId,
+        recipeId: recipeId,
+      },
     },
   })
-
-  res.json(userFavorite)
+  if (existingFavorite) {
+    res.json(existingFavorite)
+  } else {
+    const userFavorite = await client.userFavorites.create({
+      data: {
+        userId: userId,
+        recipeId: recipeId,
+      },
+    })
+    res.json(userFavorite)
+  }
 })
 
 app.delete("/favorites/:id/recipes/:recipeId", async (req, res) => {

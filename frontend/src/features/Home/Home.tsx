@@ -72,6 +72,10 @@ export const Home = (props: Props) => {
           <button>検索結果</button>
         </Link>
         <br></br>
+        <Link to={"/home/favorites"}>
+          <button>お気に入り</button>
+        </Link>
+        <br></br>
         <input onChange={(e) => setTmp(Number(e.target.value))} type="number" />
         <button onClick={onClickAddFavorite(tmp)} type="submit">
           お気に入りに追加

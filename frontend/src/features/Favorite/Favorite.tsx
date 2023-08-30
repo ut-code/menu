@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Recipe, getUserFavoritesApi } from "@/utils/recipes"
+import { Recipe, getUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/recipes"
 
 interface Props {
   userId: string | undefined
@@ -7,7 +7,6 @@ interface Props {
 
 export const Favorite = (props: Props) => {
   const [favoriteRecipes, setFavoriteRecipes] = useState<Recipe[]>([])
-  if (!props.userId) return null
 
   useEffect(() => {
     const fetchUserFavorites = async (userId: string) => {
@@ -26,8 +25,20 @@ export const Favorite = (props: Props) => {
     if (props.userId) {
       fetchUserFavorites(props.userId)
     }
-  }, [])
+  }, [props.userId])
 
+  const onClickDeleteFavorite = (recipeId: number) => async () => {
+    if (!props.userId) return
+    const response = await fetch(deleteUserFavoritesApi(props.userId, recipeId), {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId: props.userId, recipeId: recipeId }),
+    })
+    const userFavorite = await response.json()
+    console.log(userFavorite)
+  }
+
+  if (!props.userId) return null
   return (
     <>
       <div className="style_lightbrown">
@@ -35,7 +46,10 @@ export const Favorite = (props: Props) => {
         {favoriteRecipes.length > 0 ? (
           <ul>
             {favoriteRecipes.map((recipe) => (
-              <li key={recipe.id}>{recipe.recipeTitle}</li>
+              <span key={recipe.id}>
+                <li>{recipe.recipeTitle}</li>
+                <button onClick={onClickDeleteFavorite(recipe.id)}>お気に入りから削除</button>
+              </span>
             ))}
           </ul>
         ) : (
