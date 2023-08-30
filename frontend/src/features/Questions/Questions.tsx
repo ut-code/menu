@@ -132,6 +132,9 @@ type Answers = {
 }
 
 export const Questions = () => {
+  // useNavigate を Navigate に変化させる呪文
+  const Navigate = useNavigate()
+
   const [currentQuestion, setCurrentQuestion] = useState<Question>(questions[0])
   const [inputContent, setInputContent] = useState<string>("")
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
@@ -144,9 +147,6 @@ export const Questions = () => {
     genre: genre,
     cookingTime: cookingTime,
   }
-
-  // useNavigate を Navigate に変化させる呪文
-  const Navigate = useNavigate()
 
   //----------------------------------------------------------------
   // localStorage を使って inputContent と currentQuestion を設定する
