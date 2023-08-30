@@ -232,38 +232,9 @@ export const Questions = () => {
     }
     setCurrentQuestion(questions[currentNumber])
   }
-  const onClickResultPage = () => {
-    Navigate("/search")
-  }
 
-  //----------------------------------------------------------------
-  // ハンバーガーを開く・閉じる
-  //----------------------------------------------------------------
-  const onClickOpenHamburger = () => {
-    setIsOpenHamburger(true)
-  }
-  const onClickCloseHamburger = () => {
-    setIsOpenHamburger(false)
-  }
-
-  // useEffect(() => {
-  //   // localStorageから解答を取り出してanswersに入れる
-  //   questions.forEach((question) => {
-  //     const answer = localStorage.getItem(question.questionType)
-  //     if (answer !== null) {
-  //       switch (question.questionType) {
-  //         case "ingredients":
-  //           setIngredients(JSON.parse(answer))
-  //           break
-  //         case "genre":
-  //           setGenre(answer)
-  //           break
-  //         case "cookingTime":
-  //           setCookingTime(answer)
-  //       }
-  //     }
-  //   })
-  // }, [currentQuestion])
+  const onClickOpenHamburger = () => setIsOpenHamburger(true)
+  const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
   return (
     <>
@@ -274,7 +245,7 @@ export const Questions = () => {
           userInput={currentQuestion.userInput}
           onClickPreviousPage={onClickPreviousPage}
           onClickOpenHamburger={onClickOpenHamburger}
-          onClickResultPage={onClickResultPage}
+          onClickResultPage={() => Navigate("/search")}
           onChange={onChangeHandler}
           inputContent={inputContent}
           placeholder="食材の名前を入力してみましょう"
