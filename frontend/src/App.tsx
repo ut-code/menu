@@ -15,7 +15,6 @@ import "@/components/css/global.css"
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)
-  const isLoggedIn = session !== null
   const userId = session?.user?.id
 
   useEffect(() => {
@@ -36,7 +35,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HowTo />}></Route>
         <Route path="/home" element={<Home userId={userId} />}></Route>
-        <Route path="/home/favorite" element={<Favorite isLoggedIn={isLoggedIn} userId={userId} />}></Route>
+        <Route path="/home/favorite" element={<Favorite userId={userId} />}></Route>
         <Route path="/questions" element={<Questions />}></Route>
         <Route path="/search" element={<Result />}></Route>
         <Route path="/auth" element={<Auth session={session} />}></Route>

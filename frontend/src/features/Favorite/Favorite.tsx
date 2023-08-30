@@ -3,12 +3,12 @@ import { useState, useEffect } from "react"
 import { Recipe, getUserFavoritesApi } from "@/utils/recipes"
 
 interface Props {
-  isLoggedIn: boolean
   userId: string | undefined
 }
 
 export const Favorite = (props: Props) => {
   const [favoriteRecipes, setFavoriteRecipes] = useState<Recipe[]>([])
+  if (!props.userId) return null
 
   useEffect(() => {
     const fetchUserFavorites = async (userId: string) => {
@@ -31,23 +31,18 @@ export const Favorite = (props: Props) => {
 
   return (
     <>
-      {props.isLoggedIn ? (
-        <div className="style_lightbrown">
-          <h1>Favorite</h1>
+      <div className="style_lightbrown">
+        <h1>お気に入り</h1>
+        {favoriteRecipes.length > 0 ? (
           <ul>
             {favoriteRecipes.map((recipe) => (
               <li key={recipe.id}>{recipe.recipeTitle}</li>
             ))}
           </ul>
-        </div>
-      ) : (
-        <div>
-          <h1>Sign In to view your favorite</h1>
-          <Link to="/auth">
-            <button>Sign In</button>
-          </Link>
-        </div>
-      )}
+        ) : (
+          <p>お気に入りはまだありません。ハートボタンを押して追加してみましょう。</p>
+        )}
+      </div>
     </>
   )
 }
