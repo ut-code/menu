@@ -12,6 +12,10 @@ export const postUserFavoritesApi = (): string => {
   return `${API_BASE_URL}/favorites`
 }
 
+export const deleteUserFavoritesApi = (id: string, recipeId: number): string => {
+  return `${API_BASE_URL}/favorites/${id}/recipes/${recipeId}`
+}
+
 export type Recipe = {
   id: number
   recipeTitle: string
