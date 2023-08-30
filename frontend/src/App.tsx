@@ -36,7 +36,7 @@ export default function App() {
         <Route path="/" element={<HowTo />}></Route>
         <Route path="/home" element={<Home userId={userId} />}></Route>
         <Route path="/questions" element={<Questions />}></Route>
-        <Route path="/result" element={<Result />}></Route>
+        <Route path="/search" element={<Result />}></Route>
         <Route path="/favorite" element={<Favorite isLoggedIn={isLoggedIn} />}></Route>
         <Route path="/auth" element={<Auth session={session} />}></Route>
       </Routes>

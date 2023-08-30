@@ -228,12 +228,12 @@ export const Questions = () => {
 
     const currentNumber = currentQuestion.questionNumber + 1
     if (currentNumber === questions.length) {
-      Navigate("/result")
+      Navigate("/search")
     }
     setCurrentQuestion(questions[currentNumber])
   }
   const onClickResultPage = () => {
-    Navigate("/result")
+    Navigate("/search")
   }
 
   //----------------------------------------------------------------
