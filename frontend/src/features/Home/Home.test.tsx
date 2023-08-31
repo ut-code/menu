@@ -5,7 +5,7 @@ import { Home } from "./Home"
 it("renders home page correctly", () => {
   render(
     <MemoryRouter>
-      <Home userId={undefined} />
+      <Home session={null} />
     </MemoryRouter>
   )
 })
