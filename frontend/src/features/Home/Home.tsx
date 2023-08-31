@@ -1,15 +1,16 @@
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
+import { Session } from "@supabase/supabase-js"
 import { Recipe, getUserFavoritesApi, postUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/recipes"
 
 interface Props {
-  userId: string | undefined
+  session: Session | null
 }
 
-export const Home = (props: Props) => {
+export const Home = ({ session }: Props) => {
   const [favoriteRecipes, setFavoriteRecipes] = useState<Recipe[]>([])
   const [tmp, setTmp] = useState<number>(0)
-  const [runEffect, setRunEffect] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false)
 
   // 永続的に残るので、localStorageから問題への回答を消しておく
   useEffect(() => {
@@ -19,8 +20,12 @@ export const Home = (props: Props) => {
   }, [])
 
   useEffect(() => {
-    const fetchUserFavorites = async (userId: string) => {
-      const response = await fetch(getUserFavoritesApi(userId))
+    const fetchUserFavorites = async () => {
+      // NOTE: https://www.notion.so/utcode/JWT-4743f0e6a64e4ee7848818c9bc0efee1?pvs=4
+      if (!session) return
+      const response = await fetch(getUserFavoritesApi(), {
+        headers: { Authorization: `Bearer ${session.access_token}` },
+      })
       const favorites = await response.json()
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const recipes = favorites.map((favorite: any) => favorite.favoriteRecipe)
@@ -32,33 +37,31 @@ export const Home = (props: Props) => {
       }
     }
 
-    if (props.userId) {
-      fetchUserFavorites(props.userId)
-    }
-  }, [runEffect])
+    fetchUserFavorites()
+    setLoading(false)
+  }, [loading])
 
   const onClickAddFavorite = (recipeId: number) => async () => {
-    if (!props.userId) return
+    if (!session) return
     const response = await fetch(postUserFavoritesApi(), {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: props.userId, recipeId: recipeId }),
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${session.access_token}` },
+      body: JSON.stringify({ recipeId: recipeId }),
     })
     const userFavorite = await response.json()
     console.log(userFavorite)
-    setRunEffect((prev) => !prev)
+    setLoading(true)
   }
 
   const onClickDeleteFavorite = (recipeId: number) => async () => {
-    if (!props.userId) return
-    const response = await fetch(deleteUserFavoritesApi(props.userId, recipeId), {
+    if (!session) return
+    const response = await fetch(deleteUserFavoritesApi(recipeId), {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: props.userId, recipeId: recipeId }),
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${session.access_token}` },
     })
     const userFavorite = await response.json()
     console.log(userFavorite)
-    setRunEffect((prev) => !prev)
+    setLoading(true)
   }
 
   return (
@@ -81,7 +84,7 @@ export const Home = (props: Props) => {
           お気に入りに追加
         </button>
         <br></br>
-        <button onClick={() => setRunEffect((prev) => !prev)}>更新</button>
+        <button onClick={() => setLoading(true)}>更新</button>
         <ul>
           {favoriteRecipes.map((recipe) => (
             <span key={recipe.id}>

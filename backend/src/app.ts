@@ -1,6 +1,7 @@
 import express from "express"
 import cors from "cors"
 import { PrismaClient } from "@prisma/client"
+import { extractUserFromRequest } from "./utils/authUtils"
 
 const client = new PrismaClient()
 const app = express()
@@ -26,7 +27,7 @@ export type SearchInfo = {
   keywords?: string[]
 }
 
-app.post("/searchRecipes", async (req, res) => {
+app.post("/api/searchRecipes", async (req, res) => {
   const searchInfo: SearchInfo = req.body.content
   console.log(searchInfo.ingredients) // こういう風にデバッグできます。backendのターミナルで見てみてください
 
@@ -42,11 +43,16 @@ app.post("/searchRecipes", async (req, res) => {
   res.json(recipes)
 })
 
-app.get("/favorites/:id", async (req, res) => {
-  const userId = req.params.id
+app.get("/api/users/favorites", async (req, res) => {
+  const user = await extractUserFromRequest(req)
+  if (!user) {
+    res.status(401).json({ error: "Not authorized" })
+    return
+  }
+
   const recipes = await client.userFavorites.findMany({
     where: {
-      userId: userId,
+      userId: user.id,
     },
     include: {
       favoriteRecipe: true,
@@ -55,42 +61,52 @@ app.get("/favorites/:id", async (req, res) => {
   res.json(recipes)
 })
 
-app.post("/favorites", async (req, res) => {
-  const { userId, recipeId } = req.body
+app.post("/api/users/favorites", async (req, res) => {
+  const { recipeId } = req.body
+  const user = await extractUserFromRequest(req)
+  if (!user) {
+    res.status(401).json({ error: "Not authorized" })
+    return
+  }
 
   const existingFavorite = await client.userFavorites.findUnique({
     where: {
       userId_recipeId: {
-        userId: userId,
+        userId: user.id,
         recipeId: recipeId,
       },
     },
   })
   if (existingFavorite) {
     res.json(existingFavorite)
-  } else {
-    const userFavorite = await client.userFavorites.create({
-      data: {
-        userId: userId,
-        recipeId: recipeId,
-      },
-    })
-    res.json(userFavorite)
+    return
   }
+
+  const userFavorite = await client.userFavorites.create({
+    data: {
+      userId: user.id,
+      recipeId: recipeId,
+    },
+  })
+  res.json(userFavorite)
 })
 
-app.delete("/favorites/:id/recipes/:recipeId", async (req, res) => {
-  const id = req.params.id
-  const recipeId = Number(req.params.recipeId)
+app.delete("/api/users/favorites/:id", async (req, res) => {
+  const recipeId = Number(req.params.id)
+  const user = await extractUserFromRequest(req)
+  if (!user) {
+    res.status(401).json({ error: "Not authorized" })
+    return
+  }
+
   const userFavorite = await client.userFavorites.delete({
     where: {
       userId_recipeId: {
-        userId: id,
+        userId: user.id,
         recipeId: recipeId,
       },
     },
   })
-
   res.json(userFavorite)
 })
 

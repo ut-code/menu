@@ -1,16 +1,23 @@
 import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
+import { Session } from "@supabase/supabase-js"
 import { Recipe, getUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/recipes"
 
 interface Props {
-  userId: string | undefined
+  session: Session | null
 }
 
-export const Favorite = (props: Props) => {
+export const Favorite = ({ session }: Props) => {
   const [favoriteRecipes, setFavoriteRecipes] = useState<Recipe[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    const fetchUserFavorites = async (userId: string) => {
-      const response = await fetch(getUserFavoritesApi(userId))
+    const fetchUserFavorites = async () => {
+      // NOTE: https://www.notion.so/utcode/JWT-4743f0e6a64e4ee7848818c9bc0efee1?pvs=4
+      if (!session) return
+      const response = await fetch(getUserFavoritesApi(), {
+        headers: { Authorization: `Bearer ${session.access_token}` },
+      })
       const favorites = await response.json()
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const recipes = favorites.map((favorite: any) => favorite.favoriteRecipe)
@@ -22,23 +29,21 @@ export const Favorite = (props: Props) => {
       }
     }
 
-    if (props.userId) {
-      fetchUserFavorites(props.userId)
-    }
-  }, [props.userId])
+    fetchUserFavorites()
+    setLoading(false)
+  }, [loading])
 
   const onClickDeleteFavorite = (recipeId: number) => async () => {
-    if (!props.userId) return
-    const response = await fetch(deleteUserFavoritesApi(props.userId, recipeId), {
+    if (!session) return
+    const response = await fetch(deleteUserFavoritesApi(recipeId), {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: props.userId, recipeId: recipeId }),
+      headers: { Authorization: `Bearer ${session.access_token}` },
     })
     const userFavorite = await response.json()
     console.log(userFavorite)
+    setLoading(true)
   }
 
-  if (!props.userId) return null
   return (
     <>
       <div className="style_lightbrown">
@@ -55,6 +60,9 @@ export const Favorite = (props: Props) => {
         ) : (
           <p>お気に入りはまだありません。ハートボタンを押して追加してみましょう。</p>
         )}
+        <Link to="/home">
+          <button>戻る</button>
+        </Link>
       </div>
     </>
   )

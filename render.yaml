@@ -32,3 +32,7 @@ services:
         sync: false
       - key: WEB_ORIGIN
         value: https://dull-meshi.onrender.com
+      - key: VITE_SUPABASE_URL
+        sync: false
+      - key: VITE_SUPABASE_ANON_KEY
+        sync: false

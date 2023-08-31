@@ -14,6 +14,7 @@ export const Result = () => {
   const [inputContent, setInputContent] = useState<string>("")
   const [recipes, setRecipes] = useState<Recipe[]>([])
   const [runEffect, setRunEffect] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false)
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
 
   useEffect(() => {
@@ -48,7 +49,8 @@ export const Result = () => {
     }
 
     fetchSearchedRecipes(searchInfo)
-  }, [])
+    setLoading(false)
+  }, [loading])
 
   //----------------------------------------------------------------
   // フリーワード検索機能
