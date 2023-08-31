@@ -1,21 +1,55 @@
-import { Session } from "@supabase/supabase-js"
-import { SignIn } from "./SignIn"
-import { SignOut } from "./SignOut"
-import { DeleteAccount } from "./DeleteAccount"
+import { useState } from "react"
+import { supabase } from "./supabaseClient"
 
-interface Props {
-  session: Session | null
-}
+export const Auth = () => {
+  const [loading, setLoading] = useState(false)
+  const [email, setEmail] = useState("")
 
-export const Auth = (props: Props) => {
-  return !props.session ? (
-    <SignIn />
-  ) : (
-    <div>
-      <p>Already logged in</p>
-      <SignOut />
-      <br />
-      <DeleteAccount session={props.session} />
-    </div>
+  const handleSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    setLoading(true)
+    const { error } = await supabase.auth.signInWithOtp({ email })
+
+    if (error) {
+      alert(error.message)
+    } else {
+      alert("Check your email for the login link!")
+    }
+    setLoading(false)
+  }
+
+  const onClickLoginWithGoogle = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        queryParams: {
+          access_type: "offline",
+          prompt: "consent",
+        },
+      },
+    })
+    if (error) {
+      alert(error.message)
+    }
+  }
+
+  return (
+    <>
+      <h1>ログイン</h1>
+      <p>Sign in via magic link with your email below</p>
+      <form onSubmit={handleSignIn}>
+        <input
+          type="email"
+          placeholder="Your email"
+          value={email}
+          required={true}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <button disabled={loading}>{loading ? <span>Loading</span> : <span>Send magic link</span>}</button>
+      </form>
+      <p>or</p>
+      <button onClick={onClickLoginWithGoogle}>Sign in with Google Account</button>
+    </>
   )
 }

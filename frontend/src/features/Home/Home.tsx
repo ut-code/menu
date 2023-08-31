@@ -2,6 +2,8 @@ import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { Session } from "@supabase/supabase-js"
 import { Recipe, getUserFavoritesApi, postUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/recipes"
+import { DeleteAccount } from "@/features/Auth/DeleteAccount"
+import { SignOut } from "@/features/Auth/SignOut"
 
 interface Props {
   session: Session | null
@@ -75,6 +77,17 @@ export const Home = ({ session }: Props) => {
           <button>検索結果</button>
         </Link>
         <br></br>
+
+        {session && (
+          <div>
+            <p>Already logged in</p>
+            <SignOut />
+            <br />
+            <DeleteAccount session={session} />
+          </div>
+        )}
+        <br></br>
+
         <Link to={"/home/favorites"}>
           <button>お気に入り</button>
         </Link>
