@@ -2,13 +2,14 @@ import styles from "./BorderButton.module.css"
 
 interface Props {
   onClick: () => void
+  disabled: boolean
   children: React.ReactNode
 }
 
-export const BorderButton = ({ onClick, children }: Props) => {
+export const BorderButton = ({ onClick, children, disabled }: Props) => {
   return (
-    <div className={styles.button} onClick={onClick}>
+    <button className={styles.button} onClick={onClick} disabled={disabled}>
       {children}
-    </div>
+    </button>
   )
 }

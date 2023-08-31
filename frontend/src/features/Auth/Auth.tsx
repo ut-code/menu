@@ -9,13 +9,11 @@ import styles from "./Auth.module.css"
 export const Auth = () => {
   const Navigate = useNavigate()
 
-  const [, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState("")
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
 
-  const handleSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-
+  const handleSignIn = async () => {
     setLoading(true)
     const { error } = await supabase.auth.signInWithOtp({ email })
 
@@ -28,6 +26,7 @@ export const Auth = () => {
   }
 
   const onClickLoginWithGoogle = async () => {
+    setLoading(true)
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
@@ -40,6 +39,7 @@ export const Auth = () => {
     if (error) {
       alert(error.message)
     }
+    setLoading(false)
   }
 
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
@@ -54,8 +54,9 @@ export const Auth = () => {
       />
       {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
 
-      <h1 className={styles.title}>ログイン</h1>
-      <form onSubmit={handleSignIn} className={styles.form}>
+      <h1 className={styles.title}>サインイン</h1>
+      <form className={styles.form}>
+        <span className={styles.label}>メールアドレス</span>
         <input
           type="email"
           placeholder="Your email"
@@ -64,12 +65,15 @@ export const Auth = () => {
           onChange={(e) => setEmail(e.target.value)}
           className={styles.input}
         />
-        {/* <button disabled={loading}>{loading ? <span>Loading</span> : <span>Send magic link</span>}</button> */}
-        <BorderButton onClick={() => console.log("a")}>サインイン</BorderButton>
+        <div style={{ height: "40px" }} />
+        <BorderButton onClick={handleSignIn} disabled={loading}>
+          サインイン
+        </BorderButton>
       </form>
-      <p>or</p>
-      {/* <button onClick={onClickLoginWithGoogle}>Sign in with Google Account</button> */}
-      <BorderButton onClick={onClickLoginWithGoogle}>Googleアカウントで続ける</BorderButton>
+      <div className={styles.or}>or</div>
+      <BorderButton onClick={onClickLoginWithGoogle} disabled={loading}>
+        Googleアカウントで続ける
+      </BorderButton>
     </div>
   )
 }

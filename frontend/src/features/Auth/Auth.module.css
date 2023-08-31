@@ -1,6 +1,7 @@
 .title {
   font-size: 20px;
   font-weight: bold;
+  margin: 35px 0;
 }
 
 .input {
@@ -15,5 +16,31 @@
 
 .form {
   width: 100%;
-  gap: 20px;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 16px;
+}
+
+.or {
+  display: flex;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.25);
+  margin: 40px 0;
+}
+.or::before,
+.or::after {
+  content: "";
+  height: 1px;
+  width: 500px;
+  background-color: rgba(0, 0, 0, 0.25);
+  flex-grow: 1;
+}
+.or::before {
+  margin-right: 10px;
+}
+.or::after {
+  margin-left: 10px;
 }
