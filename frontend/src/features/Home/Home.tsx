@@ -45,7 +45,7 @@ export const Home = ({ session }: Props) => {
     const response = await fetch(postUserFavoritesApi(), {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${session.access_token}` },
-      body: JSON.stringify({ userId: session?.user?.id, recipeId: recipeId }),
+      body: JSON.stringify({ recipeId: recipeId }),
     })
     const userFavorite = await response.json()
     console.log(userFavorite)
@@ -53,11 +53,10 @@ export const Home = ({ session }: Props) => {
   }
 
   const onClickDeleteFavorite = (recipeId: number) => async () => {
-    if (!session?.user?.id) return
+    if (!session) return
     const response = await fetch(deleteUserFavoritesApi(recipeId), {
       method: "DELETE",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${session.access_token}` },
-      body: JSON.stringify({ recipeId: recipeId }),
     })
     const userFavorite = await response.json()
     console.log(userFavorite)

@@ -26,15 +26,14 @@ export const Favorite = ({ session }: Props) => {
         console.log(error)
       }
     }
-
     fetchUserFavorites()
-  }, [session])
+  }, [session?.access_token])
 
   const onClickDeleteFavorite = (recipeId: number) => async () => {
+    if (!session) return
     const response = await fetch(deleteUserFavoritesApi(recipeId), {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ recipeId: recipeId }),
+      headers: { Authorization: `Bearer ${session.access_token}` },
     })
     const userFavorite = await response.json()
     console.log(userFavorite)
