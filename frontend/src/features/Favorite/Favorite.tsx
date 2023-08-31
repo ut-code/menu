@@ -10,10 +10,10 @@ export const Favorite = ({ session }: Props) => {
   const [favoriteRecipes, setFavoriteRecipes] = useState<Recipe[]>([])
 
   useEffect(() => {
-    const fetchUserFavorites = async (userId: string) => {
+    const fetchUserFavorites = async () => {
       // NOTE: https://www.notion.so/utcode/JWT-4743f0e6a64e4ee7848818c9bc0efee1?pvs=4
       if (!session) return
-      const response = await fetch(getUserFavoritesApi(userId), {
+      const response = await fetch(getUserFavoritesApi(), {
         headers: { Authorization: `Bearer ${session.access_token}` },
       })
       const favorites = await response.json()
@@ -27,23 +27,19 @@ export const Favorite = ({ session }: Props) => {
       }
     }
 
-    if (session?.user?.id) {
-      fetchUserFavorites(session?.user?.id)
-    }
-  }, [session?.user?.id])
+    fetchUserFavorites()
+  }, [session])
 
   const onClickDeleteFavorite = (recipeId: number) => async () => {
-    if (!session?.user?.id) return
-    const response = await fetch(deleteUserFavoritesApi(session?.user?.id, recipeId), {
+    const response = await fetch(deleteUserFavoritesApi(recipeId), {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: session?.user?.id, recipeId: recipeId }),
+      body: JSON.stringify({ recipeId: recipeId }),
     })
     const userFavorite = await response.json()
     console.log(userFavorite)
   }
 
-  if (!session?.user?.id) return null
   return (
     <>
       <div className="style_lightbrown">
