@@ -44,6 +44,7 @@ app.post("/searchRecipes", async (req, res) => {
 
 app.get("/favorites/:id", async (req, res) => {
   const userId = req.params.id
+  // supabase.auth.getUser(req.headers["Authorization"].match(/^Bearer (.+)$/)[1])
   const recipes = await client.userFavorites.findMany({
     where: {
       userId: userId,

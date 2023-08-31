@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
+import { Session } from "@supabase/supabase-js"
 import { Recipe, getUserFavoritesApi, postUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/recipes"
 
 interface Props {
-  userId: string | undefined
+  session: Session | null
 }
 
-export const Home = (props: Props) => {
+export const Home = ({ session }: Props) => {
   const [favoriteRecipes, setFavoriteRecipes] = useState<Recipe[]>([])
   const [tmp, setTmp] = useState<number>(0)
   const [runEffect, setRunEffect] = useState<boolean>(false)
@@ -32,17 +33,17 @@ export const Home = (props: Props) => {
       }
     }
 
-    if (props.userId) {
-      fetchUserFavorites(props.userId)
+    if (session?.user?.id) {
+      fetchUserFavorites(session?.user?.id)
     }
   }, [runEffect])
 
   const onClickAddFavorite = (recipeId: number) => async () => {
-    if (!props.userId) return
+    if (!session?.user?.id) return
     const response = await fetch(postUserFavoritesApi(), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: props.userId, recipeId: recipeId }),
+      body: JSON.stringify({ userId: session?.user?.id, recipeId: recipeId }),
     })
     const userFavorite = await response.json()
     console.log(userFavorite)
@@ -50,11 +51,11 @@ export const Home = (props: Props) => {
   }
 
   const onClickDeleteFavorite = (recipeId: number) => async () => {
-    if (!props.userId) return
-    const response = await fetch(deleteUserFavoritesApi(props.userId, recipeId), {
+    if (!session?.user?.id) return
+    const response = await fetch(deleteUserFavoritesApi(session?.user?.id, recipeId), {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: props.userId, recipeId: recipeId }),
+      body: JSON.stringify({ userId: session?.user?.id, recipeId: recipeId }),
     })
     const userFavorite = await response.json()
     console.log(userFavorite)

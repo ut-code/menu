@@ -1,16 +1,21 @@
 import { useState, useEffect } from "react"
+import { Session } from "@supabase/supabase-js"
 import { Recipe, getUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/recipes"
 
 interface Props {
-  userId: string | undefined
+  session: Session | null
 }
 
-export const Favorite = (props: Props) => {
+export const Favorite = ({ session }: Props) => {
   const [favoriteRecipes, setFavoriteRecipes] = useState<Recipe[]>([])
 
   useEffect(() => {
     const fetchUserFavorites = async (userId: string) => {
-      const response = await fetch(getUserFavoritesApi(userId))
+      // NOTE: supabase.auth.getSession()で取得したJWTのaccess_tokenをAuthorizationヘッダーに設定する
+      if (!session) return
+      const response = await fetch(getUserFavoritesApi(userId), {
+        headers: { Authorization: `Bearer ${session.access_token}` },
+      })
       const favorites = await response.json()
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const recipes = favorites.map((favorite: any) => favorite.favoriteRecipe)
@@ -22,23 +27,23 @@ export const Favorite = (props: Props) => {
       }
     }
 
-    if (props.userId) {
-      fetchUserFavorites(props.userId)
+    if (session?.user?.id) {
+      fetchUserFavorites(session?.user?.id)
     }
-  }, [props.userId])
+  }, [session?.user?.id])
 
   const onClickDeleteFavorite = (recipeId: number) => async () => {
-    if (!props.userId) return
-    const response = await fetch(deleteUserFavoritesApi(props.userId, recipeId), {
+    if (!session?.user?.id) return
+    const response = await fetch(deleteUserFavoritesApi(session?.user?.id, recipeId), {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: props.userId, recipeId: recipeId }),
+      body: JSON.stringify({ userId: session?.user?.id, recipeId: recipeId }),
     })
     const userFavorite = await response.json()
     console.log(userFavorite)
   }
 
-  if (!props.userId) return null
+  if (!session?.user?.id) return null
   return (
     <>
       <div className="style_lightbrown">
