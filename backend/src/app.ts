@@ -1,6 +1,7 @@
 import express from "express"
 import cors from "cors"
 import { PrismaClient } from "@prisma/client"
+import { extractUserFromRequest } from "./utils/authUtils"
 
 const client = new PrismaClient()
 const app = express()
@@ -43,17 +44,20 @@ app.post("/searchRecipes", async (req, res) => {
 })
 
 app.get("/favorites/:id", async (req, res) => {
-  const userId = req.params.id
-  // supabase.auth.getUser(req.headers["Authorization"].match(/^Bearer (.+)$/)[1])
-  const recipes = await client.userFavorites.findMany({
-    where: {
-      userId: userId,
-    },
-    include: {
-      favoriteRecipe: true,
-    },
-  })
-  res.json(recipes)
+  const user = await extractUserFromRequest(req)
+  if (!user) {
+    res.status(401).json({ error: "Not authorized" })
+  } else {
+    const recipes = await client.userFavorites.findMany({
+      where: {
+        userId: user.id,
+      },
+      include: {
+        favoriteRecipe: true,
+      },
+    })
+    res.json(recipes)
+  }
 })
 
 app.post("/favorites", async (req, res) => {

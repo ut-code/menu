@@ -5,7 +5,7 @@ const supabaseAnonKey: string = import.meta.env.VITE_SUPABASE_ANON_KEY
 
 describe("Supabase Client", () => {
   it("should create a supabase client", () => {
-    const client = createClient(supabaseUrl, supabaseAnonKey)
-    expect(client).toBeDefined()
+    const supabase = createClient(supabaseUrl, supabaseAnonKey)
+    expect(supabase).toBeDefined()
   })
 })

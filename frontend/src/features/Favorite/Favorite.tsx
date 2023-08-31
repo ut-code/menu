@@ -11,7 +11,7 @@ export const Favorite = ({ session }: Props) => {
 
   useEffect(() => {
     const fetchUserFavorites = async (userId: string) => {
-      // NOTE: supabase.auth.getSession()で取得したJWTのaccess_tokenをAuthorizationヘッダーに設定する
+      // NOTE: https://www.notion.so/utcode/JWT-4743f0e6a64e4ee7848818c9bc0efee1?pvs=4
       if (!session) return
       const response = await fetch(getUserFavoritesApi(userId), {
         headers: { Authorization: `Bearer ${session.access_token}` },
