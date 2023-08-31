@@ -1,9 +1,16 @@
+import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { supabase } from "./supabaseClient"
+import { BorderButton } from "@/components/elements/button/BorderButton"
+import { Head } from "@/components/Head"
+import { Hamburger } from "@/components/Hamburger"
 
 export const Auth = () => {
+  const Navigate = useNavigate()
+
   const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState("")
+  const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
 
   const handleSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -34,8 +41,18 @@ export const Auth = () => {
     }
   }
 
+  const onClickOpenHamburger = () => setIsOpenHamburger(true)
+  const onClickCloseHamburger = () => setIsOpenHamburger(false)
+
   return (
-    <>
+    <div className="style_lightbrown">
+      <Head
+        showBackButton={true}
+        onClickPreviousPage={() => Navigate("/home")}
+        onClickOpenHamburger={onClickOpenHamburger}
+      />
+      {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
+
       <h1>ログイン</h1>
       <p>Sign in via magic link with your email below</p>
       <form onSubmit={handleSignIn}>
@@ -50,6 +67,7 @@ export const Auth = () => {
       </form>
       <p>or</p>
       <button onClick={onClickLoginWithGoogle}>Sign in with Google Account</button>
-    </>
+      <BorderButton onClick={() => console.log("a")}>サインイン</BorderButton>
+    </div>
   )
 }
