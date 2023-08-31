@@ -5,11 +5,12 @@
   justify-content: center;
 
   /* box */
+  box-sizing: border-box;
   background-color: var(--Yellow);
   border-radius: 10rem;
   border: 2.5px solid var(--Black);
   box-shadow: var(--Black) 2px 2px 0 0;
-  height: 36px;
+  height: 40px;
   width: 100%;
 
   /* text */

@@ -87,6 +87,10 @@ export const Home = ({ session }: Props) => {
           </div>
         )}
         <br></br>
+        <Link to={"/auth"}>
+          <button>サインアップ</button>
+        </Link>
+        <br></br>
 
         <Link to={"/home/favorites"}>
           <button>お気に入り</button>
