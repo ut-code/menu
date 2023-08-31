@@ -10,7 +10,7 @@ interface Props {
 export const Home = ({ session }: Props) => {
   const [favoriteRecipes, setFavoriteRecipes] = useState<Recipe[]>([])
   const [tmp, setTmp] = useState<number>(0)
-  const [runEffect, setRunEffect] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false)
 
   // 永続的に残るので、localStorageから問題への回答を消しておく
   useEffect(() => {
@@ -38,7 +38,8 @@ export const Home = ({ session }: Props) => {
     }
 
     fetchUserFavorites()
-  }, [runEffect])
+    setLoading(false)
+  }, [loading])
 
   const onClickAddFavorite = (recipeId: number) => async () => {
     if (!session) return
@@ -49,7 +50,7 @@ export const Home = ({ session }: Props) => {
     })
     const userFavorite = await response.json()
     console.log(userFavorite)
-    setRunEffect((prev) => !prev)
+    setLoading(true)
   }
 
   const onClickDeleteFavorite = (recipeId: number) => async () => {
@@ -60,7 +61,7 @@ export const Home = ({ session }: Props) => {
     })
     const userFavorite = await response.json()
     console.log(userFavorite)
-    setRunEffect((prev) => !prev)
+    setLoading(true)
   }
 
   return (
@@ -83,7 +84,7 @@ export const Home = ({ session }: Props) => {
           お気に入りに追加
         </button>
         <br></br>
-        <button onClick={() => setRunEffect((prev) => !prev)}>更新</button>
+        <button onClick={() => setLoading(true)}>更新</button>
         <ul>
           {favoriteRecipes.map((recipe) => (
             <span key={recipe.id}>

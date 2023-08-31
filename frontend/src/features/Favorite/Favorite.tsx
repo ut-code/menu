@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 import { Session } from "@supabase/supabase-js"
 import { Recipe, getUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/recipes"
 
@@ -8,6 +9,7 @@ interface Props {
 
 export const Favorite = ({ session }: Props) => {
   const [favoriteRecipes, setFavoriteRecipes] = useState<Recipe[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
     const fetchUserFavorites = async () => {
@@ -26,8 +28,10 @@ export const Favorite = ({ session }: Props) => {
         console.log(error)
       }
     }
+
     fetchUserFavorites()
-  }, [session?.access_token])
+    setLoading(false)
+  }, [loading])
 
   const onClickDeleteFavorite = (recipeId: number) => async () => {
     if (!session) return
@@ -37,6 +41,7 @@ export const Favorite = ({ session }: Props) => {
     })
     const userFavorite = await response.json()
     console.log(userFavorite)
+    setLoading(true)
   }
 
   return (
@@ -55,6 +60,9 @@ export const Favorite = ({ session }: Props) => {
         ) : (
           <p>お気に入りはまだありません。ハートボタンを押して追加してみましょう。</p>
         )}
+        <Link to="/home">
+          <button>戻る</button>
+        </Link>
       </div>
     </>
   )
