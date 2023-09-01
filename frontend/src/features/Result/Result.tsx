@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
+import { useQuery } from "@tanstack/react-query"
 
 import { Hamburger } from "@/components/Hamburger"
 import { Head } from "@/components/Head"
@@ -13,10 +14,9 @@ export const Result = () => {
   const Navigate = useNavigate()
 
   const [inputContent, setInputContent] = useState<string>("")
-  const [recipes, setRecipes] = useState<Recipe[]>([])
   const [runEffect, setRunEffect] = useState<boolean>(false)
-  const [loading, setLoading] = useState<boolean>(false)
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
+  // const queryClient = useQueryClient()
 
   const answers: Answers = {
     ingredients: JSON.parse(localStorage.getItem("ingredients") || "[]"),
@@ -30,27 +30,21 @@ export const Result = () => {
     // answers を空白区切りで連結したものをsetInputContent
     // 例: ["豚肉", "玉ねぎ", "にんにく"] -> "豚肉 玉ねぎ にんにく"
     setInputContent([...answers.ingredients, answers.genre, answers.cookingTime].join(" "))
+  }, [])
 
-    // searchInfo を使ってfetchAPI
-    const fetchSearchedRecipes = async (info: SearchInfo) => {
-      // searchInfo を載せてPOSTリクエスト、返ってきた内容がresponse
+  const { data: recipes, isLoading } = useQuery({
+    queryKey: ["recipes"],
+    queryFn: async () => {
       const response = await fetch(postSearchRecipesApi(), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ searchInfo: info }),
+        body: JSON.stringify({ searchInfo: searchInfo }),
       })
+      if (!response.ok) throw new Error("レシピの取得に失敗しました")
       const recipes: Recipe[] = await response.json()
-      try {
-        setRecipes(recipes)
-        console.log(recipes)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
-    fetchSearchedRecipes(searchInfo)
-    setLoading(false)
-  }, [loading])
+      return recipes
+    },
+  })
 
   //----------------------------------------------------------------
   // フリーワード検索機能
@@ -87,6 +81,7 @@ export const Result = () => {
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
+  if (isLoading) return <p>レシピを読み込み中</p>
   return (
     <>
       <div className="style_lightbrown">
@@ -117,15 +112,16 @@ export const Result = () => {
             flexDirection: "column",
           }}
         >
-          {recipes.map((recipe) => (
-            <RecipeCard
-              key={recipe.id}
-              recipeUrl={recipe.recipeUrl}
-              foodImageUrl={recipe.foodImageUrls[0]}
-              title={recipe.recipeTitle}
-              material={recipe.recipeMaterial.join("・")}
-            />
-          ))}
+          {recipes &&
+            recipes.map((recipe) => (
+              <RecipeCard
+                key={recipe.id}
+                recipeUrl={recipe.recipeUrl}
+                foodImageUrl={recipe.foodImageUrls[0]}
+                title={recipe.recipeTitle}
+                material={recipe.recipeMaterial.join("・")}
+              />
+            ))}
         </div>
       </div>
     </>
