@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom"
 import { Session } from "@supabase/supabase-js"
+import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query"
 
 import { Recipe } from "@/utils/recipes"
 import { getUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/apiUtils"
-import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query"
 
 interface Props {
   session: Session | null
@@ -12,6 +12,7 @@ interface Props {
 export const Favorite = ({ session }: Props) => {
   const queryClient = useQueryClient()
 
+  // NOTE: https://www.notion.so/utcode/JWT-4743f0e6a64e4ee7848818c9bc0efee1?pvs=4
   const { data: favoriteRecipes, isLoading } = useQuery({
     queryKey: ["favoriteRecipes"],
     queryFn: async () => {
@@ -24,13 +25,14 @@ export const Favorite = ({ session }: Props) => {
     },
   })
 
+  // NOTE: https://www.notion.so/utcode/JWT-4743f0e6a64e4ee7848818c9bc0efee1?pvs=4
   const onClickDeleteFavorite = useMutation({
     mutationFn: async (recipeId: number) => {
-      if (!session) return
       const response = await fetch(deleteUserFavoritesApi(recipeId), {
         method: "DELETE",
-        headers: { Authorization: `Bearer ${session.access_token}` },
+        headers: { Authorization: `Bearer ${session?.access_token}` },
       })
+      if (!response.ok) throw new Error("お気に入りの削除に失敗しました")
       const userFavorite = await response.json()
       console.log(userFavorite)
     },
