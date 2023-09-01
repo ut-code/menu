@@ -22,9 +22,17 @@
   font-size: 12px;
   font-weight: bold;
   margin-left: 16px;
+  margin-bottom: 6px;
+}
+
+.labelCenter {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 6px;
 }
 
 .or {
+  font-size: 12px;
   display: flex;
   align-items: center;
   color: rgba(0, 0, 0, 0.25);
