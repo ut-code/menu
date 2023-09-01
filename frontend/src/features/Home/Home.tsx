@@ -29,9 +29,7 @@ export const Home = ({ session }: Props) => {
       const response = await fetch(getUserFavoritesApi(), {
         headers: { Authorization: `Bearer ${session.access_token}` },
       })
-      const favorites = await response.json()
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const recipes = favorites.map((favorite: any) => favorite.favoriteRecipe)
+      const recipes = await response.json()
       try {
         setFavoriteRecipes(recipes)
         console.log(recipes)

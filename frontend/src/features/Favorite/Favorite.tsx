@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { Session } from "@supabase/supabase-js"
+import useSWR from "swr"
+
 import { Recipe } from "@/utils/recipes"
-import { getUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/apiUtils"
+import { fetcher, getUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/apiUtils"
 
 interface Props {
   session: Session | null
@@ -19,9 +21,7 @@ export const Favorite = ({ session }: Props) => {
       const response = await fetch(getUserFavoritesApi(), {
         headers: { Authorization: `Bearer ${session.access_token}` },
       })
-      const favorites = await response.json()
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const recipes = favorites.map((favorite: any) => favorite.favoriteRecipe)
+      const recipes: Recipe[] = await response.json()
       try {
         setFavoriteRecipes(recipes)
         console.log(recipes)
