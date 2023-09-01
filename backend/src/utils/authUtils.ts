@@ -14,11 +14,6 @@ export const extractUserFromRequest = async (req: Request): Promise<User | null>
   }
   const token = tokenMatch[1]
 
-  try {
-    const user = await supabase.auth.getUser(token)
-    return user?.data?.user ?? null
-  } catch (error) {
-    console.error("Error fetching user:", error)
-    return null
-  }
+  const user = await supabase.auth.getUser(token)
+  return user?.data?.user
 }

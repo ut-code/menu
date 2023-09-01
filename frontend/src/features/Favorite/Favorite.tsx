@@ -12,17 +12,13 @@ interface Props {
 export const Favorite = ({ session }: Props) => {
   const queryClient = useQueryClient()
 
-  const {
-    data: favoriteRecipes,
-    isLoading,
-    isError,
-  } = useQuery({
+  const { data: favoriteRecipes, isLoading } = useQuery({
     queryKey: ["favoriteRecipes"],
     queryFn: async () => {
-      if (!session) return []
       const response = await fetch(getUserFavoritesApi(), {
-        headers: { Authorization: `Bearer ${session.access_token}` },
+        headers: { Authorization: `Bearer ${session?.access_token}` },
       })
+      if (!response.ok) throw new Error("お気に入りの取得に失敗しました")
       const recipes: Recipe[] = await response.json()
       return recipes
     },
@@ -44,7 +40,6 @@ export const Favorite = ({ session }: Props) => {
   })
 
   if (isLoading) return <p>お気に入りを読み込み中</p>
-  if (isError) return <p>お気に入りの読み込みに失敗しました</p>
   return (
     <>
       <div className="style_lightbrown">
