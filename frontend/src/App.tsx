@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, Navigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { Session } from "@supabase/supabase-js"
 
@@ -34,10 +34,13 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HowTo />}></Route>
         <Route path="/home" element={<Home session={session} />}></Route>
-        <Route path="/home/favorites" element={<Favorite session={session} />}></Route>
+        <Route
+          path="/home/favorites"
+          element={session ? <Favorite session={session} /> : <Navigate replace to="/home" />}
+        ></Route>
         <Route path="/questions" element={<Questions />}></Route>
         <Route path="/search" element={<Result />}></Route>
-        <Route path="/auth" element={<Auth session={session} />}></Route>
+        <Route path="/auth" element={!session ? <Auth /> : <Navigate replace to="/home" />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </>

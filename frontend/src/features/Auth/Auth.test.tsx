@@ -1,17 +1,55 @@
-import { render } from "@testing-library/react"
-import { Session } from "@supabase/supabase-js"
+import { render, fireEvent, waitFor } from "@testing-library/react"
 import "@testing-library/jest-dom"
-import { Auth } from "./Auth"
+import { vi } from "vitest"
 
-describe("Auth component", () => {
-  it("renders SignIn component when no session is provided", () => {
-    render(<Auth session={null} />)
+import { Auth } from "./Auth"
+import { supabase } from "./supabaseClient"
+
+beforeAll(() => {
+  vi.mock("../supabaseClient")
+  window.alert = vi.fn()
+})
+
+describe("SignIn component", () => {
+  it("should handle form submission and show success alert", async () => {
+    const { getByPlaceholderText, getByText } = render(<Auth />)
+    const emailInput = getByPlaceholderText("Your email")
+    const sendButton = getByText("Send magic link")
+
+    const mockSignInWithOtp = vi.fn().mockResolvedValue({ error: null })
+    supabase.auth.signInWithOtp = mockSignInWithOtp
+
+    fireEvent.change(emailInput, { target: { value: "test@example.com" } })
+    fireEvent.click(sendButton)
+
+    expect(mockSignInWithOtp).toHaveBeenCalledWith({ email: "test@example.com" })
+
+    await waitFor(() => {
+      expect(window.alert).toHaveBeenCalledWith("Check your email for the login link!")
+    })
   })
 
-  it("renders SignOut and DeleteAccount components when a session is provided", () => {
-    const mockSession = { user: { id: "user_id" } } as Session
-    const { getByText } = render(<Auth session={mockSession} />)
-    const loggedInText = getByText("Already logged in")
-    expect(loggedInText).toBeInTheDocument()
+  it("should handle Google sign-in button click and show error alert", async () => {
+    const { getByText } = render(<Auth />)
+    const googleSignInButton = getByText("Sign in with Google Account")
+
+    const mockSignInWithOAuth = vi.fn().mockResolvedValue({ error: { message: "Google sign-in error" } })
+    supabase.auth.signInWithOAuth = mockSignInWithOAuth
+
+    fireEvent.click(googleSignInButton)
+
+    expect(mockSignInWithOAuth).toHaveBeenCalledWith({
+      provider: "google",
+      options: {
+        queryParams: {
+          access_type: "offline",
+          prompt: "consent",
+        },
+      },
+    })
+
+    await waitFor(() => {
+      expect(window.alert).toHaveBeenCalledWith("Google sign-in error")
+    })
   })
 })

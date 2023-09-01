@@ -55,6 +55,7 @@ model Urls {
 model Users {
 	id String @id
 	email String @unique
+	username String @default("名無し")
 	createdAt DateTime @default(now())
 	updatedAt DateTime @updatedAt
 
