@@ -102,7 +102,7 @@ export const Auth = () => {
         Googleアカウントで続ける
       </BorderButton>
 
-      <div style={{ height: "40px" }} />
+      <div style={{ height: "60px" }} />
 
       {!hasAccount && (
         <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>

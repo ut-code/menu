@@ -36,13 +36,13 @@
   display: flex;
   align-items: center;
   color: rgba(0, 0, 0, 0.25);
-  margin: 40px 0;
+  margin: 30px 0;
 }
 .or::before,
 .or::after {
   content: "";
   height: 1px;
-  width: 500px;
+  width: 45vw;
   background-color: rgba(0, 0, 0, 0.25);
   flex-grow: 1;
 }
