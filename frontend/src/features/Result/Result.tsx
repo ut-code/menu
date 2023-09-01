@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
-import useSWR from "swr"
 
 import { Hamburger } from "@/components/Hamburger"
 import { Head } from "@/components/Head"

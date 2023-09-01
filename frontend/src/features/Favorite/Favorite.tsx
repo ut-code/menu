@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { Session } from "@supabase/supabase-js"
-import useSWR from "swr"
 
 import { Recipe } from "@/utils/recipes"
 import { getUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/apiUtils"
