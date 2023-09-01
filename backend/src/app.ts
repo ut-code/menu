@@ -28,8 +28,8 @@ export type SearchInfo = {
 }
 
 app.post("/api/searchRecipes", async (req, res) => {
-  const searchInfo: SearchInfo = req.body.content
-  console.log(searchInfo.ingredients) // こういう風にデバッグできます。backendのターミナルで見てみてください
+  const { searchInfo } = req.body
+  console.log(searchInfo.ingredients)
 
   const ingredientsAndQuery: string = searchInfo.ingredients.join(" & ")
   const recipes = await client.recipes.findMany({

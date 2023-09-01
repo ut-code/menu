@@ -7,7 +7,7 @@ import { Head } from "@/components/Head"
 import { Searchbox } from "@/components/Searchbox"
 import { RecipeCard } from "./components/RecipeCard"
 import { Recipe, Answers, SearchInfo, convertAnswersToSearchInfo } from "@/utils/recipes"
-import { fetcher, postSearchRecipesApi } from "@/utils/apiUtils"
+import { postSearchRecipesApi } from "@/utils/apiUtils"
 
 export const Result = () => {
   // useNavigate を Navigate に変化させる呪文
@@ -39,7 +39,7 @@ export const Result = () => {
       const response = await fetch(postSearchRecipesApi(), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content: info }),
+        body: JSON.stringify({ searchInfo: info }),
       })
       const recipes: Recipe[] = await response.json()
       try {

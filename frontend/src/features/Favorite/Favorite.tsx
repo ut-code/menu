@@ -4,7 +4,7 @@ import { Session } from "@supabase/supabase-js"
 import useSWR from "swr"
 
 import { Recipe } from "@/utils/recipes"
-import { fetcher, getUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/apiUtils"
+import { getUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/apiUtils"
 
 interface Props {
   session: Session | null
