@@ -11,7 +11,7 @@ describe("/searchRecipes", () => {
       // keywords: [],
     }
 
-    const response = await request(app).post("/api/searchRecipes").send({ content: searchInfo })
+    const response = await request(app).post("/api/searchRecipes").send({ searchInfo: searchInfo })
     expect(response.statusCode).toBe(200)
   })
 })

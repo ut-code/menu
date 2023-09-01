@@ -28,8 +28,8 @@ export type SearchInfo = {
 }
 
 app.post("/api/searchRecipes", async (req, res) => {
-  const searchInfo: SearchInfo = req.body.content
-  console.log(searchInfo.ingredients) // こういう風にデバッグできます。backendのターミナルで見てみてください
+  const { searchInfo } = req.body
+  console.log(searchInfo.ingredients)
 
   const ingredientsAndQuery: string = searchInfo.ingredients.join(" & ")
   const recipes = await client.recipes.findMany({
@@ -50,7 +50,7 @@ app.get("/api/users/favorites", async (req, res) => {
     return
   }
 
-  const recipes = await client.userFavorites.findMany({
+  const favorites = await client.userFavorites.findMany({
     where: {
       userId: user.id,
     },
@@ -58,6 +58,7 @@ app.get("/api/users/favorites", async (req, res) => {
       favoriteRecipe: true,
     },
   })
+  const recipes = favorites.map((favorite) => favorite.favoriteRecipe)
   res.json(recipes)
 })
 
