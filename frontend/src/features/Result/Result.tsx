@@ -18,19 +18,18 @@ export const Result = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
 
-  useEffect(() => {
-    const answers: Answers = {
-      ingredients: JSON.parse(localStorage.getItem("ingredients") || "[]"),
-      genre: localStorage.getItem("genre") || "",
-      cookingTime: localStorage.getItem("cookingTime") || "",
-    }
+  const answers: Answers = {
+    ingredients: JSON.parse(localStorage.getItem("ingredients") || "[]"),
+    genre: localStorage.getItem("genre") || "",
+    cookingTime: localStorage.getItem("cookingTime") || "",
+  }
+  // answers をfindManyの検索に使いやすいように searchInfo に整形
+  const searchInfo: SearchInfo = convertAnswersToSearchInfo(answers)
 
+  useEffect(() => {
     // answers を空白区切りで連結したものをsetInputContent
     // 例: ["豚肉", "玉ねぎ", "にんにく"] -> "豚肉 玉ねぎ にんにく"
     setInputContent([...answers.ingredients, answers.genre, answers.cookingTime].join(" "))
-
-    // answers をfindManyの検索に使いやすいように searchInfo に整形
-    const searchInfo: SearchInfo = convertAnswersToSearchInfo(answers)
 
     // searchInfo を使ってfetchAPI
     const fetchSearchedRecipes = async (info: SearchInfo) => {

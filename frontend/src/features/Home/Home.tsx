@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Session } from "@supabase/supabase-js"
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query"
 
@@ -16,16 +16,15 @@ export const Home = ({ session }: Props) => {
   const queryClient = useQueryClient()
 
   // 永続的に残るので、localStorageから問題への回答を消しておく
-  useEffect(() => {
-    localStorage.removeItem("ingredients")
-    localStorage.removeItem("genre")
-    localStorage.removeItem("cookingTime")
-  }, [])
+  localStorage.removeItem("ingredients")
+  localStorage.removeItem("genre")
+  localStorage.removeItem("cookingTime")
 
   // NOTE: https://www.notion.so/utcode/JWT-4743f0e6a64e4ee7848818c9bc0efee1?pvs=4
   const { data: favoriteRecipes, isLoading } = useQuery({
     queryKey: ["favoriteRecipes"],
     queryFn: async () => {
+      if (!session?.access_token) return
       const response = await fetch(getUserFavoritesApi(), {
         headers: { Authorization: `Bearer ${session?.access_token}` },
       })
@@ -38,6 +37,7 @@ export const Home = ({ session }: Props) => {
   // NOTE: https://www.notion.so/utcode/JWT-4743f0e6a64e4ee7848818c9bc0efee1?pvs=4
   const onClickAddFavorite = useMutation({
     mutationFn: async (recipeId: number) => {
+      if (!session?.access_token) return
       const response = await fetch(postUserFavoritesApi(), {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${session?.access_token}` },
@@ -55,6 +55,7 @@ export const Home = ({ session }: Props) => {
   // NOTE: https://www.notion.so/utcode/JWT-4743f0e6a64e4ee7848818c9bc0efee1?pvs=4
   const onClickDeleteFavorite = useMutation({
     mutationFn: async (recipeId: number) => {
+      if (!session?.access_token) return
       const response = await fetch(deleteUserFavoritesApi(recipeId), {
         method: "DELETE",
         headers: { Authorization: `Bearer ${session?.access_token}` },
