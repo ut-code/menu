@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
+import useSWR from "swr"
 
 import { Hamburger } from "@/components/Hamburger"
 import { Head } from "@/components/Head"
 import { Searchbox } from "@/components/Searchbox"
 import { RecipeCard } from "./components/RecipeCard"
-import { Recipe, Answers, SearchInfo, convertAnswersToSearchInfo, postSearchRecipesApi } from "@/utils/recipes"
+import { Recipe, Answers, SearchInfo, convertAnswersToSearchInfo } from "@/utils/recipes"
+import { fetcher, postSearchRecipesApi } from "@/utils/apiUtils"
 
 export const Result = () => {
   // useNavigate を Navigate に変化させる呪文

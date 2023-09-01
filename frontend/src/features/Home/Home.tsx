@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { Session } from "@supabase/supabase-js"
-import { Recipe, getUserFavoritesApi, postUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/recipes"
+import { Recipe } from "@/utils/recipes"
+import { getUserFavoritesApi, postUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/apiUtils"
 import { DeleteAccount } from "@/features/Auth/DeleteAccount"
 import { SignOut } from "@/features/Auth/SignOut"
 
