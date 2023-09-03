@@ -85,7 +85,6 @@ export const HowTo = () => {
         </div>
         <Smartphone img={img3} />
         <div className="bottom">
-          {/* <NextButton onClick={() => Navigate("/home")} /> */}
           <div id="swiper-button-next">
             <NextButton />
           </div>
