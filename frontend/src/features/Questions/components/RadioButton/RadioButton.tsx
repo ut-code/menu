@@ -8,12 +8,12 @@ interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   inputContent: string
   userInput: boolean
-  choiceDesccription?: string | undefined
+  choiceDescription?: string | undefined
 }
 
 export const RadioButton = (props: Props) => {
   const className = props.userInput ? styles.pic : styles.nopic
-  if (props.choiceDesccription !== undefined) console.log(props.choiceDesccription)
+  if (props.choiceDescription !== undefined) console.log(props.choiceDescription)
   return (
     <div className={`${styles.box} ${className}`}>
       <input
@@ -39,7 +39,7 @@ export const RadioButton = (props: Props) => {
             )}
           </div>
         )}
-        {props.choiceDesccription && <div className={styles.choiceDesccription}>{props.choiceDesccription}</div>}
+        {props.choiceDescription && <div className={styles.choiceDesccription}>{props.choiceDescription}</div>}
         {props.userInput === false && <div className={styles.nopic_text}>{props.value}</div>}
       </label>
     </div>

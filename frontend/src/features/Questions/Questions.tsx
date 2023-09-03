@@ -35,7 +35,7 @@ type Choices = {
   [key: number]: {
     choiceText: string
     choiceImage: string
-    choiceDesccription?: string
+    choiceDescription?: string
   }
 }
 
@@ -118,10 +118,10 @@ const questions: Question[] = [
     questionText: "調理時間を選択してください",
     userInput: false,
     choices: {
-      0: { choiceText: "時短", choiceImage: "", choiceDesccription: "目安時間: 15分" },
-      1: { choiceText: "普通", choiceImage: "", choiceDesccription: "目安時間: 30分" },
-      2: { choiceText: "じっくり", choiceImage: "", choiceDesccription: "目安時間: 60分" },
-      3: { choiceText: "どれでも", choiceImage: "", choiceDesccription: "目安時間: ランダム" },
+      0: { choiceText: "時短", choiceImage: "", choiceDescription: "目安時間: 15分" },
+      1: { choiceText: "普通", choiceImage: "", choiceDescription: "目安時間: 30分" },
+      2: { choiceText: "じっくり", choiceImage: "", choiceDescription: "目安時間: 60分" },
+      3: { choiceText: "どれでも", choiceImage: "", choiceDescription: "目安時間: ランダム" },
     },
     questionType: "cookingTime",
   },
