@@ -6,50 +6,11 @@ import styles from "./HorizontalScroll.module.css"
 
 import { Recipe } from "@/utils/recipes"
 
-export const HorizontalScroll = () => {
-  const recipes: Recipe[] = [
-    {
-      id: 1,
-      recipeTitle: "test",
-      recipeUrl: "https://cookpad.com/recipe/1234567",
-      recipeDescription: "test",
-      foodImageUrls: [],
-      keywords: [],
-      totalTime: 30,
-      recipeMaterial: ["じゃがいも", "にんじん", "玉ねぎ", "牛肉", "水", "カレールー"],
-    },
-    {
-      id: 2,
-      recipeTitle: "testest",
-      recipeUrl: "https://cookpad.com/recipe/1234567",
-      recipeDescription: "test",
-      foodImageUrls: [],
-      keywords: [],
-      totalTime: 30,
-      recipeMaterial: ["じゃがいも", "にんじん", "玉ねぎ", "牛肉", "水", "カレールー"],
-    },
-    {
-      id: 3,
-      recipeTitle: "testest",
-      recipeUrl: "https://cookpad.com/recipe/1234567",
-      recipeDescription: "test",
-      foodImageUrls: [],
-      keywords: [],
-      totalTime: 30,
-      recipeMaterial: ["じゃがいも", "にんじん", "玉ねぎ", "牛肉", "水", "カレールー"],
-    },
-    {
-      id: 4,
-      recipeTitle: "testest",
-      recipeUrl: "https://cookpad.com/recipe/1234567",
-      recipeDescription: "test",
-      foodImageUrls: [],
-      keywords: [],
-      totalTime: 30,
-      recipeMaterial: ["じゃがいも", "にんじん", "玉ねぎ", "牛肉", "水", "カレールー"],
-    },
-  ]
+interface Props {
+  recipes?: Recipe[]
+}
 
+export const HorizontalScroll = ({ recipes }: Props) => {
   return (
     <Swiper
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -60,11 +21,12 @@ export const HorizontalScroll = () => {
       modules={[FreeMode]}
       className={styles.root}
     >
-      {recipes.map((recipe) => (
-        <SwiperSlide key={recipe.id}>
-          <div className={styles.card}>{recipe.recipeTitle}</div>
-        </SwiperSlide>
-      ))}
+      {recipes &&
+        recipes.map((recipe) => (
+          <SwiperSlide key={recipe.id}>
+            <div className={styles.card}>{recipe.recipeTitle}</div>
+          </SwiperSlide>
+        ))}
     </Swiper>
   )
 }

@@ -88,13 +88,29 @@ export const Home = ({ session }: Props) => {
           <button>はじめる</button>
         </Link>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <span>人気のレシピ</span>
-          <span>季節のレシピ</span>
-          <span>お気に入り</span>
-          <HorizontalScroll />
-          <Link to={"/home/favorites"}>
-            <button>お気に入り</button>
-          </Link>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <h3>人気のレシピ</h3>
+            <Link to={"/home/favorites"}>
+              <button>もっと見る</button>
+            </Link>
+          </div>
+          <HorizontalScroll recipes={[]} />
+
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <h3>季節のレシピ</h3>
+            <Link to={"/home/favorites"}>
+              <button>もっと見る</button>
+            </Link>
+          </div>
+          <HorizontalScroll recipes={[]} />
+
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <h3>お気に入り</h3>
+            <Link to={"/home/favorites"}>
+              <button>もっと見る</button>
+            </Link>
+          </div>
+          <HorizontalScroll recipes={favoriteRecipes?.slice(0, 3)} />
         </div>
       </div>
 

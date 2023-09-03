@@ -1,3 +1,9 @@
 .root {
   height: 200px !important;
 }
+
+.topic {
+  /* space-between */
+  display: flex;
+  justify-content: space-between;
+}
