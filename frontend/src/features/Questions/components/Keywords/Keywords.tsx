@@ -13,7 +13,7 @@ export const Keywords = ({ answers }: Props) => {
   return (
     <div className={styles.box}>
       <span className={styles.title}>あなたの検索ワード🔍&nbsp;&nbsp;</span>
-      <Footprint></Footprint>
+      <Footprint props={0.2}></Footprint>
       <br></br>
       <div className={styles.text}>{[...answers.ingredients, answers.genre, answers.cookingTime].join(" ")}</div>
     </div>
