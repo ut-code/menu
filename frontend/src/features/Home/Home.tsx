@@ -9,6 +9,8 @@ import { DeleteAccount } from "@/features/Auth/DeleteAccount"
 import { SignOut } from "@/features/Auth/SignOut"
 import { Head } from "@/components/Head"
 import { Hamburger } from "@/components/Hamburger"
+import { HorizontalScroll } from "./components/HorizontalScroll"
+
 interface Props {
   session: Session | null
 }
@@ -89,6 +91,7 @@ export const Home = ({ session }: Props) => {
           <span>人気のレシピ</span>
           <span>季節のレシピ</span>
           <span>お気に入り</span>
+          <HorizontalScroll />
           <Link to={"/home/favorites"}>
             <button>お気に入り</button>
           </Link>
