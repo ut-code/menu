@@ -7,12 +7,15 @@ import { Recipe } from "@/utils/recipes"
 import { getUserFavoritesApi, postUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/apiUtils"
 import { DeleteAccount } from "@/features/Auth/DeleteAccount"
 import { SignOut } from "@/features/Auth/SignOut"
+import { Head } from "@/components/Head"
+import { Hamburger } from "@/components/Hamburger"
 interface Props {
   session: Session | null
 }
 
 export const Home = ({ session }: Props) => {
   const [tmp, setTmp] = useState<number>(0)
+  const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
   const queryClient = useQueryClient()
 
   // 永続的に残るので、localStorageから問題への回答を消しておく
@@ -69,14 +72,32 @@ export const Home = ({ session }: Props) => {
     },
   })
 
+  const onClickOpenHamburger = () => setIsOpenHamburger(true)
+  const onClickCloseHamburger = () => setIsOpenHamburger(false)
+
   if (isLoading) return <p>お気に入りを読み込み中</p>
   return (
     <>
       <div className="style_lightbrown">
+        <Head showBackButton={false} onClickOpenHamburger={onClickOpenHamburger} />
+        {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
+        Futabaさん
         <Link to={"/questions"}>
           <button>はじめる</button>
         </Link>
-        <br></br>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <span>人気のレシピ</span>
+          <span>季節のレシピ</span>
+          <span>お気に入り</span>
+          <Link to={"/home/favorites"}>
+            <button>お気に入り</button>
+          </Link>
+        </div>
+      </div>
+
+      <hr />
+
+      <div className="style_lightbrown">
         <Link to={"/search"}>
           <button>検索結果</button>
         </Link>
@@ -95,10 +116,6 @@ export const Home = ({ session }: Props) => {
           <button>サインアップ</button>
         </Link>
         <br></br>
-
-        <Link to={"/home/favorites"}>
-          <button>お気に入り</button>
-        </Link>
         <br></br>
         <input onChange={(e) => setTmp(Number(e.target.value))} type="number" />
         <button onClick={() => onClickAddFavorite.mutate(tmp)} type="submit">
