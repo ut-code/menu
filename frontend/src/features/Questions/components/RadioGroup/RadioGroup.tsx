@@ -5,6 +5,7 @@ type Choices = {
   [key: number]: {
     choiceText: string
     choiceImage: string
+    choiceDesccription?: string | undefined
   }
 }
 
@@ -30,6 +31,7 @@ export const RadioGroup = (props: Props) => {
               onChange={props.onChange}
               inputContent={props.inputContent}
               userInput={props.userInput}
+              choiceDesccription={option.choiceDesccription}
             />
           </div>
         ))}
