@@ -1,9 +1,15 @@
 import styles from "./NextButton.module.css"
 
-export const NextButton = (props: { onClick: () => void }) => {
+interface Props {
+  onClick?: () => void
+}
+
+export const NextButton = ({ onClick }: Props) => {
   return (
-    <div className={styles.button} onClick={() => props.onClick()}>
-      Next
+    <div className={styles.root}>
+      <button className={styles.button} onClick={onClick}>
+        次へ
+      </button>
     </div>
   )
 }
