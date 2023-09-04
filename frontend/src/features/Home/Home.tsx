@@ -101,34 +101,7 @@ export const Home = ({ session }: Props) => {
             <h3>季節のレシピ</h3>
             <MoreButton onClick={() => Navigate("/home/favorites")} />
           </div>
-          <HorizontalScroll
-            recipes={[
-              {
-                foodImageUrls: ["https://www.lettuceclub.net/i/R1/img/dish/1/S20121025043001A_000.png"],
-                id: 9,
-                keywords: ["佐藤ひろみ", "塩分控えめ", "行楽"],
-                recipeDescription: "甘辛だれのだんごを卵黄につけて",
-                recipeMaterial: [
-                  "たね",
-                  "　大豆の水煮…120g",
-                  "　もめん豆腐…1/2丁(約150g)",
-                  "　しょうがのみじん切り…１かけ分",
-                  "　片栗粉…大さじ１",
-                  "　塩、こしょう…各少々",
-                  "卵黄…１個分",
-                  "たれ",
-                  "　しょうゆ…大さじ１",
-                  "　砂糖、みりん、酒…各大さじ1/2",
-                  "　片栗粉…小さじ1/2",
-                  "　水…大さじ１",
-                  "サラダ油",
-                ],
-                recipeTitle: "大豆と豆腐のふわふわだんご",
-                recipeUrl: "https://www.lettuceclub.net/recipe/dish/19945/",
-                totalTime: -1,
-              },
-            ]}
-          />
+          <HorizontalScroll recipes={[]} />
 
           <div style={{ display: "flex", justifyContent: "space-between", padding: "0 40px" }}>
             <h3>お気に入り</h3>

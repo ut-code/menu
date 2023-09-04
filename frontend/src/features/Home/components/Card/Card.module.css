@@ -68,6 +68,7 @@
 
 .text_title {
   /* text */
+  white-space: nowrap;
   font-size: 12px;
   font-weight: bold;
   /* 左寄せ */

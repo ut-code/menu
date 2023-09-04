@@ -9,9 +9,15 @@ interface Props {
 
 export const Card = ({ recipe }: Props) => {
   const maxTitleLength = 11
-  const recipeTitleConverted = recipe.recipeTitle.substring(0, maxTitleLength)
+  let recipeTitleConverted = recipe.recipeTitle.substring(0, maxTitleLength)
+  if (recipe.recipeTitle.length > maxTitleLength) {
+    recipeTitleConverted = recipe.recipeTitle.substring(0, maxTitleLength) + "..."
+  }
   const maxMaterialLength = 26
-  const recipeMaterialConverted = recipe.recipeMaterial.join("・").substring(0, maxMaterialLength)
+  let recipeMaterialConverted = recipe.recipeMaterial.join("・").substring(0, maxMaterialLength)
+  if (recipe.recipeMaterial.join("・").length > maxMaterialLength) {
+    recipeMaterialConverted = recipe.recipeMaterial.join("・").substring(0, maxMaterialLength) + "..."
+  }
 
   return (
     <Link to={recipe.recipeUrl} target="_blank" rel="noopener noreferrer">
