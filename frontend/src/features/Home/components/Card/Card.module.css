@@ -1,0 +1,122 @@
+/* https://eclair.blog/examples-of-card/ */
+.root {
+  /* layout */
+  position: relative;
+  /* z-index: 2; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* box */
+  /* background-color: white; */
+  background-color: transparent;
+  border-radius: 20px;
+  border: var(--Black) 2.5px solid;
+  /* height: 500px; */
+  /*overflow: hidden; */
+
+  height: 168px;
+  /* width: 50vw; */
+  /* width: 100%; */
+  width: auto;
+}
+
+.image_box {
+  position: relative;
+  height: 110px;
+  width: 100%;
+
+  display: flex;
+}
+
+.image_frame_blur {
+  /* box */
+  width: 100%; /* 親要素の幅に合わせる */
+  /* height: 174px; */
+  filter: blur(10px); /* ぼかし */
+}
+
+.image_frame {
+  position: relative;
+  z-index: -1;
+  width: 100%;
+  object-fit: cover;
+}
+
+.text_container {
+  /* layout */
+  display: flex;
+  justify-content: center;
+
+  /* box */
+  width: 100%; /* 親要素の幅に合わせる */
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.left {
+  /* layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  margin-left: 10px;
+
+  width: 160px;
+}
+
+.text_title {
+  /* text */
+  font-size: 12px;
+  font-weight: bold;
+  /* 左寄せ */
+  text-align: left;
+  margin-bottom: 4px;
+}
+
+.text_material {
+  /* layout */
+  /* margin: 0.5em 0 1em 0; */
+
+  /* text */
+  /* font-size: 6px; */
+  font-weight: lighter;
+  /* 改行禁止 */
+  white-space: nowrap;
+  /* NOTE: Google Chromeで 10px 未満の文字を表示させる https://blog.upshare.co.jp/2021/07/3730/ */
+  display: block;
+  font-size: 10px;
+  transform: scale(0.6);
+  transform-origin: left top;
+
+  margin-left: 2px;
+}
+
+.hr {
+  /* box */
+  width: 100%;
+  height: 2.5px;
+  background-color: var(--Black);
+  border: none;
+
+  /* text */
+  color: transparent;
+}
+
+.arrow {
+  /* icon */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* 上下中央揃え */
+  margin: auto;
+
+  /* circle */
+  background-color: var(--Red);
+  border-radius: 50%;
+  border: solid 1.5px var(--Black);
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+}

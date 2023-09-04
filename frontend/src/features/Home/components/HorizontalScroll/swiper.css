@@ -3,7 +3,11 @@
 }
 
 .topic {
-  /* space-between */
   display: flex;
   justify-content: space-between;
+}
+
+.swiper-slide {
+  width: 200px;
+  height: 168px;
 }
