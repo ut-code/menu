@@ -12,6 +12,7 @@ import { Head } from "@/components/Head"
 import { Hamburger } from "@/components/Hamburger"
 import { HorizontalScroll } from "./components/HorizontalScroll"
 import { MoreButton } from "@/components/elements/button/MoreButton"
+import { HomeSearchbox } from "./components/HomeSearchbox"
 
 interface Props {
   session: Session | null
@@ -91,7 +92,7 @@ export const Home = ({ session }: Props) => {
           <span style={{ fontSize: "12px", margin: "0 0 6px 10px" }}>さん</span>
         </div>
         <Link to={"/questions"}>
-          <button>はじめる</button>
+          <HomeSearchbox />
         </Link>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ display: "flex", justifyContent: "space-between", padding: "0 40px" }}>
