@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
 import { BsArrowRight } from "react-icons/bs"
 import { Recipe } from "@/utils/recipes"
-import { BackButton } from "@/components/elements/button/BackButton"
 import styles from "./Card.module.css"
 
 interface Props {
@@ -9,9 +8,9 @@ interface Props {
 }
 
 export const Card = ({ recipe }: Props) => {
-  const maxTitleLength = 13
+  const maxTitleLength = 11
   const recipeTitleConverted = recipe.recipeTitle.substring(0, maxTitleLength)
-  const maxMaterialLength = 30
+  const maxMaterialLength = 26
   const recipeMaterialConverted = recipe.recipeMaterial.join("・").substring(0, maxMaterialLength)
 
   return (

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import { useState } from "react"
+import { Navigate, useNavigate } from "react-router-dom"
 import { Session } from "@supabase/supabase-js"
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query"
 
@@ -10,6 +11,7 @@ import { SignOut } from "@/features/Auth/SignOut"
 import { Head } from "@/components/Head"
 import { Hamburger } from "@/components/Hamburger"
 import { HorizontalScroll } from "./components/HorizontalScroll"
+import { MoreButton } from "@/components/elements/button/MoreButton"
 
 interface Props {
   session: Session | null
@@ -19,6 +21,7 @@ export const Home = ({ session }: Props) => {
   const [tmp, setTmp] = useState<number>(0)
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
   const queryClient = useQueryClient()
+  const Navigate = useNavigate()
 
   // 永続的に残るので、localStorageから問題への回答を消しておく
   localStorage.removeItem("ingredients")
@@ -88,19 +91,15 @@ export const Home = ({ session }: Props) => {
           <button>はじめる</button>
         </Link>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", padding: "0 40px" }}>
             <h3>人気のレシピ</h3>
-            <Link to={"/home/favorites"}>
-              <button>もっと見る</button>
-            </Link>
+            <MoreButton onClick={() => Navigate("/home/favorites")} />
           </div>
           <HorizontalScroll recipes={[]} />
 
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", padding: "0 40px" }}>
             <h3>季節のレシピ</h3>
-            <Link to={"/home/favorites"}>
-              <button>もっと見る</button>
-            </Link>
+            <MoreButton onClick={() => Navigate("/home/favorites")} />
           </div>
           <HorizontalScroll
             recipes={[
@@ -131,11 +130,9 @@ export const Home = ({ session }: Props) => {
             ]}
           />
 
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", padding: "0 40px" }}>
             <h3>お気に入り</h3>
-            <Link to={"/home/favorites"}>
-              <button>もっと見る</button>
-            </Link>
+            <MoreButton onClick={() => Navigate("/home/favorites")} />
           </div>
           <HorizontalScroll recipes={favoriteRecipes?.slice(0, 6)} />
         </div>

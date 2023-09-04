@@ -17,7 +17,7 @@ export const HorizontalScroll = ({ recipes }: Props) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       slidesPerView={"auto"}
-      spaceBetween={35}
+      spaceBetween={28}
       freeMode={true}
       modules={[FreeMode]}
       className={"root"}

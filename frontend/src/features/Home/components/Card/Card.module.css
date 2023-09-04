@@ -63,7 +63,7 @@
 
   margin-left: 10px;
 
-  width: 160px;
+  width: 140px;
 }
 
 .text_title {
@@ -76,13 +76,8 @@
 }
 
 .text_material {
-  /* layout */
-  /* margin: 0.5em 0 1em 0; */
-
   /* text */
-  /* font-size: 6px; */
   font-weight: lighter;
-  /* 改行禁止 */
   white-space: nowrap;
   /* NOTE: Google Chromeで 10px 未満の文字を表示させる https://blog.upshare.co.jp/2021/07/3730/ */
   display: block;
