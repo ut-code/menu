@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { useState } from "react"
-import { Navigate, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { Session } from "@supabase/supabase-js"
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query"
 
@@ -86,7 +86,10 @@ export const Home = ({ session }: Props) => {
       <div className="style_lightbrown">
         <Head showBackButton={false} onClickOpenHamburger={onClickOpenHamburger} />
         {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
-        Futabaさん
+        <div style={{ display: "flex", alignItems: "end" }}>
+          <span style={{ fontSize: "24px", fontWeight: "bold" }}>Futaba</span>
+          <span style={{ fontSize: "12px", margin: "0 0 6px 10px" }}>さん</span>
+        </div>
         <Link to={"/questions"}>
           <button>はじめる</button>
         </Link>
