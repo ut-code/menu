@@ -47,6 +47,8 @@
   width: 100%; /* 親要素の幅に合わせる */
   /* height: auto; 高さ上限どうしますか？ */
   box-sizing: border-box; /* はみ出し阻止 */
+  background: url("/footprint.svg") no-repeat;
+  background-position: 95% 10%;
 }
 
 .text_title {
