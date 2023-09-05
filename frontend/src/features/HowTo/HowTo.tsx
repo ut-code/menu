@@ -8,12 +8,6 @@ import "swiper/css/navigation"
 import "./swiper.css"
 
 import { NextButton } from "@/components/elements/button/NextButton"
-import { Smartphone } from "./components/Smartphone"
-
-/* import image */
-import img1 from "@/assets/image/howto1.png"
-import img2 from "@/assets/image/howto2.png"
-import img3 from "@/assets/image/howto3.png"
 import icon from "@/assets/image/icon.png"
 
 export const HowTo = () => {
@@ -28,68 +22,41 @@ export const HowTo = () => {
       pagination={true}
     >
       <SwiperSlide>
-        <div className="title_div">
-          <p className="description">質問に答えていくだけで献立を提案してくれるアプリ</p>
-          <h1 className="title">だるめし</h1>
-        </div>
         <img src={icon} alt="アイコン" className="icon" />
+        こんな悩みありませんか？
         <div className="bottom">
           <div id="swiper-button-next">
             <NextButton />
           </div>
-          <Link to={"/home"} className="skip">
-            Skip
-          </Link>
         </div>
       </SwiperSlide>
 
       <SwiperSlide>
-        <div className="text_div">
-          <p className="heading">
-            まずは使いたい食材を<br></br>入力してみましょう
-          </p>
-        </div>
-        <Smartphone img={img1} />
+        <img src={icon} alt="アイコン" className="icon" />
+        だるめしを使いましょう
         <div className="bottom">
           <div id="swiper-button-next">
             <NextButton />
           </div>
-          <Link to={"/home"} className="skip">
-            Skip
-          </Link>
         </div>
       </SwiperSlide>
 
       <SwiperSlide>
-        <div className="text_div">
-          <p className="heading">
-            いくつかの質問に<br></br>答えてみましょう
-          </p>
-        </div>
-        <Smartphone img={img2} />
+        <img src={icon} alt="アイコン" className="icon" />
+        豊富なレシピ数
         <div className="bottom">
           <div id="swiper-button-next">
             <NextButton />
           </div>
-          <Link to={"/home"} className="skip">
-            Skip
-          </Link>
         </div>
       </SwiperSlide>
 
       <SwiperSlide>
-        <div className="text_div">
-          <p className="heading">
-            あなたにぴったりの<br></br>レシピを検索可能
-          </p>
-        </div>
-        <Smartphone img={img3} />
+        <img src={icon} alt="アイコン" className="icon" />
+        今日のごはん完成！
         <div className="bottom">
-          <div id="swiper-button-next">
+          <Link to="/home">
             <NextButton />
-          </div>
-          <Link to={"/home"} className="skip">
-            Skip
           </Link>
         </div>
       </SwiperSlide>

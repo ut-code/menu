@@ -15,6 +15,7 @@ import "@/components/css/global.css"
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   useEffect(() => {
     const initialize = async () => {
@@ -25,10 +26,12 @@ export default function App() {
       supabase.auth.onAuthStateChange((_event, session) => {
         setSession(session)
       })
+      setIsLoading(false)
     }
     initialize()
   }, [])
 
+  if (isLoading) return <div>loading...</div>
   return (
     <>
       <Routes>
