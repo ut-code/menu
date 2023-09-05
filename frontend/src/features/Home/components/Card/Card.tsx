@@ -8,16 +8,7 @@ interface Props {
 }
 
 export const Card = ({ recipe }: Props) => {
-  const maxTitleLength = 11
-  let recipeTitleConverted = recipe.recipeTitle.substring(0, maxTitleLength)
-  if (recipe.recipeTitle.length > maxTitleLength) {
-    recipeTitleConverted = recipe.recipeTitle.substring(0, maxTitleLength) + "..."
-  }
-  const maxMaterialLength = 26
-  let recipeMaterialConverted = recipe.recipeMaterial.join("・").substring(0, maxMaterialLength)
-  if (recipe.recipeMaterial.join("・").length > maxMaterialLength) {
-    recipeMaterialConverted = recipe.recipeMaterial.join("・").substring(0, maxMaterialLength) + "..."
-  }
+  const recipeMaterialConverted = recipe.recipeMaterial.join("・")
 
   return (
     <Link to={recipe.recipeUrl} target="_blank" rel="noopener noreferrer">
@@ -29,7 +20,7 @@ export const Card = ({ recipe }: Props) => {
         <div className={styles.hr}>{"-"}</div>
         <div className={styles.text_container}>
           <div className={styles.left}>
-            <span className={styles.text_title}>{recipeTitleConverted}</span>
+            <span className={styles.text_title}>{recipe.recipeTitle}</span>
             <span className={styles.text_material}>{recipeMaterialConverted}</span>
           </div>
           <div className={styles.arrow}>

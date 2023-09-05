@@ -68,7 +68,10 @@
 
 .text_title {
   /* text */
+  width: 144px;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 12px;
   font-weight: bold;
   /* 左寄せ */
@@ -79,12 +82,17 @@
 .text_material {
   /* text */
   font-weight: lighter;
-  white-space: nowrap;
   /* NOTE: Google Chromeで 10px 未満の文字を表示させる https://blog.upshare.co.jp/2021/07/3730/ */
   display: block;
   font-size: 10px;
   transform: scale(0.6);
   transform-origin: left top;
+
+  /* NOTE: 160 / 0.6 */
+  width: 240px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   margin-left: 2px;
 }

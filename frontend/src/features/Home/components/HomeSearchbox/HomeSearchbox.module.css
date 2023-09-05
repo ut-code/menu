@@ -1,6 +1,7 @@
 .search {
   display: flex;
   margin: 1.2em -0.8em;
+  width: 100%;
 }
 
 .box {
