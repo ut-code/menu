@@ -1,101 +1,36 @@
-/* https://eclair.blog/examples-of-card/ */
 .root {
   /* layout */
-  position: relative;
-  /* z-index: 2; */
   display: flex;
-  flex-direction: column;
   align-items: center;
+  border-radius: 25px;
+  justify-content: space-between;
+  flex-direction: column;
 
   /* box */
-  /* background-color: white; */
-  background-color: transparent;
-  border-radius: 20px;
-  border: var(--Black) 2.5px solid;
-  /* height: 500px; */
-  /*overflow: hidden; */
-
   height: 168px;
-  /* width: 50vw; */
-  /* width: 100%; */
-  width: auto;
-}
-
-.image_box {
-  position: relative;
-  height: 110px;
-  width: 100%;
-
-  display: flex;
-}
-
-.image_frame_blur {
-  /* box */
-  width: 100%; /* 親要素の幅に合わせる */
-  /* height: 174px; */
-  filter: blur(10px); /* ぼかし */
+  overflow: hidden;
+  border: var(--Black) 2px solid;
 }
 
 .image_frame {
-  position: relative;
-  z-index: -1;
-  width: 100%;
-  object-fit: cover;
-}
-
-.text_container {
-  /* layout */
-  display: flex;
-  justify-content: center;
-
   /* box */
-  width: 100%; /* 親要素の幅に合わせる */
-  height: 100%;
+  object-fit: cover;
+  height: 110px;
+  width: 100%;
+  outline: none;
+  border: none;
   box-sizing: border-box;
-  overflow: hidden;
-}
+  margin: auto;
 
-.left {
-  /* layout */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  margin-left: 10px;
-
-  width: 140px;
-}
-
-.text_title {
   /* text */
-  width: 144px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   font-size: 12px;
-  font-weight: bold;
-  /* 左寄せ */
-  text-align: left;
-  margin-bottom: 4px;
 }
 
-.text_material {
-  /* text */
-  font-weight: lighter;
-  /* NOTE: Google Chromeで 10px 未満の文字を表示させる https://blog.upshare.co.jp/2021/07/3730/ */
-  display: block;
-  font-size: 10px;
-  transform: scale(0.6);
-  transform-origin: left top;
-
-  /* NOTE: 160 / 0.6 */
-  width: 240px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  margin-left: 2px;
-}
+/* .image_frame_blur {
+  width: 100%;
+  height: 168px;
+  filter: blur(10px);
+} */
 
 .hr {
   /* box */
@@ -108,12 +43,69 @@
   color: transparent;
 }
 
-.arrow {
+.text_container {
+  /* layout */
+  display: flex;
+  justify-content: center;
+
+  /* box */
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: white;
+}
+
+.left {
+  /* layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10px;
+
+  /* box */
+  width: 140px;
+}
+
+.text_title {
+  /* layout */
+  width: 144px;
+  margin-bottom: 4px;
+
+  /* text */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.text_material {
+  /* layout */
+  margin-left: 2px;
+
+  /* text */
+  font-weight: lighter;
+  /* NOTE: Google Chromeで 10px 未満の文字を表示させる https://blog.upshare.co.jp/2021/07/3730/ */
+  display: block;
+  font-size: 10px;
+  transform: scale(0.6);
+  transform-origin: left top;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  /* box */
+  /* NOTE: 160 / 0.6 */
+  width: 240px;
+}
+
+.icon {
   /* icon */
   display: flex;
   justify-content: center;
   align-items: center;
-  /* 上下中央揃え */
   margin: auto;
 
   /* circle */
