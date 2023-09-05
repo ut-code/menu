@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { Session } from "@supabase/supabase-js"
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query"
 
@@ -7,13 +8,21 @@ import { Recipe } from "@/utils/recipes"
 import { getUserFavoritesApi, postUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/apiUtils"
 import { DeleteAccount } from "@/features/Auth/DeleteAccount"
 import { SignOut } from "@/features/Auth/SignOut"
+import { Head } from "@/components/Head"
+import { Hamburger } from "@/components/Hamburger"
+import { HorizontalScroll } from "./components/HorizontalScroll"
+import { MoreButton } from "@/components/elements/button/MoreButton"
+import { HomeSearchbox } from "./components/HomeSearchbox"
+
 interface Props {
   session: Session | null
 }
 
 export const Home = ({ session }: Props) => {
   const [tmp, setTmp] = useState<number>(0)
+  const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
   const queryClient = useQueryClient()
+  const Navigate = useNavigate()
 
   // 永続的に残るので、localStorageから問題への回答を消しておく
   localStorage.removeItem("ingredients")
@@ -69,14 +78,56 @@ export const Home = ({ session }: Props) => {
     },
   })
 
+  const onClickOpenHamburger = () => setIsOpenHamburger(true)
+  const onClickCloseHamburger = () => setIsOpenHamburger(false)
+
   if (isLoading) return <p>お気に入りを読み込み中</p>
   return (
     <>
       <div className="style_lightbrown">
-        <Link to={"/questions"}>
-          <button>はじめる</button>
-        </Link>
-        <br></br>
+        <Head showBackButton={false} onClickOpenHamburger={onClickOpenHamburger} />
+        {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "end",
+            justifyContent: "flex-start",
+            marginRight: "auto",
+            marginBottom: "15px",
+          }}
+        >
+          <span style={{ fontSize: "24px", fontWeight: "bold", marginLeft: "8px" }}>Futaba</span>
+          <span style={{ fontSize: "12px", margin: "0 0 6px 10px" }}>さん</span>
+        </div>
+        <div style={{ width: "100%", marginBottom: "25px" }}>
+          <Link to={"/questions"}>
+            <HomeSearchbox />
+          </Link>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", padding: "0 40px" }}>
+            <h3>人気のレシピ</h3>
+            <MoreButton onClick={() => Navigate("/home/favorites")} />
+          </div>
+          <HorizontalScroll recipes={favoriteRecipes?.slice(0, 6)} />
+
+          <div style={{ display: "flex", justifyContent: "space-between", padding: "0 40px" }}>
+            <h3>季節のレシピ</h3>
+            <MoreButton onClick={() => Navigate("/home/favorites")} />
+          </div>
+          <HorizontalScroll recipes={favoriteRecipes?.slice(0, 6)} />
+
+          <div style={{ display: "flex", justifyContent: "space-between", padding: "0 40px" }}>
+            <h3>お気に入り</h3>
+            <MoreButton onClick={() => Navigate("/home/favorites")} />
+          </div>
+          <HorizontalScroll recipes={favoriteRecipes?.slice(0, 6)} />
+        </div>
+      </div>
+
+      <hr />
+
+      <div className="style_lightbrown">
         <Link to={"/search"}>
           <button>検索結果</button>
         </Link>
@@ -95,10 +146,6 @@ export const Home = ({ session }: Props) => {
           <button>サインアップ</button>
         </Link>
         <br></br>
-
-        <Link to={"/home/favorites"}>
-          <button>お気に入り</button>
-        </Link>
         <br></br>
         <input onChange={(e) => setTmp(Number(e.target.value))} type="number" />
         <button onClick={() => onClickAddFavorite.mutate(tmp)} type="submit">
