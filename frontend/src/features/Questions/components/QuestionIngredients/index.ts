@@ -1,0 +1,1 @@
+export { QuestionIngredients } from "./QuestionIngredients"
