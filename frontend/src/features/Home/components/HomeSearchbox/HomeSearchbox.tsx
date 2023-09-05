@@ -1,18 +1,14 @@
 import styles from "./HomeSearchbox.module.css"
-import { FiSearch } from "react-icons/fi"
+import { BsArrowRight } from "react-icons/bs"
 
 export const HomeSearchbox = () => {
   return (
     <div className={styles.search}>
-      <input
-        className={styles.box}
-        // type="text"
-        placeholder={"あなたにぴったりのレシピを検索する"}
-        // value={props.inputContent}
-        // onChange={props.onChange}
-      />
-      <div>
-        <FiSearch className={styles.icon} />
+      <label>
+        <input className={styles.box} placeholder={"あなたにぴったりのレシピを検索する"} />
+      </label>
+      <div className={styles.icon}>
+        <BsArrowRight size="1rem" color="white" />
       </div>
     </div>
   )

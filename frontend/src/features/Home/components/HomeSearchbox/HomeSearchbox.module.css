@@ -1,41 +1,40 @@
 .search {
+  /* layout */
   display: flex;
-  margin: 1.2em -0.8em;
-  width: 100%;
+  align-items: center;
+  border-radius: 25px;
+  justify-content: space-between;
+
+  /* box */
+  height: 38px;
+  overflow: hidden;
+  border: var(--Black) 2px solid;
 }
 
 .box {
   /* layout */
-  flex-grow: 1;
-  padding: 0.7em 1.3em;
-  margin-left: 1em;
+  padding-left: 22px;
 
   /* box */
+  height: 38px;
+  width: 290px;
+  outline: none;
+  border: none;
+  box-sizing: border-box;
   background-color: white;
-  border-radius: 50em;
-  /* make a circle border */
-  border: var(--Black) 1px solid;
-  box-shadow: var(--Black) 2px 2px 0 0;
-  height: 1.8em;
 
   /* text */
-  font-size: 0.75rem;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  /* はみ出した文字は「…」で省略 */
-  color: var(--Gray);
-}
-
-input[type="text"]:focus.box {
-  border: var(--Red) 1px solid;
-  box-shadow: var(--Red) 2px 2px 0 0;
-  outline: 0;
+  font-size: 12px;
 }
 
 .icon {
-  position: relative;
-  top: 0.75em;
-  right: 2em;
-  color: var(--Black) !important;
+  /* layout */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* box */
+  width: 100%;
+  height: 100%;
+  background-color: var(--Green);
 }

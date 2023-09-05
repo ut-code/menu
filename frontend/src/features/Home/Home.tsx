@@ -91,21 +91,23 @@ export const Home = ({ session }: Props) => {
           <span style={{ fontSize: "24px", fontWeight: "bold" }}>Futaba</span>
           <span style={{ fontSize: "12px", margin: "0 0 6px 10px" }}>さん</span>
         </div>
-        <Link to={"/questions"}>
-          <HomeSearchbox />
-        </Link>
+        <div style={{ width: "100%" }}>
+          <Link to={"/questions"}>
+            <HomeSearchbox />
+          </Link>
+        </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ display: "flex", justifyContent: "space-between", padding: "0 40px" }}>
             <h3>人気のレシピ</h3>
             <MoreButton onClick={() => Navigate("/home/favorites")} />
           </div>
-          <HorizontalScroll recipes={[]} />
+          <HorizontalScroll recipes={favoriteRecipes?.slice(0, 6)} />
 
           <div style={{ display: "flex", justifyContent: "space-between", padding: "0 40px" }}>
             <h3>季節のレシピ</h3>
             <MoreButton onClick={() => Navigate("/home/favorites")} />
           </div>
-          <HorizontalScroll recipes={[]} />
+          <HorizontalScroll recipes={favoriteRecipes?.slice(0, 6)} />
 
           <div style={{ display: "flex", justifyContent: "space-between", padding: "0 40px" }}>
             <h3>お気に入り</h3>
