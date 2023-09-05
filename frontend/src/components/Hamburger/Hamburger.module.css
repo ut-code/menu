@@ -20,7 +20,7 @@
 
 .content {
   /* 奥行き */
-  z-index: 3;
+  z-index: 10;
 
   /* box */
   width: 58%;
@@ -54,7 +54,7 @@
 
 .close {
   /* 奥行き */
-  z-index: 4;
+  z-index: 11;
 
   /* display: none; */
   color: white;

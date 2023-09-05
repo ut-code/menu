@@ -1,65 +1,22 @@
 .swiper {
-  width: 100vw;
   height: 100vh;
 }
 
 .swiper-slide {
-  text-align: center;
-  font-weight: bold;
-}
-
-.heading {
-  /* text */
-  font-family: Yu Gothic; /* フォントはglobal.cssで管理するはずでは？ */
-  font-size: 1.4em;
-  line-height: 180%;
-}
-
-.title_div {
-  margin-top: 2em;
-}
-.text_div {
-  margin-top: 1.7em;
-}
-
-.title {
-  /* layout */
-  margin: 0.5em;
-
-  /* text */
-  font-size: 2.3em;
-}
-
-.description {
-  /* text */
-  font-size: 0.8em;
+  display: flex;
+  flex-direction: column;
 }
 
 .bottom {
-  /* layout */
-  position: absolute;
-  /* top: 70%; */
-  bottom: 17%;
-  left: 50%;
-  transform: translate(-50%, 70%);
-
-  /* box */
-  /* height: 6%; */
-  width: 90%;
-  flex-direction: column;
-  /* align-items: center; */
-  margin: 0 auto;
-  /* 下に寄せる */
-  /* display: flex;
-  justify-content: flex-end; */
-}
-
-.skip {
-  /* text */
-  color: var(--Gray);
-  font-size: 0.8em;
+  width: 100%;
 }
 
 .icon {
   width: 80%;
+  margin: 0 auto;
+}
+
+#swiper-button-next {
+  width: 90%;
+  margin: 0 auto;
 }

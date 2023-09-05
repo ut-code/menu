@@ -33,6 +33,7 @@ export const Home = ({ session }: Props) => {
   const { data: favoriteRecipes, isLoading } = useQuery({
     queryKey: ["favoriteRecipes"],
     queryFn: async () => {
+      console.log(session?.access_token)
       if (!session?.access_token) return []
       const response = await fetch(getUserFavoritesApi(), {
         headers: { Authorization: `Bearer ${session?.access_token}` },
