@@ -2,11 +2,6 @@
   height: 100vh;
 }
 
-.swiper-slide {
-  display: flex;
-  flex-direction: column;
-}
-
 .bottom {
   width: 100%;
 }
