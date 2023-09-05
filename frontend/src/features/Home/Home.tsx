@@ -87,11 +87,19 @@ export const Home = ({ session }: Props) => {
       <div className="style_lightbrown">
         <Head showBackButton={false} onClickOpenHamburger={onClickOpenHamburger} />
         {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
-        <div style={{ display: "flex", alignItems: "end" }}>
-          <span style={{ fontSize: "24px", fontWeight: "bold" }}>Futaba</span>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "end",
+            justifyContent: "flex-start",
+            marginRight: "auto",
+            marginBottom: "15px",
+          }}
+        >
+          <span style={{ fontSize: "24px", fontWeight: "bold", marginLeft: "8px" }}>Futaba</span>
           <span style={{ fontSize: "12px", margin: "0 0 6px 10px" }}>さん</span>
         </div>
-        <div style={{ width: "100%" }}>
+        <div style={{ width: "100%", marginBottom: "25px" }}>
           <Link to={"/questions"}>
             <HomeSearchbox />
           </Link>
