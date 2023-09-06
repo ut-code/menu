@@ -10,8 +10,8 @@ export const Footprint = (props: FootPrintProps) => {
   return (
     <>
       <div className={styles.footprint}>
-        <FaPaw size={`${props.ratio * 45}px`} className={styles.left} />
-        <FaPaw size={`${props.ratio * 25}px`} className={styles.right} />
+        <FaPaw size="45px" className={styles.left} />
+        <FaPaw size="25px" className={styles.right} />
       </div>
     </>
   )
