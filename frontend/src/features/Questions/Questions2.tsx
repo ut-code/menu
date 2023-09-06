@@ -8,18 +8,26 @@ import { QuestionCookingTime } from "./components/QuestionCookingTime"
 export const Questions = () => {
   const Navigate = useNavigate()
 
-  const [questionNumber, setQuestionNumber, removeQuestionNumber] = useLocalStorage("questionNumber", 0)
-  const [ingredients, setIngredients, removeIngredients] = useLocalStorage<string[]>("ingredients", [])
-  const [genre, setGenre, removeGenre] = useLocalStorage("genre", "")
-  const [cookingTime, setCookingTime, removeCookingTime] = useLocalStorage("cookingTime", "")
+  const [questionNumber, setQuestionNumber] = useLocalStorage("questionNumber", 0)
+  const [ingredients, setIngredients] = useLocalStorage<string[]>("ingredients", [])
+  const [genre, setGenre] = useLocalStorage("genre", "")
+  const [cookingTime, setCookingTime] = useLocalStorage("cookingTime", "")
 
   switch (questionNumber) {
     case 0:
-      return <QuestionIngredients setQuestionNumber={setQuestionNumber} setIngredients={setIngredients} />
+      return (
+        <QuestionIngredients
+          setQuestionNumber={setQuestionNumber}
+          ingredients={ingredients}
+          setIngredients={setIngredients}
+        />
+      )
     case 1:
-      return <QuestionGenre setQuestionNumber={setQuestionNumber} setAnswer={setGenre} />
+      return <QuestionGenre setQuestionNumber={setQuestionNumber} answer={genre} setAnswer={setGenre} />
     case 2:
-      return <QuestionCookingTime setQuestionNumber={setQuestionNumber} setAnswer={setCookingTime} />
+      return (
+        <QuestionCookingTime setQuestionNumber={setQuestionNumber} answer={cookingTime} setAnswer={setCookingTime} />
+      )
     default:
       Navigate("/search")
       return null
