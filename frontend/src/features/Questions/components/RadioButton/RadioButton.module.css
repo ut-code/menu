@@ -87,9 +87,6 @@
   align-items: center;
 }
 .choiceDesccription {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   color: white;
   font-size: 8px;
 }
