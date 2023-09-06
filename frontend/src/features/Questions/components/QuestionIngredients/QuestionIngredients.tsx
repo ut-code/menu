@@ -1,12 +1,12 @@
 interface Props {
   setQuestionNumber: (questionNumber: number) => void
-  setIngredients: (ingredients: string[]) => void
+  setAnswer: (answers: string[]) => void
 }
 
-export const QuestionIngredients = ({ setQuestionNumber, setIngredients }: Props) => {
+export const QuestionIngredients = ({ setQuestionNumber, setAnswer }: Props) => {
   return (
     <>
-      <button onClick={() => setIngredients(["卵"])}>卵</button>
+      <button onClick={() => setAnswer(["卵"])}>卵</button>
       <button onClick={() => setQuestionNumber(1)}>次へ</button>
     </>
   )

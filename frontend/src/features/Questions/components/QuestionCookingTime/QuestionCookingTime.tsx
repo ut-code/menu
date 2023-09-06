@@ -1,15 +1,20 @@
+import { useNavigate } from "react-router-dom"
+
 interface Props {
   setQuestionNumber: (questionNumber: number) => void
-  setCookingTime: (cookingTime: string) => void
+  setAnswer: (answer: string) => void
 }
 
-export const QuestionCookingTime = ({ setQuestionNumber, setCookingTime }: Props) => {
+export const QuestionCookingTime = ({ setQuestionNumber, setAnswer }: Props) => {
+  const Navigate = useNavigate()
+
   return (
     <>
-      <button onClick={() => setCookingTime("15分")}>15分</button>
-      <button onClick={() => setCookingTime("30分")}>30分</button>
-      <button onClick={() => setCookingTime("60分")}>60分</button>
-      <button onClick={() => setQuestionNumber(3)}>次へ</button>
+      <button onClick={() => setQuestionNumber(1)}>戻る</button>
+      <button onClick={() => setAnswer("15分")}>15分</button>
+      <button onClick={() => setAnswer("30分")}>30分</button>
+      <button onClick={() => setAnswer("60分")}>60分</button>
+      <button onClick={() => Navigate("/search")}>次へ</button>
     </>
   )
 }

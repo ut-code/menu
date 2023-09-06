@@ -15,11 +15,11 @@ export const Questions = () => {
 
   switch (questionNumber) {
     case 0:
-      return <QuestionIngredients setQuestionNumber={setQuestionNumber} setIngredients={setIngredients} />
+      return <QuestionIngredients setQuestionNumber={setQuestionNumber} setAnswer={setIngredients} />
     case 1:
-      return <QuestionGenre setQuestionNumber={setQuestionNumber} setGenre={setGenre} />
+      return <QuestionGenre setQuestionNumber={setQuestionNumber} setAnswer={setGenre} />
     case 2:
-      return <QuestionCookingTime setQuestionNumber={setQuestionNumber} setCookingTime={setCookingTime} />
+      return <QuestionCookingTime setQuestionNumber={setQuestionNumber} setAnswer={setCookingTime} />
     default:
       Navigate("/search")
       return null
