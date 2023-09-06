@@ -27,6 +27,7 @@ export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer, keyw
         onClickPreviousPage={() => setQuestionNumber(1)}
         onClickOpenHamburger={() => console.log("wip")}
       />
+      <h2>調理時間を選択してください</h2>
       <Keywords keywords={keywords} />
       <div className={"boxes"}>
         {options.map((option) => (
@@ -44,6 +45,7 @@ export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer, keyw
           </div>
         ))}
       </div>
+      <div className={"space"} />
       <NextButton onClick={() => Navigate("/search")} />
     </div>
   )

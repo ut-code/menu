@@ -3,13 +3,22 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2x2に並べる */
   margin: auto;
-  gap: 2em;
+  gap: 18px;
 }
 
 .text {
   font-weight: bold;
   text-align: left;
   margin: 0.5em 0 0 1.2em;
+}
+
+h2 {
+  font-size: 20px;
+  margin: 30px auto;
+}
+
+.space {
+  height: 40px;
 }
 
 /*
