@@ -2,11 +2,7 @@
 import { FaPaw } from "react-icons/fa"
 import styles from "./Footprint.module.css"
 
-type FootPrintProps = {
-  ratio: number
-}
-
-export const Footprint = (props: FootPrintProps) => {
+export const Footprint = () => {
   return (
     <>
       <div className={styles.footprint}>
