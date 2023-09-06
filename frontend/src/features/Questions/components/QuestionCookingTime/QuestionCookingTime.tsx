@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom"
 
 import { NextButton } from "@/components/elements/button/NextButton"
+import { Head } from "@/components/Head"
 
 interface Props {
   setQuestionNumber: (questionNumber: number) => void
@@ -10,14 +11,37 @@ interface Props {
 
 export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer }: Props) => {
   const Navigate = useNavigate()
+  const options = [
+    { id: "1", label: "時短" },
+    { id: "2", label: "普通" },
+    { id: "3", label: "じっくり" },
+    { id: "4", label: "どれでも" },
+  ]
 
   return (
-    <>
-      <button onClick={() => setQuestionNumber(1)}>戻る</button>
-      <button onClick={() => setAnswer("15分")}>15分</button>
-      <button onClick={() => setAnswer("30分")}>30分</button>
-      <button onClick={() => setAnswer("60分")}>60分</button>
+    <div className="style_lightbrown">
+      <Head
+        showBackButton={true}
+        onClickPreviousPage={() => setQuestionNumber(1)}
+        onClickOpenHamburger={() => console.log("wip")}
+      />
+      <div className={"boxes"}>
+        {options.map((option) => (
+          <div key={option.id} className={"box nopic"}>
+            <input
+              type="radio"
+              id={option.id}
+              value={option.label}
+              checked={answer === option.label}
+              onChange={() => setAnswer(option.label)}
+            />
+            <label htmlFor={option.id}>
+              <div className={"nopic_text"}>{option.label}</div>
+            </label>
+          </div>
+        ))}
+      </div>
       <NextButton onClick={() => Navigate("/search")} />
-    </>
+    </div>
   )
 }

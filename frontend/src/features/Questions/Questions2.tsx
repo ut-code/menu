@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { useLocalStorage } from "react-use"
 
+import "./questions.css"
 import { QuestionIngredients } from "./components/QuestionIngredients"
 import { QuestionGenre } from "./components/QuestionGenre"
 import { QuestionCookingTime } from "./components/QuestionCookingTime"

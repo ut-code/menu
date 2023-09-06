@@ -1,0 +1,101 @@
+.boxes {
+  /* layout */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2x2に並べる */
+  margin: auto;
+  gap: 2em;
+}
+
+.text {
+  font-weight: bold;
+  text-align: left;
+  margin: 0.5em 0 0 1.2em;
+}
+
+/*
+共通: box
+画像なし: nopic
+画像あり: pic
+*/
+.box {
+  /* box */
+  border-radius: 20px;
+  border: solid 2px var(--Black);
+  box-shadow: var(--Black) 2px 2px 0 0;
+  height: 150px;
+  width: 150px;
+  overflow: hidden; /* 丸めた枠からのはみ出しを隠す */
+}
+
+.box input[type="radio"] {
+  display: none;
+}
+
+.nopic {
+  /* box */
+  background-color: var(--Brown);
+
+  /* text */
+  color: white;
+  font-weight: bold;
+}
+
+.nopic:has(input[type="radio"]:checked) {
+  /* box */
+  background-color: var(--Yellow);
+}
+
+.nopic_text {
+  /* layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* box */
+  height: 150px;
+  width: 150px;
+
+  /* text */
+  color: white;
+  font-weight: bold;
+}
+
+.pic {
+  /* box */
+  background-color: white;
+}
+
+/* .pic:has(input[type="radio"]:checked) {
+	border: var(--Red) 2px solid;
+	box-shadow: var(--Red) 2px 2px 0 0;
+	outline: 0;
+} */
+
+.pic_iframe {
+  /* box */
+  border-bottom: solid 2px var(--Black);
+  height: 100px;
+  width: 100%;
+}
+
+.pic_heading {
+  /* layout */
+  padding: 0.35em 0.6em 0em 0.6em;
+
+  /* text */
+  color: var(--Black);
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.pic_filter {
+  width: 150px;
+  height: 150px;
+  background: var(--Yellow);
+  box-shadow: var(--Black) 2px 2px 0 0;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
