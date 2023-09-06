@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 
 import { Hamburger } from "@/components/Hamburger"
 import { NextButton } from "@/components/elements/button/NextButton"
-import { Keywords } from "./components/Keywords"
+// import { Keywords } from "./components/Keywords"
 import { RadioGroup } from "./components/RadioGroup"
 import { QuestionGroup } from "./components/QuestionGroup"
 
@@ -142,11 +142,11 @@ export const Questions = () => {
   const [ingredients, setIngredients] = useState<string[]>([])
   const [genre, setGenre] = useState<string>("")
   const [cookingTime, setCookingTime] = useState<string>("")
-  const answers: Answers = {
-    ingredients: ingredients,
-    genre: genre,
-    cookingTime: cookingTime,
-  }
+  // const answers: Answers = {
+  //   ingredients: ingredients,
+  //   genre: genre,
+  //   cookingTime: cookingTime,
+  // }
 
   //----------------------------------------------------------------
   // localStorage を使って inputContent と currentQuestion を設定する
@@ -253,7 +253,7 @@ export const Questions = () => {
 
         <div className="style_lightbrown">
           {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
-          {currentQuestion.userInput === false && <Keywords answers={answers} />}
+          {/* {currentQuestion.userInput === false && <Keywords answers={answers} />} */}
 
           <RadioGroup
             options={currentQuestion.choices}

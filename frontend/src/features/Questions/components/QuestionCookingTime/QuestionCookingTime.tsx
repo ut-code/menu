@@ -2,14 +2,16 @@ import { useNavigate } from "react-router-dom"
 
 import { NextButton } from "@/components/elements/button/NextButton"
 import { Head } from "@/components/Head"
+import { Keywords } from "../Keywords"
 
 interface Props {
   setQuestionNumber: (questionNumber: number) => void
   answer: string | undefined
   setAnswer: (answer: string) => void
+  keywords: (string | undefined)[]
 }
 
-export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer }: Props) => {
+export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer, keywords }: Props) => {
   const Navigate = useNavigate()
   const options = [
     { id: "1", label: "時短" },
@@ -25,6 +27,7 @@ export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer }: Pr
         onClickPreviousPage={() => setQuestionNumber(1)}
         onClickOpenHamburger={() => console.log("wip")}
       />
+      <Keywords keywords={keywords} />
       <div className={"boxes"}>
         {options.map((option) => (
           <div key={option.id} className={"box nopic"}>

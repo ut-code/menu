@@ -13,6 +13,7 @@ export const Questions = () => {
   const [ingredients, setIngredients] = useLocalStorage<string[]>("ingredients", [])
   const [genre, setGenre] = useLocalStorage("genre", "")
   const [cookingTime, setCookingTime] = useLocalStorage("cookingTime", "")
+  const keywords = ingredients !== undefined ? [...ingredients, genre, cookingTime] : []
 
   switch (questionNumber) {
     case 0:
@@ -27,7 +28,12 @@ export const Questions = () => {
       return <QuestionGenre setQuestionNumber={setQuestionNumber} answer={genre} setAnswer={setGenre} />
     case 2:
       return (
-        <QuestionCookingTime setQuestionNumber={setQuestionNumber} answer={cookingTime} setAnswer={setCookingTime} />
+        <QuestionCookingTime
+          setQuestionNumber={setQuestionNumber}
+          answer={cookingTime}
+          setAnswer={setCookingTime}
+          keywords={keywords}
+        />
       )
     default:
       Navigate("/search")
