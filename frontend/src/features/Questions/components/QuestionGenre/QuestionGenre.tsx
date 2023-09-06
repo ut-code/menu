@@ -39,7 +39,7 @@ export const QuestionGenre = ({ setQuestionNumber, answer, setAnswer, keywords }
     <div className="style_lightbrown">
       <Head
         showBackButton={true}
-        onClickPreviousPage={() => setQuestionNumber(1)}
+        onClickPreviousPage={() => setQuestionNumber(0)}
         onClickOpenHamburger={onClickOpenHamburger}
       />
       {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
