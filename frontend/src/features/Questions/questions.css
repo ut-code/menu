@@ -59,6 +59,7 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 
   /* box */
   height: 150px;
@@ -66,7 +67,14 @@ h2 {
 
   /* text */
   color: white;
+  font-size: 24px;
   font-weight: bold;
+}
+
+.nopic_description {
+  /* text */
+  font-size: 10px;
+  font-weight: normal;
 }
 
 .pic {

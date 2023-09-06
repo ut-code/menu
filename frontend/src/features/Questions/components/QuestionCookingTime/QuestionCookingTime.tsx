@@ -1,7 +1,9 @@
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 import { NextButton } from "@/components/elements/button/NextButton"
 import { Head } from "@/components/Head"
+import { Hamburger } from "@/components/Hamburger"
 import { Keywords } from "../Keywords"
 import { Option } from "@/utils/questions"
 
@@ -14,20 +16,35 @@ interface Props {
 
 export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer, keywords }: Props) => {
   const Navigate = useNavigate()
+  const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
+
   const options: Option[] = [
-    { id: "1", value: "時短" },
-    { id: "2", value: "普通" },
-    { id: "3", value: "じっくり" },
-    { id: "4", value: "どれでも" },
+    { id: "1", value: "時短", description: "目安時間: 15分" },
+    { id: "2", value: "普通", description: "目安時間: 30分" },
+    { id: "3", value: "じっくり", description: "目安時間: 60分" },
+    { id: "4", value: "どれでも", description: "目安時間: なし" },
   ]
+
+  const onClickNextPage = () => {
+    if (answer === "") {
+      // FIXME: アラートを実装する
+      alert("選択肢を選んでください")
+      return
+    }
+    Navigate("/search")
+  }
+
+  const onClickOpenHamburger = () => setIsOpenHamburger(true)
+  const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
   return (
     <div className="style_lightbrown">
       <Head
         showBackButton={true}
         onClickPreviousPage={() => setQuestionNumber(1)}
-        onClickOpenHamburger={() => console.log("wip")}
+        onClickOpenHamburger={onClickOpenHamburger}
       />
+      {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
       <h2>調理時間を選択してください</h2>
       <Keywords keywords={keywords} />
       <div className={"boxes"}>
@@ -41,13 +58,16 @@ export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer, keyw
               onChange={() => setAnswer(option.value)}
             />
             <label htmlFor={option.id}>
-              <div className={"nopic_text"}>{option.value}</div>
+              <div className={"nopic_text"}>
+                {option.value}
+                <div className={"nopic_description"}>{option.description}</div>
+              </div>
             </label>
           </div>
         ))}
       </div>
       <div className={"space"} />
-      <NextButton onClick={() => Navigate("/search")} />
+      <NextButton onClick={onClickNextPage} />
     </div>
   )
 }

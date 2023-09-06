@@ -25,7 +25,9 @@ export const Questions = () => {
         />
       )
     case 1:
-      return <QuestionGenre setQuestionNumber={setQuestionNumber} answer={genre} setAnswer={setGenre} />
+      return (
+        <QuestionGenre setQuestionNumber={setQuestionNumber} answer={genre} setAnswer={setGenre} keywords={keywords} />
+      )
     case 2:
       return (
         <QuestionCookingTime
