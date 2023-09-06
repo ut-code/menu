@@ -24,7 +24,7 @@ export const RadioButton = (props: Props) => {
         checked={props.inputContent === props.value}
       />
       <label htmlFor={props.index.toString()}>
-        {props.userInput && (
+        {props.userInput ? (
           <div>
             {props.inputContent === props.value && ( //選択された時
               <div className={styles.pic_filter}>
@@ -38,9 +38,12 @@ export const RadioButton = (props: Props) => {
               </div>
             )}
           </div>
+        ) : (
+          <div className={styles.nopic_text}>
+            {props.value}
+            {props.choiceDescription && <div className={styles.choiceDesccription}>{props.choiceDescription}</div>}
+          </div>
         )}
-        {props.choiceDescription && <div className={styles.choiceDesccription}>{props.choiceDescription}</div>}
-        {props.userInput === false && <div className={styles.nopic_text}>{props.value}</div>}
       </label>
     </div>
   )
