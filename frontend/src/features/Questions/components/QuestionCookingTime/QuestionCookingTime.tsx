@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { NextButton } from "@/components/elements/button/NextButton"
 import { Head } from "@/components/Head"
 import { Keywords } from "../Keywords"
+import { Option } from "@/utils/questions"
 
 interface Props {
   setQuestionNumber: (questionNumber: number) => void
@@ -13,11 +14,11 @@ interface Props {
 
 export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer, keywords }: Props) => {
   const Navigate = useNavigate()
-  const options = [
-    { id: "1", label: "時短" },
-    { id: "2", label: "普通" },
-    { id: "3", label: "じっくり" },
-    { id: "4", label: "どれでも" },
+  const options: Option[] = [
+    { id: "1", value: "時短" },
+    { id: "2", value: "普通" },
+    { id: "3", value: "じっくり" },
+    { id: "4", value: "どれでも" },
   ]
 
   return (
@@ -35,12 +36,12 @@ export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer, keyw
             <input
               type="radio"
               id={option.id}
-              value={option.label}
-              checked={answer === option.label}
-              onChange={() => setAnswer(option.label)}
+              value={option.value}
+              checked={answer === option.value}
+              onChange={() => setAnswer(option.value)}
             />
             <label htmlFor={option.id}>
-              <div className={"nopic_text"}>{option.label}</div>
+              <div className={"nopic_text"}>{option.value}</div>
             </label>
           </div>
         ))}
