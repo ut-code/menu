@@ -35,6 +35,7 @@ type Choices = {
   [key: number]: {
     choiceText: string
     choiceImage: string
+    choiceDescription?: string
   }
 }
 
@@ -117,9 +118,10 @@ const questions: Question[] = [
     questionText: "調理時間を選択してください",
     userInput: false,
     choices: {
-      0: { choiceText: "時短", choiceImage: "" },
-      1: { choiceText: "普通", choiceImage: "" },
-      2: { choiceText: "じっくり", choiceImage: "" },
+      0: { choiceText: "時短", choiceImage: "", choiceDescription: "目安時間: 15分" },
+      1: { choiceText: "普通", choiceImage: "", choiceDescription: "目安時間: 30分" },
+      2: { choiceText: "じっくり", choiceImage: "", choiceDescription: "目安時間: 60分" },
+      3: { choiceText: "どれでも", choiceImage: "", choiceDescription: "目安時間: ランダム" },
     },
     questionType: "cookingTime",
   },
@@ -256,6 +258,7 @@ export const Questions = () => {
           {/* {currentQuestion.userInput === false && <Keywords answers={answers} />} */}
 
           <RadioGroup
+            // ここにchoicesが入っている
             options={currentQuestion.choices}
             onChange={onChangeHandler}
             inputContent={inputContent}
