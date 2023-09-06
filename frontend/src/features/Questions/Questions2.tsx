@@ -15,7 +15,7 @@ export const Questions = () => {
 
   switch (questionNumber) {
     case 0:
-      return <QuestionIngredients setQuestionNumber={setQuestionNumber} setAnswer={setIngredients} />
+      return <QuestionIngredients setQuestionNumber={setQuestionNumber} setIngredients={setIngredients} />
     case 1:
       return <QuestionGenre setQuestionNumber={setQuestionNumber} setAnswer={setGenre} />
     case 2:
