@@ -1,5 +1,6 @@
-import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import { Session } from "@supabase/supabase-js"
 import { useQuery } from "@tanstack/react-query"
 
 import { Hamburger } from "@/components/Hamburger"
@@ -10,7 +11,11 @@ import { Recipe, Answers, SearchInfo, convertAnswersToSearchInfo } from "@/utils
 import { postSearchRecipesApi } from "@/utils/apiUtils"
 import styles from "./Result.module.css"
 
-export const Result = () => {
+interface Props {
+  session: Session | null
+}
+
+export const Result = ({ session }: Props) => {
   // useNavigate を Navigate に変化させる呪文
   const Navigate = useNavigate()
 
@@ -101,7 +106,7 @@ export const Result = () => {
       {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
 
       <div className={styles.cards}>
-        {recipes && recipes.map((recipe) => <RecipeCard key={recipe.id} recipe={recipe} />)}
+        {recipes && recipes.map((recipe) => <RecipeCard key={recipe.id} recipe={recipe} session={session} />)}
       </div>
 
       <div className={styles.spacer} />
