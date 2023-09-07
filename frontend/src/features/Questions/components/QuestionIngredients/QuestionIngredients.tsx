@@ -36,9 +36,16 @@ export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredi
   }
 
   // NOTE: inputContentを変化させたらingredientsも変化させている
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeSearchbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputContent(e.target.value)
     setIngredients(e.target.value.split(" "))
+  }
+
+  const onChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
+    toggleOption(e.target.value)
+    if (ingredients !== undefined) {
+      setInputContent(ingredients.join(" "))
+    }
   }
 
   return (
@@ -46,7 +53,7 @@ export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredi
       <Searchbox
         onClickHandler={() => Navigate("/search")}
         placeholder={"食材の名前を入力してみましょう"}
-        onChange={onChangeHandler}
+        onChange={onChangeSearchbox}
         inputContent={inputContent}
       />
       <div className={"boxes"}>
@@ -57,7 +64,7 @@ export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredi
               id={option.id}
               value={option.value}
               checked={inputContent.includes(option.value)}
-              onChange={() => toggleOption(option.value)}
+              onChange={onChangeCheckbox}
             />
             <label htmlFor={option.id}>
               <div className={"nopic_text"}>
