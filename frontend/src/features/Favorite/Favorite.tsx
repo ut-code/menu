@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { Session } from "@supabase/supabase-js"
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query"
 
@@ -19,6 +19,21 @@ export const Favorite = ({ session }: Props) => {
   const Navigate = useNavigate()
 
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
+  const [initialFavoriteRecipes, setInitialFavoriteRecipes] = useState<Recipe[]>([])
+
+  // NOTE: コードの再利用性は悪いが、こうするしかなかった…
+  useEffect(() => {
+    if (!session) return
+    const fetchFavoriteRecipes = async () => {
+      const response = await fetch(getUserFavoritesApi(), {
+        headers: { Authorization: `Bearer ${session?.access_token}` },
+      })
+      if (!response.ok) throw new Error("お気に入りの取得に失敗しました")
+      const recipes: Recipe[] = await response.json()
+      setInitialFavoriteRecipes(recipes)
+    }
+    fetchFavoriteRecipes()
+  }, [])
 
   // NOTE: https://www.notion.so/utcode/JWT-4743f0e6a64e4ee7848818c9bc0efee1?pvs=4
   const { data: favoriteRecipes, isLoading } = useQuery({
@@ -93,8 +108,8 @@ export const Favorite = ({ session }: Props) => {
 
       <h1>お気に入り</h1>
       <div className={styles.cards}>
-        {favoriteRecipes ? (
-          favoriteRecipes.map((recipe) => (
+        {initialFavoriteRecipes ? (
+          initialFavoriteRecipes.map((recipe) => (
             <RecipeCard
               key={recipe.id}
               recipe={recipe}
@@ -108,10 +123,6 @@ export const Favorite = ({ session }: Props) => {
           <p>お気に入りはまだありません。ハートボタンを押して追加してみましょう。</p>
         )}
       </div>
-
-      <Link to="/home">
-        <button>戻る</button>
-      </Link>
     </div>
   )
 }
