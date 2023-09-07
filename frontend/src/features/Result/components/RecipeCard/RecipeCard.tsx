@@ -31,10 +31,10 @@ export const RecipeCard = ({ recipe }: Props) => {
     <Link to={recipe.recipeUrl} target="_blank" rel="noopener noreferrer">
       <div className={styles.root}>
         <img className={styles.image_frame} src={recipe.foodImageUrls[0]} />
-        <div className={styles.hr}>{"_"}</div>
         <div className={styles.icon}>
           <AiFillHeart color="red" />
         </div>
+        <div className={styles.hr}>{"_"}</div>
         <div className={styles.text_container}>
           <div className={styles.left}>
             <span className={styles.text_title}>{recipe.recipeTitle}</span>
