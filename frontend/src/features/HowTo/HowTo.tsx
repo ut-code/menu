@@ -26,9 +26,11 @@ export const HowTo = () => {
     >
       <SwiperSlide>
         <div className="skip">
-          <p>
-            <b>スキップ</b>
-          </p>
+          <Link to="/questions">
+            <p>
+              <b>スキップ</b>
+            </p>
+          </Link>
         </div>
         <img src={one} alt="アイコン" className="icon" />
         <div className="text-area">
@@ -48,9 +50,11 @@ export const HowTo = () => {
 
       <SwiperSlide>
         <div className="skip">
-          <p>
-            <b>スキップ</b>
-          </p>
+          <Link to="/questions">
+            <p>
+              <b>スキップ</b>
+            </p>
+          </Link>
         </div>
         <img src={two} alt="アイコン" className="icon" />
         <div className="text-area">
@@ -69,9 +73,11 @@ export const HowTo = () => {
 
       <SwiperSlide>
         <div className="skip">
-          <p>
-            <b>スキップ</b>
-          </p>
+          <Link to="/questions">
+            <p>
+              <b>スキップ</b>
+            </p>
+          </Link>
         </div>
         <img src={three} alt="アイコン" className="icon" />
         <div className="text-area">
@@ -90,9 +96,11 @@ export const HowTo = () => {
 
       <SwiperSlide>
         <div className="skip">
-          <p>
-            <b>スキップ</b>
-          </p>
+          <Link to="/questions">
+            <p>
+              <b>スキップ</b>
+            </p>
+          </Link>
         </div>
         <img src={four} alt="アイコン" className="icon" />
         <div className="text-area">
