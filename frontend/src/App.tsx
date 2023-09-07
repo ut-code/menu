@@ -42,7 +42,7 @@ export default function App() {
           element={session ? <Favorite session={session} /> : <Navigate replace to="/home" />}
         ></Route>
         <Route path="/questions" element={<Questions />}></Route>
-        <Route path="/search" element={<Result />}></Route>
+        <Route path="/search" element={<Result session={session} />}></Route>
         <Route path="/auth" element={!session ? <Auth /> : <Navigate replace to="/home" />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>

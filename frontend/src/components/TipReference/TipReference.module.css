@@ -1,13 +1,19 @@
 .tip {
   /* layout */
   padding: 0.5em 1.5em;
+  margin-top: 1em;
+  margin-left: -4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   /* box */
-  background-color: var(--LightBrown);
+  background-color: var(--Brown);
   border-radius: 2rem;
   border: solid 1px black;
   width: fit-content;
 
   /* text */
-  font-weight: bold;
+  color: white;
+  font-size: 12px;
 }

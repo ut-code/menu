@@ -11,7 +11,7 @@ const urlDomainToName: dict = {
   "www.tablemark.co.jp": "テーブルマーク",
   "www.ebarafoods.com": "エバラ食品",
   "park.ajinomoto.co.jp": "味の素パーク",
-  "www.ntv.co.jp/3min/": "キユーピー",
+  "www.ntv.co.jp": "キユーピー",
   "www.meg-snow.com": "雪印メグミルク",
   "www.salad-cafe.com": "サラダカフェ",
   "dancyu.jp": "dancyu",
