@@ -47,7 +47,9 @@ export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredi
     }
   }
 
-  const incrementIngredientsNumber = () => setShowIngredientsNumber((prev) => prev + 1)
+  const incrementIngredientsNumber = () => {
+    setShowIngredientsNumber((prev) => (prev + 1 < shuffledOptions.length ? prev + 1 : prev))
+  }
 
   return (
     <div>
