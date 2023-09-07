@@ -55,6 +55,15 @@ export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredi
     setShowIngredientsNumber((prev) => (prev + 1 < shuffledOptions.length ? prev + 1 : prev))
   }
 
+  const onClickNextPage = () => {
+    if (ingredients === undefined || ingredients.length === 0) {
+      // FIXME: アラートを実装する
+      alert("選択肢を選んでください")
+      return
+    }
+    setQuestionNumber(1)
+  }
+
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
@@ -113,7 +122,8 @@ export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredi
             </div>
           </div>
         </div>
-        <NextButton onClick={() => setQuestionNumber(1)} />
+        <div className={"space"} />
+        <NextButton onClick={onClickNextPage} />
       </div>
     </>
   )

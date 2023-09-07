@@ -1,1 +1,1 @@
-export { Questions } from "./Questions2"
+export { Questions } from "./Questions"
