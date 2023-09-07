@@ -43,7 +43,7 @@ export const QuestionGenre = ({ setQuestionNumber, answer, setAnswer, keywords }
         onClickOpenHamburger={onClickOpenHamburger}
       />
       {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
-      <h2>調理時間を選択してください</h2>
+      <h2>料理のカテゴリを選択してください</h2>
       <Keywords keywords={keywords} />
       <div className={"boxes"}>
         {options.map((option) => (
