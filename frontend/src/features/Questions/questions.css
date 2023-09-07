@@ -36,7 +36,7 @@ h2 {
   overflow: hidden; /* 丸めた枠からのはみ出しを隠す */
 }
 
-.box input[type="radio"] {
+.box input {
   display: none;
 }
 
@@ -91,7 +91,7 @@ h2 {
 .pic_iframe {
   /* box */
   border-bottom: solid 2px var(--Black);
-  height: 100px;
+  height: 105px;
   width: 100%;
 }
 
@@ -102,7 +102,7 @@ h2 {
   /* text */
   color: var(--Black);
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 12px;
 }
 
 .pic_filter {

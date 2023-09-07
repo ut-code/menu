@@ -5,6 +5,7 @@ import { NextButton } from "@/components/elements/button/NextButton"
 import { Searchbox } from "@/components/Searchbox"
 import { Option, allIngredients, shuffleOptions } from "@/utils/questions"
 import iconPlus from "@/assets/icon/icon_plus.svg"
+import { BsCheckLg } from "react-icons/bs"
 
 interface Props {
   setQuestionNumber: (questionNumber: number) => void
@@ -62,7 +63,7 @@ export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredi
       />
       <div className={"boxes"}>
         {options.map((option) => (
-          <div key={option.id} className={"box nopic"}>
+          <div key={option.id} className={"box pic"}>
             <input
               type="checkbox"
               id={option.id}
@@ -71,17 +72,25 @@ export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredi
               onChange={onChangeCheckbox}
             />
             <label htmlFor={option.id}>
-              <div className={"nopic_text"}>
-                {option.value}
-                <div className={"nopic_description"}>{option.description}</div>
+              <div>
+                {ingredients && ingredients.includes(option.value) ? (
+                  <div className={"pic_filter"}>
+                    <BsCheckLg size="2rem" />
+                  </div>
+                ) : (
+                  <div>
+                    <img className={"pic_iframe"} src={option.image} />
+                    <div className={"pic_heading"}>{option.value}</div>
+                  </div>
+                )}
               </div>
             </label>
           </div>
         ))}
         <div className={"box nopic"}>
-          <button onClick={incrementIngredientsNumber}>
+          <div className={"nopic_text"} onClick={incrementIngredientsNumber}>
             <img src={iconPlus} alt="icon_plus" />
-          </button>
+          </div>
         </div>
       </div>
       <NextButton onClick={() => setQuestionNumber(1)} />
