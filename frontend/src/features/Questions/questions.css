@@ -1,3 +1,26 @@
+.boxes {
+  /* layout */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2x2に並べる */
+  margin: auto;
+  gap: 18px;
+}
+
+.text {
+  font-weight: bold;
+  text-align: left;
+  margin: 0.5em 0 0 1.2em;
+}
+
+h2 {
+  font-size: 20px;
+  margin: 30px auto;
+}
+
+.space {
+  height: 40px;
+}
+
 /*
 共通: box
 画像なし: nopic
@@ -13,7 +36,7 @@
   overflow: hidden; /* 丸めた枠からのはみ出しを隠す */
 }
 
-.box input[type="radio"] {
+.box input {
   display: none;
 }
 
@@ -44,7 +67,14 @@
 
   /* text */
   color: white;
+  font-size: 24px;
   font-weight: bold;
+}
+
+.nopic_description {
+  /* text */
+  font-size: 10px;
+  font-weight: normal;
 }
 
 .pic {
@@ -53,15 +83,15 @@
 }
 
 /* .pic:has(input[type="radio"]:checked) {
-  border: var(--Red) 2px solid;
-  box-shadow: var(--Red) 2px 2px 0 0;
-  outline: 0;
+	border: var(--Red) 2px solid;
+	box-shadow: var(--Red) 2px 2px 0 0;
+	outline: 0;
 } */
 
 .pic_iframe {
   /* box */
   border-bottom: solid 2px var(--Black);
-  height: 100px;
+  height: 105px;
   width: 100%;
 }
 
@@ -72,7 +102,7 @@
   /* text */
   color: var(--Black);
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 12px;
 }
 
 .pic_filter {
@@ -86,7 +116,20 @@
   justify-content: center;
   align-items: center;
 }
-.choiceDesccription {
+
+.style_green {
+  /* layout */
+  padding: 1.5em;
+  display: flex;
+  flex-direction: column;
+
+  /* box */
+  background-color: var(--Green);
+  border-radius: 0 0 20px 20px;
+}
+
+.h1 {
   color: white;
-  font-size: 8px;
+  font-size: 24px;
+  font-weight: bold;
 }

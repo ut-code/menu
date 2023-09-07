@@ -25,6 +25,7 @@ export const Home = ({ session }: Props) => {
   const Navigate = useNavigate()
 
   // 永続的に残るので、localStorageから問題への回答を消しておく
+  localStorage.removeItem("questionNumber")
   localStorage.removeItem("ingredients")
   localStorage.removeItem("genre")
   localStorage.removeItem("cookingTime")
