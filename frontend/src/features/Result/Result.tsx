@@ -8,6 +8,7 @@ import { Searchbox } from "@/components/Searchbox"
 import { RecipeCard } from "./components/RecipeCard"
 import { Recipe, Answers, SearchInfo, convertAnswersToSearchInfo } from "@/utils/recipes"
 import { postSearchRecipesApi } from "@/utils/apiUtils"
+import styles from "./Result.module.css"
 
 export const Result = () => {
   // useNavigate を Navigate に変化させる呪文
@@ -84,13 +85,12 @@ export const Result = () => {
   if (isLoading) return <p>レシピを読み込み中</p>
   return (
     <div className="style_lightbrown">
-      <div style={{ width: "100%", margin: "0 0 0.8em 0" }}>
-        <Head
-          showBackButton={true}
-          onClickPreviousPage={() => Navigate("/questions")}
-          onClickOpenHamburger={onClickOpenHamburger}
-        />
-
+      <Head
+        showBackButton={true}
+        onClickPreviousPage={() => Navigate("/questions")}
+        onClickOpenHamburger={onClickOpenHamburger}
+      />
+      <div className={styles.searchbox}>
         <Searchbox
           onClickHandler={onClickRunEffect}
           onChange={onChangeHandler}
@@ -98,19 +98,9 @@ export const Result = () => {
           placeholder=""
         />
       </div>
-
       {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
 
-      <div
-        style={{
-          height: "auto",
-          position: "relative",
-          zIndex: -1,
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-        }}
-      >
+      <div className={styles.cards}>
         {recipes && recipes.map((recipe) => <RecipeCard key={recipe.id} recipe={recipe} />)}
       </div>
     </div>
