@@ -4,11 +4,13 @@
   align-items: center;
   border-radius: 25px;
   justify-content: space-between;
+  margin-bottom: 24px;
 
   /* box */
   height: 38px;
   overflow: hidden;
   border: var(--Black) 2px solid;
+  box-shadow: var(--Black) 2px 2px 0 0;
 }
 
 .box {

@@ -31,7 +31,7 @@ export const HowTo = () => {
           </p>
         </div>
         <img src={one} alt="アイコン" className="icon" />
-        <div className="text">
+        <div className="text-area">
           <h2>こんなお悩みありませんか？</h2>
           <p>
             「自炊したいけど献立考えるのはめんどくさい…」<br></br>
@@ -53,7 +53,7 @@ export const HowTo = () => {
           </p>
         </div>
         <img src={two} alt="アイコン" className="icon" />
-        <div className="text">
+        <div className="text-area">
           <h2>だるめしを使いましょう</h2>
           <p>
             操作方法はカンタン！<br></br>
@@ -74,7 +74,7 @@ export const HowTo = () => {
           </p>
         </div>
         <img src={three} alt="アイコン" className="icon" />
-        <div className="text">
+        <div className="text-area">
           <h2>豊富なレシピ数</h2>
           <p>
             だるめしを使えば、いろんなサイトのレシピが一気に見れる<br></br>
@@ -95,7 +95,7 @@ export const HowTo = () => {
           </p>
         </div>
         <img src={four} alt="アイコン" className="icon" />
-        <div className="text">
+        <div className="text-area">
           <h2>今日のごはん完成！</h2>
           <p>
             今日のあなたにぴったりのレシピを、<br></br>
