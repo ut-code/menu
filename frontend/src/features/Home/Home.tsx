@@ -69,20 +69,20 @@ export const Home = ({ session }: Props) => {
           </Link>
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", padding: "0 40px" }}>
-            <h3>人気のレシピ</h3>
+          <div style={{ display: "flex", justifyContent: "space-between", padding: "0 40px 0 48px" }}>
+            <h2 style={{ marginBottom: "16px" }}>人気のレシピ</h2>
             <MoreButton onClick={() => Navigate("/home/favorites")} />
           </div>
           <HorizontalScroll recipes={favoriteRecipes?.slice(0, 6)} />
 
-          <div style={{ display: "flex", justifyContent: "space-between", padding: "0 40px" }}>
-            <h3>季節のレシピ</h3>
+          <div style={{ display: "flex", justifyContent: "space-between", padding: "0 40px 0 48px" }}>
+            <h2 style={{ marginBottom: "16px" }}>季節のレシピ</h2>
             <MoreButton onClick={() => Navigate("/home/favorites")} />
           </div>
           <HorizontalScroll recipes={favoriteRecipes?.slice(0, 6)} />
 
-          <div style={{ display: "flex", justifyContent: "space-between", padding: "0 40px" }}>
-            <h3>お気に入り</h3>
+          <div style={{ display: "flex", justifyContent: "space-between", padding: "0 40px 0 48px" }}>
+            <h2 style={{ marginBottom: "16px" }}>お気に入り</h2>
             <MoreButton onClick={() => Navigate("/home/favorites")} />
           </div>
           <HorizontalScroll recipes={favoriteRecipes?.slice(0, 6)} />

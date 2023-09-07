@@ -17,10 +17,10 @@
   width: -moz-fit-content;
   margin: 16px 0 0 calc(100% - 100px);
 }
-.text {
+.text-area {
   margin: 0px 28px calc(48px - 5%) 28px;
 }
-.text p {
+.text-area p {
   margin-top: 16px;
   line-height: 1.7;
 }
