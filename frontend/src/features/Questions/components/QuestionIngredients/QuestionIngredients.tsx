@@ -6,6 +6,8 @@ import { Searchbox } from "@/components/Searchbox"
 import { Option, allIngredients, shuffleOptions } from "@/utils/questions"
 import iconPlus from "@/assets/icon/icon_plus.svg"
 import { BsCheckLg } from "react-icons/bs"
+import { Head } from "@/components/Head"
+import { Hamburger } from "@/components/Hamburger"
 
 interface Props {
   setQuestionNumber: (questionNumber: number) => void
@@ -19,6 +21,7 @@ export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredi
   const Navigate = useNavigate()
   const [inputContent, setInputContent] = useState<string>("")
   const [showIngredientsNumber, setShowIngredientsNumber] = useState<number>(3)
+  const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
   useEffect(() => {
     if (ingredients !== undefined) {
       setInputContent(ingredients.join(" "))
@@ -52,9 +55,17 @@ export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredi
     setShowIngredientsNumber((prev) => (prev + 1 < shuffledOptions.length ? prev + 1 : prev))
   }
 
+  const onClickOpenHamburger = () => setIsOpenHamburger(true)
+  const onClickCloseHamburger = () => setIsOpenHamburger(false)
+
   return (
-    <div>
-      {/* <div className="style_lightbrown"> */}
+    <div className={"style_lightbrown"}>
+      <Head
+        showBackButton={false}
+        onClickPreviousPage={() => setQuestionNumber(0)}
+        onClickOpenHamburger={onClickOpenHamburger}
+      />
+      {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
       <Searchbox
         onClickHandler={() => Navigate("/search")}
         placeholder={"食材の名前を入力してみましょう"}
