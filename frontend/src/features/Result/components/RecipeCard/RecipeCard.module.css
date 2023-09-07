@@ -5,6 +5,7 @@
   border-radius: 8px;
   justify-content: space-between;
   flex-direction: column;
+  position: relative;
 
   /* box */
   height: 272px;

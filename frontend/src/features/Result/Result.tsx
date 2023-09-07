@@ -103,6 +103,14 @@ export const Result = () => {
       <div className={styles.cards}>
         {recipes && recipes.map((recipe) => <RecipeCard key={recipe.id} recipe={recipe} />)}
       </div>
+
+      <div className={styles.spacer} />
+
+      <div className={styles.bottom}>
+        <button className={styles.return} onClick={() => Navigate("/home")}>
+          ホームに戻る
+        </button>
+      </div>
     </div>
   )
 }

@@ -12,3 +12,39 @@
   flex-direction: column;
   gap: 20px;
 }
+
+.bottom {
+  position: fixed;
+  bottom: 0;
+
+  width: 100%;
+  height: 75px;
+  background: var(--LightBrown);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.return {
+  /* layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* box */
+  background-color: white;
+  border-radius: 10rem;
+  border: var(--Black) 1px solid;
+  height: 40px;
+  width: 176px;
+
+  /* text */
+  font-weight: bold;
+  font-size: 12px;
+  color: var(--Black);
+}
+
+.spacer {
+  height: 100px;
+}
