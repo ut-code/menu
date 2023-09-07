@@ -3,16 +3,36 @@
   height: 100vh;
 }
 
-.bottom {
-  width: 100%;
+.icon {
+  margin: 40px;
 }
 
-.icon {
-  width: 80%;
-  margin: 0 auto;
+.skip {
+  background-color: white;
+  border: solid var(--Black) 1px;
+  border-radius: 100px;
+  text-align: center;
+  padding: 0.5em 1em;
+  width: fit-content;
+  width: -moz-fit-content;
+  margin: 16px 0 0 calc(100% - 100px);
+}
+.text {
+  margin: 0px 28px calc(48px - 5%) 28px;
+}
+.text p {
+  margin-top: 16px;
+  line-height: 1.7;
+}
+.bottom {
+  width: 100%;
 }
 
 #swiper-button-next {
   width: 90%;
   margin: 0 auto;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: var(--Green);
 }
