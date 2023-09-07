@@ -7,7 +7,7 @@ import { getUserFavoritesApi, postUserFavoritesApi, deleteUserFavoritesApi } fro
 import { Hamburger } from "@/components/Hamburger"
 import { Head } from "@/components/Head"
 import { Searchbox } from "@/components/Searchbox"
-import { RecipeCard } from "./components/RecipeCard"
+import { RecipeCard } from "@/components/RecipeCard"
 import { Recipe, Answers, SearchInfo, convertAnswersToSearchInfo } from "@/utils/recipes"
 import { postSearchRecipesApi } from "@/utils/apiUtils"
 import styles from "./Result.module.css"
