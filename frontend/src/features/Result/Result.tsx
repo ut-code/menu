@@ -83,47 +83,36 @@ export const Result = () => {
 
   if (isLoading) return <p>レシピを読み込み中</p>
   return (
-    <>
-      <div className="style_lightbrown">
-        <div style={{ width: "100%", margin: "0 0 0.8em 0" }}>
-          <Head
-            showBackButton={true}
-            onClickPreviousPage={() => Navigate("/questions")}
-            onClickOpenHamburger={onClickOpenHamburger}
-          />
+    <div className="style_lightbrown">
+      <div style={{ width: "100%", margin: "0 0 0.8em 0" }}>
+        <Head
+          showBackButton={true}
+          onClickPreviousPage={() => Navigate("/questions")}
+          onClickOpenHamburger={onClickOpenHamburger}
+        />
 
-          <Searchbox
-            onClickHandler={onClickRunEffect}
-            onChange={onChangeHandler}
-            inputContent={inputContent}
-            placeholder=""
-          />
-        </div>
-
-        {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
-
-        <div
-          style={{
-            height: "auto",
-            position: "relative",
-            zIndex: -1,
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "column",
-          }}
-        >
-          {recipes &&
-            recipes.map((recipe) => (
-              <RecipeCard
-                key={recipe.id}
-                recipeUrl={recipe.recipeUrl}
-                foodImageUrl={recipe.foodImageUrls[0]}
-                title={recipe.recipeTitle}
-                material={recipe.recipeMaterial.join("・")}
-              />
-            ))}
-        </div>
+        <Searchbox
+          onClickHandler={onClickRunEffect}
+          onChange={onChangeHandler}
+          inputContent={inputContent}
+          placeholder=""
+        />
       </div>
-    </>
+
+      {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
+
+      <div
+        style={{
+          height: "auto",
+          position: "relative",
+          zIndex: -1,
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
+        {recipes && recipes.map((recipe) => <RecipeCard key={recipe.id} recipe={recipe} />)}
+      </div>
+    </div>
   )
 }
