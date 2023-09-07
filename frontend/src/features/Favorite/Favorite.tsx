@@ -106,7 +106,18 @@ export const Favorite = ({ session }: Props) => {
       />
       {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
 
-      <h1>お気に入り</h1>
+      <div className={styles.h2}>お気に入り</div>
+      <div className={styles.buttons}>
+        <div className={styles.sort_buttons}>
+          <button className={styles.sort_button}>新しい順に並び替える</button>
+        </div>
+        <div className={styles.genre_buttons}>
+          <button className={styles.genre_button}>主食</button>
+          <button className={styles.genre_button}>主菜</button>
+          <button className={styles.genre_button}>副菜</button>
+          <button className={styles.genre_button}>スープ</button>
+        </div>
+      </div>
       <div className={styles.cards}>
         {initialFavoriteRecipes ? (
           initialFavoriteRecipes.map((recipe) => (
