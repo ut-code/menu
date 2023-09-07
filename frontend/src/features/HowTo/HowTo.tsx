@@ -8,7 +8,10 @@ import "swiper/css/navigation"
 import "./swiper.css"
 
 import { NextButton } from "@/components/elements/button/NextButton"
-import icon from "@/assets/image/icon.png"
+import one from "@/assets/image/Howto1.png"
+import two from "@/assets/image/Howto2.png"
+import three from "@/assets/image/Howto3.png"
+import four from "@/assets/image/Howto4.png"
 
 export const HowTo = () => {
   return (
@@ -22,8 +25,20 @@ export const HowTo = () => {
       pagination={true}
     >
       <SwiperSlide>
-        <img src={icon} alt="アイコン" className="icon" />
-        こんな悩みありませんか？
+        <div className="skip">
+          <p>
+            <b>スキップ</b>
+          </p>
+        </div>
+        <img src={one} alt="アイコン" className="icon" />
+        <div className="text">
+          <h2>こんなお悩みありませんか？</h2>
+          <p>
+            「自炊したいけど献立考えるのはめんどくさい…」<br></br>
+            「冷蔵庫の余り物が使いきれない…」
+          </p>
+        </div>
+
         <div className="bottom">
           <div id="swiper-button-next">
             <NextButton />
@@ -32,8 +47,19 @@ export const HowTo = () => {
       </SwiperSlide>
 
       <SwiperSlide>
-        <img src={icon} alt="アイコン" className="icon" />
-        だるめしを使いましょう
+        <div className="skip">
+          <p>
+            <b>スキップ</b>
+          </p>
+        </div>
+        <img src={two} alt="アイコン" className="icon" />
+        <div className="text">
+          <h2>だるめしを使いましょう</h2>
+          <p>
+            操作方法はカンタン！<br></br>
+            材料・調理時間などの質問に答えてボタンを押すだけ！
+          </p>
+        </div>
         <div className="bottom">
           <div id="swiper-button-next">
             <NextButton />
@@ -42,8 +68,19 @@ export const HowTo = () => {
       </SwiperSlide>
 
       <SwiperSlide>
-        <img src={icon} alt="アイコン" className="icon" />
-        豊富なレシピ数
+        <div className="skip">
+          <p>
+            <b>スキップ</b>
+          </p>
+        </div>
+        <img src={three} alt="アイコン" className="icon" />
+        <div className="text">
+          <h2>豊富なレシピ数</h2>
+          <p>
+            だるめしを使えば、いろんなサイトのレシピが一気に見れる<br></br>
+            好きなレシピはお気に入りに保存も！
+          </p>
+        </div>
         <div className="bottom">
           <div id="swiper-button-next">
             <NextButton />
@@ -52,8 +89,19 @@ export const HowTo = () => {
       </SwiperSlide>
 
       <SwiperSlide>
-        <img src={icon} alt="アイコン" className="icon" />
-        今日のごはん完成！
+        <div className="skip">
+          <p>
+            <b>スキップ</b>
+          </p>
+        </div>
+        <img src={four} alt="アイコン" className="icon" />
+        <div className="text">
+          <h2>今日のごはん完成！</h2>
+          <p>
+            今日のあなたにぴったりのレシピを、<br></br>
+            もっと簡単に、もっと手軽に
+          </p>
+        </div>
         <div className="bottom">
           <Link to="/home">
             <NextButton />
