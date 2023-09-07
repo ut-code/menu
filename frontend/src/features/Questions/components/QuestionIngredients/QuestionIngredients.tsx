@@ -59,52 +59,62 @@ export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredi
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
   return (
-    <div className={"style_lightbrown"}>
-      <Head
-        showBackButton={false}
-        onClickPreviousPage={() => setQuestionNumber(0)}
-        onClickOpenHamburger={onClickOpenHamburger}
-      />
-      {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
-      <Searchbox
-        onClickHandler={() => Navigate("/search")}
-        placeholder={"食材の名前を入力してみましょう"}
-        onChange={onChangeSearchbox}
-        inputContent={inputContent}
-      />
-      <div className={"boxes"}>
-        {options.map((option) => (
-          <div key={option.id} className={"box pic"}>
-            <input
-              type="checkbox"
-              id={option.id}
-              value={option.value}
-              checked={inputContent.includes(option.value)}
-              onChange={onChangeCheckbox}
-            />
-            <label htmlFor={option.id}>
-              <div>
-                {ingredients && ingredients.includes(option.value) ? (
-                  <div className={"pic_filter"}>
-                    <BsCheckLg size="2rem" />
-                  </div>
-                ) : (
-                  <div>
-                    <img className={"pic_iframe"} src={option.image} />
-                    <div className={"pic_heading"}>{option.value}</div>
-                  </div>
-                )}
-              </div>
-            </label>
-          </div>
-        ))}
-        <div className={"box nopic"}>
-          <div className={"nopic_text"} onClick={incrementIngredientsNumber}>
-            <img src={iconPlus} alt="icon_plus" />
+    <>
+      <div className={"style_green"}>
+        <Head
+          showBackButton={false}
+          onClickPreviousPage={() => setQuestionNumber(0)}
+          onClickOpenHamburger={onClickOpenHamburger}
+          filterWhite={true}
+        />
+        {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
+        <div className={"h1"}>
+          余り物も料理のヒントも、
+          <br />
+          だるめしにおまかせ。
+        </div>
+        <Searchbox
+          onClickHandler={() => Navigate("/search")}
+          placeholder={"食材の名前を入力してみましょう"}
+          onChange={onChangeSearchbox}
+          inputContent={inputContent}
+        />
+      </div>
+      <div className={"style_lightbrown"}>
+        <div className={"boxes"}>
+          {options.map((option) => (
+            <div key={option.id} className={"box pic"}>
+              <input
+                type="checkbox"
+                id={option.id}
+                value={option.value}
+                checked={inputContent.includes(option.value)}
+                onChange={onChangeCheckbox}
+              />
+              <label htmlFor={option.id}>
+                <div>
+                  {ingredients && ingredients.includes(option.value) ? (
+                    <div className={"pic_filter"}>
+                      <BsCheckLg size="2rem" />
+                    </div>
+                  ) : (
+                    <div>
+                      <img className={"pic_iframe"} src={option.image} />
+                      <div className={"pic_heading"}>{option.value}</div>
+                    </div>
+                  )}
+                </div>
+              </label>
+            </div>
+          ))}
+          <div className={"box nopic"}>
+            <div className={"nopic_text"} onClick={incrementIngredientsNumber}>
+              <img src={iconPlus} alt="icon_plus" />
+            </div>
           </div>
         </div>
+        <NextButton onClick={() => setQuestionNumber(1)} />
       </div>
-      <NextButton onClick={() => setQuestionNumber(1)} />
-    </div>
+    </>
   )
 }

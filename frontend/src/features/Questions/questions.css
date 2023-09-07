@@ -116,3 +116,20 @@ h2 {
   justify-content: center;
   align-items: center;
 }
+
+.style_green {
+  /* layout */
+  padding: 1.5em;
+  display: flex;
+  flex-direction: column;
+
+  /* box */
+  background-color: var(--Green);
+  border-radius: 0 0 20px 20px;
+}
+
+.h1 {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
