@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom"
 
 import { NextButton } from "@/components/elements/button/NextButton"
 import { Searchbox } from "@/components/Searchbox"
-import { Option } from "@/utils/questions"
+import { Option, allIngredients, shuffleOptions } from "@/utils/questions"
+import iconPlus from "@/assets/icon/icon_plus.svg"
 
 interface Props {
   setQuestionNumber: (questionNumber: number) => void
@@ -11,20 +12,18 @@ interface Props {
   setIngredients: (ingredients: string[]) => void
 }
 
+const shuffledOptions: Option[] = shuffleOptions(allIngredients)
+
 export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredients }: Props) => {
   const Navigate = useNavigate()
   const [inputContent, setInputContent] = useState<string>("")
+  const [showIngredientsNumber, setShowIngredientsNumber] = useState<number>(3)
   useEffect(() => {
     if (ingredients !== undefined) {
       setInputContent(ingredients.join(" "))
     }
   }, [ingredients])
-
-  const options: Option[] = [
-    { id: "1", value: "卵" },
-    { id: "2", value: "牛乳" },
-    { id: "3", value: "豆腐" },
-  ]
+  const options: Option[] = shuffledOptions.slice(0, showIngredientsNumber)
 
   const toggleOption = (value: string) => {
     if (!ingredients) return
@@ -48,8 +47,11 @@ export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredi
     }
   }
 
+  const incrementIngredientsNumber = () => setShowIngredientsNumber((prev) => prev + 1)
+
   return (
-    <>
+    <div>
+      {/* <div className="style_lightbrown"> */}
       <Searchbox
         onClickHandler={() => Navigate("/search")}
         placeholder={"食材の名前を入力してみましょう"}
@@ -74,8 +76,13 @@ export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredi
             </label>
           </div>
         ))}
+        <div className={"box nopic"}>
+          <button onClick={incrementIngredientsNumber}>
+            <img src={iconPlus} alt="icon_plus" />
+          </button>
+        </div>
       </div>
       <NextButton onClick={() => setQuestionNumber(1)} />
-    </>
+    </div>
   )
 }
