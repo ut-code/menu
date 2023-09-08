@@ -23,9 +23,10 @@ export type SearchInfo = {
 }
 
 export const convertAnswersToSearchInfo = (answers: Answers): SearchInfo => {
-  const info: SearchInfo = { ingredients: [], keywords: [] }
+  const info: SearchInfo = { ingredients: [], time: "", keywords: [] }
   if (answers) {
     info.ingredients = answers.ingredients
+    info.time = answers.cookingTime
   }
   return info
 }
