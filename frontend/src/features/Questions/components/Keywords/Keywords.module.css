@@ -4,13 +4,14 @@
   padding: 1.4em 1.5em 0.5em 1.5em;
 
   /* box */
-  background-color: white;
   width: 85%;
   border: solid 2px var(--Black);
   border-radius: 20px;
   box-shadow: none;
+
   background: url("/footprint.svg") no-repeat;
   background-position: 100% 50%;
+  background-color: white;
 }
 
 .title {
