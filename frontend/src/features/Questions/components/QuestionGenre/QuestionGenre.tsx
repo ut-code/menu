@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Session } from "@supabase/supabase-js"
 
 import { NextButton } from "@/components/elements/button/NextButton"
 import { Head } from "@/components/Head"
@@ -11,9 +12,10 @@ interface Props {
   answer: string | undefined
   setAnswer: (answer: string) => void
   keywords: (string | undefined)[]
+  session: Session | null
 }
 
-export const QuestionGenre = ({ setQuestionNumber, answer, setAnswer, keywords }: Props) => {
+export const QuestionGenre = ({ setQuestionNumber, answer, setAnswer, keywords, session }: Props) => {
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
 
   const options: Option[] = [
@@ -35,6 +37,7 @@ export const QuestionGenre = ({ setQuestionNumber, answer, setAnswer, keywords }
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
+  if (isOpenHamburger) return <Hamburger session={session} onClickCloseHamburger={onClickCloseHamburger} />
   return (
     <div className="style_lightbrown">
       <Head
@@ -42,8 +45,8 @@ export const QuestionGenre = ({ setQuestionNumber, answer, setAnswer, keywords }
         onClickPreviousPage={() => setQuestionNumber(0)}
         onClickOpenHamburger={onClickOpenHamburger}
       />
-      {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
-      <h2>料理のカテゴリを選択してください</h2>
+
+      <h2 style={{ margin: "30px auto" }}>料理のカテゴリを選択してください</h2>
       <Keywords keywords={keywords} />
       <div className={"boxes"}>
         {options.map((option) => (

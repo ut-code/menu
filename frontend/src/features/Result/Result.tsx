@@ -146,6 +146,7 @@ export const Result = ({ session }: Props) => {
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
   if (isLoadingRecipes || isLoadingFavoriteRecipes) return <p>レシピを読み込み中</p>
+  if (isOpenHamburger) return <Hamburger session={session} onClickCloseHamburger={onClickCloseHamburger} />
   return (
     <div className="style_lightbrown">
       <Head
@@ -161,7 +162,6 @@ export const Result = ({ session }: Props) => {
           placeholder=""
         />
       </div>
-      {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
 
       <div className={styles.cards}>
         {recipes &&

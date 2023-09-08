@@ -97,6 +97,7 @@ export const Favorite = ({ session }: Props) => {
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
   if (isLoading) return <p>お気に入りを読み込み中</p>
+  if (isOpenHamburger) return <Hamburger session={session} onClickCloseHamburger={onClickCloseHamburger} />
   return (
     <div className="style_lightbrown">
       <Head
@@ -104,7 +105,6 @@ export const Favorite = ({ session }: Props) => {
         onClickPreviousPage={() => Navigate("/home")}
         onClickOpenHamburger={onClickOpenHamburger}
       />
-      {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
 
       <div className={styles.h2}>お気に入り</div>
       <div className={styles.buttons}>

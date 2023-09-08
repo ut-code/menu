@@ -11,7 +11,7 @@ import { BsGearFill } from "react-icons/bs"
 import { FaLock } from "react-icons/fa"
 
 interface Props {
-  session: Session | null
+  session?: Session | null
   onClickCloseHamburger: () => void
 }
 

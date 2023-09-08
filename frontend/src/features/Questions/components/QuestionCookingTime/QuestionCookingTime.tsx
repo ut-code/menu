@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { Session } from "@supabase/supabase-js"
 
 import { NextButton } from "@/components/elements/button/NextButton"
 import { Head } from "@/components/Head"
@@ -12,9 +13,10 @@ interface Props {
   answer: string | undefined
   setAnswer: (answer: string) => void
   keywords: (string | undefined)[]
+  session: Session | null
 }
 
-export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer, keywords }: Props) => {
+export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer, keywords, session }: Props) => {
   const Navigate = useNavigate()
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
 
@@ -37,6 +39,7 @@ export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer, keyw
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
+  if (isOpenHamburger) return <Hamburger session={session} onClickCloseHamburger={onClickCloseHamburger} />
   return (
     <div className="style_lightbrown">
       <Head
@@ -44,8 +47,7 @@ export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer, keyw
         onClickPreviousPage={() => setQuestionNumber(1)}
         onClickOpenHamburger={onClickOpenHamburger}
       />
-      {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
-      <h2>調理時間を選択してください</h2>
+      <h2 style={{ margin: "30px auto" }}>調理時間を選択してください</h2>
       <Keywords keywords={keywords} />
       <div className={"boxes"}>
         {options.map((option) => (

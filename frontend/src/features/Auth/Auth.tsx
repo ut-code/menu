@@ -47,6 +47,7 @@ export const Auth = () => {
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
+  if (isOpenHamburger) return <Hamburger onClickCloseHamburger={onClickCloseHamburger} />
   return (
     <div className="style_lightbrown">
       {hasAccount ? (
@@ -62,7 +63,6 @@ export const Auth = () => {
           onClickOpenHamburger={onClickOpenHamburger}
         />
       )}
-      {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
 
       {hasAccount ? <h1 className={styles.title}>サインイン</h1> : <h1 className={styles.title}>サインアップ</h1>}
       <form className={styles.form}>

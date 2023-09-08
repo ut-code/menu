@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import { Session } from "@supabase/supabase-js"
 
 import { NextButton } from "@/components/elements/button/NextButton"
 import { Searchbox } from "@/components/Searchbox"
@@ -13,11 +14,12 @@ interface Props {
   setQuestionNumber: (questionNumber: number) => void
   ingredients: string[] | undefined
   setIngredients: (ingredients: string[]) => void
+  session: Session | null
 }
 
 const shuffledOptions: Option[] = shuffleOptions(allIngredients)
 
-export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredients }: Props) => {
+export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredients, session }: Props) => {
   const Navigate = useNavigate()
   const [inputContent, setInputContent] = useState<string>("")
   const [showIngredientsNumber, setShowIngredientsNumber] = useState<number>(3)
@@ -67,6 +69,7 @@ export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredi
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
+  if (isOpenHamburger) return <Hamburger session={session} onClickCloseHamburger={onClickCloseHamburger} />
   return (
     <>
       <div className={"style_green"}>
@@ -76,7 +79,7 @@ export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredi
           onClickOpenHamburger={onClickOpenHamburger}
           filterWhite={true}
         />
-        {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
+
         <div className={"h1"}>
           余り物も料理のヒントも、
           <br />
