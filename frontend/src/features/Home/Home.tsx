@@ -45,7 +45,7 @@ export const Home = ({ session }: Props) => {
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
-  if (isOpenHamburger) return <Hamburger onClickCloseHamburger={onClickCloseHamburger} />
+  if (isOpenHamburger) return <Hamburger session={session} onClickCloseHamburger={onClickCloseHamburger} />
   if (isLoading) return <p>お気に入りを読み込み中</p>
   return (
     <>
