@@ -16,10 +16,6 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-//----------------------------------------------------------------
-// Result.tsx用
-//----------------------------------------------------------------
-// request.bodyのsearchInfoを利用して検索結果を返す
 export type SearchInfo = {
   ingredients: string[]
   time?: string
@@ -32,11 +28,27 @@ app.post("/api/searchRecipes", async (req, res) => {
   console.log(searchInfo.ingredients)
 
   const ingredientsAndQuery: string = searchInfo.ingredients.join(" & ")
+  let timeQuery = {}
+  switch (searchInfo.time) {
+    case "時短":
+      timeQuery = { gte: 1, lt: 15 }
+      break
+    case "普通":
+      timeQuery = { gte: 15, lt: 45 }
+      break
+    case "じっくり":
+      timeQuery = { gte: 45 }
+      break
+    default:
+      break
+  }
+
   const recipes = await client.recipes.findMany({
     where: {
       recipeMaterialConverted: {
         search: ingredientsAndQuery,
       },
+      totalTime: timeQuery,
     },
     take: 20,
   })

@@ -29,7 +29,7 @@ export const allIngredients: Option[] = [
   { id: "3", value: "ブロッコリー", image: imgBroccoli },
   { id: "4", value: "牛乳", image: imgMilk },
   { id: "5", value: "玉ねぎ", image: imgOnion },
-  { id: "6", value: "人参", image: imgCarrot },
+  { id: "6", value: "にんじん", image: imgCarrot },
   { id: "7", value: "鶏肉", image: imgChicken },
   { id: "8", value: "レタス", image: imgLettuce },
   { id: "9", value: "じゃがいも", image: imgPotato },

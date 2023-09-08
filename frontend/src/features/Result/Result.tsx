@@ -26,8 +26,8 @@ export const Result = ({ session }: Props) => {
 
   const answers: Answers = {
     ingredients: JSON.parse(localStorage.getItem("ingredients") || "[]"),
-    genre: localStorage.getItem("genre") || "",
-    cookingTime: localStorage.getItem("cookingTime") || "",
+    genre: JSON.parse(localStorage.getItem("genre") || ""),
+    cookingTime: JSON.parse(localStorage.getItem("cookingTime") || ""),
   }
   // answers をfindManyの検索に使いやすいように searchInfo に整形
   const searchInfo: SearchInfo = convertAnswersToSearchInfo(answers)

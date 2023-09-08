@@ -55,10 +55,10 @@
   height: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  background-color: white;
 
   background: url("/footprint.svg") no-repeat;
   background-position: 95% 10%;
+  background-color: white;
 }
 
 .left {
@@ -68,7 +68,7 @@
   justify-content: center;
 
   /* box */
-  /* width: 140px; */
+  width: 70vw;
 }
 
 .text_title {
