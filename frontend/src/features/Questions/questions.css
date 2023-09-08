@@ -119,6 +119,8 @@
   flex-direction: column;
 
   /* box */
+  background: url("/footprint.svg") no-repeat;
+  background-position: 93% 43%;
   background-color: var(--Green);
   border-radius: 0 0 20px 20px;
 }
