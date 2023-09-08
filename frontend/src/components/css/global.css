@@ -13,9 +13,38 @@ var(--変数名)で使える
   --Brown: #b29476;
   --LightBrown: #f1ece6;
   --Gray: #7e7e7e;
+  --LightGray: #d9d9d9;
   --Black: #1c1c1c;
 
   --Font: "Noto Sans JP", sans-serif;
+}
+
+/* タイポグラフィ */
+h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+h3 {
+  margin: 0;
+  font-size: 12px;
+  font-weight: bold;
+}
+p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: normal;
+}
+.small {
+  font-size: 10px;
+}
+.caption {
+  font-size: 6px;
 }
 
 html {

@@ -4,7 +4,8 @@
   padding: 1.4em 1.5em 0.5em 1.5em;
 
   /* box */
-  width: 80%;
+  background-color: white;
+  width: 85%;
   border: solid 2px var(--Black);
   border-radius: 20px;
   box-shadow: none;

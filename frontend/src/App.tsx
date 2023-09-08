@@ -15,6 +15,7 @@ import "@/components/css/global.css"
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   useEffect(() => {
     const initialize = async () => {
@@ -25,10 +26,12 @@ export default function App() {
       supabase.auth.onAuthStateChange((_event, session) => {
         setSession(session)
       })
+      setIsLoading(false)
     }
     initialize()
   }, [])
 
+  if (isLoading) return <div>loading...</div>
   return (
     <>
       <Routes>
@@ -39,7 +42,7 @@ export default function App() {
           element={session ? <Favorite session={session} /> : <Navigate replace to="/home" />}
         ></Route>
         <Route path="/questions" element={<Questions />}></Route>
-        <Route path="/search" element={<Result />}></Route>
+        <Route path="/search" element={<Result session={session} />}></Route>
         <Route path="/auth" element={!session ? <Auth /> : <Navigate replace to="/home" />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>

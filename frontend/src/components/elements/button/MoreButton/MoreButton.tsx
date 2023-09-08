@@ -1,14 +1,14 @@
-import styles from "./NextButton.module.css"
+import styles from "./MoreButton.module.css"
 
 interface Props {
   onClick?: () => void
 }
 
-export const NextButton = ({ onClick }: Props) => {
+export const MoreButton = ({ onClick }: Props) => {
   return (
     <div className={styles.root}>
       <button className={styles.button} onClick={onClick}>
-        次へ
+        もっと見る
       </button>
     </div>
   )
