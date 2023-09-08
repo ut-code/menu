@@ -1,75 +1,7 @@
-.overlay {
-  /*　画面全体を覆う設定　*/
-  position: fixed;
-  top: -12%;
-  left: -10%;
-  width: 120%; /* カスの実装かもしれません。コードレビュー求む */
-  height: 120%;
-  /* background-color は半透明の白 */
-  background-color: rgba(255, 255, 255, 0.7);
-
-  /*　画面の中央に要素を表示させる設定　*/
+.top {
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  /* transition */
-  animation: scaling 100ms both;
-}
-
-.content {
-  /* 奥行き */
-  z-index: 10;
-
-  /* box */
-  width: 58%;
-  height: 65%;
-  padding: 1em;
-  background: white;
-
-  /* ボーダー */
-  border-radius: 10px;
-  border: 2px solid var(--Black);
-
-  /* 縦につなげるようにする */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  /* text */
-  font-size: 1.1em;
-}
-
-@keyframes scaling {
-  /* 拡大する */
-  0% {
-    transform: scale(0.96);
-    animation-timing-function: ease-out;
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.close {
-  /* 奥行き */
-  z-index: 11;
-
-  /* display: none; */
-  color: white;
-
-  /* 丸でくくる */
-  border-radius: 50%;
-  border: 2px solid var(--Black);
-  width: 4em;
-  height: 4em;
-
-  /* positionを2emだけ下に下げる */
-  position: relative;
-  top: 2em;
-
-  background-color: var(--Red);
+  justify-content: flex-end;
 }
 
 .links {
@@ -80,36 +12,94 @@
   margin-top: 2em;
 }
 
-.link {
-  font-size: 0.9em;
-  /* layout */
-  margin: 0.5em;
+.links {
   display: flex;
-  /*縦を揃える*/
+  align-items: flex;
+  gap: 25px;
+  width: 100%;
+}
+
+.link {
+  /* layout */
+  display: flex;
   align-items: center;
+  justify-content: flex-start;
+
+  /* box */
+  background-color: white;
+  border-radius: 50px;
+  border: var(--Black) 2px solid;
+  height: 56px;
+  width: 100%;
+  box-sizing: border-box;
+
+  /* text */
+  font-weight: bold;
+  font-size: 12px;
+  color: var(--Black);
 }
 
 .link svg {
-  font-size: 2rem;
-  /* box */
-  margin-right: 1.1em;
+  display: flex;
+  align-items: flex-start;
+  margin: 0 30px;
 }
 
-.language {
+.signin {
+  /* layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+  padding: 10px;
+
   /* box */
-  border-radius: 100px;
-  border: none;
-  height: 7%;
+  border-radius: 10px;
+  border: var(--Black) 2px solid;
+  height: 104px;
   width: 100%;
-  background: var(--Green);
-  color: white;
-  margin: 2em 0;
+  box-sizing: border-box;
 
   /* text */
-  font-size: 0.9em;
+  font-weight: bold;
+  font-size: 12px;
+  color: var(--Black);
+
+  background: url("/footprint.svg") no-repeat;
+  background-position: 100% 50%;
+  background-color: white;
 }
 
-.footer {
+.signin_text {
+  /* 左寄せ */
+  width: 50vw;
+}
+
+.signin_link {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  height: 100%;
+  padding-bottom: 25px;
+}
+
+.signin_link_button {
+  /* layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* box */
+  background-color: var(--Yellow);
+  border-radius: 50px;
+  border: var(--Black) 2px solid;
+  height: 32px;
+  /* width: 100%; */
+  box-sizing: border-box;
+  padding: 0 15px;
+
   /* text */
-  font-size: 0.6em;
+  font-weight: bold;
+  font-size: 12px;
+  color: var(--Black);
 }
