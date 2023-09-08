@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import styles from "./Hamburger.module.css"
+import styles from "./Hamburger2.module.css"
 
 // react-icons
 import { CgClose } from "react-icons/cg"
@@ -15,31 +15,10 @@ interface Props {
   onClickCloseHamburger: () => void
 }
 
-export const Hamburger = (props: Props) => {
+export const Hamburger2 = (props: Props) => {
   return (
     <>
-      <div className="style_lightbrown">
-        <div className={styles.top}>
-          <button onClick={props.onClickCloseHamburger} className={styles.close}>
-            <CgClose size="1.2rem" />
-          </button>
-        </div>
-        <div className={styles.links}>
-          <div className={styles.link}>
-            <h2>ホーム</h2>
-          </div>
-          <div className={styles.link}>
-            <h2>検索する</h2>
-          </div>
-          <div className={styles.link}>
-            <h2>お気に入り</h2>
-          </div>
-          <div className={styles.link}>
-            <h2>設定</h2>
-          </div>
-        </div>
-      </div>
-      {/* <div className={styles.overlay}>
+      <div className={styles.overlay}>
         <button onClick={props.onClickCloseHamburger} className={styles.close}>
           <CgClose size="1.2rem" />
         </button>
@@ -68,7 +47,7 @@ export const Hamburger = (props: Props) => {
 
           <div className={styles.footer}>©だるめし Dull Meshi</div>
         </div>
-      </div> */}
+      </div>
     </>
   )
 }

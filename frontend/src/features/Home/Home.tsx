@@ -45,12 +45,12 @@ export const Home = ({ session }: Props) => {
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
+  if (isOpenHamburger) return <Hamburger onClickCloseHamburger={onClickCloseHamburger} />
   if (isLoading) return <p>お気に入りを読み込み中</p>
   return (
     <>
       <div className="style_lightbrown">
         <Head showBackButton={false} onClickOpenHamburger={onClickOpenHamburger} />
-        {isOpenHamburger === true && <Hamburger onClickCloseHamburger={onClickCloseHamburger} />}
         <div
           style={{
             display: "flex",
