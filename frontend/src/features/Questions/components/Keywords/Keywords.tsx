@@ -1,5 +1,4 @@
 import styles from "./Keywords.module.css"
-import footprint from "../../../../assets/image/footprint.svg"
 interface Props {
   keywords: (string | undefined)[]
 }
