@@ -5,7 +5,7 @@ import { Session } from "@supabase/supabase-js"
 import { useQuery } from "@tanstack/react-query"
 
 import { Recipe } from "@/utils/recipes"
-import { getUserFavoritesApi } from "@/utils/apiUtils"
+import { getUserFavoritesApi, postSearchRecipesKeywordsApi } from "@/utils/apiUtils"
 import { DeleteAccount } from "@/features/Auth/DeleteAccount"
 import { SignOut } from "@/features/Auth/SignOut"
 import { Head } from "@/components/Head"
@@ -28,8 +28,22 @@ export const Home = ({ session }: Props) => {
   localStorage.removeItem("genre")
   localStorage.removeItem("cookingTime")
 
+  const { data: seasonalRecipes, isLoading: isLoadingSeasonalRecipes } = useQuery({
+    queryKey: ["seasonalRecipes"],
+    queryFn: async () => {
+      const response = await fetch(postSearchRecipesKeywordsApi(), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ keywords: ["夏"] }),
+      })
+      if (!response.ok) throw new Error("レシピの取得に失敗しました")
+      const recipes: Recipe[] = await response.json()
+      return recipes
+    },
+  })
+
   // NOTE: https://www.notion.so/utcode/JWT-4743f0e6a64e4ee7848818c9bc0efee1?pvs=4
-  const { data: favoriteRecipes, isLoading } = useQuery({
+  const { data: favoriteRecipes, isLoading: isLoadingFavoriteRecipes } = useQuery({
     queryKey: ["favoriteRecipes"],
     queryFn: async () => {
       if (!session?.access_token) return []
@@ -46,7 +60,7 @@ export const Home = ({ session }: Props) => {
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
   if (isOpenHamburger) return <Hamburger session={session} onClickCloseHamburger={onClickCloseHamburger} />
-  if (isLoading) return <p>お気に入りを読み込み中</p>
+  if (isLoadingFavoriteRecipes || isLoadingSeasonalRecipes) return <p>お気に入りを読み込み中</p>
   return (
     <>
       <div className="style_lightbrown">
@@ -79,7 +93,7 @@ export const Home = ({ session }: Props) => {
             <h2 style={{ marginBottom: "16px" }}>季節のレシピ</h2>
             <MoreButton onClick={() => Navigate("/home/favorites")} />
           </div>
-          <HorizontalScroll recipes={favoriteRecipes?.slice(0, 6)} />
+          <HorizontalScroll recipes={seasonalRecipes?.slice(0, 6)} />
 
           <div style={{ display: "flex", justifyContent: "space-between", padding: "0 40px 0 48px" }}>
             <h2 style={{ marginBottom: "16px" }}>お気に入り</h2>
