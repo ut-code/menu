@@ -113,27 +113,16 @@ export const Result = ({ session }: Props) => {
   //----------------------------------------------------------------
   // フリーワード検索機能
   //----------------------------------------------------------------
-  const convertInputContentToSearchInfo = (newInputContent: string): SearchInfo => {
-    // inputContentを使ったフリーワード検索を行う
-    const info: SearchInfo = { ingredients: [], keywords: [] }
-    // newInputContentを空白区切りで配列にする
-    const searchWords: string[] = newInputContent.split(" ")
-
-    if (searchWords) {
-      searchWords.forEach((word: string) => {
-        // wordをkeywordsに追加
-        info.keywords.push(word)
-      })
-    }
-    return info
+  const convertInputContentToSearchInfo = (newInputContent: string) => {
+    return { keywords: newInputContent.split(" ") }
   }
 
   useEffect(() => {
     if (!runEffect) return
     setRunEffect(false)
 
-    const searchInfo: SearchInfo = convertInputContentToSearchInfo(inputContent)
-    alert("フリーワード検索: " + searchInfo.keywords)
+    const info = convertInputContentToSearchInfo(inputContent)
+    alert("フリーワード検索: " + info.keywords)
   }, [runEffect])
 
   const onClickRunEffect = () => setRunEffect(true)

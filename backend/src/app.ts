@@ -20,7 +20,6 @@ export type SearchInfo = {
   ingredients: string[]
   time?: string
   dish?: string // 主菜・副菜など
-  keywords: string[]
 }
 
 app.post("/api/searchRecipes", async (req, res) => {

@@ -19,11 +19,10 @@ export type SearchInfo = {
   ingredients: string[]
   time?: string
   dish?: string // 主菜・副菜など
-  keywords: string[]
 }
 
 export const convertAnswersToSearchInfo = (answers: Answers): SearchInfo => {
-  const info: SearchInfo = { ingredients: [], time: "", keywords: [] }
+  const info: SearchInfo = { ingredients: [], time: "" }
   if (answers) {
     info.ingredients = answers.ingredients
     info.time = answers.cookingTime
