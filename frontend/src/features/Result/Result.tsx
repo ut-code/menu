@@ -128,6 +128,7 @@ export const Result = ({ session }: Props) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(convertInputContentToSearchInfo(inputContent)),
       })
+      console.log(convertInputContentToSearchInfo(inputContent))
       if (!response.ok) throw new Error("レシピの取得に失敗しました")
       const recipes: Recipe[] = await response.json()
       return recipes

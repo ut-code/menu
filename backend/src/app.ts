@@ -24,8 +24,6 @@ export type SearchInfo = {
 
 app.post("/api/searchRecipes", async (req, res) => {
   const { searchInfo } = req.body
-  console.log(searchInfo.ingredients)
-
   const ingredientsAndQuery: string = searchInfo.ingredients.join(" & ")
   let timeQuery = {}
   switch (searchInfo.time) {
@@ -61,20 +59,15 @@ app.post("/api/searchRecipes", async (req, res) => {
     },
     take: 20,
   })
+  console.log(searchInfo)
+  console.log(recipes)
   res.json(recipes)
 })
 
 app.post("/api/searchRecipes/keywords", async (req, res) => {
   const { keywords } = req.body
-  console.log(keywords)
-
-  const keywordsOrQuery: string = keywords.ingredients.join(" | ") || ""
+  const keywordsOrQuery: string = keywords.join(" | ") || ""
   const recipes = await client.recipes.findMany({
-    // where: {
-    //   recipeDescription: {
-    //     search: keywordsOrQuery,
-    //   },
-    // },
     orderBy: {
       _relevance: {
         fields: ["recipeDescription"],
@@ -84,6 +77,8 @@ app.post("/api/searchRecipes/keywords", async (req, res) => {
     },
     take: 20,
   })
+  console.log(keywords)
+  console.log(recipes)
   res.json(recipes)
 })
 
