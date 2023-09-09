@@ -3,13 +3,18 @@ import { useNavigate } from "react-router-dom"
 import { Session } from "@supabase/supabase-js"
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query"
 
-import { getUserFavoritesApi, postUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/apiUtils"
 import { Hamburger } from "@/components/Hamburger"
 import { Head } from "@/components/Head"
 import { Searchbox } from "@/components/Searchbox"
 import { RecipeCard } from "@/components/RecipeCard"
 import { Recipe, Answers, SearchInfo, convertAnswersToSearchInfo } from "@/utils/recipes"
-import { postSearchRecipesApi } from "@/utils/apiUtils"
+import {
+  postSearchRecipesApi,
+  postSearchRecipesKeywordsApi,
+  getUserFavoritesApi,
+  postUserFavoritesApi,
+  deleteUserFavoritesApi,
+} from "@/utils/apiUtils"
 import styles from "./Result.module.css"
 
 interface Props {
@@ -20,7 +25,6 @@ export const Result = ({ session }: Props) => {
   const Navigate = useNavigate()
 
   const [inputContent, setInputContent] = useState<string>("")
-  const [runEffect, setRunEffect] = useState<boolean>(false)
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
   const queryClient = useQueryClient()
 
@@ -67,7 +71,7 @@ export const Result = ({ session }: Props) => {
   })
 
   // NOTE: https://www.notion.so/utcode/JWT-4743f0e6a64e4ee7848818c9bc0efee1?pvs=4
-  const onClickAddFavorite = useMutation({
+  const addFavorite = useMutation({
     mutationFn: async (recipeId: number) => {
       if (!session?.access_token) return []
       const response = await fetch(postUserFavoritesApi(), {
@@ -85,7 +89,7 @@ export const Result = ({ session }: Props) => {
   })
 
   // NOTE: https://www.notion.so/utcode/JWT-4743f0e6a64e4ee7848818c9bc0efee1?pvs=4
-  const onClickDeleteFavorite = useMutation({
+  const deleteFavorite = useMutation({
     mutationFn: async (recipeId: number) => {
       if (!session?.access_token) return []
       const response = await fetch(deleteUserFavoritesApi(recipeId), {
@@ -104,9 +108,9 @@ export const Result = ({ session }: Props) => {
   const toggleFavorite = (recipeId: number) => {
     if (!favoriteRecipes) return
     if (favoriteRecipes.some((recipe) => recipe.id === recipeId)) {
-      onClickDeleteFavorite.mutate(recipeId)
+      deleteFavorite.mutate(recipeId)
     } else {
-      onClickAddFavorite.mutate(recipeId)
+      addFavorite.mutate(recipeId)
     }
   }
 
@@ -117,15 +121,25 @@ export const Result = ({ session }: Props) => {
     return { keywords: newInputContent.split(" ") }
   }
 
-  useEffect(() => {
-    if (!runEffect) return
-    setRunEffect(false)
+  const searchRecipesKeywords = useMutation({
+    mutationFn: async () => {
+      const response = await fetch(postSearchRecipesKeywordsApi(), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(convertInputContentToSearchInfo(inputContent)),
+      })
+      if (!response.ok) throw new Error("レシピの取得に失敗しました")
+      const recipes: Recipe[] = await response.json()
+      return recipes
+    },
+    onSuccess: (recipes) => {
+      queryClient.setQueryData(["recipes"], recipes)
+    },
+  })
 
-    const info = convertInputContentToSearchInfo(inputContent)
-    alert("フリーワード検索: " + info.keywords)
-  }, [runEffect])
-
-  const onClickRunEffect = () => setRunEffect(true)
+  const onClickSearchRecipesKeywords = () => {
+    searchRecipesKeywords.mutate()
+  }
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputContent(e.target.value)
@@ -145,7 +159,7 @@ export const Result = ({ session }: Props) => {
       />
       <div className={styles.searchbox}>
         <Searchbox
-          onClickHandler={onClickRunEffect}
+          onClickHandler={onClickSearchRecipesKeywords}
           onChange={onChangeHandler}
           inputContent={inputContent}
           placeholder=""
