@@ -64,6 +64,29 @@ app.post("/api/searchRecipes", async (req, res) => {
   res.json(recipes)
 })
 
+app.post("/api/searchRecipes/keywords", async (req, res) => {
+  const { keywords } = req.body
+  console.log(keywords)
+
+  const keywordsOrQuery: string = keywords.ingredients.join(" | ") || ""
+  const recipes = await client.recipes.findMany({
+    // where: {
+    //   recipeDescription: {
+    //     search: keywordsOrQuery,
+    //   },
+    // },
+    orderBy: {
+      _relevance: {
+        fields: ["recipeDescription"],
+        search: keywordsOrQuery,
+        sort: "asc",
+      },
+    },
+    take: 20,
+  })
+  res.json(recipes)
+})
+
 app.get("/api/users/favorites", async (req, res) => {
   const user = await extractUserFromRequest(req)
   if (!user) {
