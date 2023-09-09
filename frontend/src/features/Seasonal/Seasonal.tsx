@@ -1,42 +1,46 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Session } from "@supabase/supabase-js"
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query"
 
-import { getUserFavoritesApi, postUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/apiUtils"
+import {
+  postSearchRecipesKeywordsApi,
+  getUserFavoritesApi,
+  postUserFavoritesApi,
+  deleteUserFavoritesApi,
+} from "@/utils/apiUtils"
 import { Recipe } from "@/utils/recipes"
 import { Head } from "@/components/Head"
 import { RecipeCard } from "@/components/RecipeCard"
 import { Hamburger } from "@/components/Hamburger"
-import styles from "./Favorite.module.css"
+import styles from "./Seasonal.module.css"
 
 interface Props {
   session: Session | null
 }
 
-export const Favorite = ({ session }: Props) => {
+export const Seasonal = ({ session }: Props) => {
   const queryClient = useQueryClient()
   const Navigate = useNavigate()
 
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
-  const [initialFavoriteRecipes, setInitialFavoriteRecipes] = useState<Recipe[]>([])
 
-  // NOTE: コードの再利用性は悪いが、こうするしかなかった…
-  useEffect(() => {
-    if (!session) return
-    const fetchFavoriteRecipes = async () => {
-      const response = await fetch(getUserFavoritesApi(), {
-        headers: { Authorization: `Bearer ${session?.access_token}` },
+  const { data: seasonalRecipes, isLoading: isLoadingSeasonalRecipes } = useQuery({
+    queryKey: ["seasonalRecipes"],
+    queryFn: async () => {
+      const response = await fetch(postSearchRecipesKeywordsApi(), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ keywords: ["夏"] }),
       })
-      if (!response.ok) throw new Error("お気に入りの取得に失敗しました")
+      if (!response.ok) throw new Error("レシピの取得に失敗しました")
       const recipes: Recipe[] = await response.json()
-      setInitialFavoriteRecipes(recipes)
-    }
-    fetchFavoriteRecipes()
-  }, [])
+      return recipes
+    },
+  })
 
   // NOTE: https://www.notion.so/utcode/JWT-4743f0e6a64e4ee7848818c9bc0efee1?pvs=4
-  const { data: favoriteRecipes, isLoading } = useQuery({
+  const { data: favoriteRecipes, isLoading: isLoadingFavoriteRecipes } = useQuery({
     queryKey: ["favoriteRecipes"],
     queryFn: async () => {
       if (!session?.access_token) return []
@@ -96,7 +100,7 @@ export const Favorite = ({ session }: Props) => {
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
-  if (isLoading) return <p>お気に入りを読み込み中</p>
+  if (isLoadingSeasonalRecipes || isLoadingFavoriteRecipes) return <p>レシピを読み込み中</p>
   if (isOpenHamburger) return <Hamburger session={session} onClickCloseHamburger={onClickCloseHamburger} />
   return (
     <div className="style_lightbrown">
@@ -106,21 +110,10 @@ export const Favorite = ({ session }: Props) => {
         onClickOpenHamburger={onClickOpenHamburger}
       />
 
-      <h2 style={{ margin: "20px 0" }}>お気に入り</h2>
-      <div className={styles.buttons}>
-        <div className={styles.sort_buttons}>
-          <button className={styles.sort_button}>新しい順に並び替える</button>
-        </div>
-        <div className={styles.genre_buttons}>
-          <button className={styles.genre_button}>主食</button>
-          <button className={styles.genre_button}>主菜</button>
-          <button className={styles.genre_button}>副菜</button>
-          <button className={styles.genre_button}>スープ</button>
-        </div>
-      </div>
+      <h2 style={{ margin: "20px 0" }}>季節のレシピ</h2>
       <div className={styles.cards}>
-        {initialFavoriteRecipes ? (
-          initialFavoriteRecipes.map((recipe) => (
+        {seasonalRecipes &&
+          seasonalRecipes.map((recipe) => (
             <RecipeCard
               key={recipe.id}
               recipe={recipe}
@@ -128,11 +121,7 @@ export const Favorite = ({ session }: Props) => {
               toggleFavorite={toggleFavorite}
               session={session}
             />
-          ))
-        ) : (
-          // TODO: サインインしてないときに表示を変える
-          <p>お気に入りはまだありません。ハートボタンを押して追加してみましょう。</p>
-        )}
+          ))}
       </div>
     </div>
   )

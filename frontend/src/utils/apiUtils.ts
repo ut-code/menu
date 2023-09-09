@@ -4,6 +4,10 @@ export const postSearchRecipesApi = (): string => {
   return `${API_BASE_URL}/api/searchRecipes`
 }
 
+export const postSearchRecipesKeywordsApi = (): string => {
+  return `${API_BASE_URL}/api/searchRecipes/keywords`
+}
+
 export const getUserFavoritesApi = (): string => {
   return `${API_BASE_URL}/api/users/favorites`
 }

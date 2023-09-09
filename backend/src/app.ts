@@ -20,13 +20,10 @@ export type SearchInfo = {
   ingredients: string[]
   time?: string
   dish?: string // 主菜・副菜など
-  keywords?: string[]
 }
 
 app.post("/api/searchRecipes", async (req, res) => {
   const { searchInfo } = req.body
-  console.log(searchInfo.ingredients)
-
   const ingredientsAndQuery: string = searchInfo.ingredients.join(" & ")
   let timeQuery = {}
   switch (searchInfo.time) {
@@ -43,7 +40,17 @@ app.post("/api/searchRecipes", async (req, res) => {
       break
   }
 
+  const orderBy = Math.random() < 0.5 ? "recipeDescription" : "recipeMaterialConverted"
+  const orderDir = Math.random() < 0.5 ? "asc" : "desc"
+  // const itemCount = await client.recipes.count()
+  // const skip = Math.max(0, Math.floor(Math.random() * itemCount) - 5000)
+
   const recipes = await client.recipes.findMany({
+    orderBy: {
+      [orderBy]: orderDir,
+    },
+    // FIXME: skip をすると全部消えてしまう, ランダムサンプリングの書き方が弱い(rawSQLにする?)
+    // skip: skip,
     where: {
       recipeMaterialConverted: {
         search: ingredientsAndQuery,
@@ -52,6 +59,26 @@ app.post("/api/searchRecipes", async (req, res) => {
     },
     take: 20,
   })
+  console.log(searchInfo)
+  console.log(recipes)
+  res.json(recipes)
+})
+
+app.post("/api/searchRecipes/keywords", async (req, res) => {
+  const { keywords } = req.body
+  const keywordsOrQuery: string = keywords.join(" | ") || ""
+  const recipes = await client.recipes.findMany({
+    orderBy: {
+      _relevance: {
+        fields: ["recipeDescription"],
+        search: keywordsOrQuery,
+        sort: "asc",
+      },
+    },
+    take: 20,
+  })
+  console.log(keywords)
+  console.log(recipes)
   res.json(recipes)
 })
 
