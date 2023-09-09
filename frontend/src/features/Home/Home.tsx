@@ -91,7 +91,7 @@ export const Home = ({ session }: Props) => {
 
           <div style={{ display: "flex", justifyContent: "space-between", padding: "0 40px 0 48px" }}>
             <h2 style={{ marginBottom: "16px" }}>季節のレシピ</h2>
-            <MoreButton onClick={() => Navigate("/home/favorites")} />
+            <MoreButton onClick={() => Navigate("/home/seasonal")} />
           </div>
           <HorizontalScroll recipes={seasonalRecipes?.slice(0, 6)} />
 
