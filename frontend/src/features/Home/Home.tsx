@@ -5,8 +5,7 @@ import { Session } from "@supabase/supabase-js"
 import { useQuery } from "@tanstack/react-query"
 
 import { Recipe } from "@/utils/recipes"
-import { getUserFavoritesApi, postSearchRecipesKeywordsApi } from "@/utils/apiUtils"
-import { DeleteAccount } from "@/features/Auth/DeleteAccount"
+import { getUserFavoritesApi, postSearchRecipesKeywordsApi, getUsernameApi, updateUsernameApi } from "@/utils/apiUtils"
 import { SignOut } from "@/features/Auth/SignOut"
 import { Head } from "@/components/Head"
 import { Hamburger } from "@/components/Hamburger"
@@ -56,6 +55,32 @@ export const Home = ({ session }: Props) => {
     },
   })
 
+  const { data: username } = useQuery({
+    queryKey: ["username"],
+    queryFn: async () => {
+      if (!session?.access_token) return ""
+      const response = await fetch(getUsernameApi(), {
+        headers: { Authorization: `Bearer ${session?.access_token}` },
+      })
+      if (!response.ok) throw new Error("ユーザーネームの取得に失敗しました")
+      return await response.json()
+    },
+  })
+
+  const updateUsername = async (session: Session | null) => {
+    console.log(session)
+    if (!session?.access_token) return
+    const response = await fetch(updateUsernameApi(), {
+      method: "PUT",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${session?.access_token}` },
+      body: JSON.stringify({ username: "変更後" }),
+    })
+    console.log(response)
+    if (!response.ok) throw new Error("ユーザーネームの更新に失敗しました")
+    const user = await response.json()
+    console.log(user)
+  }
+
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
@@ -74,7 +99,9 @@ export const Home = ({ session }: Props) => {
             marginBottom: "15px",
           }}
         >
-          <span style={{ fontSize: "24px", fontWeight: "bold", marginLeft: "8px" }}>Futaba</span>
+          <span style={{ fontSize: "24px", fontWeight: "bold", marginLeft: "8px" }}>
+            {session ? username : "ゲスト"}
+          </span>
           <span style={{ fontSize: "12px", margin: "0 0 6px 10px" }}>さん</span>
         </div>
         <div style={{ width: "100%", marginBottom: "25px" }}>
@@ -115,8 +142,6 @@ export const Home = ({ session }: Props) => {
           <div>
             <p>Already logged in</p>
             <SignOut />
-            <br />
-            <DeleteAccount session={session} />
           </div>
         )}
         <br></br>
@@ -124,6 +149,7 @@ export const Home = ({ session }: Props) => {
           <button>サインアップ</button>
         </Link>
       </div>
+      <button onClick={() => updateUsername(session)}>ユーザーネーム更新</button>
     </>
   )
 }

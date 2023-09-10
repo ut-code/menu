@@ -51,10 +51,10 @@
   align-items: center;
   justify-content: center;
   margin-top: 60px;
-  padding: 10px;
+  padding: 10px 20px;
 
   /* box */
-  border-radius: 10px;
+  border-radius: 20px;
   border: var(--Black) 2px solid;
   height: 104px;
   width: 100%;
@@ -94,7 +94,7 @@
   border-radius: 50px;
   border: var(--Black) 2px solid;
   height: 32px;
-  /* width: 100%; */
+  width: 130px;
   box-sizing: border-box;
   padding: 0 15px;
 

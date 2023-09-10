@@ -11,7 +11,7 @@ beforeAll(() => {
 describe("SignOut component", () => {
   it("should handle sign out and show error alert", async () => {
     const { getByText } = render(<SignOut />)
-    const signOutButton = getByText("Sign out")
+    const signOutButton = getByText("サインアウト")
 
     const mockSignOut = vi.fn().mockResolvedValue({ error: { message: "Sign out error" } })
     supabase.auth.signOut = mockSignOut
