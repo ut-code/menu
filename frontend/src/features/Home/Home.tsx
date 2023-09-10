@@ -5,7 +5,7 @@ import { Session } from "@supabase/supabase-js"
 import { useQuery } from "@tanstack/react-query"
 
 import { Recipe } from "@/utils/recipes"
-import { getUserFavoritesApi, postSearchRecipesKeywordsApi } from "@/utils/apiUtils"
+import { getUserFavoritesApi, postSearchRecipesKeywordsApi, getUsernameApi } from "@/utils/apiUtils"
 import { SignOut } from "@/features/Auth/SignOut"
 import { Head } from "@/components/Head"
 import { Hamburger } from "@/components/Hamburger"
@@ -55,6 +55,18 @@ export const Home = ({ session }: Props) => {
     },
   })
 
+  const { data: username } = useQuery({
+    queryKey: ["username"],
+    queryFn: async () => {
+      if (!session?.access_token) return ""
+      const response = await fetch(getUsernameApi(), {
+        headers: { Authorization: `Bearer ${session?.access_token}` },
+      })
+      if (!response.ok) throw new Error("ユーザーネームの取得に失敗しました")
+      return await response.json()
+    },
+  })
+
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
@@ -73,7 +85,7 @@ export const Home = ({ session }: Props) => {
             marginBottom: "15px",
           }}
         >
-          <span style={{ fontSize: "24px", fontWeight: "bold", marginLeft: "8px" }}>Futaba</span>
+          <span style={{ fontSize: "24px", fontWeight: "bold", marginLeft: "8px" }}>{username}</span>
           <span style={{ fontSize: "12px", margin: "0 0 6px 10px" }}>さん</span>
         </div>
         <div style={{ width: "100%", marginBottom: "25px" }}>

@@ -19,3 +19,11 @@ export const postUserFavoritesApi = (): string => {
 export const deleteUserFavoritesApi = (id: number): string => {
   return `${API_BASE_URL}/api/users/favorites/${id}`
 }
+
+export const updateUsernameApi = (): string => {
+  return `${API_BASE_URL}/api/users/username`
+}
+
+export const getUsernameApi = (): string => {
+  return `${API_BASE_URL}/api/users/username`
+}
