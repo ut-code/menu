@@ -5,6 +5,7 @@ import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query"
 
 import { Hamburger } from "@/components/Hamburger"
 import { Head } from "@/components/Head"
+import { Loading } from "@/components/Loading"
 import { Searchbox } from "@/components/Searchbox"
 import { RecipeCard } from "@/components/RecipeCard"
 import { Recipe, Answers, SearchInfo, convertAnswersToSearchInfo } from "@/utils/recipes"
@@ -149,7 +150,7 @@ export const Result = ({ session }: Props) => {
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
-  if (isLoadingRecipes || isLoadingFavoriteRecipes) return <p>レシピを読み込み中</p>
+  if (isLoadingRecipes || isLoadingFavoriteRecipes) return <Loading />
   if (isOpenHamburger) return <Hamburger session={session} onClickCloseHamburger={onClickCloseHamburger} />
   return (
     <div className="style_lightbrown">
