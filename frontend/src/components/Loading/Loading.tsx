@@ -1,7 +1,5 @@
-// react-icons
-import { FaPaw } from "react-icons/fa"
-import styles from "./Footprint.module.css"
+//import styles from "./Loading.module.css"
 
 export const Loading = () => {
-  return <div>hello world</div>
+  return <div>Hello</div>
 }

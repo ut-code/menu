@@ -12,6 +12,7 @@ import { Head } from "@/components/Head"
 import { Hamburger } from "@/components/Hamburger"
 import { HorizontalScroll } from "./components/HorizontalScroll"
 import { MoreButton } from "@/components/elements/button/MoreButton"
+import { Loading } from "@/components/Loading"
 import { HomeSearchbox } from "./components/HomeSearchbox"
 
 interface Props {
@@ -60,7 +61,7 @@ export const Home = ({ session }: Props) => {
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
   if (isOpenHamburger) return <Hamburger session={session} onClickCloseHamburger={onClickCloseHamburger} />
-  if (isLoadingFavoriteRecipes || isLoadingSeasonalRecipes) return <p>お気に入りを読み込み中</p>
+  if (isLoadingFavoriteRecipes || isLoadingSeasonalRecipes) return <Loading />
   return (
     <>
       <div className="style_lightbrown">
@@ -123,6 +124,7 @@ export const Home = ({ session }: Props) => {
         <Link to={"/auth"}>
           <button>サインアップ</button>
         </Link>
+        <Loading />
       </div>
     </>
   )
