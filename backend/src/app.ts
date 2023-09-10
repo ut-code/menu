@@ -78,7 +78,7 @@ app.post("/api/searchRecipes/keywords", async (req, res) => {
     take: 20,
   })
   console.log(keywords)
-  // console.log(recipes)
+  console.log(recipes)
   res.json(recipes)
 })
 

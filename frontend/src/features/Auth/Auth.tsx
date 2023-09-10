@@ -17,19 +17,20 @@ export const Auth = () => {
   const [username, setUsername] = useState("")
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
 
-  const updateUsername = async (session: Session | null) => {
-    console.log(session)
-    if (!session?.access_token) return
-    const response = await fetch(updateUsernameApi(), {
-      method: "PUT",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${session?.access_token}` },
-      body: JSON.stringify({ username: username }),
-    })
-    console.log(response)
-    if (!response.ok) throw new Error("ユーザーネームの更新に失敗しました")
-    const user = await response.json()
-    console.log(user)
-  }
+  // const updateUsername = async (session: Session | null) => {
+  //   console.log(username)
+  //   console.log(session)
+  //   if (!session?.access_token) return
+  //   const response = await fetch(updateUsernameApi(), {
+  //     method: "PUT",
+  //     headers: { "Content-Type": "application/json", Authorization: `Bearer ${session?.access_token}` },
+  //     body: JSON.stringify({ username: username }),
+  //   })
+  //   console.log(response)
+  //   if (!response.ok) throw new Error("ユーザーネームの更新に失敗しました")
+  //   const user = await response.json()
+  //   console.log(user)
+  // }
 
   const handleSignIn = async () => {
     setLoading(true)
@@ -40,7 +41,6 @@ export const Auth = () => {
     } else {
       alert("Check your email for the login link!")
     }
-    await updateUsername(data.session)
     setLoading(false)
   }
 
