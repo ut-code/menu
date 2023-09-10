@@ -6,7 +6,6 @@ import { useQuery } from "@tanstack/react-query"
 
 import { Recipe } from "@/utils/recipes"
 import { getUserFavoritesApi, postSearchRecipesKeywordsApi } from "@/utils/apiUtils"
-import { DeleteAccount } from "@/features/Auth/DeleteAccount"
 import { SignOut } from "@/features/Auth/SignOut"
 import { Head } from "@/components/Head"
 import { Hamburger } from "@/components/Hamburger"
@@ -115,8 +114,6 @@ export const Home = ({ session }: Props) => {
           <div>
             <p>Already logged in</p>
             <SignOut />
-            <br />
-            <DeleteAccount session={session} />
           </div>
         )}
         <br></br>
