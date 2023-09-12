@@ -13,12 +13,13 @@
   background-color: white;
   border-radius: 50em;
   /* make a circle border */
-  border: var(--Black) 1px solid;
+  border: var(--Black) 2px solid;
   box-shadow: var(--Black) 2px 2px 0 0;
   height: 1.8em;
 
   /* text */
-  font-size: 0.75rem;
+  font-size: 12px;
+  font-weight: medium;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -27,8 +28,8 @@
 }
 
 input[type="text"]:focus.box {
-  border: var(--Red) 1px solid;
-  box-shadow: var(--Red) 2px 2px 0 0;
+  border: var(--Green) 2px solid;
+  box-shadow: var(--Green) 2px 2px 0 0;
   outline: 0;
 }
 
