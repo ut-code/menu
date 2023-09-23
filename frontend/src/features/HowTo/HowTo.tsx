@@ -111,7 +111,7 @@ export const HowTo = () => {
           </p>
         </div>
         <div className="bottom">
-          <Link to="/home">
+          <Link to="/questions">
             <NextButton />
           </Link>
         </div>
