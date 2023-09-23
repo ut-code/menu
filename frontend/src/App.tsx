@@ -13,6 +13,7 @@ import { NotFound } from "@/features/NotFound"
 import { supabase } from "@/features/Auth/supabaseClient"
 
 import "@/components/css/global.css"
+import { Loading } from "./components/Loading"
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)
@@ -32,7 +33,7 @@ export default function App() {
     initialize()
   }, [])
 
-  if (isLoading) return <div>loading...</div>
+  if (isLoading) return <Loading />
   return (
     <>
       <Routes>

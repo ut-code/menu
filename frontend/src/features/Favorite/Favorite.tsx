@@ -6,6 +6,7 @@ import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query"
 import { getUserFavoritesApi, postUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/apiUtils"
 import { Recipe } from "@/utils/recipes"
 import { Head } from "@/components/Head"
+import { Loading } from "@/components/Loading"
 import { RecipeCard } from "@/components/RecipeCard"
 import { Hamburger } from "@/components/Hamburger"
 import styles from "./Favorite.module.css"
@@ -96,7 +97,7 @@ export const Favorite = ({ session }: Props) => {
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
-  if (isLoading) return <p>お気に入りを読み込み中</p>
+  if (isLoading) return <Loading />
   if (isOpenHamburger) return <Hamburger session={session} onClickCloseHamburger={onClickCloseHamburger} />
   return (
     <div className="style_lightbrown">
