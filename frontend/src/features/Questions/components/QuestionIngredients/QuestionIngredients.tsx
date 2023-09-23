@@ -72,60 +72,31 @@ export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredi
   if (isOpenHamburger) return <Hamburger session={session} onClickCloseHamburger={onClickCloseHamburger} />
   return (
     <>
-      <div className={"style_green"}>
+      <div style={{ padding: 16 }}>
         <Head
           showBackButton={false}
           onClickPreviousPage={() => setQuestionNumber(0)}
           onClickOpenHamburger={onClickOpenHamburger}
-          filterWhite={true}
+          filterWhite={false}
         />
 
-        <div className={"h1"}>
+        <h1 style={{ paddingLeft: 16, lineHeight: 1.7, marginTop: 120, marginBottom: 32 }}>
           余り物も料理のヒントも、
           <br />
           だるめしにおまかせ。
-        </div>
+        </h1>
         <Searchbox
           onClickHandler={() => Navigate("/search")}
           placeholder={"食材の名前を入力してみましょう"}
           onChange={onChangeSearchbox}
           inputContent={inputContent}
         />
-      </div>
-      <div className={"style_lightbrown"}>
-        <div className={"boxes"}>
-          {options.map((option) => (
-            <div key={option.id} className={"box pic"}>
-              <input
-                type="checkbox"
-                id={option.id}
-                value={option.value}
-                checked={inputContent.includes(option.value)}
-                onChange={onChangeCheckbox}
-              />
-              <label htmlFor={option.id}>
-                <div>
-                  {ingredients && ingredients.includes(option.value) ? (
-                    <div className={"pic_filter"}>
-                      <BsCheckLg size="2rem" />
-                    </div>
-                  ) : (
-                    <div>
-                      <img className={"pic_iframe"} src={option.image} />
-                      <div className={"pic_heading"}>{option.value}</div>
-                    </div>
-                  )}
-                </div>
-              </label>
-            </div>
-          ))}
-          <div className={"box nopic"}>
-            <div className={"nopic_text"} onClick={incrementIngredientsNumber}>
-              <img src={iconPlus} alt="icon_plus" />
-            </div>
-          </div>
+        <div style={{ paddingLeft: 16, paddingRight: 16, marginTop: 24, marginBottom: 96 }}>
+          <h3 style={{ marginBottom: 8 }}>入力のヒント💡</h3>
+          <p style={{ marginBottom: 4 }}>食材は2個以上入力することができます(例：玉ねぎ 牛乳)</p>
+          <p>食材を2個以上入力するときは、スペースを空けてください</p>
         </div>
-        <div className={"space"} />
+
         <NextButton onClick={onClickNextPage} />
       </div>
     </>

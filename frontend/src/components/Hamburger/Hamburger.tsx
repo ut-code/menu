@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom"
 import { Session } from "@supabase/supabase-js"
-import styles from "./Hamburger.module.css"
+import { useQuery } from "@tanstack/react-query"
 
+import { SignOut } from "@/features/Auth/SignOut"
+import { getUsernameApi } from "@/utils/apiUtils"
+import styles from "./Hamburger.module.css"
 // react-icons
 import iconClose from "@/assets/icon/icon_close.svg"
 import { BsHouseDoorFill } from "react-icons/bs"
@@ -16,6 +19,18 @@ interface Props {
 }
 
 export const Hamburger = ({ session, onClickCloseHamburger }: Props) => {
+  const { data: username } = useQuery({
+    queryKey: ["username"],
+    queryFn: async () => {
+      if (!session?.access_token) return ""
+      const response = await fetch(getUsernameApi(), {
+        headers: { Authorization: `Bearer ${session?.access_token}` },
+      })
+      if (!response.ok) throw new Error("ユーザーネームの取得に失敗しました")
+      return await response.json()
+    },
+  })
+
   return (
     <div className="style_lightbrown">
       <div className={styles.top}>
@@ -43,22 +58,26 @@ export const Hamburger = ({ session, onClickCloseHamburger }: Props) => {
         </Link>
       </div>
 
-      {!session && (
-        <div className={styles.signin}>
-          <div className={styles.signin_text}>
-            <div style={{ display: "flex", alignItems: "end", marginBottom: "6px" }}>
-              <h2>ゲスト</h2>
-              <p style={{ marginLeft: "5px", marginBottom: "2px" }}>さん</p>
-            </div>
-            <p style={{ color: "gray" }}>メールアドレスの登録なし</p>
+      <div className={styles.signin}>
+        <div className={styles.signin_text}>
+          <div style={{ display: "flex", alignItems: "end", marginBottom: "6px" }}>
+            <h2>{session ? username : "ゲスト"}</h2>
+            <p style={{ marginLeft: "5px", marginBottom: "2px" }}>さん</p>
           </div>
-          <div className={styles.signin_link}>
+          {!session && <p style={{ color: "gray" }}>メールアドレスの登録なし</p>}
+        </div>
+        <div className={styles.signin_link}>
+          {!session ? (
             <Link to="/auth" className={styles.signin_link_button}>
               <h3>サインイン</h3>
             </Link>
-          </div>
+          ) : (
+            <div className={styles.signin_link_button}>
+              <SignOut />
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   )
 }
