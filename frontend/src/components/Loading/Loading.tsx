@@ -1,5 +1,5 @@
-//import styles from "./Loading.module.css"
+import styles from "./Loading.module.css"
 
 export const Loading = () => {
-  return <div>Hello</div>
+  return <div className={styles.loader}></div>
 }
