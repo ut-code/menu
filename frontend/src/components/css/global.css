@@ -24,27 +24,33 @@ h1 {
   margin: 0;
   font-size: 24px;
   font-weight: bold;
+  font-family: var(--Font);
 }
 h2 {
   margin: 0;
   font-size: 20px;
   font-weight: bold;
+  font-family: var(--Font);
 }
 h3 {
   margin: 0;
   font-size: 12px;
   font-weight: bold;
+  font-family: var(--Font);
 }
 p {
   margin: 0;
   font-size: 12px;
   font-weight: normal;
+  font-family: var(--Font);
 }
 .small {
   font-size: 10px;
+  font-family: var(--Font);
 }
 .caption {
   font-size: 6px;
+  font-family: var(--Font);
 }
 
 html {
@@ -58,10 +64,12 @@ a {
   /* a href / Link の文字が変な色にならないようにする */
   text-decoration: none;
   color: var(--Black);
+  font-family: var(--Font);
 }
 
 body {
   height: 100vh;
+  font-family: var(--Font);
 }
 
 .style_lightbrown {
