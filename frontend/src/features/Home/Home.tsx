@@ -124,7 +124,6 @@ export const Home = ({ session }: Props) => {
         <Link to={"/auth"}>
           <button>サインアップ</button>
         </Link>
-        <Loading />
       </div>
     </>
   )
