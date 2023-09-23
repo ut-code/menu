@@ -17,6 +17,7 @@ import {
   deleteUserFavoritesApi,
 } from "@/utils/apiUtils"
 import styles from "./Result.module.css"
+import { EmptyResults } from "@/components/EmptyResults"
 
 interface Props {
   session: Session | null
@@ -168,18 +169,22 @@ export const Result = ({ session }: Props) => {
         />
       </div>
 
-      <div className={styles.cards}>
-        {recipes &&
-          recipes.map((recipe) => (
-            <RecipeCard
-              key={recipe.id}
-              recipe={recipe}
-              favoriteRecipes={favoriteRecipes}
-              toggleFavorite={toggleFavorite}
-              session={session}
-            />
-          ))}
-      </div>
+      {recipes ? (
+        <div className={styles.cards}>
+          {recipes &&
+            recipes.map((recipe) => (
+              <RecipeCard
+                key={recipe.id}
+                recipe={recipe}
+                favoriteRecipes={favoriteRecipes}
+                toggleFavorite={toggleFavorite}
+                session={session}
+              />
+            ))}
+        </div>
+      ) : (
+        <EmptyResults />
+      )}
 
       <div className={styles.spacer} />
 
