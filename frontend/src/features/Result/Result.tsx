@@ -169,7 +169,7 @@ export const Result = ({ session }: Props) => {
         />
       </div>
 
-      {recipes ? (
+      {recipes && recipes.length > 0 ? (
         <div className={styles.cards}>
           {recipes &&
             recipes.map((recipe) => (

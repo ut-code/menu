@@ -14,7 +14,7 @@ import { supabase } from "@/features/Auth/supabaseClient"
 
 import "@/components/css/global.css"
 import { Loading } from "./components/Loading"
-import { EmptyResults } from "./components/EmptyResults"
+//import { EmptyResults } from "./components/EmptyResults"
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)
