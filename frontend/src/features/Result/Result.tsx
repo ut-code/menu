@@ -181,18 +181,27 @@ export const Result = ({ session }: Props) => {
                 session={session}
               />
             ))}
+          <div className={styles.spacer} />
+
+          <div className={styles.bottom}>
+            <button className={styles.return} onClick={() => Navigate("/home")}>
+              ホームに戻る
+            </button>
+          </div>
         </div>
       ) : (
-        <EmptyResults />
+        <div className={styles.cards}>
+          <EmptyResults />
+          <div className={styles.links}>
+            <button className={styles.return} onClick={() => Navigate("/questions")}>
+              もう一度検索する
+            </button>
+            <button className={styles.return} onClick={() => Navigate("/home")}>
+              ホームに戻る
+            </button>
+          </div>
+        </div>
       )}
-
-      <div className={styles.spacer} />
-
-      <div className={styles.bottom}>
-        <button className={styles.return} onClick={() => Navigate("/home")}>
-          ホームに戻る
-        </button>
-      </div>
     </div>
   )
 }

@@ -48,3 +48,11 @@
 .spacer {
   height: 100px;
 }
+
+.links {
+  display: flex;
+  flex-direction: column;
+
+  /* 上にmargin */
+  margin-top: 2em;
+}

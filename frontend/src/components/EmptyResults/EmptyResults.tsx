@@ -8,7 +8,7 @@ export const EmptyResults = () => {
     <div className={styles.centerContainer}>
       <img src={Sorry} alt="アイコン" className="icon" />
       <h2>検索結果が見つかりません</h2>
-      <div className={styles.explanetionText}>
+      <div className={styles.explanationText}>
         <p>大変申し訳ございません</p>
       </div>
     </div>
