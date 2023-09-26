@@ -190,13 +190,15 @@ export const Result = ({ session }: Props) => {
           </div>
         </div>
       ) : (
-        <div className={styles.cards}>
+        <div className="style_lightbrown">
           <EmptyResults />
           <div className={styles.links}>
-            <button className={styles.return} onClick={() => Navigate("/questions")}>
+            <button className={styles.returnSearch} onClick={() => Navigate("/questions")}>
               もう一度検索する
             </button>
-            <button className={styles.return} onClick={() => Navigate("/home")}>
+          </div>
+          <div className={styles.links}>
+            <button className={styles.returnHome} onClick={() => Navigate("/home")}>
               ホームに戻る
             </button>
           </div>
