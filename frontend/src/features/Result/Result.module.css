@@ -16,7 +16,6 @@
 .bottom {
   position: fixed;
   bottom: 0;
-
   width: 100%;
   height: 75px;
   background: var(--LightBrown);
@@ -52,7 +51,8 @@
   justify-content: center;
 
   /* box */
-  background-color: #f5b72e;
+  /*background-color: var(--Yellow);*/
+  background-color: white;
   border-radius: 10rem;
   border: var(--Black) 1px solid;
   height: 40px;
@@ -73,5 +73,17 @@
   flex-direction: column;
 
   /* 上にmargin */
-  margin-top: 2em;
+  margin-top: 16px;
+}
+
+.emptyResults {
+  /* layout */
+  padding: 1.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* transition */
+  animation: fadeIn 1s;
+  animation-fill-mode: forwards;
 }

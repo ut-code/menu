@@ -124,6 +124,7 @@
 .icon {
   /* layout */
   position: absolute;
+
   right: 7px;
   top: 7px;
 
@@ -138,6 +139,9 @@
   border-radius: 50%;
   border: solid 1.5px var(--Black);
   box-sizing: border-box;
+
   width: 32px;
   height: 32px;
+
+  margin: 0px;
 }
