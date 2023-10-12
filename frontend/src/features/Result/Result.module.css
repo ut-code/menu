@@ -32,7 +32,7 @@
   justify-content: center;
 
   /* box */
-  background-color: white;
+  background-color: var(--Yellow);
   border-radius: 10rem;
   border: var(--Black) 1px solid;
   height: 40px;
@@ -52,7 +52,7 @@
 
   /* box */
   /*background-color: var(--Yellow);*/
-  background-color: white;
+  background-color: #fff;
   border-radius: 10rem;
   border: var(--Black) 1px solid;
   height: 40px;
@@ -68,6 +68,10 @@
   height: 100px;
 }
 
+.buttonBundle {
+  margin-top: 20px;
+}
+
 .links {
   display: flex;
   flex-direction: column;
@@ -78,12 +82,7 @@
 
 .emptyResults {
   /* layout */
-  padding: 1.5em;
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  /* transition */
-  animation: fadeIn 1s;
-  animation-fill-mode: forwards;
 }

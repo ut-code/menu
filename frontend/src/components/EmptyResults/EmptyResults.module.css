@@ -10,138 +10,15 @@
   overflow-y: auto;
 }
 
-.explanationText {
+.icon {
+  width: 240px;
+  height: 240px;
+}
+
+.smallExplanationText {
   margin-top: 8px;
 }
 
-/*copied from RecipeCard.modules.css*/
-
-.root {
-  /* layout */
-  display: flex;
-  align-items: center;
-  border-radius: 8px;
-  justify-content: space-between;
-  flex-direction: column;
-  position: relative;
-
-  /* box */
-  height: 272px;
-  width: 85vw;
-  overflow: hidden;
-  border: var(--Black) 2px solid;
-}
-
-.image_frame {
-  /* box */
-  object-fit: cover;
-  height: 136px;
-  width: 100%;
-  outline: none;
-  border: none;
-  box-sizing: border-box;
-  margin: auto;
-
-  /* text */
-  font-size: 12px;
-}
-
-/* .image_frame_blur {
-  width: 100%;
-  height: 168px;
-  filter: blur(10px);
-} */
-
-.hr {
-  /* box */
-  width: 100%;
-  height: 2.5px;
-  background-color: var(--Black);
-  border: none;
-
-  /* text */
-  color: transparent;
-}
-
-.text_container {
-  /* layout */
-  display: flex;
-  padding-left: 15px;
-
-  /* box */
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  overflow: hidden;
-
-  background: url("/footprint.svg") no-repeat;
-  background-position: 95% 10%;
-  background-color: white;
-}
-
-.left {
-  /* layout */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  /* box */
-  width: 70vw;
-}
-
-.text_title {
-  /* layout */
-  /* width: 144px; */
-  margin-bottom: 4px;
-
-  /* text */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 20px;
-  font-weight: bold;
-  text-align: left;
-}
-
-.text_material {
-  /* layout */
-  margin-left: 2px;
-
-  /* text */
-  font-weight: lighter;
-  font-size: 12px;
-  /* white-space: nowrap; */
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  /* box */
-  /* NOTE: 160 / 0.6 */
-  /* width: 240px; */
-  width: 70vw;
-  height: 35px;
-}
-
-.icon {
-  /* layout */
-  position: absolute;
-
-  right: 7px;
-  top: 7px;
-
-  /* icon */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-
-  /* circle */
-  background-color: white;
-  border-radius: 50%;
-  border: solid 1.5px var(--Black);
-  box-sizing: border-box;
-
-  width: 32px;
-  height: 32px;
-
-  margin: 0px;
+.combinedText {
+  margin-top: 30px;
 }

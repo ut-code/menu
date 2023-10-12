@@ -192,15 +192,22 @@ export const Result = ({ session }: Props) => {
       ) : (
         <div className={styles.emptyResults}>
           <EmptyResults />
-          <div className={styles.links}>
-            <button className={styles.returnSearch} onClick={() => Navigate("/questions")}>
-              もう一度検索する
-            </button>
-          </div>
-          <div className={styles.links}>
-            <button className={styles.returnHome} onClick={() => Navigate("/home")}>
-              ホームに戻る
-            </button>
+          <div className={styles.buttonBundle}>
+            <div className={styles.links}>
+              <button
+                className={styles.returnSearch}
+                onClick={() => {
+                  Navigate("/questions")
+                }}
+              >
+                もう一度検索する
+              </button>
+            </div>
+            <div className={styles.links}>
+              <button className={styles.returnHome} onClick={() => Navigate("/home")}>
+                ホームに戻る
+              </button>
+            </div>
           </div>
         </div>
       )}
