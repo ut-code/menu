@@ -25,11 +25,11 @@ model Recipes {
   recipeTitle             String
   recipeUrl               String
   recipeDescription       String
-  foodImageUrls           String[]
+  foodImageUrl            String
   keywords                String[]
   totalTime               Int
   recipeMaterial          String[]
-  recipeMaterialConverted String?
+  recipeMaterialConverted String
 
   favorites UserFavorites[]
 }
@@ -39,7 +39,7 @@ model RecipesTmp {
   recipeTitle       String
   recipeUrl         String
   recipeDescription String
-  foodImageUrls     String[]
+  foodImageUrl      String
   keywords          String[]
   totalTime         Int
   recipeMaterial    String[]
