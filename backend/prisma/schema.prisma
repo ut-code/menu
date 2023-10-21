@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["fullTextSearch"]
 }
 
@@ -11,13 +11,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Categories {
-  id           Int    @id @default(autoincrement())
+  id           Int     @id @default(autoincrement())
   category1    String
   category2    String?
   category3    String?
-  categoryId   String @unique
+  categoryId   String  @unique
   categoryName String
 }
 
@@ -32,7 +31,7 @@ model Recipes {
   recipeMaterial          String[]
   recipeMaterialConverted String?
 
-  favorites               UserFavorites[]
+  favorites UserFavorites[]
 }
 
 model RecipesTmp {
@@ -47,28 +46,28 @@ model RecipesTmp {
 }
 
 model Urls {
-  id Int @id @default(autoincrement())
-  url String
+  id         Int     @id @default(autoincrement())
+  url        String
   structured Boolean
 }
 
 model Users {
-	id String @id
-	email String @unique
-	username String @default("名無し")
-	createdAt DateTime @default(now())
-	updatedAt DateTime @updatedAt
+  id        String   @id
+  email     String   @unique
+  username  String   @default("名無し")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   favorites UserFavorites[]
 }
 
 model UserFavorites {
-  id             Int @id @default(autoincrement())
-  userId         String
-  recipeId       Int
-  createdAt      DateTime @default(now())
+  id        Int      @id @default(autoincrement())
+  userId    String
+  recipeId  Int
+  createdAt DateTime @default(now())
 
-  user           Users    @relation(fields: [userId], references: [id])
+  user           Users   @relation(fields: [userId], references: [id])
   favoriteRecipe Recipes @relation(fields: [recipeId], references: [id])
 
   @@unique([userId, recipeId])
