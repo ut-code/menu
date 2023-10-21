@@ -47,8 +47,7 @@ model RecipesTmp {
 
 model Urls {
   id         Int     @id @default(autoincrement())
-  url        String
-  structured Boolean
+  url        String  @unique
 }
 
 model Users {
