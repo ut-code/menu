@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const RecipeCard = ({ recipe, favoriteRecipes, toggleFavorite, session }: Props) => {
-  const recipeMaterialConverted = recipe.recipeMaterial.join("・")
+  const materialsConverted = recipe.materials.join("・")
 
   const isFavorite: boolean =
     favoriteRecipes !== undefined && favoriteRecipes.some((favoriteRecipe) => favoriteRecipe.id === recipe.id)
@@ -27,9 +27,9 @@ export const RecipeCard = ({ recipe, favoriteRecipes, toggleFavorite, session }:
   }
 
   return (
-    <Link to={recipe.recipeUrl} target="_blank" rel="noopener noreferrer">
+    <Link to={recipe.sourceUrl} target="_blank" rel="noopener noreferrer">
       <div className={styles.root}>
-        <img className={styles.image_frame} src={recipe.foodImageUrls[0]} />
+        <img className={styles.image_frame} src={recipe.foodImageUrl} />
         {session && (
           <div
             className={styles.icon}
@@ -41,9 +41,9 @@ export const RecipeCard = ({ recipe, favoriteRecipes, toggleFavorite, session }:
         <div className={styles.hr}>{"_"}</div>
         <div className={styles.text_container}>
           <div className={styles.left}>
-            <span className={styles.text_title}>{recipe.recipeTitle}</span>
-            <span className={styles.text_material}>{recipeMaterialConverted}</span>
-            <TipReference url={recipe.recipeUrl} />
+            <span className={styles.text_title}>{recipe.title}</span>
+            <span className={styles.text_material}>{materialsConverted}</span>
+            <TipReference url={recipe.sourceUrl} />
           </div>
         </div>
       </div>

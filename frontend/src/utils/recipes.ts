@@ -1,12 +1,12 @@
 export type Recipe = {
   id: number
-  recipeTitle: string
-  recipeUrl: string
-  recipeDescription: string
-  foodImageUrls: string[]
+  title: string
+  description: string
+  totalCookingTime: number
+  materials: string[]
   keywords: string[]
-  totalTime: number
-  recipeMaterial: string[]
+  sourceUrl: string
+  foodImageUrl: string
 }
 
 export type Answers = {
