@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["fullTextSearch"]
@@ -21,15 +18,15 @@ model Categories {
 }
 
 model Recipes {
-  id                      Int      @id @default(autoincrement())
-  recipeTitle             String
-  recipeUrl               String   @unique
-  recipeDescription       String
-  foodImageUrl            String
-  keywords                String[]
-  totalTime               Int
-  recipeMaterial          String[]
-  recipeMaterialConverted String?
+  id                 Int      @id @default(autoincrement())
+  title              String
+  description        String
+  totalCookingTime   Int      @default(-1)
+  materials          String[]
+  materialsConverted String
+  keywords           String[]
+  sourceUrl          String   @unique(map: "Recipes_recipeUrl_key")
+  foodImageUrl       String
 
   favorites UserFavorites[]
 }
@@ -40,23 +37,22 @@ model Urls {
 }
 
 model Users {
-  id        String   @id
-  email     String   @unique
-  username  String   @default("名無し")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  id        String          @id
+  email     String          @unique
+  username  String          @default("名無し")
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
   favorites UserFavorites[]
 }
 
 model UserFavorites {
-  id        Int      @id @default(autoincrement())
-  userId    String
-  recipeId  Int
-  createdAt DateTime @default(now())
-
-  user           Users   @relation(fields: [userId], references: [id])
-  favoriteRecipe Recipes @relation(fields: [recipeId], references: [id])
+  id             Int      @id @default(autoincrement())
+  userId         String
+  recipeId       Int
+  createdAt      DateTime @default(now())
+  
+  user           Users    @relation(fields: [userId], references: [id])
+  favoriteRecipe Recipes  @relation(fields: [recipeId], references: [id])
 
   @@unique([userId, recipeId])
 }
