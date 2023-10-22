@@ -23,31 +23,20 @@ model Categories {
 model Recipes {
   id                      Int      @id @default(autoincrement())
   recipeTitle             String
-  recipeUrl               String
+  recipeUrl               String   @unique
   recipeDescription       String
   foodImageUrl            String
   keywords                String[]
   totalTime               Int
   recipeMaterial          String[]
-  recipeMaterialConverted String
+  recipeMaterialConverted String?
 
   favorites UserFavorites[]
 }
 
-model RecipesTmp {
-  id                Int      @id @default(autoincrement())
-  recipeTitle       String
-  recipeUrl         String
-  recipeDescription String
-  foodImageUrl      String
-  keywords          String[]
-  totalTime         Int
-  recipeMaterial    String[]
-}
-
 model Urls {
-  id         Int     @id @default(autoincrement())
-  url        String  @unique
+  id  Int    @id @default(autoincrement())
+  url String @unique
 }
 
 model Users {
