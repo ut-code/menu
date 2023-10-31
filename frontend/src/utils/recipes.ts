@@ -11,21 +11,21 @@ export type Recipe = {
 
 export type Answers = {
   ingredients: string[]
-  genre: string
-  cookingTime: string
+  genre: string | null
+  cookingTime: string | null
 }
 
 export type SearchInfo = {
   ingredients: string[]
-  time?: string
-  dish?: string // 主菜・副菜など
+  time: string | null
+  dish: string | null // 主菜・副菜など
 }
 
 export const convertAnswersToSearchInfo = (answers: Answers): SearchInfo => {
-  const info: SearchInfo = { ingredients: [], time: "" }
-  if (answers) {
-    info.ingredients = answers.ingredients
-    info.time = answers.cookingTime
+  const info: SearchInfo = {
+    ingredients: answers.ingredients,
+    time: answers.cookingTime,
+    dish: answers.genre,
   }
   return info
 }
