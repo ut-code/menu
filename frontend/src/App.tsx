@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom"
+import { Routes, Route, Navigate, useLocation } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { Session } from "@supabase/supabase-js"
 
@@ -18,6 +18,7 @@ import { Loading } from "./components/Loading"
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
+  const location = useLocation()
 
   useEffect(() => {
     const initialize = async () => {
@@ -37,17 +38,17 @@ export default function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<HowTo />}></Route>
-        <Route path="/home" element={<Home session={session} />}></Route>
+        <Route path="/" element={location.search !== "?ref=a2hs" ? <HowTo /> : <Home session={session} />} />
+        <Route path="/home" element={<Home session={session} />} />
         <Route
           path="/home/favorites"
           element={session ? <Favorite session={session} /> : <Navigate replace to="/home" />}
-        ></Route>
-        <Route path="/home/seasonal" element={<Seasonal session={session} />}></Route>
-        <Route path="/questions" element={<Questions session={session} />}></Route>
-        <Route path="/search" element={<Result session={session} />}></Route>
-        <Route path="/auth" element={!session ? <Auth /> : <Navigate replace to="/home" />}></Route>
-        <Route path="*" element={<NotFound />}></Route>
+        />
+        <Route path="/home/seasonal" element={<Seasonal session={session} />} />
+        <Route path="/questions" element={<Questions session={session} />} />
+        <Route path="/search" element={<Result session={session} />} />
+        <Route path="/auth" element={!session ? <Auth /> : <Navigate replace to="/home" />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   )
