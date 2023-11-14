@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
-import { Session } from "@supabase/supabase-js"
+// import { Session } from "@supabase/supabase-js"
 import { supabase } from "./supabaseClient"
-import { updateUsernameApi } from "@/utils/apiUtils"
+// import { updateUsernameApi } from "@/utils/apiUtils"
 import { BorderButton } from "@/components/elements/button/BorderButton"
 import { Head } from "@/components/Head"
 import { Hamburger } from "@/components/Hamburger"
@@ -34,7 +34,7 @@ export const Auth = () => {
 
   const handleSignIn = async () => {
     setLoading(true)
-    const { data, error } = await supabase.auth.signInWithOtp({ email })
+    const { error } = await supabase.auth.signInWithOtp({ email })
 
     if (error) {
       alert(error.message)
