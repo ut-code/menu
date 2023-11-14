@@ -20,7 +20,7 @@ export default defineConfig({
         lang: "ja",
         display: "standalone",
         scope: "/",
-        start_url: "/",
+        start_url: "/?ref=a2hs",
         short_name: "だるめし",
         name: "だるめし Dull Meshi",
         description: "献立提案システム",
