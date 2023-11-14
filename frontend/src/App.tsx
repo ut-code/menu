@@ -38,7 +38,7 @@ export default function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={location.search !== "?ref=a2hs" ? <HowTo /> : <Home session={session} />} />
+        <Route path="/" element={location.search !== "?ref=a2hs" ? <HowTo /> : <Navigate replace to="/questions" />} />
         <Route path="/home" element={<Home session={session} />} />
         <Route
           path="/home/favorites"
