@@ -134,6 +134,9 @@ export const Home = ({ session }: Props) => {
       <hr />
 
       <div className="style_lightbrown">
+        <Link to={"https://gist.github.com/bvv-1/d3c318f90d0720e81259e58de49adc30"}>
+          <button>プライバシーポリシー</button>
+        </Link>
         <Link to={"/search"}>
           <button>検索結果</button>
         </Link>
