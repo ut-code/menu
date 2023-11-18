@@ -1,17 +1,9 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Session } from "@supabase/supabase-js"
-import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query"
 
-import {
-  postSearchRecipesKeywordsApi,
-  getUserFavoritesApi,
-  postUserFavoritesApi,
-  deleteUserFavoritesApi,
-} from "@/utils/apiUtils"
-import { Recipe } from "@/utils/recipes"
+import { BorderButton } from "@/components/elements/button/BorderButton"
 import { Head } from "@/components/Head"
-import { RecipeCard } from "@/components/RecipeCard"
 import { Hamburger } from "@/components/Hamburger"
 import styles from "./Setting.module.css"
 
@@ -20,87 +12,17 @@ interface Props {
 }
 
 export const Setting = ({ session }: Props) => {
-  const queryClient = useQueryClient()
   const Navigate = useNavigate()
 
+  const [loading, setLoading] = useState(false)
+  const [hasAccount, setHasAccount] = useState<boolean>(true)
+  const [email, setEmail] = useState("")
+  const [username, setUsername] = useState("")
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
-
-  const { data: seasonalRecipes, isLoading: isLoadingSeasonalRecipes } = useQuery({
-    queryKey: ["seasonalRecipes"],
-    queryFn: async () => {
-      const response = await fetch(postSearchRecipesKeywordsApi(), {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ keywords: ["夏"] }),
-      })
-      if (!response.ok) throw new Error("レシピの取得に失敗しました")
-      const recipes: Recipe[] = await response.json()
-      return recipes
-    },
-  })
-
-  // NOTE: https://www.notion.so/utcode/JWT-4743f0e6a64e4ee7848818c9bc0efee1?pvs=4
-  const { data: favoriteRecipes, isLoading: isLoadingFavoriteRecipes } = useQuery({
-    queryKey: ["favoriteRecipes"],
-    queryFn: async () => {
-      if (!session?.access_token) return []
-      const response = await fetch(getUserFavoritesApi(), {
-        headers: { Authorization: `Bearer ${session?.access_token}` },
-      })
-      if (!response.ok) throw new Error("お気に入りの取得に失敗しました")
-      const recipes: Recipe[] = await response.json()
-      return recipes
-    },
-  })
-
-  // NOTE: https://www.notion.so/utcode/JWT-4743f0e6a64e4ee7848818c9bc0efee1?pvs=4
-  const onClickAddFavorite = useMutation({
-    mutationFn: async (recipeId: number) => {
-      if (!session?.access_token) return []
-      const response = await fetch(postUserFavoritesApi(), {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${session?.access_token}` },
-        body: JSON.stringify({ recipeId: recipeId }),
-      })
-      if (!response.ok) throw new Error("お気に入りの追加に失敗しました")
-      const userFavorite = await response.json()
-      console.log(userFavorite)
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries(["favoriteRecipes"])
-    },
-  })
-
-  // NOTE: https://www.notion.so/utcode/JWT-4743f0e6a64e4ee7848818c9bc0efee1?pvs=4
-  const onClickDeleteFavorite = useMutation({
-    mutationFn: async (recipeId: number) => {
-      if (!session?.access_token) return []
-      const response = await fetch(deleteUserFavoritesApi(recipeId), {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${session?.access_token}` },
-      })
-      if (!response.ok) throw new Error("お気に入りの削除に失敗しました")
-      const userFavorite = await response.json()
-      console.log(userFavorite)
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries(["favoriteRecipes"])
-    },
-  })
-
-  const toggleFavorite = (recipeId: number) => {
-    if (!favoriteRecipes) return
-    if (favoriteRecipes.some((recipe) => recipe.id === recipeId)) {
-      onClickDeleteFavorite.mutate(recipeId)
-    } else {
-      onClickAddFavorite.mutate(recipeId)
-    }
-  }
 
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
-  if (isLoadingSeasonalRecipes || isLoadingFavoriteRecipes) return <p>レシピを読み込み中</p>
   if (isOpenHamburger) return <Hamburger session={session} onClickCloseHamburger={onClickCloseHamburger} />
   return (
     <div className="style_lightbrown">
@@ -110,19 +32,49 @@ export const Setting = ({ session }: Props) => {
         onClickOpenHamburger={onClickOpenHamburger}
       />
 
-      <h2 style={{ margin: "20px 0" }}>季節のレシピ</h2>
-      <div className={styles.cards}>
-        {seasonalRecipes &&
-          seasonalRecipes.map((recipe) => (
-            <RecipeCard
-              key={recipe.id}
-              recipe={recipe}
-              favoriteRecipes={favoriteRecipes}
-              toggleFavorite={toggleFavorite}
-              session={session}
+      <h2 style={{ margin: "20px 0" }}>設定</h2>
+
+      {hasAccount && (
+        <form className={styles.form}>
+          <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
+            <span className={styles.label}>
+              <h3>ユーザーネーム</h3>
+            </span>
+            <input
+              type="text"
+              placeholder="ユーザーネームを入力してください"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className={styles.input}
             />
-          ))}
-      </div>
+          </div>
+
+          <div style={{ height: "12px" }} />
+
+          <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
+            <span className={styles.label}>
+              <h3>メールアドレス</h3>
+            </span>
+            <input
+              type="email"
+              disabled={true}
+              // NOTE: 本人がemailを変更しているか、変更後のemailがvalidか確認する処理を含めて実装する必要があり、一旦後回しにするためdisabled
+              value={email}
+              required={true}
+              onChange={(e) => setEmail(e.target.value)}
+              className={styles.input}
+            />
+          </div>
+
+          <div style={{ height: "40px" }} />
+
+          <BorderButton onClick={/* TODO */ () => console.log("TODO")} disabled={loading}>
+            <h3>アカウント情報を変更する</h3>
+          </BorderButton>
+        </form>
+      )}
+
+      {/* TODO: プライバシーポリシー */}
     </div>
   )
 }

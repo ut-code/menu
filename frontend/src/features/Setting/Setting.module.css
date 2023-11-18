@@ -1,64 +1,52 @@
-.cards {
-  height: auto;
-  position: relative;
-  z-index: -1;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 20px;
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 35px 0;
 }
 
-.buttons {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 20px;
-  flex-direction: column;
-}
-
-.sort_buttons {
-  width: 85vw;
-}
-
-.sort_button {
-  /* layout */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  /* box */
-  background-color: white;
-  border-radius: 10rem;
-  border: var(--Black) 1px solid;
-  height: 32px;
+.input {
   width: 100%;
+  height: 40px;
+  padding: 15px;
+  border: 2.5px solid var(--Black);
+  border-radius: 10rem;
+  box-sizing: border-box;
+  outline: none;
+}
 
-  /* text */
-  font-weight: bold;
+.form {
+  width: 100%;
+}
+
+.label {
+  margin-left: 16px;
+  margin-bottom: 6px;
+}
+
+.labelCenter {
   font-size: 12px;
-  color: var(--Black);
+  font-weight: bold;
+  margin-bottom: 6px;
 }
 
-.genre_buttons {
-  display: flex;
-  justify-content: flex-start;
-  gap: 4px;
-}
-
-.genre_button {
-  /* layout */
+.or {
+  font-size: 12px;
   display: flex;
   align-items: center;
-  justify-content: center;
-
-  /* box */
-  background-color: white;
-  border-radius: 10rem;
-  border: var(--Black) 1px solid;
-  height: 32px;
-  width: 60px;
-
-  /* text */
-  font-weight: bold;
-  font-size: 12px;
-  color: var(--Black);
+  color: rgba(0, 0, 0, 0.25);
+  margin: 30px 0;
+}
+.or::before,
+.or::after {
+  content: "";
+  height: 1px;
+  width: 45vw;
+  background-color: rgba(0, 0, 0, 0.25);
+  flex-grow: 1;
+}
+.or::before {
+  margin-right: 10px;
+}
+.or::after {
+  margin-left: 10px;
 }
