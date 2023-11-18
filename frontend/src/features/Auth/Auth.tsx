@@ -81,7 +81,7 @@ export const Auth = () => {
         />
       )}
 
-      {hasAccount ? <h1 className={styles.title}>サインイン</h1> : <h1 className={styles.title}>サインアップ</h1>}
+      {hasAccount ? <h2 className={styles.title}>サインイン</h2> : <h2 className={styles.title}>サインアップ</h2>}
       <form className={styles.form}>
         {!hasAccount && (
           <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
