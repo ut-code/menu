@@ -52,7 +52,7 @@ export const Hamburger = ({ session, onClickCloseHamburger }: Props) => {
           <h2>お気に入り</h2>
           {!session && <FaLock size="0.9rem" />}
         </Link>
-        <Link to="/home/favorites" className={styles.link}>
+        <Link to="/setting" className={styles.link}>
           <BsGearFill size="1.2rem" />
           <h2>設定</h2>
         </Link>

@@ -9,6 +9,7 @@ import { Result } from "@/features/Result"
 import { Auth } from "@/features/Auth"
 import { Favorite } from "@/features/Favorite"
 import { Seasonal } from "@/features/Seasonal"
+import { Setting } from "@/features/Setting"
 import { NotFound } from "@/features/NotFound"
 import { supabase } from "@/features/Auth/supabaseClient"
 
@@ -47,6 +48,7 @@ export default function App() {
         <Route path="/home/seasonal" element={<Seasonal session={session} />} />
         <Route path="/questions" element={<Questions session={session} />} />
         <Route path="/search" element={<Result session={session} />} />
+        <Route path="/setting" element={<Setting session={session} />} />
         <Route path="/auth" element={!session ? <Auth /> : <Navigate replace to="/home" />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
