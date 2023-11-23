@@ -2,7 +2,9 @@ import { Link } from "react-router-dom"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Session } from "@supabase/supabase-js"
+import { useQuery } from "@tanstack/react-query"
 
+import { getUsernameApi, updateUsernameApi } from "@/utils/apiUtils"
 import { BorderButton } from "@/components/elements/button/BorderButton"
 import { Head } from "@/components/Head"
 import { Hamburger } from "@/components/Hamburger"
@@ -17,11 +19,38 @@ interface Props {
 export const Setting = ({ session }: Props) => {
   const Navigate = useNavigate()
 
-  const [loading, setLoading] = useState(false)
-  const [hasAccount, setHasAccount] = useState<boolean>(true)
   // const [email, setEmail] = useState("")
   const [username, setUsername] = useState("")
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
+
+  const { isLoading, refetch: refetchUsername } = useQuery({
+    queryKey: ["username"],
+    queryFn: async () => {
+      if (!session?.access_token) return ""
+      const response = await fetch(getUsernameApi(), {
+        headers: { Authorization: `Bearer ${session?.access_token}` },
+      })
+      if (!response.ok) throw new Error("ユーザーネームの取得に失敗しました")
+      return await response.json()
+    },
+    onSuccess: (data) => {
+      setUsername(data)
+    },
+  })
+
+  const updateUsername = async (session: Session | null) => {
+    console.log(session)
+    if (!session?.access_token) return
+    const response = await fetch(updateUsernameApi(), {
+      method: "PUT",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${session?.access_token}` },
+      body: JSON.stringify({ username: username }),
+    })
+    console.log(response)
+    if (!response.ok) throw new Error("ユーザーネームの更新に失敗しました")
+
+    refetchUsername()
+  }
 
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
@@ -37,7 +66,7 @@ export const Setting = ({ session }: Props) => {
 
       <h2 style={{ margin: "20px 0" }}>設定</h2>
 
-      {hasAccount && (
+      {session && (
         <form className={styles.form}>
           <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
             <span className={styles.label}>
@@ -71,7 +100,7 @@ export const Setting = ({ session }: Props) => {
 
           <div style={{ height: "40px" }} />
 
-          <BorderButton onClick={/* TODO */ () => console.log("TODO")} disabled={loading}>
+          <BorderButton onClick={async () => await updateUsername(session)} disabled={isLoading}>
             <h3>アカウント情報を変更する</h3>
           </BorderButton>
         </form>
