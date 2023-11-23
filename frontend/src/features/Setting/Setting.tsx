@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Session } from "@supabase/supabase-js"
@@ -6,6 +7,8 @@ import { BorderButton } from "@/components/elements/button/BorderButton"
 import { Head } from "@/components/Head"
 import { Hamburger } from "@/components/Hamburger"
 import styles from "./Setting.module.css"
+
+import { BsArrowRight } from "react-icons/bs"
 
 interface Props {
   session: Session | null
@@ -16,7 +19,7 @@ export const Setting = ({ session }: Props) => {
 
   const [loading, setLoading] = useState(false)
   const [hasAccount, setHasAccount] = useState<boolean>(true)
-  const [email, setEmail] = useState("")
+  // const [email, setEmail] = useState("")
   const [username, setUsername] = useState("")
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
 
@@ -51,20 +54,20 @@ export const Setting = ({ session }: Props) => {
 
           <div style={{ height: "12px" }} />
 
-          <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
+          {/* NOTE: 本人がemailを変更しているか、変更後のemailがvalidか確認する処理を含めて実装する必要があり、一旦後回しにした */}
+          {/* <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
             <span className={styles.label}>
               <h3>メールアドレス</h3>
             </span>
             <input
               type="email"
-              disabled={true}
-              // NOTE: 本人がemailを変更しているか、変更後のemailがvalidか確認する処理を含めて実装する必要があり、一旦後回しにするためdisabled
+              placeholder="メールアドレスを入力してください"
               value={email}
               required={true}
               onChange={(e) => setEmail(e.target.value)}
               className={styles.input}
             />
-          </div>
+          </div> */}
 
           <div style={{ height: "40px" }} />
 
@@ -74,7 +77,19 @@ export const Setting = ({ session }: Props) => {
         </form>
       )}
 
-      {/* TODO: プライバシーポリシー */}
+      <Link to={"https://gist.github.com/bvv-1/d3c318f90d0720e81259e58de49adc30"} className={styles.signin}>
+        <div className={styles.signin_text}>
+          <div style={{ display: "flex", alignItems: "end", marginBottom: "6px" }}>
+            <h2>プライバシーポリシー</h2>
+          </div>
+          <p style={{ color: "gray" }}>外部リンクに移動します。</p>
+        </div>
+        <div className={styles.signin_link}>
+          <div className={styles.arrow_right}>
+            <BsArrowRight size="2rem" color="white" />
+          </div>
+        </div>
+      </Link>
     </div>
   )
 }
