@@ -170,17 +170,17 @@ app.put("/api/users/username", async (req, res) => {
 })
 
 app.get("/api/users/username", async (req, res) => {
-  const user = await extractUserFromRequest(req)
-  if (!user) {
+  const userFromRequest = await extractUserFromRequest(req)
+  if (!userFromRequest) {
     res.status(401).json({ error: "Not authorized" })
     return
   }
-  const user2 = await client.users.findUnique({
+  const user = await client.users.findUnique({
     where: {
-      id: user.id,
+      id: userFromRequest.id,
     },
   })
-  res.json(user2?.username)
+  res.json(user?.username)
 })
 
 export default app

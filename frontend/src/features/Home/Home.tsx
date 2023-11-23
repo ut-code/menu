@@ -5,8 +5,7 @@ import { Session } from "@supabase/supabase-js"
 import { useQuery } from "@tanstack/react-query"
 
 import { Recipe } from "@/utils/recipes"
-import { getUserFavoritesApi, postSearchRecipesKeywordsApi, getUsernameApi, updateUsernameApi } from "@/utils/apiUtils"
-import { SignOut } from "@/features/Auth/SignOut"
+import { getUserFavoritesApi, postSearchRecipesKeywordsApi, getUsernameApi } from "@/utils/apiUtils"
 import { Head } from "@/components/Head"
 import { Hamburger } from "@/components/Hamburger"
 import { HorizontalScroll } from "./components/HorizontalScroll"
@@ -68,20 +67,6 @@ export const Home = ({ session }: Props) => {
     },
   })
 
-  const updateUsername = async (session: Session | null) => {
-    console.log(session)
-    if (!session?.access_token) return
-    const response = await fetch(updateUsernameApi(), {
-      method: "PUT",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${session?.access_token}` },
-      body: JSON.stringify({ username: "変更後" }),
-    })
-    console.log(response)
-    if (!response.ok) throw new Error("ユーザーネームの更新に失敗しました")
-    const user = await response.json()
-    console.log(user)
-  }
-
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
@@ -130,30 +115,6 @@ export const Home = ({ session }: Props) => {
           <HorizontalScroll recipes={favoriteRecipes?.slice(0, 6)} />
         </div>
       </div>
-
-      <hr />
-
-      <div className="style_lightbrown">
-        <Link to={"https://gist.github.com/bvv-1/d3c318f90d0720e81259e58de49adc30"}>
-          <button>プライバシーポリシー</button>
-        </Link>
-        <Link to={"/search"}>
-          <button>検索結果</button>
-        </Link>
-        <br></br>
-
-        {session && (
-          <div>
-            <p>Already logged in</p>
-            <SignOut />
-          </div>
-        )}
-        <br></br>
-        <Link to={"/auth"}>
-          <button>サインアップ</button>
-        </Link>
-      </div>
-      <button onClick={() => updateUsername(session)}>ユーザーネーム更新</button>
     </>
   )
 }

@@ -81,11 +81,13 @@ export const Auth = () => {
         />
       )}
 
-      {hasAccount ? <h1 className={styles.title}>サインイン</h1> : <h1 className={styles.title}>サインアップ</h1>}
+      {hasAccount ? <h2 className={styles.title}>サインイン</h2> : <h2 className={styles.title}>サインアップ</h2>}
       <form className={styles.form}>
         {!hasAccount && (
           <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
-            <span className={styles.label}>ユーザーネーム</span>
+            <span className={styles.label}>
+              <h3>ユーザーネーム</h3>
+            </span>
             <input
               type="text"
               placeholder="ユーザーネームを入力してください"
@@ -98,7 +100,9 @@ export const Auth = () => {
         <div style={{ height: "12px" }} />
 
         <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
-          <span className={styles.label}>メールアドレス</span>
+          <span className={styles.label}>
+            <h3>メールアドレス</h3>
+          </span>
           <input
             type="email"
             placeholder="メールアドレスを入力してください"
