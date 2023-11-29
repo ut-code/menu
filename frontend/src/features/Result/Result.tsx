@@ -188,7 +188,7 @@ export const Result = ({ session }: Props) => {
 
           <div className={styles.bottom}>
             <button className={styles.returnHome} onClick={() => Navigate("/home")}>
-              ホームに戻る
+              ホームへ戻る
             </button>
           </div>
         </div>
@@ -208,7 +208,7 @@ export const Result = ({ session }: Props) => {
             </div>
             <div className={styles.links}>
               <button className={styles.returnHome} onClick={() => Navigate("/home")}>
-                ホームに戻る
+                ホームへ戻る
               </button>
             </div>
           </div>

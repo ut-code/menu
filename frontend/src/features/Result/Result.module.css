@@ -34,7 +34,7 @@
   /* box */
   background-color: var(--Yellow);
   border-radius: 10rem;
-  border: var(--Black) 1px solid;
+  border: var(--Black) 2px solid;
   height: 40px;
   width: 176px;
 
@@ -54,7 +54,7 @@
   /*background-color: var(--Yellow);*/
   background-color: #fff;
   border-radius: 10rem;
-  border: var(--Black) 1px solid;
+  border: var(--Black) 2px solid;
   height: 40px;
   width: 176px;
 
