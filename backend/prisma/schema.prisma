@@ -1,8 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["fullTextSearch"]
 }
 
@@ -11,64 +8,63 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Categories {
-  id           Int    @id @default(autoincrement())
+  id           Int     @id @default(autoincrement())
   category1    String
-  category2    String
-  category3    String
-  categoryId   String
+  category2    String?
+  category3    String?
+  categoryId   String  @unique
   categoryName String
 }
 
 model Recipes {
-  id                      Int      @id @default(autoincrement())
-  recipeTitle             String
-  recipeUrl               String
-  recipeDescription       String
-  foodImageUrls           String[]
-  keywords                String[]
-  totalTime               Int
-  recipeMaterial          String[]
-  recipeMaterialConverted String?
+  id                 Int      @id @default(autoincrement())
+  title              String
+  description        String
+  totalCookingTime   Int      @default(-1)
+  materials          String[]
+  materialsConverted String
+  keywords           String[]
+  sourceUrl          String   @unique(map: "Recipes_recipeUrl_key")
+  foodImageUrl       String
 
-  favorites               UserFavorites[]
+  favorites UserFavorites[]
 }
 
-model RecipesTmp {
-  id                Int      @id @default(autoincrement())
-  recipeTitle       String
-  recipeUrl         String
-  recipeDescription String
-  foodImageUrls     String[]
-  keywords          String[]
-  totalTime         Int
-  recipeMaterial    String[]
+model RecipesBackup {
+  id                 Int      @id @default(autoincrement())
+  title              String
+  description        String
+  totalCookingTime   Int      @default(-1)
+  materials          String[]
+  materialsConverted String
+  keywords           String[]
+  sourceUrl          String   @unique
+  foodImageUrl       String
 }
 
 model Urls {
-  id Int @id @default(autoincrement())
-  url String
-  structured Boolean
+  id  Int    @id @default(autoincrement())
+  url String @unique
 }
 
 model Users {
-	id String @id
-	email String @unique
-	username String @default("名無し")
-	createdAt DateTime @default(now())
-	updatedAt DateTime @updatedAt
+  id        String   @id
+  email     String   @unique
+  username  String   @default("名無し")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   favorites UserFavorites[]
 }
 
 model UserFavorites {
-  id             Int @id @default(autoincrement())
-  userId         String
-  recipeId       Int
-  createdAt      DateTime @default(now())
+  id        Int      @id @default(autoincrement())
+  userId    String
+  recipeId  Int
+  createdAt DateTime @default(now())
 
-  user           Users    @relation(fields: [userId], references: [id])
+  user           Users   @relation(fields: [userId], references: [id])
   favoriteRecipe Recipes @relation(fields: [recipeId], references: [id])
 
   @@unique([userId, recipeId])

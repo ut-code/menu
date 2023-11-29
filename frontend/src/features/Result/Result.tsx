@@ -30,16 +30,19 @@ export const Result = ({ session }: Props) => {
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
   const queryClient = useQueryClient()
 
+  const storedIngredients = localStorage.getItem("ingredients")
+  const storedGenre = localStorage.getItem("genre")
+  const storedCookingTime = localStorage.getItem("cookingTime")
   const answers: Answers = {
-    ingredients: JSON.parse(localStorage.getItem("ingredients") || "[]"),
-    genre: JSON.parse(localStorage.getItem("genre") || ""),
-    cookingTime: JSON.parse(localStorage.getItem("cookingTime") || ""),
+    ingredients: storedIngredients ? JSON.parse(storedIngredients) : [],
+    genre: storedGenre ? JSON.parse(storedGenre) : null,
+    cookingTime: storedCookingTime ? JSON.parse(storedCookingTime) : null,
   }
-  // answers をfindManyの検索に使いやすいように searchInfo に整形
+  // NOTE: answers をfindManyの検索に使いやすいように searchInfo に整形
   const searchInfo: SearchInfo = convertAnswersToSearchInfo(answers)
 
   useEffect(() => {
-    // answers を空白区切りで連結したものをsetInputContent
+    // NOTE: answers を空白区切りで連結したものをsetInputContent
     // 例: ["豚肉", "玉ねぎ", "にんにく"] -> "豚肉 玉ねぎ にんにく"
     setInputContent([...answers.ingredients, answers.genre, answers.cookingTime].join(" "))
   }, [])

@@ -40,7 +40,7 @@ app.post("/api/searchRecipes", async (req, res) => {
       break
   }
 
-  const orderBy = Math.random() < 0.5 ? "recipeDescription" : "recipeMaterialConverted"
+  const orderBy = Math.random() < 0.5 ? "description" : "materialsConverted"
   const orderDir = Math.random() < 0.5 ? "asc" : "desc"
   // const itemCount = await client.recipes.count()
   // const skip = Math.max(0, Math.floor(Math.random() * itemCount) - 5000)
@@ -52,10 +52,10 @@ app.post("/api/searchRecipes", async (req, res) => {
     // FIXME: skip をすると全部消えてしまう, ランダムサンプリングの書き方が弱い(rawSQLにする?)
     // skip: skip,
     where: {
-      recipeMaterialConverted: {
+      materialsConverted: {
         search: ingredientsAndQuery,
       },
-      totalTime: timeQuery,
+      totalCookingTime: timeQuery,
     },
     take: 20,
   })
@@ -70,7 +70,7 @@ app.post("/api/searchRecipes/keywords", async (req, res) => {
   const recipes = await client.recipes.findMany({
     orderBy: {
       _relevance: {
-        fields: ["recipeDescription"],
+        fields: ["description"],
         search: keywordsOrQuery,
         sort: "asc",
       },
@@ -170,17 +170,17 @@ app.put("/api/users/username", async (req, res) => {
 })
 
 app.get("/api/users/username", async (req, res) => {
-  const user = await extractUserFromRequest(req)
-  if (!user) {
+  const userFromRequest = await extractUserFromRequest(req)
+  if (!userFromRequest) {
     res.status(401).json({ error: "Not authorized" })
     return
   }
-  const user2 = await client.users.findUnique({
+  const user = await client.users.findUnique({
     where: {
-      id: user.id,
+      id: userFromRequest.id,
     },
   })
-  res.json(user2?.username)
+  res.json(user?.username)
 })
 
 export default app
