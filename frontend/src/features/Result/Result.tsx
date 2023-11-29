@@ -17,6 +17,7 @@ import {
   deleteUserFavoritesApi,
 } from "@/utils/apiUtils"
 import styles from "./Result.module.css"
+import { EmptyResults } from "@/components/EmptyResults"
 
 interface Props {
   session: Session | null
@@ -171,26 +172,46 @@ export const Result = ({ session }: Props) => {
         />
       </div>
 
-      <div className={styles.cards}>
-        {recipes &&
-          recipes.map((recipe) => (
-            <RecipeCard
-              key={recipe.id}
-              recipe={recipe}
-              favoriteRecipes={favoriteRecipes}
-              toggleFavorite={toggleFavorite}
-              session={session}
-            />
-          ))}
-      </div>
+      {recipes && recipes.length > 0 ? (
+        <div className={styles.cards}>
+          {recipes &&
+            recipes.map((recipe) => (
+              <RecipeCard
+                key={recipe.id}
+                recipe={recipe}
+                favoriteRecipes={favoriteRecipes}
+                toggleFavorite={toggleFavorite}
+                session={session}
+              />
+            ))}
+          <div className={styles.spacer} />
 
-      <div className={styles.spacer} />
-
-      <div className={styles.bottom}>
-        <button className={styles.return} onClick={() => Navigate("/home")}>
-          ホームに戻る
-        </button>
-      </div>
+          <div className={styles.bottom}>
+            <button className={styles.returnHome} onClick={() => Navigate("/home")}>
+              ホームへ戻る
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className={styles.emptyResults}>
+          <EmptyResults />
+          <div className={styles.buttonBundle}>
+            <div className={styles.links}>
+              <button
+                className={styles.returnSearch}
+                onClick={() => {
+                  Navigate("/questions")
+                }}
+              >
+                もう一度検索する
+              </button>
+              <button className={styles.returnHome} onClick={() => Navigate("/home")}>
+                ホームへ戻る
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
