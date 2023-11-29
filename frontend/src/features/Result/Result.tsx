@@ -205,8 +205,6 @@ export const Result = ({ session }: Props) => {
               >
                 もう一度検索する
               </button>
-            </div>
-            <div className={styles.links}>
               <button className={styles.returnHome} onClick={() => Navigate("/home")}>
                 ホームへ戻る
               </button>
