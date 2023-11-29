@@ -1,6 +1,4 @@
-//import { SwiperSlide } from "swiper/react"
 import styles from "./EmptyResults.module.css"
-//import { EmptyResults } from "@/components/EmptyResults"
 import imgSorry from "@/assets/image/Sorry.png"
 
 export const EmptyResults = () => {
