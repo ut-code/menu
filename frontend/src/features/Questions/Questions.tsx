@@ -51,7 +51,6 @@ export const Questions = ({ session }: Props) => {
         />
       )
     default:
-      setQuestionNumber(0)
       Navigate("/search")
       return null
   }
