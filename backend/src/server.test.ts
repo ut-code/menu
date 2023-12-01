@@ -6,9 +6,8 @@ describe("/searchRecipes", () => {
   it("正常系のテスト", async () => {
     const searchInfo: SearchInfo = {
       ingredients: ["ごぼう", "豚肉"],
-      // time: "",
-      // dish: "",
-      // keywords: [],
+      cookingTime: null,
+      dish: null,
     }
 
     const response = await request(app).post("/api/searchRecipes").send({ searchInfo: searchInfo })
