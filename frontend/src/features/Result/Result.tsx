@@ -8,7 +8,7 @@ import { Head } from "@/components/Head"
 import { Loading } from "@/components/Loading"
 import { Searchbox } from "@/components/Searchbox"
 import { RecipeCard } from "@/components/RecipeCard"
-import { Recipe, Answers, SearchInfo, convertAnswersToSearchInfo } from "@/utils/recipes"
+import { Recipe, SearchInfo } from "@/utils/recipes"
 import {
   postSearchRecipesApi,
   postSearchRecipesKeywordsApi,
@@ -33,18 +33,16 @@ export const Result = ({ session }: Props) => {
   const storedIngredients = localStorage.getItem("ingredients")
   const storedGenre = localStorage.getItem("genre")
   const storedCookingTime = localStorage.getItem("cookingTime")
-  const answers: Answers = {
+  const searchInfo: SearchInfo = {
     ingredients: storedIngredients ? JSON.parse(storedIngredients) : [],
-    genre: storedGenre ? JSON.parse(storedGenre) : null,
+    dish: storedGenre ? JSON.parse(storedGenre) : null,
     cookingTime: storedCookingTime ? JSON.parse(storedCookingTime) : null,
   }
-  // NOTE: answers をfindManyの検索に使いやすいように searchInfo に整形
-  const searchInfo: SearchInfo = convertAnswersToSearchInfo(answers)
 
   useEffect(() => {
-    // NOTE: answers を空白区切りで連結したものをsetInputContent
+    // NOTE: searchInfo を空白区切りで連結したものをsetInputContent
     // 例: ["豚肉", "玉ねぎ", "にんにく"] -> "豚肉 玉ねぎ にんにく"
-    setInputContent([...answers.ingredients, answers.genre, answers.cookingTime].join(" "))
+    setInputContent([...searchInfo.ingredients, searchInfo.dish, searchInfo.cookingTime].join(" "))
   }, [])
 
   const { data: recipes, isLoading: isLoadingRecipes } = useQuery({
