@@ -18,23 +18,24 @@ app.use(express.urlencoded({ extended: true }))
 
 export type SearchInfo = {
   ingredients: string[]
-  time?: string
-  dish?: string // 主菜・副菜など
+  dish: string | null
+  cookingTime: string | null
 }
 
 app.post("/api/searchRecipes", async (req, res) => {
   const { searchInfo } = req.body
   const ingredientsAndQuery: string = searchInfo.ingredients.join(" & ")
-  let timeQuery = {}
-  switch (searchInfo.time) {
+  const dishQuery = searchInfo.dish
+  let cookingTimeQuery = {}
+  switch (searchInfo.cookingTime) {
     case "時短":
-      timeQuery = { gte: 1, lt: 15 }
+      cookingTimeQuery = { gte: 1, lt: 20 }
       break
     case "普通":
-      timeQuery = { gte: 15, lt: 45 }
+      cookingTimeQuery = { gte: 20, lt: 45 }
       break
     case "じっくり":
-      timeQuery = { gte: 45 }
+      cookingTimeQuery = { gte: 45 }
       break
     default:
       break
@@ -55,7 +56,8 @@ app.post("/api/searchRecipes", async (req, res) => {
       materialsConverted: {
         search: ingredientsAndQuery,
       },
-      totalCookingTime: timeQuery,
+      dish: dishQuery,
+      totalCookingTime: cookingTimeQuery,
     },
     take: 20,
   })

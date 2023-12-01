@@ -27,6 +27,7 @@ model Recipes {
   keywords           String[]
   sourceUrl          String   @unique(map: "Recipes_recipeUrl_key")
   foodImageUrl       String
+  dish               String?
 
   favorites UserFavorites[]
 }

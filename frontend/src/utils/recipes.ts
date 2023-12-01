@@ -9,23 +9,8 @@ export type Recipe = {
   foodImageUrl: string
 }
 
-export type Answers = {
-  ingredients: string[]
-  genre: string | null
-  cookingTime: string | null
-}
-
 export type SearchInfo = {
   ingredients: string[]
-  time: string | null
-  dish: string | null // 主菜・副菜など
-}
-
-export const convertAnswersToSearchInfo = (answers: Answers): SearchInfo => {
-  const info: SearchInfo = {
-    ingredients: answers.ingredients,
-    time: answers.cookingTime,
-    dish: answers.genre,
-  }
-  return info
+  dish: string | null
+  cookingTime: string | null
 }
