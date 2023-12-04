@@ -1,9 +1,8 @@
 import express from "express"
 import cors from "cors"
-import { PrismaClient } from "@prisma/client"
+import { client } from "./db.server"
 import { extractUserFromRequest } from "./utils/authUtils"
 
-const client = new PrismaClient()
 const app = express()
 
 /*
