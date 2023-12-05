@@ -1,28 +1,24 @@
 import { client } from "../db.server"
-import { Request, Response, NextFunction } from "express"
+import { Request, Response } from "express"
 import { supabase } from "../supabaseClient"
 import { User } from "@supabase/supabase-js"
 import type { Users } from "@prisma/client"
 
 class UserController {
-  async getUser(req: Request, res: Response, next: NextFunction): Promise<void> {
-    try {
-      const userFromRequest = await this.extractUserFromRequest(req)
-      if (!userFromRequest) {
-        res.status(401).json({ error: "Not authorized" })
-        return
-      }
-
-      const user = await this.getUserById({ userId: userFromRequest.id })
-      if (!user) {
-        res.status(404).json({ error: "User not found" })
-        return
-      }
-
-      res.status(200).json(user)
-    } catch (error) {
-      next(error)
+  async getUser(req: Request, res: Response): Promise<void> {
+    const userFromRequest = await this.extractUserFromRequest(req)
+    if (!userFromRequest) {
+      res.status(401).json({ error: "Not authorized" })
+      return
     }
+
+    const user = await this.getUserById({ userId: userFromRequest.id })
+    if (!user) {
+      res.status(404).json({ error: "User not found" })
+      return
+    }
+
+    res.status(200).json(user)
   }
 
   private async getUserById({ userId }: { userId: Users["id"] }) {
