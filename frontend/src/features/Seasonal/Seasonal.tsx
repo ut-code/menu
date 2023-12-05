@@ -1,6 +1,5 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
-import { Session } from "@supabase/supabase-js"
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query"
 
 import {
@@ -9,19 +8,17 @@ import {
   postUserFavoritesApi,
   deleteUserFavoritesApi,
 } from "@/utils/apiUtils"
+import { UserContext } from "@/utils/context"
 import { Recipe } from "@/utils/recipes"
 import { Head } from "@/components/Head"
 import { RecipeCard } from "@/components/RecipeCard"
 import { Hamburger } from "@/components/Hamburger"
 import styles from "./Seasonal.module.css"
 
-interface Props {
-  session: Session | null
-}
-
-export const Seasonal = ({ session }: Props) => {
+export const Seasonal = () => {
   const queryClient = useQueryClient()
   const Navigate = useNavigate()
+  const { session } = useContext(UserContext)
 
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
 
