@@ -7,10 +7,7 @@ import { getUsernameApi } from "@/utils/apiUtils"
 import styles from "./Hamburger.module.css"
 // react-icons
 import iconClose from "@/assets/icon/icon_close.svg"
-import { BsHouseDoorFill } from "react-icons/bs"
-import { BsSearch } from "react-icons/bs"
-import { BsHeartFill } from "react-icons/bs"
-import { BsGearFill } from "react-icons/bs"
+import { BsHouseDoorFill, BsSearch, BsHeartFill, BsGearFill } from "react-icons/bs"
 import { FaLock } from "react-icons/fa"
 
 interface Props {
