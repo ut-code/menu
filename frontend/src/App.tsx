@@ -68,7 +68,7 @@ export default function App() {
         <Route path="/home/seasonal" element={<Seasonal session={session} />} />
         <Route path="/questions" element={<Questions />} />
         <Route path="/search" element={<Result session={session} />} />
-        <Route path="/setting" element={<Setting session={session} />} />
+        <Route path="/setting" element={<Setting setUser={setUser} />} />
         <Route path="/auth" element={!session ? <Auth /> : <Navigate replace to="/home" />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
