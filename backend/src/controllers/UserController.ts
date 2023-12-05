@@ -23,6 +23,34 @@ class UserController {
     res.status(200).json(user)
   }
 
+  updateUsername = async (req: Request, res: Response): Promise<void> => {
+    const userFromRequest = await this.extractUserFromRequest(req)
+    if (!userFromRequest) {
+      res.status(401).json({ error: "Not authorized" })
+      return
+    }
+
+    const { username } = req.body
+    if (!this.isValidUsername(username)) {
+      res.status(400).json({ error: "Invalid username" })
+      return
+    }
+
+    const user = await client.users.update({
+      where: {
+        id: userFromRequest.id,
+      },
+      data: {
+        username: username,
+      },
+    })
+    if (!user) {
+      res.status(500).json({ error: "Failed to update user" })
+      return
+    }
+    res.status(200).json(user)
+  }
+
   private getUserById = async ({ userId }: { userId: Users["id"] }) => {
     return client.users.findUnique({
       where: {
@@ -48,6 +76,11 @@ class UserController {
       return null
     }
     return user.data.user
+  }
+
+  private isValidUsername = (username: string): boolean => {
+    // TODO: 他のバリデーションも追加する
+    return username.length > 0 && username.length <= 20
   }
 }
 

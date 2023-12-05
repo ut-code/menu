@@ -153,23 +153,6 @@ app.delete("/api/users/favorites/:id", async (req, res) => {
 
 app.get("/api/users", UserController.getUser)
 
-app.put("/api/users/username", async (req, res) => {
-  console.log(req)
-  const user = await extractUserFromRequest(req)
-  if (!user) {
-    res.status(401).json({ error: "Not authorized" })
-    return res.json("名無し")
-  }
-  const { username } = req.body
-  const updatedUser = await client.users.update({
-    where: {
-      id: user.id,
-    },
-    data: {
-      username: username,
-    },
-  })
-  res.json(updatedUser)
-})
+app.put("/api/users/username", UserController.updateUsername)
 
 export default app
