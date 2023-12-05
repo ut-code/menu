@@ -15,7 +15,7 @@ it("renders home page correctly", () => {
   render(
     <MemoryRouter>
       <QueryClientProvider client={queryClient}>
-        <Home session={null} />
+        <Home />
       </QueryClientProvider>
     </MemoryRouter>
   )

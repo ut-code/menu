@@ -24,6 +24,6 @@ export const updateUsernameApi = (): string => {
   return `${API_BASE_URL}/api/users/username`
 }
 
-export const getUsernameApi = (): string => {
-  return `${API_BASE_URL}/api/users/username`
+export const getUserApi = (): string => {
+  return `${API_BASE_URL}/api/users`
 }

@@ -1,35 +1,20 @@
+import { useContext } from "react"
 import { Link } from "react-router-dom"
-import { Session } from "@supabase/supabase-js"
-import { useQuery } from "@tanstack/react-query"
 
 import { SignOut } from "@/features/Auth/SignOut"
-import { getUsernameApi } from "@/utils/apiUtils"
+import { UserContext } from "@/utils/context"
 import styles from "./Hamburger.module.css"
 // react-icons
 import iconClose from "@/assets/icon/icon_close.svg"
-import { BsHouseDoorFill } from "react-icons/bs"
-import { BsSearch } from "react-icons/bs"
-import { BsHeartFill } from "react-icons/bs"
-import { BsGearFill } from "react-icons/bs"
+import { BsHouseDoorFill, BsSearch, BsHeartFill, BsGearFill } from "react-icons/bs"
 import { FaLock } from "react-icons/fa"
 
 interface Props {
-  session?: Session | null
   onClickCloseHamburger: () => void
 }
 
-export const Hamburger = ({ session, onClickCloseHamburger }: Props) => {
-  const { data: username } = useQuery({
-    queryKey: ["username"],
-    queryFn: async () => {
-      if (!session?.access_token) return ""
-      const response = await fetch(getUsernameApi(), {
-        headers: { Authorization: `Bearer ${session?.access_token}` },
-      })
-      if (!response.ok) throw new Error("ユーザーネームの取得に失敗しました")
-      return await response.json()
-    },
-  })
+export const Hamburger = ({ onClickCloseHamburger }: Props) => {
+  const { user, session } = useContext(UserContext)
 
   return (
     <div className="style_lightbrown">
@@ -61,7 +46,7 @@ export const Hamburger = ({ session, onClickCloseHamburger }: Props) => {
       <div className={styles.signin}>
         <div className={styles.signin_text}>
           <div style={{ display: "flex", alignItems: "end", marginBottom: "6px" }}>
-            <h2>{session ? username : "ゲスト"}</h2>
+            <h2>{session ? user?.username : "ゲスト"}</h2>
             <p style={{ marginLeft: "5px", marginBottom: "2px" }}>さん</p>
           </div>
           {!session && <p style={{ color: "gray" }}>メールアドレスの登録なし</p>}

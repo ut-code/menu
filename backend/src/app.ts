@@ -1,9 +1,9 @@
 import express from "express"
 import cors from "cors"
-import { PrismaClient } from "@prisma/client"
+import { client } from "./db.server"
 import { extractUserFromRequest } from "./utils/authUtils"
+import UserController from "./controllers/UserController"
 
-const client = new PrismaClient()
 const app = express()
 
 /*
@@ -12,7 +12,6 @@ const app = express()
  * 参考: https://developer.mozilla.org/ja/docs/Web/HTTP/CORS
  */
 app.use(cors())
-
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
@@ -152,6 +151,8 @@ app.delete("/api/users/favorites/:id", async (req, res) => {
   res.json(userFavorite)
 })
 
+app.get("/api/users", UserController.getUser)
+
 app.put("/api/users/username", async (req, res) => {
   console.log(req)
   const user = await extractUserFromRequest(req)
@@ -169,20 +170,6 @@ app.put("/api/users/username", async (req, res) => {
     },
   })
   res.json(updatedUser)
-})
-
-app.get("/api/users/username", async (req, res) => {
-  const userFromRequest = await extractUserFromRequest(req)
-  if (!userFromRequest) {
-    res.status(401).json({ error: "Not authorized" })
-    return
-  }
-  const user = await client.users.findUnique({
-    where: {
-      id: userFromRequest.id,
-    },
-  })
-  res.json(user?.username)
 })
 
 export default app

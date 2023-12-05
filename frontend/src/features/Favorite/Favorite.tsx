@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { useNavigate } from "react-router-dom"
-import { Session } from "@supabase/supabase-js"
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query"
 
 import { getUserFavoritesApi, postUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/apiUtils"
+import { UserContext } from "@/utils/context"
 import { Recipe } from "@/utils/recipes"
 import { Head } from "@/components/Head"
 import { Loading } from "@/components/Loading"
@@ -11,20 +11,17 @@ import { RecipeCard } from "@/components/RecipeCard"
 import { Hamburger } from "@/components/Hamburger"
 import styles from "./Favorite.module.css"
 
-interface Props {
-  session: Session | null
-}
-
-export const Favorite = ({ session }: Props) => {
+export const Favorite = () => {
   const queryClient = useQueryClient()
   const Navigate = useNavigate()
+  const { session } = useContext(UserContext)
 
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
   const [initialFavoriteRecipes, setInitialFavoriteRecipes] = useState<Recipe[]>([])
 
   // NOTE: コードの再利用性は悪いが、こうするしかなかった…
   useEffect(() => {
-    if (!session) return
+    if (!session?.access_token) return
     const fetchFavoriteRecipes = async () => {
       const response = await fetch(getUserFavoritesApi(), {
         headers: { Authorization: `Bearer ${session?.access_token}` },
@@ -98,7 +95,7 @@ export const Favorite = ({ session }: Props) => {
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
   if (isLoading) return <Loading />
-  if (isOpenHamburger) return <Hamburger session={session} onClickCloseHamburger={onClickCloseHamburger} />
+  if (isOpenHamburger) return <Hamburger onClickCloseHamburger={onClickCloseHamburger} />
   return (
     <div className="style_lightbrown">
       <Head

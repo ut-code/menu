@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom"
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
-import { Session } from "@supabase/supabase-js"
-import { useQuery } from "@tanstack/react-query"
 
-import { getUsernameApi, updateUsernameApi } from "@/utils/apiUtils"
+import { updateUsernameApi } from "@/utils/apiUtils"
+import { User } from "@/utils/users"
+import { UserContext } from "@/utils/context"
 import { BorderButton } from "@/components/elements/button/BorderButton"
 import { Head } from "@/components/Head"
 import { Hamburger } from "@/components/Hamburger"
@@ -13,34 +13,19 @@ import styles from "./Setting.module.css"
 import { BsArrowRight } from "react-icons/bs"
 
 interface Props {
-  session: Session | null
+  setUser: (user: User | null) => void
 }
 
-export const Setting = ({ session }: Props) => {
+export const Setting = ({ setUser }: Props) => {
   const Navigate = useNavigate()
+  const { user, session } = useContext(UserContext)
 
-  // const [email, setEmail] = useState("")
-  const [username, setUsername] = useState("")
+  // const [email, setEmail] = useState(user?.email || "")
+  const [username, setUsername] = useState(user?.username || "")
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
 
-  const { isLoading, refetch: refetchUsername } = useQuery({
-    queryKey: ["username"],
-    queryFn: async () => {
-      if (!session?.access_token) return ""
-      const response = await fetch(getUsernameApi(), {
-        headers: { Authorization: `Bearer ${session?.access_token}` },
-      })
-      if (!response.ok) throw new Error("ユーザーネームの取得に失敗しました")
-      return await response.json()
-    },
-    onSuccess: (data) => {
-      setUsername(data)
-    },
-  })
-
-  const updateUsername = async (session: Session | null) => {
-    console.log(session)
-    if (!session?.access_token) return
+  const updateUsername = async () => {
+    if (!session?.access_token || !user) return
     const response = await fetch(updateUsernameApi(), {
       method: "PUT",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${session?.access_token}` },
@@ -49,13 +34,13 @@ export const Setting = ({ session }: Props) => {
     console.log(response)
     if (!response.ok) throw new Error("ユーザーネームの更新に失敗しました")
 
-    refetchUsername()
+    setUser({ ...user, username: username })
   }
 
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
-  if (isOpenHamburger) return <Hamburger session={session} onClickCloseHamburger={onClickCloseHamburger} />
+  if (isOpenHamburger) return <Hamburger onClickCloseHamburger={onClickCloseHamburger} />
   return (
     <div className="style_lightbrown">
       <Head
@@ -66,7 +51,7 @@ export const Setting = ({ session }: Props) => {
 
       <h2 style={{ margin: "20px 0" }}>設定</h2>
 
-      {session && (
+      {user && (
         <form className={styles.form}>
           <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
             <span className={styles.label}>
@@ -100,7 +85,7 @@ export const Setting = ({ session }: Props) => {
 
           <div style={{ height: "40px" }} />
 
-          <BorderButton onClick={async () => await updateUsername(session)} disabled={isLoading}>
+          <BorderButton onClick={async () => await updateUsername()} disabled={false}>
             <h3>アカウント情報を変更する</h3>
           </BorderButton>
         </form>
