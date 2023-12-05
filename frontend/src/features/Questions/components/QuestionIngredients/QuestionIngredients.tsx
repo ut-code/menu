@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { Session } from "@supabase/supabase-js"
 
 import { NextButton } from "@/components/elements/button/NextButton"
 import { Searchbox } from "@/components/Searchbox"
@@ -11,10 +10,9 @@ interface Props {
   setQuestionNumber: (questionNumber: number) => void
   ingredients: string[] | undefined
   setIngredients: (ingredients: string[]) => void
-  session: Session | null
 }
 
-export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredients, session }: Props) => {
+export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredients }: Props) => {
   const Navigate = useNavigate()
   const [inputContent, setInputContent] = useState<string>("")
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
@@ -41,7 +39,7 @@ export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredi
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
-  if (isOpenHamburger) return <Hamburger session={session} onClickCloseHamburger={onClickCloseHamburger} />
+  if (isOpenHamburger) return <Hamburger onClickCloseHamburger={onClickCloseHamburger} />
   return (
     <>
       <div style={{ padding: 16 }}>

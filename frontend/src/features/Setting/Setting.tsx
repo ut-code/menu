@@ -55,7 +55,7 @@ export const Setting = ({ session }: Props) => {
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
-  if (isOpenHamburger) return <Hamburger session={session} onClickCloseHamburger={onClickCloseHamburger} />
+  if (isOpenHamburger) return <Hamburger onClickCloseHamburger={onClickCloseHamburger} />
   return (
     <div className="style_lightbrown">
       <Head

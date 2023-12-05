@@ -30,10 +30,10 @@ export default function App() {
     const fetchUser = async (session: Session | null): Promise<User | null> => {
       const access_token = session?.access_token
       if (!access_token) return null
-      const data = await fetch(getUserApi(), {
+      const response = await fetch(getUserApi(), {
         headers: { authorization: `Bearer ${access_token}` },
       })
-      const user = await data.json()
+      const user = await response.json()
       return user
     }
 
@@ -45,8 +45,10 @@ export default function App() {
       const user = await fetchUser(data.session)
       setUser(user)
 
-      supabase.auth.onAuthStateChange((_event, session) => {
+      supabase.auth.onAuthStateChange(async (_event, session) => {
         setSession(session)
+        const user = await fetchUser(session)
+        setUser(user)
       })
       setIsLoading(false)
     }
@@ -64,7 +66,7 @@ export default function App() {
           element={session ? <Favorite session={session} /> : <Navigate replace to="/home" />}
         />
         <Route path="/home/seasonal" element={<Seasonal session={session} />} />
-        <Route path="/questions" element={<Questions session={session} />} />
+        <Route path="/questions" element={<Questions />} />
         <Route path="/search" element={<Result session={session} />} />
         <Route path="/setting" element={<Setting session={session} />} />
         <Route path="/auth" element={!session ? <Auth /> : <Navigate replace to="/home" />} />

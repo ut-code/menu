@@ -98,7 +98,7 @@ export const Favorite = ({ session }: Props) => {
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
   if (isLoading) return <Loading />
-  if (isOpenHamburger) return <Hamburger session={session} onClickCloseHamburger={onClickCloseHamburger} />
+  if (isOpenHamburger) return <Hamburger onClickCloseHamburger={onClickCloseHamburger} />
   return (
     <div className="style_lightbrown">
       <Head

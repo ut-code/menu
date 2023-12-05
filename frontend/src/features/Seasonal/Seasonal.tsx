@@ -101,7 +101,7 @@ export const Seasonal = ({ session }: Props) => {
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
   if (isLoadingSeasonalRecipes || isLoadingFavoriteRecipes) return <p>レシピを読み込み中</p>
-  if (isOpenHamburger) return <Hamburger session={session} onClickCloseHamburger={onClickCloseHamburger} />
+  if (isOpenHamburger) return <Hamburger onClickCloseHamburger={onClickCloseHamburger} />
   return (
     <div className="style_lightbrown">
       <Head

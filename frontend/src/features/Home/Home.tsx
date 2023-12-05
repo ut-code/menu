@@ -70,7 +70,7 @@ export const Home = ({ session }: Props) => {
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
-  if (isOpenHamburger) return <Hamburger session={session} onClickCloseHamburger={onClickCloseHamburger} />
+  if (isOpenHamburger) return <Hamburger onClickCloseHamburger={onClickCloseHamburger} />
   if (isLoadingFavoriteRecipes || isLoadingSeasonalRecipes) return <Loading />
   return (
     <>

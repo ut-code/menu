@@ -1,17 +1,12 @@
 import { useNavigate } from "react-router-dom"
 import { useLocalStorage } from "react-use"
-import { Session } from "@supabase/supabase-js"
 
 import "./questions.css"
 import { QuestionIngredients } from "./components/QuestionIngredients"
 import { QuestionGenre } from "./components/QuestionGenre"
 import { QuestionCookingTime } from "./components/QuestionCookingTime"
 
-interface Props {
-  session: Session | null
-}
-
-export const Questions = ({ session }: Props) => {
+export const Questions = () => {
   const Navigate = useNavigate()
 
   const [questionNumber, setQuestionNumber] = useLocalStorage("questionNumber", 0)
@@ -27,18 +22,11 @@ export const Questions = ({ session }: Props) => {
           setQuestionNumber={setQuestionNumber}
           ingredients={ingredients}
           setIngredients={setIngredients}
-          session={session}
         />
       )
     case 1:
       return (
-        <QuestionGenre
-          setQuestionNumber={setQuestionNumber}
-          answer={genre}
-          setAnswer={setGenre}
-          keywords={keywords}
-          session={session}
-        />
+        <QuestionGenre setQuestionNumber={setQuestionNumber} answer={genre} setAnswer={setGenre} keywords={keywords} />
       )
     case 2:
       return (
@@ -47,7 +35,6 @@ export const Questions = ({ session }: Props) => {
           answer={cookingTime}
           setAnswer={setCookingTime}
           keywords={keywords}
-          session={session}
         />
       )
     default:
