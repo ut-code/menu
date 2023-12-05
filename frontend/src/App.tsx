@@ -1,10 +1,10 @@
 import { Routes, Route, Navigate, useLocation } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { Session } from "@supabase/supabase-js"
+
 import { User } from "@/utils/users"
 import { getUserApi } from "@/utils/apiUtils"
 import { UserContext } from "@/utils/context"
-
 import { Home } from "@/features/Home"
 import { HowTo } from "@/features/HowTo"
 import { Questions } from "@/features/Questions"
