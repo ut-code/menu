@@ -1,6 +1,5 @@
 import { useContext } from "react"
 import { Link } from "react-router-dom"
-import { Session } from "@supabase/supabase-js"
 
 import { SignOut } from "@/features/Auth/SignOut"
 import { UserContext } from "@/utils/context"
@@ -11,7 +10,6 @@ import { BsHouseDoorFill, BsSearch, BsHeartFill, BsGearFill } from "react-icons/
 import { FaLock } from "react-icons/fa"
 
 interface Props {
-  session?: Session | null
   onClickCloseHamburger: () => void
 }
 

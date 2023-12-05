@@ -28,10 +28,9 @@ export default function App() {
 
   useEffect(() => {
     const fetchUser = async (session: Session | null): Promise<User | null> => {
-      const access_token = session?.access_token
-      if (!access_token) return null
+      if (!session?.access_token) return null
       const response = await fetch(getUserApi(), {
-        headers: { authorization: `Bearer ${access_token}` },
+        headers: { authorization: `Bearer ${session?.access_token}` },
       })
       const user = await response.json()
       return user
@@ -61,10 +60,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={location.search !== "?ref=a2hs" ? <HowTo /> : <Navigate replace to="/questions" />} />
         <Route path="/home" element={<Home />} />
-        <Route
-          path="/home/favorites"
-          element={session ? <Favorite session={session} /> : <Navigate replace to="/home" />}
-        />
+        <Route path="/home/favorites" element={session ? <Favorite /> : <Navigate replace to="/home" />} />
         <Route path="/home/seasonal" element={<Seasonal session={session} />} />
         <Route path="/questions" element={<Questions />} />
         <Route path="/search" element={<Result session={session} />} />
