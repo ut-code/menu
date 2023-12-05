@@ -60,7 +60,7 @@ export default function App() {
     <UserContext.Provider value={{ user, session }}>
       <Routes>
         <Route path="/" element={location.search !== "?ref=a2hs" ? <HowTo /> : <Navigate replace to="/questions" />} />
-        <Route path="/home" element={<Home session={session} />} />
+        <Route path="/home" element={<Home />} />
         <Route
           path="/home/favorites"
           element={session ? <Favorite session={session} /> : <Navigate replace to="/home" />}

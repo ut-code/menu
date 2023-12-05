@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom"
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
-import { Session } from "@supabase/supabase-js"
 import { useQuery } from "@tanstack/react-query"
 
 import { Recipe } from "@/utils/recipes"
-import { getUserFavoritesApi, postSearchRecipesKeywordsApi, getUsernameApi } from "@/utils/apiUtils"
+import { getUserFavoritesApi, postSearchRecipesKeywordsApi } from "@/utils/apiUtils"
+import { UserContext } from "@/utils/context"
 import { Head } from "@/components/Head"
 import { Hamburger } from "@/components/Hamburger"
 import { HorizontalScroll } from "./components/HorizontalScroll"
@@ -13,13 +13,10 @@ import { MoreButton } from "@/components/elements/button/MoreButton"
 import { Loading } from "@/components/Loading"
 import { HomeSearchbox } from "./components/HomeSearchbox"
 
-interface Props {
-  session: Session | null
-}
-
-export const Home = ({ session }: Props) => {
+export const Home = () => {
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
   const Navigate = useNavigate()
+  const { user, session } = useContext(UserContext)
 
   // 永続的に残るので、localStorageから問題への回答を消しておく
   localStorage.removeItem("questionNumber")
@@ -55,18 +52,6 @@ export const Home = ({ session }: Props) => {
     },
   })
 
-  const { data: username } = useQuery({
-    queryKey: ["username"],
-    queryFn: async () => {
-      if (!session?.access_token) return ""
-      const response = await fetch(getUsernameApi(), {
-        headers: { Authorization: `Bearer ${session?.access_token}` },
-      })
-      if (!response.ok) throw new Error("ユーザーネームの取得に失敗しました")
-      return await response.json()
-    },
-  })
-
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
@@ -86,7 +71,7 @@ export const Home = ({ session }: Props) => {
           }}
         >
           <span style={{ fontSize: "24px", fontWeight: "bold", marginLeft: "8px" }}>
-            {session ? username : "ゲスト"}
+            {session ? user?.username : "ゲスト"}
           </span>
           <span style={{ fontSize: "12px", margin: "0 0 6px 10px" }}>さん</span>
         </div>
