@@ -1,6 +1,9 @@
 import { Routes, Route, Navigate, useLocation } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { Session } from "@supabase/supabase-js"
+import { User } from "@/utils/users"
+import { getUserApi } from "@/utils/apiUtils"
+import { UserContext } from "@/utils/context"
 
 import { Home } from "@/features/Home"
 import { HowTo } from "@/features/HowTo"
@@ -17,15 +20,30 @@ import "@/components/css/global.css"
 import { Loading } from "./components/Loading"
 
 export default function App() {
+  // Ref: https://mixblog.vercel.app/contents/next-supabase
+  const [user, setUser] = useState<User | null>(null)
   const [session, setSession] = useState<Session | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const location = useLocation()
 
   useEffect(() => {
+    const fetchUser = async (session: Session | null): Promise<User | null> => {
+      const access_token = session?.access_token
+      if (!access_token) return null
+      const data = await fetch(getUserApi(), {
+        headers: { authorization: `Bearer ${access_token}` },
+      })
+      const user = await data.json()
+      return user
+    }
+
     const initialize = async () => {
       const { data, error } = await supabase.auth.getSession()
       if (error) console.log(error)
       else setSession(data.session)
+
+      const user = await fetchUser(data.session)
+      setUser(user)
 
       supabase.auth.onAuthStateChange((_event, session) => {
         setSession(session)
@@ -37,7 +55,7 @@ export default function App() {
 
   if (isLoading) return <Loading />
   return (
-    <>
+    <UserContext.Provider value={{ user, session }}>
       <Routes>
         <Route path="/" element={location.search !== "?ref=a2hs" ? <HowTo /> : <Navigate replace to="/questions" />} />
         <Route path="/home" element={<Home session={session} />} />
@@ -52,6 +70,6 @@ export default function App() {
         <Route path="/auth" element={!session ? <Auth /> : <Navigate replace to="/home" />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </>
+    </UserContext.Provider>
   )
 }
