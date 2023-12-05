@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { useNavigate } from "react-router-dom"
-import { Session } from "@supabase/supabase-js"
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query"
 
 import { Hamburger } from "@/components/Hamburger"
@@ -8,7 +7,6 @@ import { Head } from "@/components/Head"
 import { Loading } from "@/components/Loading"
 import { Searchbox } from "@/components/Searchbox"
 import { RecipeCard } from "@/components/RecipeCard"
-import { Recipe, SearchInfo } from "@/utils/recipes"
 import {
   postSearchRecipesApi,
   postSearchRecipesKeywordsApi,
@@ -16,15 +14,14 @@ import {
   postUserFavoritesApi,
   deleteUserFavoritesApi,
 } from "@/utils/apiUtils"
+import { UserContext } from "@/utils/context"
+import { Recipe, SearchInfo } from "@/utils/recipes"
 import styles from "./Result.module.css"
 import { EmptyResults } from "@/components/EmptyResults"
 
-interface Props {
-  session: Session | null
-}
-
-export const Result = ({ session }: Props) => {
+export const Result = () => {
   const Navigate = useNavigate()
+  const { session } = useContext(UserContext)
 
   const [inputContent, setInputContent] = useState<string>("")
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)

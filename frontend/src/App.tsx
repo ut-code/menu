@@ -63,7 +63,7 @@ export default function App() {
         <Route path="/home/favorites" element={session ? <Favorite /> : <Navigate replace to="/home" />} />
         <Route path="/home/seasonal" element={<Seasonal />} />
         <Route path="/questions" element={<Questions />} />
-        <Route path="/search" element={<Result session={session} />} />
+        <Route path="/search" element={<Result />} />
         <Route path="/setting" element={<Setting setUser={setUser} />} />
         <Route path="/auth" element={!session ? <Auth /> : <Navigate replace to="/home" />} />
         <Route path="*" element={<NotFound />} />
