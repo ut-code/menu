@@ -81,11 +81,12 @@ export const Home = () => {
           </Link>
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", padding: "0 40px 0 48px" }}>
+          {/* TODO: 人気度を測定して人気のレシピを載せる */}
+          {/* <div style={{ display: "flex", justifyContent: "space-between", padding: "0 40px 0 48px" }}>
             <h2 style={{ marginBottom: "16px" }}>人気のレシピ</h2>
             <MoreButton onClick={() => Navigate("/home/favorites")} />
           </div>
-          <HorizontalScroll recipes={favoriteRecipes?.slice(0, 6)} />
+          <HorizontalScroll recipes={favoriteRecipes?.slice(0, 6)} /> */}
 
           <div style={{ display: "flex", justifyContent: "space-between", padding: "0 40px 0 48px" }}>
             <h2 style={{ marginBottom: "16px" }}>季節のレシピ</h2>
