@@ -51,6 +51,25 @@ class UserController {
     res.status(200).json(user)
   }
 
+  getFavorites = async (req: Request, res: Response): Promise<void> => {
+    const userFromRequest = await this.extractUserFromRequest(req)
+    if (!userFromRequest) {
+      res.status(401).json({ error: "Not authorized" })
+      return
+    }
+
+    const favorites = await client.userFavorites.findMany({
+      where: {
+        userId: userFromRequest.id,
+      },
+      include: {
+        favoriteRecipe: true,
+      },
+    })
+    const recipes = favorites.map((favorite) => favorite.favoriteRecipe)
+    res.json(recipes)
+  }
+
   private getUserById = async ({ userId }: { userId: Users["id"] }) => {
     return client.users.findUnique({
       where: {

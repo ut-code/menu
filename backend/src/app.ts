@@ -83,24 +83,7 @@ app.post("/api/searchRecipes/keywords", async (req, res) => {
   res.json(recipes)
 })
 
-app.get("/api/users/favorites", async (req, res) => {
-  const user = await extractUserFromRequest(req)
-  if (!user) {
-    res.status(401).json({ error: "Not authorized" })
-    return
-  }
-
-  const favorites = await client.userFavorites.findMany({
-    where: {
-      userId: user.id,
-    },
-    include: {
-      favoriteRecipe: true,
-    },
-  })
-  const recipes = favorites.map((favorite) => favorite.favoriteRecipe)
-  res.json(recipes)
-})
+app.get("/api/users/favorites", UserController.getFavorites)
 
 app.post("/api/users/favorites", async (req, res) => {
   const { recipeId } = req.body
