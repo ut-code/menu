@@ -125,6 +125,30 @@ class UserController {
     }
   }
 
+  deleteFavorite = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const recipeId = Number(req.params.id)
+      const userFromRequest = await this.extractUserFromRequest(req)
+      if (!userFromRequest) {
+        res.status(401).json({ error: "Not authorized" })
+        return
+      }
+
+      const userFavorite = await client.userFavorites.delete({
+        where: {
+          userId_recipeId: {
+            userId: userFromRequest.id,
+            recipeId: recipeId,
+          },
+        },
+      })
+      res.status(200).json(userFavorite)
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ error: "Internal server error" })
+    }
+  }
+
   private getUserById = async ({ userId }: { userId: Users["id"] }) => {
     try {
       const user = client.users.findUnique({

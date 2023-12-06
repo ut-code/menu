@@ -1,7 +1,6 @@
 import express from "express"
 import cors from "cors"
 import { client } from "./db.server"
-import { extractUserFromRequest } from "./utils/authUtils"
 import UserController from "./controllers/UserController"
 
 const app = express()
@@ -84,30 +83,9 @@ app.post("/api/searchRecipes/keywords", async (req, res) => {
 })
 
 app.get("/api/users/favorites", UserController.getFavorites)
-
 app.post("/api/users/favorites", UserController.addFavorite)
-
-app.delete("/api/users/favorites/:id", async (req, res) => {
-  const recipeId = Number(req.params.id)
-  const user = await extractUserFromRequest(req)
-  if (!user) {
-    res.status(401).json({ error: "Not authorized" })
-    return
-  }
-
-  const userFavorite = await client.userFavorites.delete({
-    where: {
-      userId_recipeId: {
-        userId: user.id,
-        recipeId: recipeId,
-      },
-    },
-  })
-  res.json(userFavorite)
-})
-
+app.delete("/api/users/favorites/:id", UserController.deleteFavorite)
 app.get("/api/users", UserController.getUser)
-
 app.put("/api/users/username", UserController.updateUsername)
 
 export default app
