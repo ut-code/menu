@@ -85,35 +85,7 @@ app.post("/api/searchRecipes/keywords", async (req, res) => {
 
 app.get("/api/users/favorites", UserController.getFavorites)
 
-app.post("/api/users/favorites", async (req, res) => {
-  const { recipeId } = req.body
-  const user = await extractUserFromRequest(req)
-  if (!user) {
-    res.status(401).json({ error: "Not authorized" })
-    return
-  }
-
-  const existingFavorite = await client.userFavorites.findUnique({
-    where: {
-      userId_recipeId: {
-        userId: user.id,
-        recipeId: recipeId,
-      },
-    },
-  })
-  if (existingFavorite) {
-    res.json(existingFavorite)
-    return
-  }
-
-  const userFavorite = await client.userFavorites.create({
-    data: {
-      userId: user.id,
-      recipeId: recipeId,
-    },
-  })
-  res.json(userFavorite)
-})
+app.post("/api/users/favorites", UserController.addFavorite)
 
 app.delete("/api/users/favorites/:id", async (req, res) => {
   const recipeId = Number(req.params.id)
