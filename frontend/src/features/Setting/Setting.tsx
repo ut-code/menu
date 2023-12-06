@@ -63,6 +63,7 @@ export const Setting = ({ setUser }: Props) => {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               className={styles.input}
+              maxLength={20}
             />
           </div>
 

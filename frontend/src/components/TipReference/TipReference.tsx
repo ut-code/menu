@@ -17,6 +17,7 @@ const urlDomainToName: dict = {
   "dancyu.jp": "dancyu",
   "www.yutori.co.jp": "ゆとりの空間",
   "recipe.rakuten.co.jp": "楽天レシピ",
+  "www.mizkan.co.jp": "ミツカン",
 }
 
 const translateUrlToSiteName = (url: string): string => {
