@@ -30,7 +30,7 @@ export const Home = () => {
       const response = await fetch(postSearchRecipesKeywordsApi(), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ keywords: ["夏"] }),
+        body: JSON.stringify({ keywords: "夏" }),
       })
       if (!response.ok) throw new Error("レシピの取得に失敗しました")
       const recipes: Recipe[] = await response.json()

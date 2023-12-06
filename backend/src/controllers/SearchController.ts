@@ -39,6 +39,30 @@ class SearchController {
     }
   }
 
+  searchRecipesByKeywords = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { keywords } = req.body
+      const keywordsOrQuery = this.joinKeywords(keywords)
+      console.log(keywordsOrQuery)
+      // FIXME: 関連性のある結果が全く得られない
+      const recipes = await client.recipes.findMany({
+        orderBy: {
+          _relevance: {
+            fields: ["description"],
+            search: keywordsOrQuery,
+            sort: "asc",
+          },
+        },
+        take: 20,
+      })
+      console.log(recipes)
+      res.json(recipes)
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ error: "Internal server error" })
+    }
+  }
+
   private joinIngredients = (ingredients: string[]): string => {
     return ingredients.join(" & ")
   }
@@ -60,6 +84,10 @@ class SearchController {
     const orderBy = Math.random() < 0.5 ? "description" : "materialsConverted"
     const orderDir = Math.random() < 0.5 ? "asc" : "desc"
     return { orderBy, orderDir }
+  }
+
+  private joinKeywords = (keywords: string): string => {
+    return keywords.replace(/\s+/g, " | ")
   }
 }
 

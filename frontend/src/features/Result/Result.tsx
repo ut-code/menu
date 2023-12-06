@@ -117,18 +117,13 @@ export const Result = () => {
   //----------------------------------------------------------------
   // フリーワード検索機能
   //----------------------------------------------------------------
-  const convertInputContentToSearchInfo = (newInputContent: string) => {
-    return { keywords: newInputContent.split(" ") }
-  }
-
   const searchRecipesKeywords = useMutation({
     mutationFn: async () => {
       const response = await fetch(postSearchRecipesKeywordsApi(), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(convertInputContentToSearchInfo(inputContent)),
+        body: JSON.stringify({ keywords: inputContent }),
       })
-      console.log(convertInputContentToSearchInfo(inputContent))
       if (!response.ok) throw new Error("レシピの取得に失敗しました")
       const recipes: Recipe[] = await response.json()
       return recipes
