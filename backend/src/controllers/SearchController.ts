@@ -41,10 +41,10 @@ class SearchController {
 
   searchRecipesByKeywords = async (req: Request, res: Response): Promise<void> => {
     try {
+      // FIXME: 関連性のある結果が全く得られない
       const { keywords } = req.body
       const keywordsOrQuery = this.joinKeywords(keywords)
-      console.log(keywordsOrQuery)
-      // FIXME: 関連性のある結果が全く得られない
+
       const recipes = await client.recipes.findMany({
         orderBy: {
           _relevance: {
@@ -55,7 +55,6 @@ class SearchController {
         },
         take: 20,
       })
-      console.log(recipes)
       res.json(recipes)
     } catch (error) {
       console.error(error)
@@ -86,8 +85,11 @@ class SearchController {
     return { orderBy, orderDir }
   }
 
-  private joinKeywords = (keywords: string): string => {
-    return keywords.replace(/\s+/g, " | ")
+  private joinKeywords = (keywords: string | null): string => {
+    // FIXME: keywords が空白のみのときのエラーを無理やり回避している
+    const keywordsFiltered = keywords?.replace(/\s{2,}/g, " ")
+    if (!keywordsFiltered || keywordsFiltered === " ") return ""
+    return keywordsFiltered.replace(/\s+/g, " | ")
   }
 }
 
