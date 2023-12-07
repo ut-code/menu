@@ -1,36 +1,28 @@
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { useState } from "react"
-// import { Session } from "@supabase/supabase-js"
+
 import { supabase } from "./supabaseClient"
-// import { updateUsernameApi } from "@/utils/apiUtils"
 import { BorderButton } from "@/components/elements/button/BorderButton"
 import { Head } from "@/components/Head"
 import { Hamburger } from "@/components/Hamburger"
 import styles from "./Auth.module.css"
 
-export const Auth = () => {
+interface Props {
+  inputUsername: string | undefined
+  setInputUsername: (inputUsername: string) => void
+}
+
+export const Auth = ({ inputUsername, setInputUsername }: Props) => {
   const Navigate = useNavigate()
 
   const [loading, setLoading] = useState(false)
   const [hasAccount, setHasAccount] = useState<boolean>(false)
   const [email, setEmail] = useState("")
-  const [username, setUsername] = useState("")
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
 
-  // const updateUsername = async (session: Session | null) => {
-  //   console.log(username)
-  //   console.log(session)
-  //   if (!session?.access_token) return
-  //   const response = await fetch(updateUsernameApi(), {
-  //     method: "PUT",
-  //     headers: { "Content-Type": "application/json", Authorization: `Bearer ${session?.access_token}` },
-  //     body: JSON.stringify({ username: username }),
-  //   })
-  //   console.log(response)
-  //   if (!response.ok) throw new Error("ユーザーネームの更新に失敗しました")
-  //   const user = await response.json()
-  //   console.log(user)
-  // }
+  useEffect(() => {
+    setInputUsername("")
+  }, [])
 
   const handleSignIn = async () => {
     setLoading(true)
@@ -91,8 +83,8 @@ export const Auth = () => {
             <input
               type="text"
               placeholder="ユーザーネームを入力してください"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={inputUsername}
+              onChange={(e) => setInputUsername(e.target.value)}
               className={styles.input}
             />
           </div>
