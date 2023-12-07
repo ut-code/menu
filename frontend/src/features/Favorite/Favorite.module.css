@@ -38,13 +38,13 @@
   color: var(--Black);
 }
 
-.genre_buttons {
+.dish_buttons {
   display: flex;
   justify-content: flex-start;
   gap: 4px;
 }
 
-.genre_button {
+.dish_button {
   /* layout */
   display: flex;
   align-items: center;
