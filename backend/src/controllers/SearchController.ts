@@ -40,11 +40,11 @@ class SearchController {
   }
 
   searchRecipesByKeywords = async (req: Request, res: Response): Promise<void> => {
-    const { keywords } = req.body
-    const keywordsOrQuery = this.joinKeywords(keywords)
-    console.error(keywordsOrQuery)
     try {
       // FIXME: 関連性のある結果が全く得られない
+      const { keywords } = req.body
+      const keywordsOrQuery = this.joinKeywords(keywords)
+
       const recipes = await client.recipes.findMany({
         orderBy: {
           _relevance: {
@@ -55,7 +55,6 @@ class SearchController {
         },
         take: 20,
       })
-      console.log(recipes)
       res.json(recipes)
     } catch (error) {
       console.error(error)
