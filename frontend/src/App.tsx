@@ -1,8 +1,9 @@
 import { Routes, Route, Navigate, useLocation } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { Session } from "@supabase/supabase-js"
+import { useLocalStorage } from "react-use"
 
-import { User } from "@/utils/users"
+import { User, updateUsername } from "@/utils/users"
 import { getUserApi } from "@/utils/apiUtils"
 import { UserContext } from "@/utils/context"
 import { Home } from "@/features/Home"
@@ -24,6 +25,7 @@ export default function App() {
   const [user, setUser] = useState<User | null>(null)
   const [session, setSession] = useState<Session | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [inputUsername, setInputUsername] = useLocalStorage("inputUsername", "")
   const location = useLocation()
 
   useEffect(() => {
@@ -46,8 +48,16 @@ export default function App() {
 
       supabase.auth.onAuthStateChange(async (_event, session) => {
         setSession(session)
-        const user = await fetchUser(session)
-        setUser(user)
+
+        const fetchedUser = await fetchUser(session)
+        if (fetchedUser) {
+          setUser(fetchedUser)
+        }
+        const username = await updateUsername({ user, session }, inputUsername)
+        if (username && fetchedUser) {
+          setInputUsername(username)
+          setUser({ ...fetchedUser, username: username })
+        }
       })
       setIsLoading(false)
     }
@@ -64,8 +74,17 @@ export default function App() {
         <Route path="/home/seasonal" element={<Seasonal />} />
         <Route path="/questions" element={<Questions />} />
         <Route path="/search" element={<Result />} />
-        <Route path="/setting" element={<Setting setUser={setUser} />} />
-        <Route path="/auth" element={!session ? <Auth /> : <Navigate replace to="/home" />} />
+        <Route path="/setting" element={<Setting setUser={setUser} setInputUsername={setInputUsername} />} />
+        <Route
+          path="/auth"
+          element={
+            !session ? (
+              <Auth inputUsername={inputUsername} setInputUsername={setInputUsername} />
+            ) : (
+              <Navigate replace to="/home" />
+            )
+          }
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </UserContext.Provider>
