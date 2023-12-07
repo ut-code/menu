@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom"
-import { useState, useContext } from "react"
+import { useState, useEffect, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 
-import { updateUsernameApi } from "@/utils/apiUtils"
-import { User } from "@/utils/users"
+import { User, updateUsername } from "@/utils/users"
 import { UserContext } from "@/utils/context"
 import { BorderButton } from "@/components/elements/button/BorderButton"
 import { Head } from "@/components/Head"
@@ -14,9 +13,10 @@ import { BsArrowRight } from "react-icons/bs"
 
 interface Props {
   setUser: (user: User | null) => void
+  setInputUsername: (inputUsername: string) => void
 }
 
-export const Setting = ({ setUser }: Props) => {
+export const Setting = ({ setUser, setInputUsername }: Props) => {
   const Navigate = useNavigate()
   const { user, session } = useContext(UserContext)
 
@@ -24,17 +24,15 @@ export const Setting = ({ setUser }: Props) => {
   const [username, setUsername] = useState(user?.username || "")
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
 
-  const updateUsername = async () => {
-    if (!session?.access_token || !user) return
-    const response = await fetch(updateUsernameApi(), {
-      method: "PUT",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${session?.access_token}` },
-      body: JSON.stringify({ username: username }),
-    })
-    console.log(response)
-    if (!response.ok) throw new Error("ユーザーネームの更新に失敗しました")
+  useEffect(() => {
+    setInputUsername("")
+  }, [])
 
-    setUser({ ...user, username: username })
+  const handleUpdateUsername = async () => {
+    const updatedUsername = await updateUsername({ user, session }, username)
+    if (updatedUsername && user) {
+      setUser({ ...user, username: updatedUsername })
+    }
   }
 
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
@@ -86,7 +84,7 @@ export const Setting = ({ setUser }: Props) => {
 
           <div style={{ height: "40px" }} />
 
-          <BorderButton onClick={async () => await updateUsername()} disabled={false}>
+          <BorderButton onClick={async () => await handleUpdateUsername()} disabled={false}>
             <h3>アカウント情報を変更する</h3>
           </BorderButton>
         </form>
