@@ -1,13 +1,3 @@
-<p style="display: inline">
-  <img src="https://img.shields.io/badge/-React-000000.svg?logo=react&style=for-the-badge">
-  <img src="https://img.shields.io/badge/-Vite-000000.svg?logo=vite&style=for-the-badge">
-  <img src="https://img.shields.io/badge/-Express-000000.svg?logo=express&style=for-the-badge">
-  <img src="https://img.shields.io/badge/-Supabase-000000.svg?logo=supabase&style=for-the-badge">
-  <img src="https://img.shields.io/badge/-Prisma-000000.svg?logo=prisma&style=for-the-badge">
-  <img src="https://img.shields.io/badge/-Typescript-000000.svg?logo=Typescript&style=for-the-badge">
-  <img src="https://img.shields.io/badge/-Node.js-000000.svg?logo=node.js&style=for-the-badge">
-</p>
-
 ## だるめし
 
 @ここにいい感じのバナー画像が入る@
@@ -23,7 +13,10 @@
   <img src="https://github.com/ut-code/menu/assets/53532178/6eb799e5-3f34-451a-99b5-2319db85fed2") width="200" />
 </p>
 
+@検索している動画/ブックマークしている動画を載せる？@
+
 <br></br>
+
 ## 開発した背景
 
 [ある調査](https://news.mynavi.jp/article/20220407-2315146/)によると、自炊をしない理由の第一位は<b>「面倒だから」</b>。そんな悩みを解決するのが本サービスです。
@@ -33,7 +26,18 @@
 ＠もう少し膨らます＠
 
 <br></br>
+
 ## 使用技術
+
+<p style="display: inline">
+  <img src="https://img.shields.io/badge/-React-000000.svg?logo=react&style=for-the-badge">
+  <img src="https://img.shields.io/badge/-Vite-000000.svg?logo=vite&style=for-the-badge">
+  <img src="https://img.shields.io/badge/-Express-000000.svg?logo=express&style=for-the-badge">
+  <img src="https://img.shields.io/badge/-Supabase-000000.svg?logo=supabase&style=for-the-badge">
+  <img src="https://img.shields.io/badge/-Prisma-000000.svg?logo=prisma&style=for-the-badge">
+  <img src="https://img.shields.io/badge/-Typescript-000000.svg?logo=Typescript&style=for-the-badge">
+  <img src="https://img.shields.io/badge/-Node.js-000000.svg?logo=node.js&style=for-the-badge">
+</p>
 
 - バックエンド
   - Express / Typescript
@@ -48,6 +52,7 @@
   - GitHub Actions
 
 <br></br>
+
 ## 環境構築
 
 ### セットアップ
