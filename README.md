@@ -13,7 +13,10 @@
   <img src="https://github.com/ut-code/menu/assets/53532178/6eb799e5-3f34-451a-99b5-2319db85fed2") width="200" />
 </p>
 
+@検索している動画/ブックマークしている動画を載せる？@
+
 <br></br>
+
 ## 開発した背景
 
 [ある調査](https://news.mynavi.jp/article/20220407-2315146/)によると、自炊をしない理由の第一位は<b>「面倒だから」</b>。そんな悩みを解決するのが本サービスです。
@@ -23,6 +26,7 @@
 ＠もう少し膨らます＠
 
 <br></br>
+
 ## 使用技術
 
 <p style="display: inline">
@@ -48,6 +52,7 @@
   - GitHub Actions
 
 <br></br>
+
 ## 環境構築
 
 ### セットアップ
