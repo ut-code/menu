@@ -1,13 +1,3 @@
-<p style="display: inline">
-  <img src="https://img.shields.io/badge/-React-000000.svg?logo=react&style=for-the-badge">
-  <img src="https://img.shields.io/badge/-Vite-000000.svg?logo=vite&style=for-the-badge">
-  <img src="https://img.shields.io/badge/-Express-000000.svg?logo=express&style=for-the-badge">
-  <img src="https://img.shields.io/badge/-Supabase-000000.svg?logo=supabase&style=for-the-badge">
-  <img src="https://img.shields.io/badge/-Prisma-000000.svg?logo=prisma&style=for-the-badge">
-  <img src="https://img.shields.io/badge/-Typescript-000000.svg?logo=Typescript&style=for-the-badge">
-  <img src="https://img.shields.io/badge/-Node.js-000000.svg?logo=node.js&style=for-the-badge">
-</p>
-
 ## だるめし
 
 @ここにいい感じのバナー画像が入る@
@@ -34,6 +24,16 @@
 
 <br></br>
 ## 使用技術
+
+<p style="display: inline">
+  <img src="https://img.shields.io/badge/-React-000000.svg?logo=react&style=for-the-badge">
+  <img src="https://img.shields.io/badge/-Vite-000000.svg?logo=vite&style=for-the-badge">
+  <img src="https://img.shields.io/badge/-Express-000000.svg?logo=express&style=for-the-badge">
+  <img src="https://img.shields.io/badge/-Supabase-000000.svg?logo=supabase&style=for-the-badge">
+  <img src="https://img.shields.io/badge/-Prisma-000000.svg?logo=prisma&style=for-the-badge">
+  <img src="https://img.shields.io/badge/-Typescript-000000.svg?logo=Typescript&style=for-the-badge">
+  <img src="https://img.shields.io/badge/-Node.js-000000.svg?logo=node.js&style=for-the-badge">
+</p>
 
 - バックエンド
   - Express / Typescript
