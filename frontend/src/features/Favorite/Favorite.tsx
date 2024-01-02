@@ -18,6 +18,20 @@ export const Favorite = () => {
 
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
   const [initialFavoriteRecipes, setInitialFavoriteRecipes] = useState<Recipe[]>([])
+  const [filterStapleFood, setFilterStapleFood] = useState<boolean>(false)
+  const [filterMainDish, setFilterMainDish] = useState<boolean>(false)
+  const [filterSideDish, setFilterSideDish] = useState<boolean>(false)
+  const [filterSoup, setFilterSoup] = useState<boolean>(false)
+
+  const recipes = initialFavoriteRecipes.filter((recipe) => {
+    if (!filterStapleFood && !filterMainDish && !filterSideDish && !filterSoup) return true
+    // NOTE: OR条件でfilterをかける
+    if (filterStapleFood && recipe.dish === "主食") return true
+    if (filterMainDish && recipe.dish === "主菜") return true
+    if (filterSideDish && recipe.dish === "副菜") return true
+    if (filterSoup && recipe.dish === "スープ") return true
+    return false
+  })
 
   // NOTE: コードの再利用性は悪いが、こうするしかなかった…
   useEffect(() => {
@@ -110,15 +124,47 @@ export const Favorite = () => {
           <button className={styles.sort_button}>新しい順に並び替える</button>
         </div>
         <div className={styles.dish_buttons}>
-          <button className={styles.dish_button}>主食</button>
-          <button className={styles.dish_button}>主菜</button>
-          <button className={styles.dish_button}>副菜</button>
-          <button className={styles.dish_button}>スープ</button>
+          <div key="主食">
+            <input
+              type="checkbox"
+              className={styles.dish_button}
+              onChange={() => setFilterStapleFood((f) => !f)}
+              checked={filterStapleFood}
+            />
+            <label htmlFor="主食">主食</label>
+          </div>
+          <div key="主菜">
+            <input
+              type="checkbox"
+              className={styles.dish_button}
+              onChange={() => setFilterMainDish((f) => !f)}
+              checked={filterMainDish}
+            />
+            <label htmlFor="主菜">主菜</label>
+          </div>
+          <div key="副菜">
+            <input
+              type="checkbox"
+              className={styles.dish_button}
+              onChange={() => setFilterSideDish((f) => !f)}
+              checked={filterSideDish}
+            />
+            <label htmlFor="副菜">副菜</label>
+          </div>
+          <div key="スープ">
+            <input
+              type="checkbox"
+              className={styles.dish_button}
+              onChange={() => setFilterSoup((f) => !f)}
+              checked={filterSoup}
+            />
+            <label htmlFor="スープ">スープ</label>
+          </div>
         </div>
       </div>
       <div className={styles.cards}>
-        {initialFavoriteRecipes ? (
-          initialFavoriteRecipes.map((recipe) => (
+        {recipes.length > 0 ? (
+          recipes.map((recipe) => (
             <RecipeCard
               key={recipe.id}
               recipe={recipe}

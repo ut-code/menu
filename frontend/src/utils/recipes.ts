@@ -7,6 +7,7 @@ export type Recipe = {
   keywords: string[]
   sourceUrl: string
   foodImageUrl: string
+  dish: string
 }
 
 export type SearchInfo = {
