@@ -23,15 +23,21 @@ export const Favorite = () => {
   const [filterSideDish, setFilterSideDish] = useState<boolean>(false)
   const [filterSoup, setFilterSoup] = useState<boolean>(false)
 
-  const recipes = initialFavoriteRecipes.filter((recipe) => {
-    if (!filterStapleFood && !filterMainDish && !filterSideDish && !filterSoup) return true
-    // NOTE: OR条件でfilterをかける
-    if (filterStapleFood && recipe.dish === "主食") return true
-    if (filterMainDish && recipe.dish === "主菜") return true
-    if (filterSideDish && recipe.dish === "副菜") return true
-    if (filterSoup && recipe.dish === "スープ") return true
-    return false
-  })
+  const recipes = initialFavoriteRecipes
+    .filter((recipe) => {
+      if (!filterStapleFood && !filterMainDish && !filterSideDish && !filterSoup) return true
+      // NOTE: OR条件でfilterをかける
+      if (filterStapleFood && recipe.dish === "主食") return true
+      if (filterMainDish && recipe.dish === "主菜") return true
+      if (filterSideDish && recipe.dish === "副菜") return true
+      if (filterSoup && recipe.dish === "スープ") return true
+      return false
+    })
+    .sort((a, b) => {
+      if (a.createdAt > b.createdAt) return -1
+      if (a.createdAt < b.createdAt) return 1
+      return 0
+    })
 
   // NOTE: コードの再利用性は悪いが、こうするしかなかった…
   useEffect(() => {
@@ -120,9 +126,10 @@ export const Favorite = () => {
 
       <h2 style={{ margin: "20px 0" }}>お気に入り</h2>
       <div className={styles.buttons}>
-        <div className={styles.sort_buttons}>
+        {/* NOTE: 仕様が確定するまで隠す */}
+        {/* <div className={styles.sort_buttons}>
           <button className={styles.sort_button}>新しい順に並び替える</button>
-        </div>
+        </div> */}
         <div className={styles.dish_buttons}>
           <div key="主食">
             <input
