@@ -38,6 +38,10 @@
   color: var(--Black);
 }
 
+.dish_buttons input {
+  display: none;
+}
+
 .dish_buttons {
   display: flex;
   justify-content: flex-start;
@@ -61,4 +65,10 @@
   font-weight: bold;
   font-size: 12px;
   color: var(--Black);
+}
+
+.dish_button:has(input[type="checkbox"]:checked) {
+  /* box */
+  background-color: var(--Brown);
+  color: white;
 }

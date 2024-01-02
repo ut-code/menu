@@ -131,40 +131,25 @@ export const Favorite = () => {
           <button className={styles.sort_button}>新しい順に並び替える</button>
         </div> */}
         <div className={styles.dish_buttons}>
-          <div key="主食">
+          <div key="主食" className={styles.dish_button}>
             <input
               type="checkbox"
-              className={styles.dish_button}
+              id="主食"
               onChange={() => setFilterStapleFood((f) => !f)}
               checked={filterStapleFood}
             />
             <label htmlFor="主食">主食</label>
           </div>
-          <div key="主菜">
-            <input
-              type="checkbox"
-              className={styles.dish_button}
-              onChange={() => setFilterMainDish((f) => !f)}
-              checked={filterMainDish}
-            />
+          <div key="主菜" className={styles.dish_button}>
+            <input type="checkbox" id="主菜" onChange={() => setFilterMainDish((f) => !f)} checked={filterMainDish} />
             <label htmlFor="主菜">主菜</label>
           </div>
-          <div key="副菜">
-            <input
-              type="checkbox"
-              className={styles.dish_button}
-              onChange={() => setFilterSideDish((f) => !f)}
-              checked={filterSideDish}
-            />
+          <div key="副菜" className={styles.dish_button}>
+            <input type="checkbox" id="副菜" onChange={() => setFilterSideDish((f) => !f)} checked={filterSideDish} />
             <label htmlFor="副菜">副菜</label>
           </div>
-          <div key="スープ">
-            <input
-              type="checkbox"
-              className={styles.dish_button}
-              onChange={() => setFilterSoup((f) => !f)}
-              checked={filterSoup}
-            />
+          <div key="スープ" className={styles.dish_button}>
+            <input type="checkbox" id="スープ" onChange={() => setFilterSoup((f) => !f)} checked={filterSoup} />
             <label htmlFor="スープ">スープ</label>
           </div>
         </div>
