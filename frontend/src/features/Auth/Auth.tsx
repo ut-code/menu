@@ -5,6 +5,7 @@ import { supabase } from "./supabaseClient"
 import { BorderButton } from "@/components/elements/button/BorderButton"
 import { Head } from "@/components/Head"
 import { Hamburger } from "@/components/Hamburger"
+import { Loading } from "@/components/Loading"
 import styles from "./Auth.module.css"
 
 interface Props {
@@ -28,12 +29,12 @@ export const Auth = ({ inputUsername, setInputUsername }: Props) => {
     setLoading(true)
     const { error } = await supabase.auth.signInWithOtp({ email })
 
+    setLoading(false)
     if (error) {
       alert(error.message)
     } else {
       alert("Check your email for the login link!")
     }
-    setLoading(false)
   }
 
   const onClickLoginWithGoogle = async () => {
@@ -47,16 +48,17 @@ export const Auth = ({ inputUsername, setInputUsername }: Props) => {
         },
       },
     })
+    setLoading(false)
     if (error) {
       alert(error.message)
     }
-    setLoading(false)
   }
 
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
   if (isOpenHamburger) return <Hamburger onClickCloseHamburger={onClickCloseHamburger} />
+  if (loading) return <Loading />
   return (
     <div className="style_lightbrown">
       {hasAccount ? (
