@@ -162,7 +162,6 @@ export const Favorite = () => {
               recipe={recipe}
               favoriteRecipes={favoriteRecipes}
               toggleFavorite={toggleFavorite}
-              session={session}
             />
           ))
         ) : (

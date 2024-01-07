@@ -116,7 +116,6 @@ export const Seasonal = () => {
               recipe={recipe}
               favoriteRecipes={favoriteRecipes}
               toggleFavorite={toggleFavorite}
-              session={session}
             />
           ))}
       </div>

@@ -171,7 +171,6 @@ export const Result = () => {
                 recipe={recipe}
                 favoriteRecipes={favoriteRecipes}
                 toggleFavorite={toggleFavorite}
-                session={session}
               />
             ))}
           <div className={styles.spacer} />

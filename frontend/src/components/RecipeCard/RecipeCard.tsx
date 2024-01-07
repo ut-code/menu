@@ -1,19 +1,21 @@
+import { useContext } from "react"
 import { Link } from "react-router-dom"
-import { Session } from "@supabase/supabase-js"
 
 import { AiFillHeart } from "react-icons/ai"
 import { TipReference } from "@/components/TipReference"
 import { Recipe } from "@/utils/recipes"
+import { UserContext } from "@/utils/context"
 import styles from "./RecipeCard.module.css"
 
 interface Props {
   recipe: Recipe
   favoriteRecipes: Recipe[] | undefined
   toggleFavorite: (recipeId: number) => void
-  session: Session | null
 }
 
-export const RecipeCard = ({ recipe, favoriteRecipes, toggleFavorite, session }: Props) => {
+export const RecipeCard = ({ recipe, favoriteRecipes, toggleFavorite }: Props) => {
+  const { session } = useContext(UserContext)
+
   const materialsConverted = recipe.materials.join("・")
 
   const isFavorited: boolean =
