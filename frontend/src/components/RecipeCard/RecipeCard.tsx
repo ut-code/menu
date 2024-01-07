@@ -16,7 +16,7 @@ interface Props {
 export const RecipeCard = ({ recipe, favoriteRecipes, toggleFavorite, session }: Props) => {
   const materialsConverted = recipe.materials.join("・")
 
-  const isFavorite: boolean =
+  const isFavorited: boolean =
     favoriteRecipes !== undefined && favoriteRecipes.some((favoriteRecipe) => favoriteRecipe.id === recipe.id)
 
   const onClickHandler = (recipeId: number, event: React.MouseEvent<HTMLDivElement>) => {
@@ -35,7 +35,7 @@ export const RecipeCard = ({ recipe, favoriteRecipes, toggleFavorite, session }:
             className={styles.icon}
             onClick={(event: React.MouseEvent<HTMLDivElement>) => onClickHandler(recipe.id, event)}
           >
-            <AiFillHeart color={isFavorite ? "red" : "gray"} />
+            <AiFillHeart color={isFavorited ? "red" : "gray"} />
           </div>
         )}
         <div className={styles.hr}>{"_"}</div>
