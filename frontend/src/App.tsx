@@ -17,7 +17,7 @@ import { Setting } from "@/features/Setting"
 import { NotFound } from "@/features/NotFound"
 import { supabase } from "@/features/Auth/supabaseClient"
 
-import "@/components/css/global.css"
+import "./App.css"
 import { Loading } from "./components/Loading"
 
 export default function App() {
