@@ -4,6 +4,7 @@ import { vi } from "vitest"
 import { Session } from "@supabase/supabase-js"
 import { DeleteAccount } from "./DeleteAccount"
 import { supabase } from "../supabaseClient"
+import { UserContext } from "@/utils/context"
 
 beforeAll(() => {
   window.alert = vi.fn()
@@ -11,7 +12,11 @@ beforeAll(() => {
 
 describe("DeleteAccount component", () => {
   it("DeleteAccount component disables button during deletion", () => {
-    const { getByText } = render(<DeleteAccount session={null} />)
+    const { getByText } = render(
+      <UserContext.Provider value={{ user: null, session: null }}>
+        <DeleteAccount />
+      </UserContext.Provider>
+    )
 
     const deleteButton = getByText("Delete Account")
     expect(deleteButton).toBeInTheDocument()
@@ -24,7 +29,11 @@ describe("DeleteAccount component", () => {
 
   it("should handle delete account and show error alerts", async () => {
     const mockSession = { user: { id: "user_id" } } as Session
-    const { getByText } = render(<DeleteAccount session={mockSession} />)
+    const { getByText } = render(
+      <UserContext.Provider value={{ user: null, session: mockSession }}>
+        <DeleteAccount />
+      </UserContext.Provider>
+    )
     const deleteButton = getByText("Delete Account")
 
     vi.mock("../supabaseClient", () => ({

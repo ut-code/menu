@@ -1,17 +1,15 @@
-import { useState } from "react"
-import { Session } from "@supabase/supabase-js"
+import { useState, useContext } from "react"
+
 import { supabase } from "../supabaseClient"
+import { UserContext } from "@/utils/context"
 
-interface Props {
-  session: Session | null
-}
-
-export const DeleteAccount = (props: Props) => {
+export const DeleteAccount = () => {
+  const { session } = useContext(UserContext)
   const [loading, setLoading] = useState(false)
 
   const handleDeleteAccount = async () => {
     setLoading(true)
-    const userId = props.session?.user?.id
+    const userId = session?.user?.id
     if (!userId) return
 
     const [deleteResult, signOutResult] = await Promise.all([

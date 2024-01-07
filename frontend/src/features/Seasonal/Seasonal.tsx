@@ -17,7 +17,7 @@ import styles from "./Seasonal.module.css"
 
 export const Seasonal = () => {
   const queryClient = useQueryClient()
-  const Navigate = useNavigate()
+  const navigate = useNavigate()
   const { session } = useContext(UserContext)
 
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
@@ -103,7 +103,7 @@ export const Seasonal = () => {
     <div className="style_lightbrown">
       <Head
         showBackButton={true}
-        onClickPreviousPage={() => Navigate("/home")}
+        onClickPreviousPage={() => navigate("/home")}
         onClickOpenHamburger={onClickOpenHamburger}
       />
 
@@ -116,7 +116,6 @@ export const Seasonal = () => {
               recipe={recipe}
               favoriteRecipes={favoriteRecipes}
               toggleFavorite={toggleFavorite}
-              session={session}
             />
           ))}
       </div>

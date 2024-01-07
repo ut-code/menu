@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const Auth = ({ inputUsername, setInputUsername }: Props) => {
-  const Navigate = useNavigate()
+  const navigate = useNavigate()
 
   const [loading, setLoading] = useState(false)
   const [hasAccount, setHasAccount] = useState<boolean>(false)
@@ -70,7 +70,7 @@ export const Auth = ({ inputUsername, setInputUsername }: Props) => {
       ) : (
         <Head
           showBackButton={true}
-          onClickPreviousPage={() => Navigate("/home")}
+          onClickPreviousPage={() => navigate("/home")}
           onClickOpenHamburger={onClickOpenHamburger}
         />
       )}

@@ -7,7 +7,7 @@ import { QuestionGenre } from "./components/QuestionGenre"
 import { QuestionCookingTime } from "./components/QuestionCookingTime"
 
 export const Questions = () => {
-  const Navigate = useNavigate()
+  const navigate = useNavigate()
 
   const [questionNumber, setQuestionNumber] = useLocalStorage("questionNumber", 0)
   const [ingredients, setIngredients] = useLocalStorage<string[]>("ingredients", [])
@@ -38,7 +38,7 @@ export const Questions = () => {
         />
       )
     default:
-      Navigate("/search")
+      navigate("/search")
       return null
   }
 }
