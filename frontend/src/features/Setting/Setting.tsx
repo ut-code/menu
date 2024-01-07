@@ -17,7 +17,7 @@ interface Props {
 }
 
 export const Setting = ({ setUser, setInputUsername }: Props) => {
-  const Navigate = useNavigate()
+  const navigate = useNavigate()
   const { user, session } = useContext(UserContext)
 
   // const [email, setEmail] = useState(user?.email || "")
@@ -43,7 +43,7 @@ export const Setting = ({ setUser, setInputUsername }: Props) => {
     <div className="style_lightbrown">
       <Head
         showBackButton={true}
-        onClickPreviousPage={() => Navigate("/home")}
+        onClickPreviousPage={() => navigate("/home")}
         onClickOpenHamburger={onClickOpenHamburger}
       />
 

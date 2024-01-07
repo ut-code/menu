@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredients }: Props) => {
-  const Navigate = useNavigate()
+  const navigate = useNavigate()
   const [inputContent, setInputContent] = useState<string>("")
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
   useEffect(() => {
@@ -56,7 +56,7 @@ export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredi
           だるめしにおまかせ。
         </h1>
         <Searchbox
-          onClickHandler={() => Navigate("/search")}
+          onClickHandler={() => navigate("/search")}
           placeholder={"食材の名前を入力してみましょう"}
           onChange={onChangeSearchbox}
           inputContent={inputContent}

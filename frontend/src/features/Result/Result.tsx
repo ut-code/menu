@@ -20,7 +20,7 @@ import styles from "./Result.module.css"
 import { EmptyResults } from "@/components/EmptyResults"
 
 export const Result = () => {
-  const Navigate = useNavigate()
+  const navigate = useNavigate()
   const { session } = useContext(UserContext)
 
   const [inputContent, setInputContent] = useState<string>("")
@@ -150,7 +150,7 @@ export const Result = () => {
     <div className="style_lightbrown">
       <Head
         showBackButton={true}
-        onClickPreviousPage={() => Navigate("/questions")}
+        onClickPreviousPage={() => navigate("/questions")}
         onClickOpenHamburger={onClickOpenHamburger}
       />
       <div className={styles.searchbox}>
@@ -176,7 +176,7 @@ export const Result = () => {
           <div className={styles.spacer} />
 
           <div className={styles.bottom}>
-            <button className={styles.returnHome} onClick={() => Navigate("/home")}>
+            <button className={styles.returnHome} onClick={() => navigate("/home")}>
               ホームへ戻る
             </button>
           </div>
@@ -189,12 +189,12 @@ export const Result = () => {
               <button
                 className={styles.returnSearch}
                 onClick={() => {
-                  Navigate("/questions")
+                  navigate("/questions")
                 }}
               >
                 もう一度検索する
               </button>
-              <button className={styles.returnHome} onClick={() => Navigate("/home")}>
+              <button className={styles.returnHome} onClick={() => navigate("/home")}>
                 ホームへ戻る
               </button>
             </div>

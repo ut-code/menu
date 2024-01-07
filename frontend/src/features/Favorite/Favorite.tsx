@@ -13,7 +13,7 @@ import styles from "./Favorite.module.css"
 
 export const Favorite = () => {
   const queryClient = useQueryClient()
-  const Navigate = useNavigate()
+  const navigate = useNavigate()
   const { session } = useContext(UserContext)
 
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
@@ -120,7 +120,7 @@ export const Favorite = () => {
     <div className="style_lightbrown">
       <Head
         showBackButton={true}
-        onClickPreviousPage={() => Navigate("/home")}
+        onClickPreviousPage={() => navigate("/home")}
         onClickOpenHamburger={onClickOpenHamburger}
       />
 

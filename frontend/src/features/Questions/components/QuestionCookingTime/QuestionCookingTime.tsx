@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer, keywords }: Props) => {
-  const Navigate = useNavigate()
+  const navigate = useNavigate()
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
 
   const options: Option[] = [
@@ -31,7 +31,7 @@ export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer, keyw
       alert("選択肢を選んでください")
       return
     }
-    Navigate("/search")
+    navigate("/search")
   }
 
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
