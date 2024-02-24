@@ -12,9 +12,4 @@
   box-shadow: var(--Black) 2px 2px 0 0;
   height: 40px;
   width: 100%;
-
-  /* text */
-  font-weight: bold;
-  font-size: 12px;
-  color: var(--Black);
 }

@@ -18,11 +18,6 @@
   /* layout */
   margin-bottom: 0rem;
 
-  /* text */
-  color: var(--Black);
-  font-weight: bold;
-  font-size: 1.2em;
-
   /* underline */
   display: inline-block;
   background: linear-gradient(transparent 70%, var(--Yellow) 0%);
@@ -33,8 +28,8 @@
   margin: 1em 0 1.4em 0;
 
   /* text */
-  color: "var(--Gray)";
-  font-size: 0.85rem;
+  color: var(--Gray);
+  font-size: 14px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis; /* はみ出した文字は「…」で省略 */
