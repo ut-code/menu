@@ -9,6 +9,7 @@ import { Head } from "@/components/Head"
 import { Loading } from "@/components/Loading"
 import { RecipeCard } from "@/components/RecipeCard"
 import { Hamburger } from "@/components/Hamburger"
+import { GoTriangleDown, GoTriangleUp } from "react-icons/go"
 import styles from "./Favorite.module.css"
 
 export const Favorite = () => {
@@ -22,6 +23,7 @@ export const Favorite = () => {
   const [filterMainDish, setFilterMainDish] = useState<boolean>(false)
   const [filterSideDish, setFilterSideDish] = useState<boolean>(false)
   const [filterSoup, setFilterSoup] = useState<boolean>(false)
+  const [isSortNew, setIsSortNew] = useState<boolean>(true)
 
   const recipes = initialFavoriteRecipes
     .filter((recipe) => {
@@ -34,9 +36,15 @@ export const Favorite = () => {
       return false
     })
     .sort((a, b) => {
-      if (a.createdAt > b.createdAt) return -1
-      if (a.createdAt < b.createdAt) return 1
-      return 0
+      if (isSortNew) {
+        if (a.createdAt > b.createdAt) return -1
+        if (a.createdAt < b.createdAt) return 1
+        return 0
+      } else {
+        if (a.createdAt > b.createdAt) return 1
+        if (a.createdAt < b.createdAt) return -1
+        return 0
+      }
     })
 
   // NOTE: コードの再利用性は悪いが、こうするしかなかった…
@@ -77,8 +85,6 @@ export const Favorite = () => {
         body: JSON.stringify({ recipeId: recipeId }),
       })
       if (!response.ok) throw new Error("お気に入りの追加に失敗しました")
-      const userFavorite = await response.json()
-      console.log(userFavorite)
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["favoriteRecipes"])
@@ -94,8 +100,6 @@ export const Favorite = () => {
         headers: { Authorization: `Bearer ${session?.access_token}` },
       })
       if (!response.ok) throw new Error("お気に入りの削除に失敗しました")
-      const userFavorite = await response.json()
-      console.log(userFavorite)
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["favoriteRecipes"])
@@ -110,6 +114,8 @@ export const Favorite = () => {
       onClickAddFavorite.mutate(recipeId)
     }
   }
+
+  const toggleSort = () => setIsSortNew((s) => !s)
 
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
@@ -126,10 +132,12 @@ export const Favorite = () => {
 
       <h2 style={{ margin: "20px 0" }}>お気に入り</h2>
       <div className={styles.buttons}>
-        {/* NOTE: 仕様が確定するまで隠す */}
-        {/* <div className={styles.sort_buttons}>
-          <button className={styles.sort_button}>新しい順に並び替える</button>
-        </div> */}
+        <div className={styles.sort_buttons}>
+          <button className={styles.sort_button} onClick={toggleSort}>
+            {isSortNew ? <h3>新しい順</h3> : <h3>古い順</h3>}
+            {isSortNew ? <GoTriangleDown size="24px" /> : <GoTriangleUp size="24px" />}
+          </button>
+        </div>
         <div className={styles.dish_buttons}>
           <div key="主食" className={styles.dish_button}>
             <input

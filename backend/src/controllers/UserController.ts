@@ -78,8 +78,13 @@ class UserController {
           favoriteRecipe: true,
         },
       })
-      const recipes = favorites.map((favorite) => favorite.favoriteRecipe)
-      res.status(200).json(recipes)
+      const favoriteRecipes = favorites.map((favorite) => {
+        return {
+          ...favorite.favoriteRecipe,
+          createdAt: favorite.createdAt,
+        }
+      })
+      res.status(200).json(favoriteRecipes)
     } catch (error) {
       console.error(error)
       res.status(500).json({ error: "Internal server error" })
