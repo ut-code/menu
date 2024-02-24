@@ -14,6 +14,10 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+app.get("/", (req, res) => {
+  res.send("Hello, world!")
+})
+
 app.post("/api/searchRecipes", SearchController.searchRecipes)
 app.post("/api/searchRecipes/keywords", SearchController.searchRecipesByKeywords)
 
