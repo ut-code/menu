@@ -50,7 +50,7 @@ class SearchController {
           _relevance: {
             fields: ["description"],
             search: keywordsOrQuery,
-            sort: "asc",
+            sort: "desc",
           },
         },
         take: 20,
