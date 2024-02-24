@@ -80,8 +80,6 @@ export const Result = () => {
         body: JSON.stringify({ recipeId: recipeId }),
       })
       if (!response.ok) throw new Error("お気に入りの追加に失敗しました")
-      const userFavorite = await response.json()
-      console.log(userFavorite)
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["favoriteRecipes"])
@@ -97,8 +95,6 @@ export const Result = () => {
         headers: { Authorization: `Bearer ${session?.access_token}` },
       })
       if (!response.ok) throw new Error("お気に入りの取得に失敗しました")
-      const userFavorite = await response.json()
-      console.log(userFavorite)
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["favoriteRecipes"])
