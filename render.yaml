@@ -16,7 +16,7 @@ services:
         destination: /
     envVars:
       - key: VITE_API_ENDPOINT
-        value: https://dull-meshi-backend.onrender.com
+        value: https://dull-meshi-app-backend.onrender.com
   - type: web
     name: dull-meshi-backend
     env: node
@@ -31,7 +31,7 @@ services:
       - key: DATABASE_URL
         sync: false
       - key: WEB_ORIGIN
-        value: https://dull-meshi.onrender.com
+        value: https://dull-meshi-app.onrender.com
       - key: VITE_SUPABASE_URL
         sync: false
       - key: VITE_SUPABASE_ANON_KEY
