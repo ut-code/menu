@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: dull-meshi
+    name: dull-meshi-app
     env: static
     rootDir: frontend
     buildCommand: npm ci && npm run build
@@ -18,7 +18,7 @@ services:
       - key: VITE_API_ENDPOINT
         value: https://dull-meshi-app-backend.onrender.com
   - type: web
-    name: dull-meshi-backend
+    name: dull-meshi-app.backend
     env: node
     region: singapore
     plan: free
