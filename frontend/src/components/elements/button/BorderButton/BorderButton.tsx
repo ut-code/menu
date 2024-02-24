@@ -14,7 +14,7 @@ export const BorderButton = ({ onClick, disabled, isWhite, children }: Props) =>
 
   return (
     <button className={styles.button} onClick={onClick} disabled={disabled} style={buttonStyle}>
-      {children}
+      <h3>{children}</h3>
     </button>
   )
 }

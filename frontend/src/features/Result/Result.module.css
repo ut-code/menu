@@ -36,11 +36,6 @@
   border: var(--Black) 2px solid;
   height: 40px;
   width: 176px;
-
-  /* text */
-  font-weight: bold;
-  font-size: 12px;
-  color: var(--Black);
 }
 
 .returnHome {
@@ -55,11 +50,6 @@
   border: var(--Black) 2px solid;
   height: 40px;
   width: 176px;
-
-  /* text */
-  font-weight: bold;
-  font-size: 12px;
-  color: var(--Black);
 }
 
 .spacer {
