@@ -32,11 +32,18 @@ export const Hamburger = ({ onClickCloseHamburger }: Props) => {
           <BsSearch size="1.2rem" />
           <h2>検索する</h2>
         </Link>
-        <Link to="/home/favorites" className={styles.link}>
-          <BsHeartFill size="1.2rem" />
-          <h2>お気に入り</h2>
-          {!session && <FaLock size="0.9rem" />}
-        </Link>
+        {session ? (
+          <Link to="/home/favorites" className={styles.link}>
+            <BsHeartFill size="1.2rem" />
+            <h2>お気に入り</h2>
+          </Link>
+        ) : (
+          <div className={styles.link}>
+            <BsHeartFill size="1.2rem" />
+            <h2>お気に入り</h2>
+            <FaLock size="0.9rem" />
+          </div>
+        )}
         <Link to="/setting" className={styles.link}>
           <BsGearFill size="1.2rem" />
           <h2>設定</h2>
