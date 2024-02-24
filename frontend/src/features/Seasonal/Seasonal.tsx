@@ -13,6 +13,7 @@ import { Recipe } from "@/utils/recipes"
 import { Head } from "@/components/Head"
 import { RecipeCard } from "@/components/RecipeCard"
 import { Hamburger } from "@/components/Hamburger"
+import { Loading } from "@/components/Loading"
 import styles from "./Seasonal.module.css"
 
 export const Seasonal = () => {
@@ -28,7 +29,7 @@ export const Seasonal = () => {
       const response = await fetch(postSearchRecipesKeywordsApi(), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ keywords: "夏" }),
+        body: JSON.stringify({ keywords: "冬" }),
       })
       if (!response.ok) throw new Error("レシピの取得に失敗しました")
       const recipes: Recipe[] = await response.json()
@@ -97,7 +98,7 @@ export const Seasonal = () => {
   const onClickOpenHamburger = () => setIsOpenHamburger(true)
   const onClickCloseHamburger = () => setIsOpenHamburger(false)
 
-  if (isLoadingSeasonalRecipes || isLoadingFavoriteRecipes) return <p>レシピを読み込み中</p>
+  if (isLoadingSeasonalRecipes || isLoadingFavoriteRecipes) return <Loading />
   if (isOpenHamburger) return <Hamburger onClickCloseHamburger={onClickCloseHamburger} />
   return (
     <div className="style_lightbrown">
