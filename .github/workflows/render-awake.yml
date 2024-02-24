@@ -16,5 +16,5 @@ jobs:
         shell: bash
 
       - name: Access to Render
-        run: curl --silent --show-error https://dull-meshi-backend.onrender.com/
+        run: curl --silent --show-error https://dull-meshi-app-backend.onrender.com/
         shell: bash
