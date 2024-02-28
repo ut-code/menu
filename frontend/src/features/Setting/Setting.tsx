@@ -103,6 +103,10 @@ export const Setting = ({ setUser, setInputUsername }: Props) => {
           </div>
         </div>
       </Link>
+
+      <a href="http://www.goo.ne.jp/">
+        <img src="//u.xgoo.jp/img/sgoo.png" alt="supported by goo" title="supported by goo" width={"80%"} />
+      </a>
     </div>
   )
 }

@@ -5,11 +5,13 @@ import { Request, Response } from "express"
 // NOTE: https://github.com/Microsoft/TypeScript/wiki/'this'-in-TypeScript#use-instance-functions
 // メンバ関数にはアロー関数を使っておくと this が undefined にならずに済む
 class SearchController {
+  private static GOO_API_KEY = process.env.VITE_GOO_API_KEY ?? ""
+
   searchRecipes = async (req: Request, res: Response): Promise<void> => {
     try {
       const { searchInfo } = req.body
 
-      const ingredientsAndQuery = this.joinIngredients(searchInfo.ingredients)
+      const ingredientsAndQuery = await this.joinIngredients(searchInfo.ingredients)
       const cookingTimeQuery = this.getCookingTimeQuery(searchInfo.cookingTime)
 
       const { orderBy, orderDir } = this.getRandomOrder()
@@ -41,7 +43,6 @@ class SearchController {
 
   searchRecipesByKeywords = async (req: Request, res: Response): Promise<void> => {
     try {
-      // FIXME: 関連性のある結果が全く得られない
       const { keywords } = req.body
       const keywordsOrQuery = this.joinKeywords(keywords)
 
@@ -62,8 +63,47 @@ class SearchController {
     }
   }
 
-  private joinIngredients = (ingredients: string[]): string => {
-    return ingredients.join(" & ")
+  private convertToKatakana = async (sentence: string): Promise<void> => {
+    try {
+      const response = await fetch("https://labs.goo.ne.jp/api/hiragana", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          app_id: SearchController.GOO_API_KEY,
+          sentence: sentence,
+          output_type: "katakana",
+        }),
+      })
+
+      if (!response.ok) {
+        const error = await response.json()
+        return Promise.reject(error)
+      }
+
+      const data = await response.json()
+      return data.converted
+    } catch (error) {
+      console.error(error)
+      return Promise.reject(error)
+    }
+  }
+
+  private joinIngredients = async (ingredients: string[]): Promise<string> => {
+    try {
+      const katakanaIngredientsPromises = ingredients.map(async (ingredient) => {
+        // NOTE: this.convertToKatakanaが成功したらその結果を、失敗したら元の文字列を使う
+        return await this.convertToKatakana(ingredient).catch(() => ingredient)
+      })
+
+      const katakanaIngredients = await Promise.all(katakanaIngredientsPromises)
+      console.log(katakanaIngredients)
+      return katakanaIngredients.join(" & ")
+    } catch (error) {
+      console.error(error)
+      return ingredients.join(" & ")
+    }
   }
 
   private getCookingTimeQuery = (cookingTime: string): Record<string, number> => {
