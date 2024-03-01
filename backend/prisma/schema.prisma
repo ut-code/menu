@@ -30,6 +30,7 @@ model Recipes {
   dish               String?
 
   favorites UserFavorites[]
+  recipeMaterialsSearch RecipeMaterialsSearch[]
 }
 
 model RecipesBackup {
@@ -42,6 +43,14 @@ model RecipesBackup {
   keywords           String[]
   sourceUrl          String   @unique
   foodImageUrl       String
+}
+
+model RecipeMaterialsSearch {
+  id       Int    @id @default(autoincrement())
+  material String @unique
+  recipeId Int
+  
+  recipe   Recipes @relation(fields: [recipeId], references: [id])
 }
 
 model Urls {
