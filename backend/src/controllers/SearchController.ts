@@ -11,7 +11,9 @@ class SearchController {
     try {
       const { searchInfo } = req.body
 
-      const ingredientsAndQuery = await this.joinIngredients(searchInfo.ingredients)
+      // NOTE: revert this
+      // const ingredientsAndQuery = await this.joinIngredients(searchInfo.ingredients)
+      const ingredientsAndQuery = searchInfo.ingredients.join(" & ")
       const cookingTimeQuery = this.getCookingTimeQuery(searchInfo.cookingTime)
 
       const { orderBy, orderDir } = this.getRandomOrder()
