@@ -14,6 +14,7 @@ import { Auth } from "@/features/Auth"
 import { Favorite } from "@/features/Favorite"
 import { Seasonal } from "@/features/Seasonal"
 import { Setting } from "@/features/Setting"
+import { NewRecipes } from "@/features/NewRecipes"
 import { NotFound } from "@/features/NotFound"
 import { supabase } from "@/features/Auth/supabaseClient"
 
@@ -85,6 +86,7 @@ export default function App() {
             )
           }
         />
+        <Route path="/new" element={<NewRecipes />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </UserContext.Provider>

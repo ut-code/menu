@@ -48,6 +48,10 @@ export const Hamburger = ({ onClickCloseHamburger }: Props) => {
           <BsGearFill size="1.2rem" />
           <h2>設定</h2>
         </Link>
+        <Link to="/new" className={styles.link}>
+          <BsGearFill size="1.2rem" />
+          <h2>新しいレシピ</h2>
+        </Link>
       </div>
 
       <div className={styles.signin}>

@@ -2,6 +2,7 @@ import express from "express"
 import cors from "cors"
 import UserController from "./controllers/UserController"
 import SearchController from "./controllers/SearchController"
+import RecipeController from "./controllers/RecipeController"
 
 const app = express()
 
@@ -26,5 +27,8 @@ app.post("/api/users/favorites", UserController.addFavorite)
 app.delete("/api/users/favorites/:id", UserController.deleteFavorite)
 app.get("/api/users", UserController.getUser)
 app.put("/api/users/username", UserController.updateUsername)
+
+app.post("/api/recipes/new", RecipeController.createRecipe)
+app.post("/api/recipes/scrape", RecipeController.scrapeRecipe)
 
 export default app

@@ -3,3 +3,7 @@
 /dist
 __pycache__/
 selenium.ipynb
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
