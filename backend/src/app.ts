@@ -29,5 +29,6 @@ app.get("/api/users", UserController.getUser)
 app.put("/api/users/username", UserController.updateUsername)
 
 app.post("/api/recipes/new", RecipeController.createRecipe)
+app.post("/api/recipes/scrape", RecipeController.scrapeRecipe)
 
 export default app

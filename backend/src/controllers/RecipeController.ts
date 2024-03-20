@@ -1,4 +1,5 @@
 import { client } from "../db.server"
+import { chromium } from "playwright"
 import { Request, Response } from "express"
 import { extractUserFromRequest } from "../utils/UserUtil"
 import type { Recipes } from "@prisma/client"
@@ -67,6 +68,60 @@ class RecipeController {
     }
   }
 
+  scrapeRecipe = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const userFromRequest = await extractUserFromRequest(req)
+      if (!userFromRequest) {
+        // res.status(401).json({ error: "Not authorized" })
+        // return
+        console.log("Not authorized")
+      }
+
+      const { sourceUrl } = req.body
+
+      console.log("started")
+      const browser = await chromium.launch()
+      const context = await browser.newContext()
+      const page = await context.newPage()
+      // Ref) https://playwright.dev/docs/api/class-page#page-goto
+      await page.goto(sourceUrl, { waitUntil: "domcontentloaded" })
+
+      const recipeData = await page.evaluate(() => {
+        const scriptTag = document.querySelector("script[type='application/ld+json']")
+        if (!scriptTag) {
+          return null
+        }
+        const recipeJson = JSON.parse(scriptTag.innerHTML)
+        if (recipeJson["@type"] !== "Recipe") {
+          return null
+        }
+        return recipeJson
+      })
+
+      await browser.close()
+
+      console.log(recipeData)
+      if (!recipeData) {
+        res.status(400).json({ error: "Could not find structured recipe data" })
+        return
+      }
+      const recipeResponse = {
+        title: recipeData.name,
+        description: recipeData.description,
+        totalCookingTime: recipeData.totalTime,
+        materials: recipeData.recipeIngredient,
+        keywords: this.convertKeywords(recipeData.keywords),
+        sourceUrl: sourceUrl,
+        foodImageUrl: recipeData.image[0],
+        dish: recipeData.recipeCategory,
+      }
+      res.status(200).json(recipeResponse)
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ error: "Internal server error" })
+    }
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private isRecipe = (data: any): data is Recipes => {
     // Ref) https://typescriptbook.jp/reference/functions/type-guard-functions
@@ -85,6 +140,10 @@ class RecipeController {
 
   private convertMaterials = (materials: string[]): string => {
     return materials.join(",")
+  }
+
+  private convertKeywords = (keywords: string): string[] => {
+    return keywords.split(",").map((keyword) => keyword.trim())
   }
 }
 
