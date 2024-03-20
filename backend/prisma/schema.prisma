@@ -29,9 +29,9 @@ model Recipes {
   foodImageUrl       String
   dish               String?
 
-  favorites UserFavorites[]
+  favorites             UserFavorites[]
   recipeMaterialsSearch RecipeMaterialsSearch[]
-  submissions RecipeSubmissions[]
+  submissions           RecipeSubmissions[]
 }
 
 model RecipesBackup {
@@ -50,8 +50,8 @@ model RecipeMaterialsSearch {
   id       Int    @id @default(autoincrement())
   material String @unique
   recipeId Int
-  
-  recipe   Recipes @relation(fields: [recipeId], references: [id])
+
+  recipe Recipes @relation(fields: [recipeId], references: [id])
 }
 
 model Urls {
@@ -66,7 +66,7 @@ model Users {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  favorites UserFavorites[]
+  favorites   UserFavorites[]
   submissions RecipeSubmissions[]
 }
 
