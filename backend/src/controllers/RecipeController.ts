@@ -15,8 +15,8 @@ class RecipeController {
         return
       }
 
-      const { title, description, totalCookingTime, materials, sourceUrl, foodImageUrl, dish } = req.body
-      const materialsConverted = this.convertMaterials(materials)
+      const { title, description, totalCookingTime, materials, materialsConverted, sourceUrl, foodImageUrl, dish } =
+        req.body
       if (
         !this.isRecipe({
           title,
@@ -40,6 +40,7 @@ class RecipeController {
           totalCookingTime: totalCookingTime,
           materials: materials,
           materialsConverted: materialsConverted,
+          keywords: [],
           sourceUrl: sourceUrl,
           foodImageUrl: foodImageUrl,
           dish: dish,
@@ -79,7 +80,6 @@ class RecipeController {
 
       const { sourceUrl } = req.body
 
-      console.log("started")
       const browser = await chromium.launch()
       const context = await browser.newContext()
       const page = await context.newPage()
@@ -100,7 +100,7 @@ class RecipeController {
 
       await browser.close()
 
-      console.log(recipeData)
+      // console.log(recipeData)
       if (!recipeData) {
         res.status(400).json({ error: "Could not find structured recipe data" })
         return
@@ -131,15 +131,11 @@ class RecipeController {
       typeof data.totalCookingTime === "number" &&
       Array.isArray(data.materials) &&
       typeof data.materialsConverted === "string" &&
-      Array.isArray(data.keywords) &&
+      // Array.isArray(data.keywords) &&
       typeof data.sourceUrl === "string" &&
       typeof data.foodImageUrl === "string" &&
       (typeof data.dish === "string" || data.dish === undefined)
     )
-  }
-
-  private convertMaterials = (materials: string[]): string => {
-    return materials.join(",")
   }
 
   private convertKeywords = (keywords: string): string[] => {
@@ -147,6 +143,9 @@ class RecipeController {
   }
 
   private convertTotalCookingTimeToMinutes = (totalTime: string): number => {
+    if (!totalTime || totalTime.length < 2) {
+      return -1
+    }
     const time = totalTime.substring(2)
     let minutes = 0
     const hoursMatch = time.match(/(\d+)H/)

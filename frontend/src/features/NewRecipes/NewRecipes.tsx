@@ -1,4 +1,5 @@
 import { useState, useContext } from "react"
+import { Link } from "react-router-dom"
 
 import { postSubmitRecipeApi, postScrapeRecipeApi } from "@/utils/apiUtils"
 import { UserContext } from "@/utils/context"
@@ -61,7 +62,13 @@ export const NewRecipes = () => {
     })
     if (!response.ok) throw new Error("レシピの投稿に失敗しました")
     alert("レシピを投稿しました")
-    return
+    setTitle("")
+    setDescription("")
+    setTotalCookingTime(-1)
+    setMaterialsConverted("")
+    setSourceUrl("")
+    setFoodImageUrl("")
+    setDish("")
   }
 
   // 「お気に入りにいれる」にデフォルトでチェックを入れる
@@ -69,41 +76,42 @@ export const NewRecipes = () => {
   if (!session?.access_token) return <p>ログインしていません</p>
   return (
     <>
-      <h1>NewRecipes</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="sourceUrl">URL</label>
-        <input type="text" value={sourceUrl} onChange={(e) => setSourceUrl(e.target.value)} />
-        <button type="button" onClick={handleScrape}>
-          自動スクレイピング
-        </button>
-        <br />
-        <label htmlFor="title">タイトル</label>
-        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-        <br />
-        <label htmlFor="description">説明</label>
-        <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
-        <br />
-        <label htmlFor="cookingTime">調理時間</label>
-        <input type="number" value={totalCookingTime} onChange={(e) => setTotalCookingTime(Number(e.target.value))} />
-        <br />
-        <label htmlFor="materials">材料</label>
-        <input type="text" value={materialsConverted} onChange={(e) => setMaterialsConverted(e.target.value)} />
-        <br />
-        <label htmlFor="foodImageUrl">料理画像URL</label>
-        <input type="text" value={foodImageUrl} onChange={(e) => setFoodImageUrl(e.target.value)} />
-        <br />
-        <img src={foodImageUrl} alt="料理画像" />
-        <br />
-        <label htmlFor="dish">料理の種類</label>
-        <select value={dish} onChange={(e) => setDish(e.target.value)}>
-          <option value="主食">主食</option>
-          <option value="主菜">主菜</option>
-          <option value="副菜">副菜</option>
-          <option value="スープ">スープ</option>
-        </select>
-        <br />
-        <button type="submit">投稿</button>
-      </form>
+      <h1>レシピ投稿機能</h1>
+
+      <label htmlFor="sourceUrl">URL</label>
+      <input type="text" value={sourceUrl} onChange={(e) => setSourceUrl(e.target.value)} />
+      <button type="button" onClick={handleScrape}>
+        自動スクレイピング
+      </button>
+      <br />
+      <label htmlFor="title">タイトル</label>
+      <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+      <br />
+      <label htmlFor="description">説明</label>
+      <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
+      <br />
+      <label htmlFor="cookingTime">調理時間</label>
+      <input type="number" value={totalCookingTime} onChange={(e) => setTotalCookingTime(Number(e.target.value))} />
+      <br />
+      <label htmlFor="materials">材料</label>
+      <input type="text" value={materialsConverted} onChange={(e) => setMaterialsConverted(e.target.value)} />
+      <br />
+      <label htmlFor="foodImageUrl">料理画像URL</label>
+      <input type="text" value={foodImageUrl} onChange={(e) => setFoodImageUrl(e.target.value)} />
+      <br />
+      <label htmlFor="dish">料理の種類</label>
+      <select value={dish} onChange={(e) => setDish(e.target.value)}>
+        <option value="主食">主食</option>
+        <option value="主菜">主菜</option>
+        <option value="副菜">副菜</option>
+        <option value="スープ">スープ</option>
+      </select>
+      <br />
+      <img src={foodImageUrl} alt="料理画像" />
+      <br />
+      <button onClick={handleSubmit}>投稿</button>
+
+      <Link to="/">ホームに戻る</Link>
     </>
   )
 }
