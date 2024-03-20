@@ -108,7 +108,7 @@ class RecipeController {
       const recipeResponse = {
         title: recipeData.name,
         description: recipeData.description,
-        totalCookingTime: recipeData.totalTime,
+        totalCookingTime: this.convertTotalCookingTimeToMinutes(recipeData.totalTime),
         materials: recipeData.recipeIngredient,
         keywords: this.convertKeywords(recipeData.keywords),
         sourceUrl: sourceUrl,
@@ -144,6 +144,20 @@ class RecipeController {
 
   private convertKeywords = (keywords: string): string[] => {
     return keywords.split(",").map((keyword) => keyword.trim())
+  }
+
+  private convertTotalCookingTimeToMinutes = (totalTime: string): number => {
+    const time = totalTime.substring(2)
+    let minutes = 0
+    const hoursMatch = time.match(/(\d+)H/)
+    if (hoursMatch) {
+      minutes += parseInt(hoursMatch[1]) * 60
+    }
+    const minutesMatch = time.match(/(\d+)M/)
+    if (minutesMatch) {
+      minutes += parseInt(minutesMatch[1])
+    }
+    return minutes
   }
 }
 

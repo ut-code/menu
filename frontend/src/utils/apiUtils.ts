@@ -28,6 +28,10 @@ export const getUserApi = (): string => {
   return `${API_BASE_URL}/api/users`
 }
 
-export const postRecipeApi = (): string => {
+export const postSubmitRecipeApi = (): string => {
   return `${API_BASE_URL}/api/recipes/new`
+}
+
+export const postScrapeRecipeApi = (): string => {
+  return `${API_BASE_URL}/api/recipes/scrape`
 }
