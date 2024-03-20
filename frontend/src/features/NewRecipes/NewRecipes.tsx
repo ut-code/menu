@@ -1,5 +1,6 @@
 import { useState, useContext } from "react"
 
+import { postRecipeApi } from "@/utils/apiUtils"
 import { UserContext } from "@/utils/context"
 
 export const NewRecipes = () => {
@@ -12,7 +13,28 @@ export const NewRecipes = () => {
   const [foodImageUrl, setFoodImageUrl] = useState<string>("")
   const [dish, setDish] = useState<string>("")
 
-  const handleSubmit = () => {}
+  const handleSubmit = async () => {
+    if (!session?.access_token) return
+    const response = await fetch(postRecipeApi(), {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${session?.access_token}`,
+      },
+      body: JSON.stringify({
+        title: title,
+        description: description,
+        totalCookingTime: cookingTime,
+        materials: ingredients,
+        sourceUrl: sourceUrl,
+        foodImageUrl: foodImageUrl,
+        dish: dish,
+      }),
+    })
+    if (!response.ok) throw new Error("レシピの投稿に失敗しました")
+    alert("レシピを投稿しました")
+    return
+  }
 
   // 「お気に入りにいれる」にデフォルトでチェックを入れる
 

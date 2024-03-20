@@ -27,3 +27,7 @@ export const updateUsernameApi = (): string => {
 export const getUserApi = (): string => {
   return `${API_BASE_URL}/api/users`
 }
+
+export const postRecipeApi = (): string => {
+  return `${API_BASE_URL}/api/recipes/new`
+}
