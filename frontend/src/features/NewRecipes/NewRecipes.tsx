@@ -21,20 +21,32 @@ export const NewRecipes = () => {
     <>
       <h1>NewRecipes</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="title">タイトル</label>
-        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-        <label htmlFor="description">説明</label>
-        <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
-        <label htmlFor="cookingTime">調理時間</label>
-        <input type="number" value={cookingTime} onChange={(e) => setTotalCookingTime(e.target.value)} />
-        <label htmlFor="ingredients">材料</label>
-        <input type="text" value={ingredients} onChange={(e) => setIngredients(e.target.value)} />
         <label htmlFor="sourceUrl">URL</label>
         <input type="text" value={sourceUrl} onChange={(e) => setSourceUrl(e.target.value)} />
+        <br />
+        <label htmlFor="title">タイトル</label>
+        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+        <br />
+        <label htmlFor="description">説明</label>
+        <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
+        <br />
+        <label htmlFor="cookingTime">調理時間</label>
+        <input type="number" value={cookingTime} onChange={(e) => setTotalCookingTime(e.target.value)} />
+        <br />
+        <label htmlFor="ingredients">材料</label>
+        <input type="text" value={ingredients} onChange={(e) => setIngredients(e.target.value)} />
+        <br />
         <label htmlFor="foodImageUrl">料理画像URL</label>
         <input type="text" value={foodImageUrl} onChange={(e) => setFoodImageUrl(e.target.value)} />
+        <br />
         <label htmlFor="dish">料理の種類</label>
-        <input type="text" value={dish} onChange={(e) => setDish(e.target.value)} />
+        <select value={dish} onChange={(e) => setDish(e.target.value)}>
+          <option value="主食">主食</option>
+          <option value="主菜">主菜</option>
+          <option value="副菜">副菜</option>
+          <option value="スープ">スープ</option>
+        </select>
+        <br />
         <button type="submit">投稿</button>
       </form>
     </>
