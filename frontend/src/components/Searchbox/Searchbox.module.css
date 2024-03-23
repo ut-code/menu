@@ -1,41 +1,21 @@
-.search {
-  display: flex;
-  margin: 1.2em -0.8em;
-}
-
 .box {
-  /* layout */
-  flex-grow: 1;
-  padding: 0.7em 1.3em;
-  margin-left: 1em;
+  display: flex;
+  width: 100%; /* わかりません */
+  height: 52px; /* わかりません */
+  padding: 0px 16px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
 
-  /* box */
-  background-color: white;
-  border-radius: 50em;
-  /* make a circle border */
-  border: var(--Black) 2px solid;
-  box-shadow: var(--Black) 2px 2px 0 0;
-  height: 1.8em;
-
-  /* text */
-  font-size: 12px;
-  font-weight: medium;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  /* はみ出した文字は「…」で省略 */
-  color: var(--Gray);
+  border-radius: 40px;
+  border: 2px solid #000;
+  background: #fff;
 }
 
-input[type="text"]:focus.box {
-  border: var(--Green) 2px solid;
-  box-shadow: var(--Green) 2px 2px 0 0;
-  outline: 0;
-}
-
-.icon {
-  position: relative;
-  top: 0.75em;
-  right: 2em;
-  color: var(--Black) !important;
+.root {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
 }

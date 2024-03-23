@@ -1,0 +1,12 @@
+.infobox {
+  display: flex;
+  width: calc(100% - 35px); /* わかりません */
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+
+  border-radius: 8px;
+  border: 1px solid #c4c4c4;
+  background: #fff;
+}

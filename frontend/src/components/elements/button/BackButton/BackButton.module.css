@@ -1,10 +1,21 @@
 .button {
-  /* icon */
-  padding: 0.5em;
-  display: flex; /* アイコン内を上下中央揃え */
+  display: inline-flex;
+  padding: 4px;
+  align-items: flex-start;
+  gap: 10px;
+}
 
-  /* circle */
-  background-color: var(--Green);
-  border-radius: 50%;
-  border: solid 1.5px var(--Black);
+.button2 {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  padding: 3px 2px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 100px;
+  background: #f5f5f5;
+  color: #000;
 }

@@ -7,96 +7,78 @@ CSS変数代入について
 var(--変数名)で使える
 ----------------------------------------------------------------*/
 :root {
-  --Red: #e95122;
-  --Yellow: #f5b72e;
-  --Green: #517e55;
-  --Brown: #b29476;
-  --LightBrown: #f1ece6;
-  --Gray: #7e7e7e;
-  --LightGray: #d9d9d9;
-  --Black: #1c1c1c;
-
   --Font: "Noto Sans JP", sans-serif;
 }
 
-/* タイポグラフィ */
+/*タイポグラフィ*/
 h1 {
-  margin: 0;
-  font-size: 24px;
-  font-weight: bold;
-  font-family: var(--Font);
+  color: #000;
+  font-family: "Noto Sans JP";
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.96px;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
+
 h2 {
-  margin: 0;
-  font-size: 20px;
-  font-weight: bold;
-  font-family: var(--Font);
+  color: #000;
+  font-family: "Noto Sans JP";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.72px;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
+
 h3 {
-  margin: 0;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: var(--Font);
+  color: #000;
+  font-family: "Noto Sans JP";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.6px;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
-p {
-  margin: 0;
-  font-size: 12px;
-  font-weight: normal;
-  font-family: var(--Font);
+
+h4 {
+  color: #000;
+  font-family: "Noto Sans JP";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.42px;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
-.small {
+
+h5 {
+  color: #000;
+  font-family: "Noto Sans JP";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.36px;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+h6 {
+  color: #000;
+  font-family: "Noto Sans JP";
   font-size: 10px;
-  font-family: var(--Font);
-}
-.caption {
-  font-size: 6px;
-  font-family: var(--Font);
-}
-
-html {
-  /* text */
-  font-family: var(--Font);
-  color: var(--Black);
-  background-color: var(--LightBrown);
-}
-
-a {
-  /* a href / Link の文字が変な色にならないようにする */
-  text-decoration: none;
-  color: var(--Black);
-  font-family: var(--Font);
-}
-
-body {
-  height: 100vh;
-  font-family: var(--Font);
-}
-
-.style_lightbrown {
-  /* layout */
-  padding: 1.5em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  /* transition */
-  animation: fadeIn 1s;
-  animation-fill-mode: forwards;
-}
-.greenBack {
-  padding: 1em 1.5em 1.75em 1.5em;
-  background-color: var(--Green);
-  color: white;
-  border-radius: 0px 0px 18px 18px;
-}
-.greenBack svg {
-  color: white;
-}
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.3px;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }

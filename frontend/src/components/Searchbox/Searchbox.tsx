@@ -1,5 +1,4 @@
 import styles from "./Searchbox.module.css"
-import { FiSearch } from "react-icons/fi"
 
 interface Props {
   onClickHandler: () => void
@@ -8,11 +7,10 @@ interface Props {
   placeholder: string
 }
 
-export const Searchbox = ({ onClickHandler, onChange, inputContent, placeholder }: Props) => {
+export const Searchbox = ({ onChange, inputContent, placeholder }: Props) => {
   return (
-    <div className={styles.search}>
+    <div className={styles.root}>
       <input className={styles.box} type="text" placeholder={placeholder} value={inputContent} onChange={onChange} />
-      <FiSearch className={styles.icon} onClick={onClickHandler} />
     </div>
   )
 }
