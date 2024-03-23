@@ -1,4 +1,5 @@
-// import { Searchbox } from "@/components/Searchbox"
+//import { useNavigate } from "react-router-dom"
+//import { Searchbox } from "@/components/Searchbox"
 import { BackButton } from "@/components/elements/button/BackButton"
 import { NextButton } from "@/components/elements/button/NextButton"
 import { Option } from "@/utils/questions"
@@ -26,7 +27,12 @@ export const QuestionGenre = ({ setQuestionNumber, answer, setAnswer }: Props) =
     <div style={{ padding: 16 }}>
       <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
         <BackButton onClick={() => setQuestionNumber(0)} />
-        {/* <Searchbox /> */}
+        {/* <Searchbox 
+          onClickHandler={() => navigate("/search")}
+          placeholder={"例: 卵 トマト じゃがいも"}
+          onChange={onChangeSearchbox}
+          inputContent={inputContent}
+        /> */}
       </div>
       <div
         style={{

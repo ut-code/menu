@@ -9,8 +9,8 @@ interface Props {
 
 export const Searchbox = ({ onChange, inputContent, placeholder }: Props) => {
   return (
-    <div className={styles.root}>
-      <input className={styles.box} type="text" placeholder={placeholder} value={inputContent} onChange={onChange} />
+    <div>
+      <input className={styles.input} type="text" placeholder={placeholder} value={inputContent} onChange={onChange} />
     </div>
   )
 }
