@@ -1,14 +1,9 @@
 import styles from "./RadioButtonCard.module.css"
-
-interface Option {
-  value: string // 仮に value が string 型であると仮定
-  label: string // 仮に label が string 型であると仮定
-  description: string // 仮に description が string 型であると仮定
-}
+import { Option } from "@/utils/questions"
 
 interface Props {
   options: Option[] // Option 型の配列
-  selectedOption: string // 選択されたオプションの value を表す文字列
+  selectedOption: string | undefined // 選択されたオプションの value を表す文字列
   handleChange: (option: string) => void // オプションの value を引数として受け取るコールバック関数
 }
 
@@ -29,7 +24,8 @@ export const RadioButtonCard = ({ options, selectedOption, handleChange }: Props
             checked={selectedOption === option.value}
             onChange={() => handleChange(option.value)}
           />
-          <label htmlFor={option.value}>{option.label}</label>
+          <label htmlFor={option.value}>{option.value}</label>
+          <h6>{option.description}</h6>
         </div>
       ))}
     </div>

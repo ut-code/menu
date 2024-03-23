@@ -1,7 +1,7 @@
-//import { useNavigate } from "react-router-dom"
-//import { Searchbox } from "@/components/Searchbox"
+// import { Searchbox } from "@/components/Searchbox"
 import { BackButton } from "@/components/elements/button/BackButton"
 import { NextButton } from "@/components/elements/button/NextButton"
+import { RadioButtonCard } from "@/components/RadioButtonCard"
 import { Option } from "@/utils/questions"
 
 interface Props {
@@ -12,11 +12,11 @@ interface Props {
 
 export const QuestionGenre = ({ setQuestionNumber, answer, setAnswer }: Props) => {
   const options: Option[] = [
-    { id: "1", value: "主食" },
-    { id: "2", value: "主菜" },
-    { id: "3", value: "副菜" },
-    { id: "4", value: "スープ" },
-    { id: "5", value: "スイーツ" },
+    { value: "主食", description: "ご飯、パン、麺類など" },
+    { value: "主菜", description: "おかず" },
+    { value: "副菜", description: "おかず" },
+    { value: "スープ", description: "おかず" },
+    { value: "スイーツ", description: "デザート" },
   ]
 
   const onClickNextPage = () => {
@@ -27,12 +27,7 @@ export const QuestionGenre = ({ setQuestionNumber, answer, setAnswer }: Props) =
     <div style={{ padding: 16 }}>
       <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
         <BackButton onClick={() => setQuestionNumber(0)} />
-        {/* <Searchbox 
-          onClickHandler={() => navigate("/search")}
-          placeholder={"例: 卵 トマト じゃがいも"}
-          onChange={onChangeSearchbox}
-          inputContent={inputContent}
-        /> */}
+        {/* <Searchbox /> */}
       </div>
       <div
         style={{
@@ -46,25 +41,7 @@ export const QuestionGenre = ({ setQuestionNumber, answer, setAnswer }: Props) =
         <h1>ジャンル</h1>
         <h6>作りたい料理の種類を選択してください</h6>
       </div>
-      <div>
-        {options.map((option) => (
-          <div key={option.id}>
-            <input
-              type="radio"
-              id={option.id}
-              value={option.value}
-              checked={answer === option.value}
-              onChange={() => setAnswer(option.value)}
-            />
-            <label htmlFor={option.id}>
-              <div>
-                {option.value}
-                <div>{option.description}</div>
-              </div>
-            </label>
-          </div>
-        ))}
-      </div>
+      <RadioButtonCard options={options} selectedOption={answer} handleChange={setAnswer} />
       <NextButton onClick={onClickNextPage} />
     </div>
   )
