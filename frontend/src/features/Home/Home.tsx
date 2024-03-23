@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom"
 import { useState, useContext } from "react"
-import { useNavigate } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
 
 import { Recipe } from "@/utils/recipes"
@@ -9,13 +8,11 @@ import { UserContext } from "@/utils/context"
 import { Head } from "@/components/Head"
 import { Hamburger } from "@/components/Hamburger"
 import { HorizontalScroll } from "./components/HorizontalScroll"
-import { MoreButton } from "@/components/elements/button/MoreButton"
 import { Loading } from "@/components/Loading"
 import { HomeSearchbox } from "./components/HomeSearchbox"
 
 export const Home = () => {
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
-  const navigate = useNavigate()
   const { user, session } = useContext(UserContext)
 
   // 永続的に残るので、localStorageから問題への回答を消しておく
@@ -90,13 +87,11 @@ export const Home = () => {
 
           <div style={{ display: "flex", justifyContent: "space-between", padding: "0 40px 0 48px" }}>
             <h2 style={{ marginBottom: "16px" }}>季節のレシピ</h2>
-            <MoreButton onClick={() => navigate("/home/seasonal")} />
           </div>
           <HorizontalScroll recipes={seasonalRecipes?.slice(0, 6)} />
 
           <div style={{ display: "flex", justifyContent: "space-between", padding: "0 40px 0 48px" }}>
             <h2 style={{ marginBottom: "16px" }}>お気に入り</h2>
-            <MoreButton onClick={() => navigate("/home/favorites")} />
           </div>
           <HorizontalScroll recipes={favoriteRecipes?.slice(0, 6)} />
         </div>

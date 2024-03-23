@@ -4,17 +4,15 @@ import { useNavigate } from "react-router-dom"
 import { NextButton } from "@/components/elements/button/NextButton"
 import { Head } from "@/components/Head"
 import { Hamburger } from "@/components/Hamburger"
-import { Keywords } from "../Keywords"
 import { Option } from "@/utils/questions"
 
 interface Props {
   setQuestionNumber: (questionNumber: number) => void
   answer: string | undefined
   setAnswer: (answer: string) => void
-  keywords: (string | undefined)[]
 }
 
-export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer, keywords }: Props) => {
+export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer }: Props) => {
   const navigate = useNavigate()
   const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
 
@@ -46,7 +44,6 @@ export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer, keyw
         onClickOpenHamburger={onClickOpenHamburger}
       />
       <h2 style={{ margin: "30px auto" }}>調理時間を選択してください</h2>
-      <Keywords keywords={keywords} />
       <div className={"boxes"}>
         {options.map((option) => (
           <div key={option.id} className={"box nopic"}>
