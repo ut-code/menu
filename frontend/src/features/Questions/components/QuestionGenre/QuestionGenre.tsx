@@ -1,4 +1,4 @@
-import { Searchbox } from "@/components/Searchbox"
+// import { Searchbox } from "@/components/Searchbox"
 import { BackButton } from "@/components/elements/button/BackButton"
 import { NextButton } from "@/components/elements/button/NextButton"
 import { Option } from "@/utils/questions"
@@ -7,7 +7,6 @@ interface Props {
   setQuestionNumber: (questionNumber: number) => void
   answer: string | undefined
   setAnswer: (answer: string) => void
-  keywords: (string | undefined)[]
 }
 
 export const QuestionGenre = ({ setQuestionNumber, answer, setAnswer }: Props) => {
@@ -27,7 +26,7 @@ export const QuestionGenre = ({ setQuestionNumber, answer, setAnswer }: Props) =
     <div style={{ padding: 16 }}>
       <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
         <BackButton onClick={() => setQuestionNumber(0)} />
-        <Searchbox />
+        {/* <Searchbox /> */}
       </div>
       <div
         style={{
