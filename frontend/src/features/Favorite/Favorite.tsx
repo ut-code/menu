@@ -6,8 +6,8 @@ import { UserContext } from "@/utils/context"
 import { Recipe } from "@/utils/recipes"
 import { Loading } from "@/components/Loading"
 import { RecipeCard } from "@/components/RecipeCard"
-import { GoTriangleDown, GoTriangleUp } from "react-icons/go"
 import styles from "./Favorite.module.css"
+import emptyImage from "@/assets/image/Howto4.png"
 
 export const Favorite = () => {
   const queryClient = useQueryClient()
@@ -18,29 +18,18 @@ export const Favorite = () => {
   const [filterMainDish, setFilterMainDish] = useState<boolean>(false)
   const [filterSideDish, setFilterSideDish] = useState<boolean>(false)
   const [filterSoup, setFilterSoup] = useState<boolean>(false)
-  const [isSortNew, setIsSortNew] = useState<boolean>(true)
+  const [filterDessert, setFilterDessert] = useState<boolean>(false)
 
-  const recipes = initialFavoriteRecipes
-    .filter((recipe) => {
-      if (!filterStapleFood && !filterMainDish && !filterSideDish && !filterSoup) return true
-      // NOTE: OR条件でfilterをかける
-      if (filterStapleFood && recipe.dish === "主食") return true
-      if (filterMainDish && recipe.dish === "主菜") return true
-      if (filterSideDish && recipe.dish === "副菜") return true
-      if (filterSoup && recipe.dish === "スープ") return true
-      return false
-    })
-    .sort((a, b) => {
-      if (isSortNew) {
-        if (a.createdAt > b.createdAt) return -1
-        if (a.createdAt < b.createdAt) return 1
-        return 0
-      } else {
-        if (a.createdAt > b.createdAt) return 1
-        if (a.createdAt < b.createdAt) return -1
-        return 0
-      }
-    })
+  const recipes = initialFavoriteRecipes.filter((recipe) => {
+    if (!filterStapleFood && !filterMainDish && !filterSideDish && !filterSoup) return true
+    // NOTE: OR条件でfilterをかける
+    if (filterStapleFood && recipe.dish === "主食") return true
+    if (filterMainDish && recipe.dish === "主菜") return true
+    if (filterSideDish && recipe.dish === "副菜") return true
+    if (filterSoup && recipe.dish === "スープ") return true
+    if (filterDessert && recipe.dish === "デザート") return true
+    return false
+  })
 
   // NOTE: コードの再利用性は悪いが、こうするしかなかった…
   useEffect(() => {
@@ -110,19 +99,10 @@ export const Favorite = () => {
     }
   }
 
-  const toggleSort = () => setIsSortNew((s) => !s)
-
   if (isLoading) return <Loading />
   return (
-    <div>
-      <h2 style={{ margin: "20px 0" }}>お気に入り</h2>
+    <div className={styles.root}>
       <div className={styles.buttons}>
-        <div className={styles.sort_buttons}>
-          <button className={styles.sort_button} onClick={toggleSort}>
-            {isSortNew ? <h3>新しい順</h3> : <h3>古い順</h3>}
-            {isSortNew ? <GoTriangleDown size="24px" /> : <GoTriangleUp size="24px" />}
-          </button>
-        </div>
         <div className={styles.dish_buttons}>
           <div key="主食" className={styles.dish_button}>
             <input
@@ -145,6 +125,10 @@ export const Favorite = () => {
             <input type="checkbox" id="スープ" onChange={() => setFilterSoup((f) => !f)} checked={filterSoup} />
             <label htmlFor="スープ">スープ</label>
           </div>
+          <div key="デザート" className={styles.dish_button}>
+            <input type="checkbox" id="デザート" onChange={() => setFilterDessert((f) => !f)} checked={filterDessert} />
+            <label htmlFor="デザート">デザート</label>
+          </div>
         </div>
       </div>
       <div className={styles.cards}>
@@ -159,7 +143,12 @@ export const Favorite = () => {
           ))
         ) : (
           // TODO: サインインしてないときに表示を変える
-          <p>お気に入りはまだありません。ハートボタンを押して追加してみましょう。</p>
+          <div className={styles.noResult}>
+            <img src={emptyImage} alt="empty" style={{ width: "300px" }} />
+            <h4 style={{ fontWeight: 400 }}>
+              お気に入りのレシピがありません。検索したレシピをお気に入りに追加してみましょう
+            </h4>
+          </div>
         )}
       </div>
     </div>
