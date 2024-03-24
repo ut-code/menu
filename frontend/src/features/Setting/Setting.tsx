@@ -5,8 +5,7 @@ import { User, updateUsername } from "@/utils/users"
 import { UserContext } from "@/utils/context"
 import { BorderButton } from "@/components/elements/button/BorderButton"
 import styles from "./Setting.module.css"
-
-import { BsArrowRight } from "react-icons/bs"
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward"
 
 interface Props {
   setUser: (user: User | null) => void
@@ -31,9 +30,7 @@ export const Setting = ({ setUser, setInputUsername }: Props) => {
   }
 
   return (
-    <div>
-      <h2 style={{ margin: "20px 0" }}>設定</h2>
-
+    <div className={styles.container}>
       {user && (
         <form className={styles.form}>
           <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
@@ -74,24 +71,56 @@ export const Setting = ({ setUser, setInputUsername }: Props) => {
           </BorderButton>
         </form>
       )}
-
-      <Link to={"https://gist.github.com/bvv-1/d3c318f90d0720e81259e58de49adc30"} className={styles.signin}>
-        <div className={styles.signin_text}>
-          <div style={{ display: "flex", alignItems: "end", marginBottom: "6px" }}>
-            <h2>プライバシーポリシー</h2>
-          </div>
-          <p style={{ color: "gray" }}>外部リンクに移動します。</p>
+      <div>
+        <div className={styles.title}>
+          <h6>アカウント設定</h6>
         </div>
-        <div className={styles.signin_link}>
-          <div className={styles.arrow_right}>
-            <BsArrowRight size="2rem" color="white" />
+        <Link to={"https://gist.github.com/bvv-1/d3c318f90d0720e81259e58de49adc30"} style={{ textDecoration: "none" }}>
+          <div className={styles.list}>
+            <div className={styles.textarea}>
+              <h4 style={{ fontWeight: 400 }}>ログアウト</h4>
+            </div>
+            <ArrowForwardIcon className={styles.icon} />
           </div>
+        </Link>
+        <Link to={"https://gist.github.com/bvv-1/d3c318f90d0720e81259e58de49adc30"} style={{ textDecoration: "none" }}>
+          <div className={styles.list}>
+            <div className={styles.textarea}>
+              <h4 style={{ fontWeight: 400 }}>アカウント削除</h4>
+            </div>
+            <ArrowForwardIcon className={styles.icon} />
+          </div>
+        </Link>
+      </div>
+      <div>
+        <div className={styles.title}>
+          <h6>アプリ情報</h6>
         </div>
-      </Link>
-
-      <a href="http://www.goo.ne.jp/">
-        <img src="//u.xgoo.jp/img/sgoo.png" alt="supported by goo" title="supported by goo" width={"80%"} />
-      </a>
+        <Link to={"https://gist.github.com/bvv-1/d3c318f90d0720e81259e58de49adc30"} style={{ textDecoration: "none" }}>
+          <div className={styles.list}>
+            <div className={styles.textarea}>
+              <h4 style={{ fontWeight: 400 }}>プライバシーポリシー</h4>
+              <h6 style={{ color: "#434343" }}>外部リンクに移動します</h6>
+            </div>
+            <ArrowForwardIcon className={styles.icon} />
+          </div>
+        </Link>
+      </div>
+      <div>
+        <div className={styles.title}>
+          <h6>ライセンス</h6>
+        </div>
+        <Link to={"https://gist.github.com/bvv-1/d3c318f90d0720e81259e58de49adc30"} style={{ textDecoration: "none" }}>
+          <div className={styles.list}>
+            <div className={styles.textarea}>
+              <h4 style={{ fontWeight: 400 }}>gooラボAPI</h4>
+            </div>
+            <a href="http://www.goo.ne.jp/">
+              <img src="//u.xgoo.jp/img/sgoo.png" alt="supported by goo" title="supported by goo" width={"96px"} />
+            </a>
+          </div>
+        </Link>
+      </div>
     </div>
   )
 }
