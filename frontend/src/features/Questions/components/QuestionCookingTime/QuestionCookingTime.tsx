@@ -46,7 +46,7 @@ export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer }: Pr
           <h6>調理にかける時間を選択してください</h6>
         </div>
         <RadioButtonCard options={options} selectedOption={answer} handleChange={setAnswer} />
-        <NextButton onClick={onClickNextPage} />
+        <NextButton title={"レシピを検索する"} onClick={onClickNextPage} />
       </div>
     </div>
   )

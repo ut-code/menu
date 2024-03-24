@@ -45,7 +45,7 @@ export const QuestionGenre = ({ setQuestionNumber, answer, setAnswer }: Props) =
           <h6>作りたい料理の種類を選択してください</h6>
         </div>
         <RadioButtonCard options={options} selectedOption={answer} handleChange={setAnswer} />
-        <NextButton onClick={onClickNextPage} />
+        <NextButton title={"次の質問に進む"} onClick={onClickNextPage} />
       </div>
     </div>
   )

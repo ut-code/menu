@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 
 import { Searchbox } from "@/components/Searchbox"
 import { InfoBox } from "@/components/InfoBox"
+import { NextButton } from "@/components/elements/button/NextButton"
 
 interface Props {
   setQuestionNumber: (questionNumber: number) => void
@@ -43,7 +44,7 @@ export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredi
           <InfoBox />
           <InfoBox />
         </div>
-        <button onClick={onClickNextPage}>次へ</button>
+        <NextButton title={"次の質問に進む"} onClick={onClickNextPage} />
       </div>
     </>
   )
