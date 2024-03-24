@@ -2,8 +2,6 @@ import { useState, useEffect, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query"
 
-import { Hamburger } from "@/components/Hamburger"
-import { Head } from "@/components/Head"
 import { Loading } from "@/components/Loading"
 import { Searchbox } from "@/components/Searchbox"
 import { RecipeCard } from "@/components/RecipeCard"
@@ -24,7 +22,6 @@ export const Result = () => {
   const { session } = useContext(UserContext)
 
   const [inputContent, setInputContent] = useState<string>("")
-  const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
   const queryClient = useQueryClient()
 
   const storedIngredients = localStorage.getItem("ingredients")
@@ -137,18 +134,9 @@ export const Result = () => {
     setInputContent(e.target.value)
   }
 
-  const onClickOpenHamburger = () => setIsOpenHamburger(true)
-  const onClickCloseHamburger = () => setIsOpenHamburger(false)
-
   if (isLoadingRecipes || isLoadingFavoriteRecipes) return <Loading />
-  if (isOpenHamburger) return <Hamburger onClickCloseHamburger={onClickCloseHamburger} />
   return (
     <div className="style_lightbrown">
-      <Head
-        showBackButton={true}
-        onClickPreviousPage={() => navigate("/questions")}
-        onClickOpenHamburger={onClickOpenHamburger}
-      />
       <div className={styles.searchbox}>
         <Searchbox
           onClickHandler={onClickSearchRecipesKeywords}

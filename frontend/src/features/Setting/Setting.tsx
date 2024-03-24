@@ -1,12 +1,9 @@
 import { Link } from "react-router-dom"
 import { useState, useEffect, useContext } from "react"
-import { useNavigate } from "react-router-dom"
 
 import { User, updateUsername } from "@/utils/users"
 import { UserContext } from "@/utils/context"
 import { BorderButton } from "@/components/elements/button/BorderButton"
-import { Head } from "@/components/Head"
-import { Hamburger } from "@/components/Hamburger"
 import styles from "./Setting.module.css"
 
 import { BsArrowRight } from "react-icons/bs"
@@ -17,12 +14,10 @@ interface Props {
 }
 
 export const Setting = ({ setUser, setInputUsername }: Props) => {
-  const navigate = useNavigate()
   const { user, session } = useContext(UserContext)
 
   // const [email, setEmail] = useState(user?.email || "")
   const [username, setUsername] = useState(user?.username || "")
-  const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
 
   useEffect(() => {
     setInputUsername("")
@@ -35,18 +30,8 @@ export const Setting = ({ setUser, setInputUsername }: Props) => {
     }
   }
 
-  const onClickOpenHamburger = () => setIsOpenHamburger(true)
-  const onClickCloseHamburger = () => setIsOpenHamburger(false)
-
-  if (isOpenHamburger) return <Hamburger onClickCloseHamburger={onClickCloseHamburger} />
   return (
-    <div className="style_lightbrown">
-      <Head
-        showBackButton={true}
-        onClickPreviousPage={() => navigate("/home")}
-        onClickOpenHamburger={onClickOpenHamburger}
-      />
-
+    <div>
       <h2 style={{ margin: "20px 0" }}>設定</h2>
 
       {user && (

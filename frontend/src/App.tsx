@@ -6,13 +6,11 @@ import { useLocalStorage } from "react-use"
 import { User, updateUsername } from "@/utils/users"
 import { getUserApi } from "@/utils/apiUtils"
 import { UserContext } from "@/utils/context"
-import { Home } from "@/features/Home"
 import { HowTo } from "@/features/HowTo"
 import { Questions } from "@/features/Questions"
 import { Result } from "@/features/Result"
 import { Auth } from "@/features/Auth"
 import { Favorite } from "@/features/Favorite"
-import { Seasonal } from "@/features/Seasonal"
 import { Setting } from "@/features/Setting"
 import { NewRecipes } from "@/features/NewRecipes"
 import { NotFound } from "@/features/NotFound"
@@ -70,9 +68,7 @@ export default function App() {
     <UserContext.Provider value={{ user, session }}>
       <Routes>
         <Route path="/" element={location.search !== "?ref=a2hs" ? <HowTo /> : <Navigate replace to="/questions" />} />
-        <Route path="/home" element={<Home />} />
         <Route path="/home/favorites" element={session ? <Favorite /> : <Navigate replace to="/home" />} />
-        <Route path="/home/seasonal" element={<Seasonal />} />
         <Route path="/questions" element={<Questions />} />
         <Route path="/search" element={<Result />} />
         <Route path="/setting" element={<Setting setUser={setUser} setInputUsername={setInputUsername} />} />

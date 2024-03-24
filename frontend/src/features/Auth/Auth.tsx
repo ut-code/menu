@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
 
 import { supabase } from "./supabaseClient"
 import { BorderButton } from "@/components/elements/button/BorderButton"
-import { Head } from "@/components/Head"
-import { Hamburger } from "@/components/Hamburger"
 import { Loading } from "@/components/Loading"
 import styles from "./Auth.module.css"
 
@@ -14,12 +11,9 @@ interface Props {
 }
 
 export const Auth = ({ inputUsername, setInputUsername }: Props) => {
-  const navigate = useNavigate()
-
   const [loading, setLoading] = useState(false)
   const [hasAccount, setHasAccount] = useState<boolean>(false)
   const [email, setEmail] = useState("")
-  const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
 
   useEffect(() => {
     setInputUsername("")
@@ -54,27 +48,9 @@ export const Auth = ({ inputUsername, setInputUsername }: Props) => {
     }
   }
 
-  const onClickOpenHamburger = () => setIsOpenHamburger(true)
-  const onClickCloseHamburger = () => setIsOpenHamburger(false)
-
-  if (isOpenHamburger) return <Hamburger onClickCloseHamburger={onClickCloseHamburger} />
   if (loading) return <Loading />
   return (
-    <div className="style_lightbrown">
-      {hasAccount ? (
-        <Head
-          showBackButton={true}
-          onClickPreviousPage={() => setHasAccount(false)}
-          onClickOpenHamburger={onClickOpenHamburger}
-        />
-      ) : (
-        <Head
-          showBackButton={true}
-          onClickPreviousPage={() => navigate("/home")}
-          onClickOpenHamburger={onClickOpenHamburger}
-        />
-      )}
-
+    <div>
       {hasAccount ? <h2 className={styles.title}>サインイン</h2> : <h2 className={styles.title}>サインアップ</h2>}
       <form className={styles.form}>
         {!hasAccount && (

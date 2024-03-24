@@ -42,11 +42,11 @@ export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer }: Pr
             gap: 4,
           }}
         >
-          <h1>ジャンル</h1>
-          <h6>作りたい料理の種類を選択してください</h6>
+          <h1>調理時間</h1>
+          <h6>調理にかける時間を選択してください</h6>
         </div>
         <RadioButtonCard options={options} selectedOption={answer} handleChange={setAnswer} />
-        <NextButton onClick={onClickNextPage} />
+        <NextButton title={"レシピを検索する"} onClick={onClickNextPage} />
       </div>
     </div>
   )

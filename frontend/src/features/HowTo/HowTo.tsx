@@ -43,7 +43,7 @@ export const HowTo = () => {
 
         <div className="bottom">
           <div id="swiper-button-next">
-            <NextButton />
+            <NextButton title={"次へ"} onClick={() => {}} />
           </div>
         </div>
       </SwiperSlide>
@@ -66,7 +66,7 @@ export const HowTo = () => {
         </div>
         <div className="bottom">
           <div id="swiper-button-next">
-            <NextButton />
+            <NextButton title={"次へ"} onClick={() => {}} />
           </div>
         </div>
       </SwiperSlide>
@@ -89,7 +89,7 @@ export const HowTo = () => {
         </div>
         <div className="bottom">
           <div id="swiper-button-next">
-            <NextButton />
+            <NextButton title={"次へ"} onClick={() => {}} />
           </div>
         </div>
       </SwiperSlide>
@@ -112,7 +112,7 @@ export const HowTo = () => {
         </div>
         <div className="bottom">
           <Link to="/questions">
-            <NextButton />
+            <NextButton title={"次へ"} onClick={() => {}} />
           </Link>
         </div>
       </SwiperSlide>
