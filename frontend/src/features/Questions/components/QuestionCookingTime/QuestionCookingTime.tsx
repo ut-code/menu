@@ -1,9 +1,7 @@
-import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-
+import { BackButton } from "@/components/elements/button/BackButton"
 import { NextButton } from "@/components/elements/button/NextButton"
-import { Head } from "@/components/Head"
-import { Hamburger } from "@/components/Hamburger"
+import { RadioButtonCard } from "@/components/RadioButtonCard"
 import { Option } from "@/utils/questions"
 
 interface Props {
@@ -14,57 +12,42 @@ interface Props {
 
 export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer }: Props) => {
   const navigate = useNavigate()
-  const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
 
   const options: Option[] = [
-    { id: "1", value: "時短", description: "目安時間: 15分" },
-    { id: "2", value: "普通", description: "目安時間: 30分" },
-    { id: "3", value: "じっくり", description: "目安時間: 60分" },
-    { id: "4", value: "どれでも", description: "目安時間: なし" },
+    { value: "時短", description: "目安時間: 15分" },
+    { value: "普通", description: "目安時間: 30分" },
+    { value: "じっくり", description: "目安時間: 60分" },
+    { value: "どれでも", description: "目安時間: なし" },
   ]
 
   const onClickNextPage = () => {
-    if (answer === "") {
-      // FIXME: アラートを実装する
-      alert("選択肢を選んでください")
-      return
-    }
     navigate("/search")
   }
 
-  const onClickOpenHamburger = () => setIsOpenHamburger(true)
-  const onClickCloseHamburger = () => setIsOpenHamburger(false)
-
-  if (isOpenHamburger) return <Hamburger onClickCloseHamburger={onClickCloseHamburger} />
   return (
-    <div className="style_lightbrown">
-      <Head
-        showBackButton={true}
-        onClickPreviousPage={() => setQuestionNumber(1)}
-        onClickOpenHamburger={onClickOpenHamburger}
-      />
-      <h2 style={{ margin: "30px auto" }}>調理時間を選択してください</h2>
-      <div className={"boxes"}>
-        {options.map((option) => (
-          <div key={option.id} className={"box nopic"}>
-            <input
-              type="radio"
-              id={option.id}
-              value={option.value}
-              checked={answer === option.value}
-              onChange={() => setAnswer(option.value)}
-            />
-            <label htmlFor={option.id}>
-              <div className={"nopic_text"}>
-                {option.value}
-                <div className={"nopic_description"}>{option.description}</div>
-              </div>
-            </label>
-          </div>
-        ))}
+    <div style={{ padding: 16 }}>
+      <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
+        <BackButton onClick={() => setQuestionNumber(0)} />
+        {/* <Searchbox /> */}
       </div>
-      <div className={"space"} />
-      <NextButton onClick={onClickNextPage} />
+      <div
+        style={{ margin: "16px 0", display: "inline-flex", flexDirection: "column", gap: 24, alignItems: "flex-start" }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-end",
+            alignItems: "flex-start",
+            gap: 4,
+          }}
+        >
+          <h1>ジャンル</h1>
+          <h6>作りたい料理の種類を選択してください</h6>
+        </div>
+        <RadioButtonCard options={options} selectedOption={answer} handleChange={setAnswer} />
+        <NextButton onClick={onClickNextPage} />
+      </div>
     </div>
   )
 }
