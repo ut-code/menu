@@ -1,23 +1,18 @@
 import { useState, useEffect, useContext } from "react"
-import { useNavigate } from "react-router-dom"
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query"
 
 import { getUserFavoritesApi, postUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/apiUtils"
 import { UserContext } from "@/utils/context"
 import { Recipe } from "@/utils/recipes"
-import { Head } from "@/components/Head"
 import { Loading } from "@/components/Loading"
 import { RecipeCard } from "@/components/RecipeCard"
-import { Hamburger } from "@/components/Hamburger"
 import { GoTriangleDown, GoTriangleUp } from "react-icons/go"
 import styles from "./Favorite.module.css"
 
 export const Favorite = () => {
   const queryClient = useQueryClient()
-  const navigate = useNavigate()
   const { session } = useContext(UserContext)
 
-  const [isOpenHamburger, setIsOpenHamburger] = useState<boolean>(false)
   const [initialFavoriteRecipes, setInitialFavoriteRecipes] = useState<Recipe[]>([])
   const [filterStapleFood, setFilterStapleFood] = useState<boolean>(false)
   const [filterMainDish, setFilterMainDish] = useState<boolean>(false)
@@ -117,19 +112,9 @@ export const Favorite = () => {
 
   const toggleSort = () => setIsSortNew((s) => !s)
 
-  const onClickOpenHamburger = () => setIsOpenHamburger(true)
-  const onClickCloseHamburger = () => setIsOpenHamburger(false)
-
   if (isLoading) return <Loading />
-  if (isOpenHamburger) return <Hamburger onClickCloseHamburger={onClickCloseHamburger} />
   return (
-    <div className="style_lightbrown">
-      <Head
-        showBackButton={true}
-        onClickPreviousPage={() => navigate("/home")}
-        onClickOpenHamburger={onClickOpenHamburger}
-      />
-
+    <div>
       <h2 style={{ margin: "20px 0" }}>お気に入り</h2>
       <div className={styles.buttons}>
         <div className={styles.sort_buttons}>

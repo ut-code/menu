@@ -1,1 +1,0 @@
-export { Seasonal } from "./Seasonal"
