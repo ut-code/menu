@@ -6,8 +6,17 @@ import { UserContext } from "@/utils/context"
 import { Recipe } from "@/utils/recipes"
 import { Loading } from "@/components/Loading"
 import { RecipeCard } from "@/components/RecipeCard"
-import { GoTriangleDown, GoTriangleUp } from "react-icons/go"
+import { Chip } from "@/components/Chip"
+
 import styles from "./Favorite.module.css"
+import emptyImage from "@/assets/image/Howto4.png"
+import GridViewIcon from "@mui/icons-material/GridView"
+
+import { Swiper, SwiperSlide } from "swiper/react"
+import { FreeMode } from "swiper/modules"
+import "swiper/css"
+import "swiper/css/free-mode"
+import "./swiper.css"
 
 export const Favorite = () => {
   const queryClient = useQueryClient()
@@ -18,29 +27,24 @@ export const Favorite = () => {
   const [filterMainDish, setFilterMainDish] = useState<boolean>(false)
   const [filterSideDish, setFilterSideDish] = useState<boolean>(false)
   const [filterSoup, setFilterSoup] = useState<boolean>(false)
-  const [isSortNew, setIsSortNew] = useState<boolean>(true)
+  const [filterDessert, setFilterDessert] = useState<boolean>(false)
+  const [filterQuick, setFilterQuick] = useState<boolean>(false)
+  const [filterStandard, setFilterStandard] = useState<boolean>(false)
+  const [filterHard, setFilterHard] = useState<boolean>(false)
 
-  const recipes = initialFavoriteRecipes
-    .filter((recipe) => {
-      if (!filterStapleFood && !filterMainDish && !filterSideDish && !filterSoup) return true
-      // NOTE: OR条件でfilterをかける
-      if (filterStapleFood && recipe.dish === "主食") return true
-      if (filterMainDish && recipe.dish === "主菜") return true
-      if (filterSideDish && recipe.dish === "副菜") return true
-      if (filterSoup && recipe.dish === "スープ") return true
-      return false
-    })
-    .sort((a, b) => {
-      if (isSortNew) {
-        if (a.createdAt > b.createdAt) return -1
-        if (a.createdAt < b.createdAt) return 1
-        return 0
-      } else {
-        if (a.createdAt > b.createdAt) return 1
-        if (a.createdAt < b.createdAt) return -1
-        return 0
-      }
-    })
+  const recipes = initialFavoriteRecipes.filter((recipe) => {
+    if (!filterStapleFood && !filterMainDish && !filterSideDish && !filterSoup) return true
+    // NOTE: OR条件でfilterをかける
+    if (filterStapleFood && recipe.dish === "主食") return true
+    if (filterMainDish && recipe.dish === "主菜") return true
+    if (filterSideDish && recipe.dish === "副菜") return true
+    if (filterSoup && recipe.dish === "スープ") return true
+    if (filterDessert && recipe.dish === "デザート") return true
+    if (filterQuick && 1 <= recipe.totalCookingTime && recipe.totalCookingTime < 20) return true
+    if (filterStandard && 20 <= recipe.totalCookingTime && recipe.totalCookingTime < 45) return true
+    if (filterHard && 45 <= recipe.totalCookingTime) return true
+    return false
+  })
 
   // NOTE: コードの再利用性は悪いが、こうするしかなかった…
   useEffect(() => {
@@ -110,41 +114,51 @@ export const Favorite = () => {
     }
   }
 
-  const toggleSort = () => setIsSortNew((s) => !s)
-
   if (isLoading) return <Loading />
   return (
-    <div>
-      <h2 style={{ margin: "20px 0" }}>お気に入り</h2>
+    <div className={styles.root}>
       <div className={styles.buttons}>
-        <div className={styles.sort_buttons}>
-          <button className={styles.sort_button} onClick={toggleSort}>
-            {isSortNew ? <h3>新しい順</h3> : <h3>古い順</h3>}
-            {isSortNew ? <GoTriangleDown size="24px" /> : <GoTriangleUp size="24px" />}
-          </button>
+        <div className={styles.scrollable}>
+          <Swiper
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            slidesPerView={"auto"}
+            spaceBetween={8}
+            freeMode={true}
+            modules={[FreeMode]}
+            className={"root"}
+          >
+            <SwiperSlide key="主食">
+              <Chip label="主食" onChange={() => setFilterStapleFood((f) => !f)} checked={filterStapleFood} />
+            </SwiperSlide>
+            <SwiperSlide key="主菜">
+              <Chip label="主菜" onChange={() => setFilterMainDish((f) => !f)} checked={filterMainDish} />
+            </SwiperSlide>
+            <SwiperSlide key="副菜">
+              <Chip label="副菜" onChange={() => setFilterSideDish((f) => !f)} checked={filterSideDish} />
+            </SwiperSlide>
+            <SwiperSlide key="スープ">
+              <Chip label="スープ" onChange={() => setFilterSoup((f) => !f)} checked={filterSoup} />
+            </SwiperSlide>
+            <SwiperSlide key="デザート">
+              <Chip label="デザート" onChange={() => setFilterDessert((f) => !f)} checked={filterDessert} />
+            </SwiperSlide>
+            <SwiperSlide key="時短">
+              <Chip label="時短" onChange={() => setFilterQuick((f) => !f)} checked={filterQuick} />
+            </SwiperSlide>
+            <SwiperSlide key="普通">
+              <Chip label="普通" onChange={() => setFilterStandard((f) => !f)} checked={filterStandard} />
+            </SwiperSlide>
+            <SwiperSlide key="じっくり">
+              <Chip label="じっくり" onChange={() => setFilterHard((f) => !f)} checked={filterHard} />
+            </SwiperSlide>
+          </Swiper>
         </div>
-        <div className={styles.dish_buttons}>
-          <div key="主食" className={styles.dish_button}>
-            <input
-              type="checkbox"
-              id="主食"
-              onChange={() => setFilterStapleFood((f) => !f)}
-              checked={filterStapleFood}
-            />
-            <label htmlFor="主食">主食</label>
-          </div>
-          <div key="主菜" className={styles.dish_button}>
-            <input type="checkbox" id="主菜" onChange={() => setFilterMainDish((f) => !f)} checked={filterMainDish} />
-            <label htmlFor="主菜">主菜</label>
-          </div>
-          <div key="副菜" className={styles.dish_button}>
-            <input type="checkbox" id="副菜" onChange={() => setFilterSideDish((f) => !f)} checked={filterSideDish} />
-            <label htmlFor="副菜">副菜</label>
-          </div>
-          <div key="スープ" className={styles.dish_button}>
-            <input type="checkbox" id="スープ" onChange={() => setFilterSoup((f) => !f)} checked={filterSoup} />
-            <label htmlFor="スープ">スープ</label>
-          </div>
+        <div className={styles.changeButton}>
+          <button>
+            <GridViewIcon style={{ width: 18, height: 18 }} />
+            <h5>表示切り替え</h5>
+          </button>
         </div>
       </div>
       <div className={styles.cards}>
@@ -159,7 +173,12 @@ export const Favorite = () => {
           ))
         ) : (
           // TODO: サインインしてないときに表示を変える
-          <p>お気に入りはまだありません。ハートボタンを押して追加してみましょう。</p>
+          <div className={styles.noResult}>
+            <img src={emptyImage} alt="empty" style={{ width: "300px" }} />
+            <h4 style={{ fontWeight: 400 }}>
+              お気に入りのレシピがありません。検索したレシピをお気に入りに追加してみましょう
+            </h4>
+          </div>
         )}
       </div>
     </div>
