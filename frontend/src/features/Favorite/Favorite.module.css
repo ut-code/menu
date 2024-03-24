@@ -2,6 +2,19 @@
   padding: 32px 16px;
 }
 
+.buttons {
+  overflow: hidden;
+}
+
+.scrollable {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 8px;
+  overflow-x: auto; /* 横スクロールを可能にする */
+  white-space: nowrap; /* 要素を横並びにする */
+  padding-bottom: 10px; /* ボタンの下にスクロールバーが表示されないようにするための余白 */
+}
+
 .noResult {
   display: flex;
   flex-direction: column;

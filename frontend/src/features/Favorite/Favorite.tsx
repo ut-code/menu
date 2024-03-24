@@ -6,8 +6,16 @@ import { UserContext } from "@/utils/context"
 import { Recipe } from "@/utils/recipes"
 import { Loading } from "@/components/Loading"
 import { RecipeCard } from "@/components/RecipeCard"
+import { Chip } from "@/components/Chip"
+
 import styles from "./Favorite.module.css"
 import emptyImage from "@/assets/image/Howto4.png"
+
+import { Swiper, SwiperSlide } from "swiper/react"
+import { FreeMode } from "swiper/modules"
+import "swiper/css"
+import "swiper/css/free-mode"
+import "./swiper.css"
 
 export const Favorite = () => {
   const queryClient = useQueryClient()
@@ -103,32 +111,32 @@ export const Favorite = () => {
   return (
     <div className={styles.root}>
       <div className={styles.buttons}>
-        <div className={styles.dish_buttons}>
-          <div key="主食" className={styles.dish_button}>
-            <input
-              type="checkbox"
-              id="主食"
-              onChange={() => setFilterStapleFood((f) => !f)}
-              checked={filterStapleFood}
-            />
-            <label htmlFor="主食">主食</label>
-          </div>
-          <div key="主菜" className={styles.dish_button}>
-            <input type="checkbox" id="主菜" onChange={() => setFilterMainDish((f) => !f)} checked={filterMainDish} />
-            <label htmlFor="主菜">主菜</label>
-          </div>
-          <div key="副菜" className={styles.dish_button}>
-            <input type="checkbox" id="副菜" onChange={() => setFilterSideDish((f) => !f)} checked={filterSideDish} />
-            <label htmlFor="副菜">副菜</label>
-          </div>
-          <div key="スープ" className={styles.dish_button}>
-            <input type="checkbox" id="スープ" onChange={() => setFilterSoup((f) => !f)} checked={filterSoup} />
-            <label htmlFor="スープ">スープ</label>
-          </div>
-          <div key="デザート" className={styles.dish_button}>
-            <input type="checkbox" id="デザート" onChange={() => setFilterDessert((f) => !f)} checked={filterDessert} />
-            <label htmlFor="デザート">デザート</label>
-          </div>
+        <div className={styles.scrollable}>
+          <Swiper
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            slidesPerView={"auto"}
+            spaceBetween={8}
+            freeMode={true}
+            modules={[FreeMode]}
+            className={"root"}
+          >
+            <SwiperSlide key="主食">
+              <Chip label="主食" onChange={() => setFilterStapleFood((f) => !f)} checked={filterStapleFood} />
+            </SwiperSlide>
+            <SwiperSlide key="主菜">
+              <Chip label="主菜" onChange={() => setFilterMainDish((f) => !f)} checked={filterMainDish} />
+            </SwiperSlide>
+            <SwiperSlide key="副菜">
+              <Chip label="副菜" onChange={() => setFilterSideDish((f) => !f)} checked={filterSideDish} />
+            </SwiperSlide>
+            <SwiperSlide key="スープ">
+              <Chip label="スープ" onChange={() => setFilterSoup((f) => !f)} checked={filterSoup} />
+            </SwiperSlide>
+            <SwiperSlide key="デザート">
+              <Chip label="デザート" onChange={() => setFilterDessert((f) => !f)} checked={filterDessert} />
+            </SwiperSlide>
+          </Swiper>
         </div>
       </div>
       <div className={styles.cards}>
