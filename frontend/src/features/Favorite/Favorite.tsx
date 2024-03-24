@@ -10,6 +10,7 @@ import { Chip } from "@/components/Chip"
 
 import styles from "./Favorite.module.css"
 import emptyImage from "@/assets/image/Howto4.png"
+import GridViewIcon from "@mui/icons-material/GridView"
 
 import { Swiper, SwiperSlide } from "swiper/react"
 import { FreeMode } from "swiper/modules"
@@ -27,6 +28,9 @@ export const Favorite = () => {
   const [filterSideDish, setFilterSideDish] = useState<boolean>(false)
   const [filterSoup, setFilterSoup] = useState<boolean>(false)
   const [filterDessert, setFilterDessert] = useState<boolean>(false)
+  const [filterQuick, setFilterQuick] = useState<boolean>(false)
+  const [filterStandard, setFilterStandard] = useState<boolean>(false)
+  const [filterHard, setFilterHard] = useState<boolean>(false)
 
   const recipes = initialFavoriteRecipes.filter((recipe) => {
     if (!filterStapleFood && !filterMainDish && !filterSideDish && !filterSoup) return true
@@ -36,6 +40,9 @@ export const Favorite = () => {
     if (filterSideDish && recipe.dish === "副菜") return true
     if (filterSoup && recipe.dish === "スープ") return true
     if (filterDessert && recipe.dish === "デザート") return true
+    if (filterQuick && 1 <= recipe.totalCookingTime && recipe.totalCookingTime < 20) return true
+    if (filterStandard && 20 <= recipe.totalCookingTime && recipe.totalCookingTime < 45) return true
+    if (filterHard && 45 <= recipe.totalCookingTime) return true
     return false
   })
 
@@ -136,7 +143,22 @@ export const Favorite = () => {
             <SwiperSlide key="デザート">
               <Chip label="デザート" onChange={() => setFilterDessert((f) => !f)} checked={filterDessert} />
             </SwiperSlide>
+            <SwiperSlide key="時短">
+              <Chip label="時短" onChange={() => setFilterQuick((f) => !f)} checked={filterQuick} />
+            </SwiperSlide>
+            <SwiperSlide key="普通">
+              <Chip label="普通" onChange={() => setFilterStandard((f) => !f)} checked={filterStandard} />
+            </SwiperSlide>
+            <SwiperSlide key="じっくり">
+              <Chip label="じっくり" onChange={() => setFilterHard((f) => !f)} checked={filterHard} />
+            </SwiperSlide>
           </Swiper>
+        </div>
+        <div className={styles.changeButton}>
+          <button>
+            <GridViewIcon style={{ width: 18, height: 18 }} />
+            <h5>表示切り替え</h5>
+          </button>
         </div>
       </div>
       <div className={styles.cards}>
