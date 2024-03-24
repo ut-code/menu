@@ -12,11 +12,11 @@ interface Props {
 
 export const QuestionGenre = ({ setQuestionNumber, answer, setAnswer }: Props) => {
   const options: Option[] = [
-    { value: "主食", description: "ご飯、パン、麺類など" },
-    { value: "主菜", description: "おかず" },
-    { value: "副菜", description: "おかず" },
-    { value: "スープ", description: "おかず" },
-    { value: "スイーツ", description: "デザート" },
+    { value: "主食", description: "パン・麺・ごはんなどの穀類の料理" },
+    { value: "主菜", description: "メインのおかずとなる料理" },
+    { value: "副菜", description: "野菜・海藻・きのこなどを使った料理" },
+    { value: "スープ", description: "みそ汁やポタージュなどの水分が多い料理" },
+    { value: "スイーツ", description: "ケーキやプリンなどの甘いお菓子" },
   ]
 
   const onClickNextPage = () => {
@@ -30,19 +30,23 @@ export const QuestionGenre = ({ setQuestionNumber, answer, setAnswer }: Props) =
         {/* <Searchbox /> */}
       </div>
       <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-end",
-          alignItems: "flex-start",
-          gap: 4,
-        }}
+        style={{ margin: "16px 0", display: "inline-flex", flexDirection: "column", gap: 24, alignItems: "flex-start" }}
       >
-        <h1>ジャンル</h1>
-        <h6>作りたい料理の種類を選択してください</h6>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-end",
+            alignItems: "flex-start",
+            gap: 4,
+          }}
+        >
+          <h1>ジャンル</h1>
+          <h6>作りたい料理の種類を選択してください</h6>
+        </div>
+        <RadioButtonCard options={options} selectedOption={answer} handleChange={setAnswer} />
+        <NextButton onClick={onClickNextPage} />
       </div>
-      <RadioButtonCard options={options} selectedOption={answer} handleChange={setAnswer} />
-      <NextButton onClick={onClickNextPage} />
     </div>
   )
 }

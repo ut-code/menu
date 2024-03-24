@@ -1,5 +1,6 @@
 import styles from "./RadioButtonCard.module.css"
 import { Option } from "@/utils/questions"
+import CheckIcon from "@mui/icons-material/Check"
 
 interface Props {
   options: Option[] // Option 型の配列
@@ -13,7 +14,7 @@ export const RadioButtonCard = ({ options, selectedOption, handleChange }: Props
       {options.map((option) => (
         <div
           key={option.value}
-          className={`radio-button-card ${selectedOption === option.value ? "selected" : ""}`}
+          className={`${styles.radio_button_card} ${selectedOption === option.value ? styles.selected : ""}`}
           onClick={() => handleChange(option.value)}
         >
           <input
@@ -24,8 +25,17 @@ export const RadioButtonCard = ({ options, selectedOption, handleChange }: Props
             checked={selectedOption === option.value}
             onChange={() => handleChange(option.value)}
           />
-          <label htmlFor={option.value}>{option.value}</label>
-          <h6>{option.description}</h6>
+          <label htmlFor={option.value}>
+            <div className={styles.root}>
+              <div>
+                <h3>{option.value}</h3>
+                <h6>{option.description}</h6>
+              </div>
+              <div className={styles.icon}>
+                {selectedOption === option.value && <CheckIcon fontSize="medium" style={{ color: "white" }} />}
+              </div>
+            </div>
+          </label>
         </div>
       ))}
     </div>
