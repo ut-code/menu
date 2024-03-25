@@ -73,7 +73,7 @@ export const Auth = ({ setInputUsername }: Props) => {
             <div>
               <input
                 type="email"
-                placeholder="メールアドレス"
+                placeholder="メールアドレスを入力してください"
                 value={email}
                 required={true}
                 onChange={(e) => setEmail(e.target.value)}
