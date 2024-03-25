@@ -135,7 +135,7 @@ export const Auth = ({ setInputUsername }: Props) => {
             <div className={styles.orMessage}>
               <h6>すでにアカウントをお持ちの方は</h6>
               <button onClick={() => setHasAccount(true)} disabled={false}>
-                ログイン
+                サインイン
               </button>
             </div>
           )}
