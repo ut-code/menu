@@ -1,3 +1,4 @@
+import React from "react"
 import styles from "./TextField.module.css"
 
 interface Props {
@@ -12,9 +13,9 @@ export const TextField = ({ label, value, onChange }: Props) => {
   }
 
   return (
-    <div className={styles.root}>
-      <input type="text" value={value} onChange={handleChange} />
+    <div className={`${styles.root} ${value !== "" ? styles.filled : ""}`}>
       <label>{label}</label>
+      <input type="text" value={value} onChange={handleChange} />
     </div>
   )
 }

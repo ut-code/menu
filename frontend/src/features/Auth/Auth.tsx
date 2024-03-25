@@ -71,7 +71,7 @@ export const Auth = ({ setInputUsername }: Props) => {
         )}
         <div className={styles.content}>
           <div className={styles.form}>
-            <div>
+            <div style={{ width: "100%" }}>
               <TextField label="メールアドレス" value={email} onChange={setEmail} />
               <input
                 type="email"
