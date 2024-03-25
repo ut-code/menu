@@ -44,7 +44,18 @@ export const QuestionGenre = ({ setQuestionNumber, answer, setAnswer }: Props) =
           <h1>ジャンル</h1>
           <h6>作りたい料理の種類を選択してください</h6>
         </div>
-        <RadioButtonCard options={options} selectedOption={answer} handleChange={setAnswer} />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-end",
+            gap: 16,
+          }}
+        >
+          {options.map((option) => (
+            <RadioButtonCard key={option.value} option={option} selectedOption={answer} handleChange={setAnswer} />
+          ))}
+        </div>
         <NextButton title={"次の質問に進む"} onClick={onClickNextPage} />
       </div>
     </div>
