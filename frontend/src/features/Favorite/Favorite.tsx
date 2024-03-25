@@ -118,42 +118,40 @@ export const Favorite = () => {
   return (
     <div className={styles.root}>
       <div className={styles.buttons}>
-        <div className={styles.scrollable}>
-          <Swiper
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            slidesPerView={"auto"}
-            spaceBetween={8}
-            freeMode={true}
-            modules={[FreeMode]}
-            className={"root"}
-          >
-            <SwiperSlide key="主食">
-              <Chip label="主食" onChange={() => setFilterStapleFood((f) => !f)} checked={filterStapleFood} />
-            </SwiperSlide>
-            <SwiperSlide key="主菜">
-              <Chip label="主菜" onChange={() => setFilterMainDish((f) => !f)} checked={filterMainDish} />
-            </SwiperSlide>
-            <SwiperSlide key="副菜">
-              <Chip label="副菜" onChange={() => setFilterSideDish((f) => !f)} checked={filterSideDish} />
-            </SwiperSlide>
-            <SwiperSlide key="スープ">
-              <Chip label="スープ" onChange={() => setFilterSoup((f) => !f)} checked={filterSoup} />
-            </SwiperSlide>
-            <SwiperSlide key="デザート">
-              <Chip label="デザート" onChange={() => setFilterDessert((f) => !f)} checked={filterDessert} />
-            </SwiperSlide>
-            <SwiperSlide key="時短">
-              <Chip label="時短" onChange={() => setFilterQuick((f) => !f)} checked={filterQuick} />
-            </SwiperSlide>
-            <SwiperSlide key="普通">
-              <Chip label="普通" onChange={() => setFilterStandard((f) => !f)} checked={filterStandard} />
-            </SwiperSlide>
-            <SwiperSlide key="じっくり">
-              <Chip label="じっくり" onChange={() => setFilterHard((f) => !f)} checked={filterHard} />
-            </SwiperSlide>
-          </Swiper>
-        </div>
+        <Swiper
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          slidesPerView={"auto"}
+          spaceBetween={8}
+          freeMode={true}
+          modules={[FreeMode]}
+          className={"root"}
+        >
+          <SwiperSlide key="主食">
+            <Chip label="主食" onChange={() => setFilterStapleFood((f) => !f)} checked={filterStapleFood} />
+          </SwiperSlide>
+          <SwiperSlide key="主菜">
+            <Chip label="主菜" onChange={() => setFilterMainDish((f) => !f)} checked={filterMainDish} />
+          </SwiperSlide>
+          <SwiperSlide key="副菜">
+            <Chip label="副菜" onChange={() => setFilterSideDish((f) => !f)} checked={filterSideDish} />
+          </SwiperSlide>
+          <SwiperSlide key="スープ">
+            <Chip label="スープ" onChange={() => setFilterSoup((f) => !f)} checked={filterSoup} />
+          </SwiperSlide>
+          <SwiperSlide key="デザート">
+            <Chip label="デザート" onChange={() => setFilterDessert((f) => !f)} checked={filterDessert} />
+          </SwiperSlide>
+          <SwiperSlide key="時短">
+            <Chip label="時短" onChange={() => setFilterQuick((f) => !f)} checked={filterQuick} />
+          </SwiperSlide>
+          <SwiperSlide key="普通">
+            <Chip label="普通" onChange={() => setFilterStandard((f) => !f)} checked={filterStandard} />
+          </SwiperSlide>
+          <SwiperSlide key="じっくり">
+            <Chip label="じっくり" onChange={() => setFilterHard((f) => !f)} checked={filterHard} />
+          </SwiperSlide>
+        </Swiper>
         <div className={styles.changeButton}>
           <button>
             <GridViewIcon style={{ width: 18, height: 18 }} />
