@@ -1,14 +1,8 @@
-.radio {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
 .radio_button_card input[type="radio"] {
   appearance: none;
 }
 
-.radio_button_card label {
+.radio_button_card {
   display: flex;
   width: 360px;
   padding: 16px;
@@ -39,7 +33,7 @@
   background: #f5f5f5;
 }
 
-.radio_button_card.selected label {
+.radio_button_card.selected {
   border: 1px solid #3ec1d3;
 }
 
