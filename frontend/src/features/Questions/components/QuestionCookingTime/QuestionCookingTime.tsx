@@ -45,7 +45,19 @@ export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer }: Pr
           <h1>調理時間</h1>
           <h6>調理にかける時間を選択してください</h6>
         </div>
-        <RadioButtonCard options={options} selectedOption={answer} handleChange={setAnswer} />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-end",
+            gap: 16,
+          }}
+        >
+          {options.map((option) => (
+            <RadioButtonCard key={option.value} option={option} selectedOption={answer} handleChange={setAnswer} />
+          ))}
+        </div>
+
         <NextButton title={"レシピを検索する"} onClick={onClickNextPage} />
       </div>
     </div>
