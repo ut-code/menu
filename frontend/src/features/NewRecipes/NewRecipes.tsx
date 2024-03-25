@@ -1,9 +1,15 @@
 import { useState, useContext } from "react"
+import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
 
 import { postSubmitRecipeApi, postScrapeRecipeApi } from "@/utils/apiUtils"
 import { UserContext } from "@/utils/context"
 import { Recipe } from "@/utils/recipes"
+
+import styles from "./NewRecipes.module.css"
+import { BorderButton } from "@/components/elements/button/BorderButton"
+
+import emptyImage from "@/assets/image/Howto4.png"
 
 export const NewRecipes = () => {
   const { session } = useContext(UserContext)
@@ -71,9 +77,22 @@ export const NewRecipes = () => {
     setDish("")
   }
 
+  const navigate = useNavigate()
   // 「お気に入りにいれる」にデフォルトでチェックを入れる
 
-  if (!session?.access_token) return <p>ログインしていません</p>
+  if (!session?.access_token)
+    return (
+      <div className={styles.noResult}>
+        <div className={styles.imageArea}>
+          <img src={emptyImage} alt="empty" style={{ width: "300px" }} />
+          <h4 className={styles.text}>だるめしにログインして作成機能を使ってみましょう</h4>
+        </div>
+        <BorderButton onClick={() => navigate("/Auth")} disabled={false}>
+          <h4>ログインする</h4>
+        </BorderButton>
+      </div>
+    )
+
   return (
     <>
       <h1>レシピ投稿機能</h1>
