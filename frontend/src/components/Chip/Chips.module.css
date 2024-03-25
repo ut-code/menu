@@ -16,6 +16,7 @@
 
 .chip label {
   color: #000;
+  background: none;
   font-family: "Noto Sans JP";
   font-size: 12px;
   font-style: normal;
