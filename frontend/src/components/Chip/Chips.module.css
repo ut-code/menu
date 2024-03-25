@@ -16,12 +16,18 @@
 
 .chip label {
   color: #000;
+  background: none;
   font-family: "Noto Sans JP";
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   letter-spacing: 0.36px;
+
+  position: relative;
+  top: 0;
+  left: 0;
+  translate: 0;
 }
 
 .chip input[type="checkbox"] {
