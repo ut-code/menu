@@ -5,6 +5,7 @@ import { BorderButton } from "@/components/elements/button/BorderButton"
 import { BackButton } from "@/components/elements/button/BackButton"
 import { NextButton } from "@/components/elements/button/NextButton"
 import { Loading } from "@/components/Loading"
+import { TextField } from "@/components/TextField"
 import { Setting } from "../Setting"
 
 import styles from "./Auth.module.css"
@@ -70,7 +71,8 @@ export const Auth = ({ setInputUsername }: Props) => {
         )}
         <div className={styles.content}>
           <div className={styles.form}>
-            <div>
+            <div style={{ width: "100%" }}>
+              <TextField label="メールアドレス" value={email} onChange={setEmail} />
               <input
                 type="email"
                 placeholder="メールアドレスを入力してください"
