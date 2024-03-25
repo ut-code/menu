@@ -1,0 +1,33 @@
+.root {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+input {
+  padding: 16px;
+  border: 1px solid #c4c4c4;
+  border-radius: 4px;
+  width: 361px;
+  height: 22px;
+}
+
+input:focus + label,
+input:not(:placeholder-shown) + label {
+  font-size: 12px;
+  transform: translateY(-150%);
+  color: #3ec1d3;
+  background-color: white;
+  padding: 0 4px;
+}
+
+label {
+  position: absolute;
+  top: 35%;
+  left: 12px;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+input:not(:placeholder-shown) + label {
+  transform: translateY(-150%);
+}
