@@ -1,15 +1,14 @@
 .button {
-  /* layout */
   display: flex;
-  align-items: center;
-  justify-content: center;
-
-  /* box */
-  box-sizing: border-box;
-  background-color: var(--Yellow);
-  border-radius: 10rem;
-  border: 2.5px solid var(--Black);
-  box-shadow: var(--Black) 2px 2px 0 0;
   height: 40px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
   width: 100%;
+  height: 40px;
+  padding: 12px 24px;
+  border-radius: 24px;
+  border: 1px solid #c4c4c4;
+  background: #fff;
 }
