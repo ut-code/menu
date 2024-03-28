@@ -49,7 +49,7 @@ export const QuestionGenre = ({ setQuestionNumber, answer, setAnswer }: Props) =
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-end",
-            gap: 16,
+            gap: 8,
           }}
         >
           {options.map((option) => (
