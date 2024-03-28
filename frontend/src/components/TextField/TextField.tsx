@@ -3,7 +3,7 @@ import styles from "./TextField.module.css"
 
 interface Props {
   label: string
-  value: string
+  value: string | number | string[] | undefined
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
