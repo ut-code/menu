@@ -1,5 +1,3 @@
-import styles from "./TipReference.module.css"
-
 interface dict {
   [key: string]: string
 }
@@ -30,5 +28,5 @@ const translateUrlToSiteName = (url: string): string => {
 }
 
 export const TipReference = (props: { url: string }) => {
-  return <div className={styles.tip}>{translateUrlToSiteName(props.url)}</div>
+  return <h4 style={{ textDecoration: "none" }}>{translateUrlToSiteName(props.url)}</h4>
 }

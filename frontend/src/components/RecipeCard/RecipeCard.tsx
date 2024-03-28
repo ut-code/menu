@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { Link } from "react-router-dom"
 
-import { AiFillHeart } from "react-icons/ai"
+import FavoriteIcon from "@mui/icons-material/Favorite"
 import { TipReference } from "@/components/TipReference"
 import { Recipe } from "@/utils/recipes"
 import { UserContext } from "@/utils/context"
@@ -30,22 +30,23 @@ export const RecipeCard = ({ recipe, favoriteRecipes, toggleFavorite }: Props) =
 
   return (
     <Link to={recipe.sourceUrl} target="_blank" rel="noopener noreferrer">
-      <div className={styles.root}>
+      <div className={styles.container}>
         <img className={styles.image_frame} src={recipe.foodImageUrl} />
-        {session && (
-          <div
-            className={styles.icon}
-            onClick={(event: React.MouseEvent<HTMLDivElement>) => onClickHandler(recipe.id, event)}
-          >
-            <AiFillHeart color={isFavorited ? "red" : "gray"} />
-          </div>
-        )}
-        <div className={styles.hr}>{"_"}</div>
-        <div className={styles.text_container}>
-          <div className={styles.left}>
-            <span className={styles.text_title}>{recipe.title}</span>
-            <span className={styles.text_material}>{materialsConverted}</span>
-            <TipReference url={recipe.sourceUrl} />
+        <div className={styles.text}>
+          {session && (
+            <div
+              className={styles.icon}
+              onClick={(event: React.MouseEvent<HTMLDivElement>) => onClickHandler(recipe.id, event)}
+            >
+              <FavoriteIcon style={{ color: isFavorited ? "red" : "gray" }} />
+            </div>
+          )}
+          <div className={styles.text_area}>
+            <div className={styles.title_area}>
+              <h3>{recipe.title}</h3>
+              <TipReference url={recipe.sourceUrl} />
+            </div>
+            <h5 className={styles.txt_limit}>{materialsConverted}</h5>
           </div>
         </div>
       </div>
