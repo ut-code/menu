@@ -44,14 +44,12 @@ export const Setting = () => {
         <div className={styles.title}>
           <h6>ライセンス</h6>
         </div>
-        <Link to={"https://gist.github.com/bvv-1/d3c318f90d0720e81259e58de49adc30"} style={{ textDecoration: "none" }}>
+        <Link to={"http://www.goo.ne.jp"} style={{ textDecoration: "none" }}>
           <div className={styles.list}>
             <div className={styles.textarea}>
               <h4 style={{ fontWeight: 400 }}>gooラボAPI</h4>
             </div>
-            <a href="http://www.goo.ne.jp/">
-              <img src="//u.xgoo.jp/img/sgoo.png" alt="supported by goo" title="supported by goo" width={"96px"} />
-            </a>
+            <img src="//u.xgoo.jp/img/sgoo.png" alt="supported by goo" title="supported by goo" width={"96px"} />
           </div>
         </Link>
       </div>
