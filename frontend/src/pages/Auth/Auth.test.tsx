@@ -14,12 +14,12 @@ beforeAll(() => {
 describe("SignIn component", () => {
   it("should handle form submission and show success alert", async () => {
     const mockSetInputUsername = vi.fn()
-    const { getByPlaceholderText, getByText } = render(
+    const { getByLabelText, getByText } = render(
       <MemoryRouter>
         <Auth inputUsername="" setInputUsername={mockSetInputUsername} />
       </MemoryRouter>
     )
-    const emailInput = getByPlaceholderText("メールアドレスを入力してください")
+    const emailInput = getByLabelText("メールアドレス")
     const sendButton = getByText("サインイン")
 
     const mockSignInWithOtp = vi.fn().mockResolvedValue({ error: null })
