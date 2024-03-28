@@ -6,12 +6,12 @@ import { postSubmitRecipeApi, postScrapeRecipeApi } from "@/utils/apiUtils"
 import { UserContext } from "@/utils/context"
 import { Recipe } from "@/utils/recipes"
 
-import styles from "./NewRecipes.module.css"
+import styles from "./NewRecipe.module.css"
 import { BorderButton } from "@/components/elements/button/BorderButton"
 
 import emptyImage from "@/assets/image/Howto4.png"
 
-export const NewRecipes = () => {
+export const NewRecipe = () => {
   const { session } = useContext(UserContext)
   const [title, setTitle] = useState<string>("")
   const [description, setDescription] = useState<string>("")

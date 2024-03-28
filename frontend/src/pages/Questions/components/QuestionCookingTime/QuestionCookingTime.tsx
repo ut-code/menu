@@ -21,7 +21,7 @@ export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer }: Pr
   ]
 
   const onClickNextPage = () => {
-    navigate("/search")
+    navigate("/result")
   }
 
   return (
