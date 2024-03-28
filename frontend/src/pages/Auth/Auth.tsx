@@ -6,7 +6,6 @@ import { BackButton } from "@/components/elements/button/BackButton"
 import { NextButton } from "@/components/elements/button/NextButton"
 import { Loading } from "@/components/Loading"
 import { TextField } from "@/components/TextField"
-import { Setting } from "../Setting"
 
 import styles from "./Auth.module.css"
 
@@ -56,7 +55,7 @@ export const Auth = ({ setInputUsername }: Props) => {
   if (loading) return <Loading />
   return (
     <div className={styles.root}>
-      <BackButton onClick={() => Setting} />
+      <BackButton onClick={() => {}} />
       <div className={styles.container}>
         {hasAccount ? (
           <div className={styles.title}>
@@ -72,15 +71,7 @@ export const Auth = ({ setInputUsername }: Props) => {
         <div className={styles.content}>
           <div className={styles.form}>
             <div style={{ width: "100%" }}>
-              <TextField label="メールアドレス" value={email} onChange={setEmail} />
-              <input
-                type="email"
-                placeholder="メールアドレスを入力してください"
-                value={email}
-                required={true}
-                onChange={(e) => setEmail(e.target.value)}
-                className={styles.input}
-              />
+              <TextField label="メールアドレス" value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
             <NextButton
               onClick={() => handleSignIn}

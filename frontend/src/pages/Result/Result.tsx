@@ -182,7 +182,7 @@ export const Result = () => {
               >
                 <h3>もう一度検索する</h3>
               </button>
-              <button className={styles.returnHome} onClick={() => navigate("/home")}>
+              <button className={styles.returnHome} onClick={() => navigate("/questions")}>
                 <h3>ホームへ戻る</h3>
               </button>
             </div>

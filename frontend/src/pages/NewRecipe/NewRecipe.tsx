@@ -1,18 +1,27 @@
 import { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
-import { Link } from "react-router-dom"
 
 import { postSubmitRecipeApi, postScrapeRecipeApi } from "@/utils/apiUtils"
 import { UserContext } from "@/utils/context"
 import { Recipe } from "@/utils/recipes"
 
-import styles from "./NewRecipes.module.css"
+import styles from "./NewRecipe.module.css"
 import { BorderButton } from "@/components/elements/button/BorderButton"
+import { BackButton } from "@/components/elements/button/BackButton"
+import { NextButton } from "@/components/elements/button/NextButton"
+import { Loading } from "@/components/Loading"
+import { InfoBox } from "@/components/InfoBox"
+import { TextField } from "@/components/TextField"
+import GridViewIcon from "@mui/icons-material/GridView"
 
 import emptyImage from "@/assets/image/Howto4.png"
 
-export const NewRecipes = () => {
+type UIState = "URL" | "Detail"
+
+export const NewRecipe = () => {
   const { session } = useContext(UserContext)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [uiState, setUiState] = useState<UIState>("URL")
   const [title, setTitle] = useState<string>("")
   const [description, setDescription] = useState<string>("")
   const [totalCookingTime, setTotalCookingTime] = useState<number>(-1)
@@ -27,6 +36,7 @@ export const NewRecipes = () => {
       return
     }
     if (!session?.access_token) return
+    setIsLoading(true)
     const response = await fetch(postScrapeRecipeApi(), {
       method: "POST",
       headers: {
@@ -45,6 +55,8 @@ export const NewRecipes = () => {
     setMaterialsConverted(recipe.materials.join(","))
     setFoodImageUrl(recipe.foodImageUrl)
     setDish(recipe.dish)
+    setIsLoading(false)
+    setUiState("Detail")
   }
 
   const handleSubmit = async () => {
@@ -80,6 +92,7 @@ export const NewRecipes = () => {
   const navigate = useNavigate()
   // 「お気に入りにいれる」にデフォルトでチェックを入れる
 
+  if (isLoading) return <Loading />
   if (!session?.access_token)
     return (
       <div className={styles.noResult}>
@@ -93,31 +106,31 @@ export const NewRecipes = () => {
       </div>
     )
 
+  if (uiState === "URL")
+    return (
+      <div style={{ padding: 16 }}>
+        <input type="text" value={sourceUrl} onChange={(e) => setSourceUrl(e.target.value)} />
+        <InfoBox />
+        <NextButton title={"レシピを作成する"} onClick={handleScrape} disabled={false} />
+      </div>
+    )
+
   return (
     <>
-      <h1>レシピ投稿機能</h1>
-
-      <label htmlFor="sourceUrl">URL</label>
-      <input type="text" value={sourceUrl} onChange={(e) => setSourceUrl(e.target.value)} />
-      <button type="button" onClick={handleScrape}>
-        自動スクレイピング
-      </button>
-      <br />
-      <label htmlFor="title">タイトル</label>
-      <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-      <br />
-      <label htmlFor="description">説明</label>
-      <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
-      <br />
-      <label htmlFor="cookingTime">調理時間</label>
-      <input type="number" value={totalCookingTime} onChange={(e) => setTotalCookingTime(Number(e.target.value))} />
-      <br />
-      <label htmlFor="materials">材料</label>
-      <input type="text" value={materialsConverted} onChange={(e) => setMaterialsConverted(e.target.value)} />
-      <br />
-      <label htmlFor="foodImageUrl">料理画像URL</label>
-      <input type="text" value={foodImageUrl} onChange={(e) => setFoodImageUrl(e.target.value)} />
-      <br />
+      <BackButton onClick={() => setUiState("URL")} />
+      <h1>作成内容</h1>
+      <h4>作成するレシピの内容を確認・修正してください</h4>
+      <div className={styles.changeButton}>
+        <button>
+          <GridViewIcon style={{ width: 18, height: 18 }} />
+          <h5>表示切り替え</h5>
+        </button>
+      </div>
+      <img src={foodImageUrl} alt="料理画像" />
+      <TextField label="料理画像URL" value={foodImageUrl} onChange={(e) => setFoodImageUrl(e.target.value)} />
+      <TextField label="料理名" value={title} onChange={(e) => setTitle(e.target.value)} />
+      <TextField label="説明" value={description} onChange={(e) => setDescription(e.target.value)} />
+      <TextField label="材料" value={materialsConverted} onChange={(e) => setMaterialsConverted(e.target.value)} />
       <label htmlFor="dish">料理の種類</label>
       <select value={dish} onChange={(e) => setDish(e.target.value)}>
         <option value="主食">主食</option>
@@ -125,12 +138,12 @@ export const NewRecipes = () => {
         <option value="副菜">副菜</option>
         <option value="スープ">スープ</option>
       </select>
-      <br />
-      <img src={foodImageUrl} alt="料理画像" />
-      <br />
-      <button onClick={handleSubmit}>投稿</button>
-
-      <Link to="/">ホームに戻る</Link>
+      <TextField
+        label="調理時間"
+        value={totalCookingTime}
+        onChange={(e) => setTotalCookingTime(Number(e.target.value))}
+      />
+      <NextButton title={"投稿する"} onClick={handleSubmit} disabled={false} />
     </>
   )
 }

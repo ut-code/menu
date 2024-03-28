@@ -29,7 +29,7 @@ export const Questions = () => {
         <QuestionCookingTime setQuestionNumber={setQuestionNumber} answer={cookingTime} setAnswer={setCookingTime} />
       )
     default:
-      navigate("/search")
+      navigate("/result")
       return null
   }
 }

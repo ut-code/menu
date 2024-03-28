@@ -9,6 +9,14 @@ export const Setting = () => {
         <div className={styles.title}>
           <h6>アカウント設定</h6>
         </div>
+        <Link to={"/auth"} style={{ textDecoration: "none" }}>
+          <div className={styles.list}>
+            <div className={styles.textarea}>
+              <h4 style={{ fontWeight: 400 }}>サインイン周りの画面</h4>
+            </div>
+            <ArrowForwardIcon className={styles.icon} />
+          </div>
+        </Link>
         <Link to={"https://gist.github.com/bvv-1/d3c318f90d0720e81259e58de49adc30"} style={{ textDecoration: "none" }}>
           <div className={styles.list}>
             <div className={styles.textarea}>

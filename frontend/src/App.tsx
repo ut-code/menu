@@ -12,7 +12,7 @@ import { Result } from "@/pages/Result"
 import { Auth } from "@/pages/Auth"
 import { Favorite } from "@/pages/Favorite"
 import { Setting } from "@/pages/Setting"
-import { NewRecipes } from "@/pages/NewRecipes"
+import { NewRecipe } from "@/pages/NewRecipe"
 import { NotFound } from "@/pages/NotFound"
 import { supabase } from "@/pages/Auth/supabaseClient"
 
@@ -72,7 +72,7 @@ export default function App() {
         <Route path="/" element={location.search !== "?ref=a2hs" ? <HowTo /> : <Navigate replace to="/questions" />} />
         <Route path="/favorites" element={<Favorite />} />
         <Route path="/questions" element={<Questions />} />
-        <Route path="/search" element={<Result />} />
+        <Route path="/result" element={<Result />} />
         <Route path="/setting" element={<Setting />} />
         <Route
           path="/auth"
@@ -80,11 +80,11 @@ export default function App() {
             !session ? (
               <Auth inputUsername={inputUsername} setInputUsername={setInputUsername} />
             ) : (
-              <Navigate replace to="/home" />
+              <Navigate replace to="/questions" />
             )
           }
         />
-        <Route path="/new" element={<NewRecipes />} />
+        <Route path="/new" element={<NewRecipe />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <BottomNavigationBar />

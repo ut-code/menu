@@ -35,7 +35,7 @@ export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredi
       <div style={{ padding: 16 }}>
         <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "flex-start", gap: 16 }}>
           <Searchbox
-            onClickHandler={() => navigate("/search")}
+            onClickHandler={() => navigate("/result")}
             placeholder={"例: 卵 トマト じゃがいも"}
             onChange={onChangeSearchbox}
             inputContent={inputContent}
