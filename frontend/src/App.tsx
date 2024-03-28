@@ -71,7 +71,7 @@ export default function App() {
         <Route path="/home/favorites" element={<Favorite />} />
         <Route path="/questions" element={<Questions />} />
         <Route path="/search" element={<Result />} />
-        <Route path="/setting" element={<Setting setUser={setUser} setInputUsername={setInputUsername} />} />
+        <Route path="/setting" element={<Setting />} />
         <Route
           path="/auth"
           element={
