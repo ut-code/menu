@@ -80,7 +80,7 @@ export default function App() {
             !session ? (
               <Auth inputUsername={inputUsername} setInputUsername={setInputUsername} />
             ) : (
-              <Navigate replace to="/home" />
+              <Navigate replace to="/questions" />
             )
           }
         />

@@ -8,11 +8,19 @@ import { Recipe } from "@/utils/recipes"
 
 import styles from "./NewRecipe.module.css"
 import { BorderButton } from "@/components/elements/button/BorderButton"
+import { BackButton } from "@/components/elements/button/BackButton"
+import { NextButton } from "@/components/elements/button/NextButton"
+import { Loading } from "@/components/Loading"
+import { InfoBox } from "@/components/InfoBox"
 
 import emptyImage from "@/assets/image/Howto4.png"
 
+type UIState = "URL" | "Detail"
+
 export const NewRecipe = () => {
   const { session } = useContext(UserContext)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [uiState, setUiState] = useState<UIState>("URL")
   const [title, setTitle] = useState<string>("")
   const [description, setDescription] = useState<string>("")
   const [totalCookingTime, setTotalCookingTime] = useState<number>(-1)
@@ -27,6 +35,7 @@ export const NewRecipe = () => {
       return
     }
     if (!session?.access_token) return
+    setIsLoading(true)
     const response = await fetch(postScrapeRecipeApi(), {
       method: "POST",
       headers: {
@@ -45,6 +54,8 @@ export const NewRecipe = () => {
     setMaterialsConverted(recipe.materials.join(","))
     setFoodImageUrl(recipe.foodImageUrl)
     setDish(recipe.dish)
+    setIsLoading(false)
+    setUiState("Detail")
   }
 
   const handleSubmit = async () => {
@@ -80,6 +91,7 @@ export const NewRecipe = () => {
   const navigate = useNavigate()
   // 「お気に入りにいれる」にデフォルトでチェックを入れる
 
+  if (isLoading) return <Loading />
   if (!session?.access_token)
     return (
       <div className={styles.noResult}>
@@ -93,16 +105,18 @@ export const NewRecipe = () => {
       </div>
     )
 
+  if (uiState === "URL")
+    return (
+      <div style={{ padding: 16 }}>
+        <input type="text" value={sourceUrl} onChange={(e) => setSourceUrl(e.target.value)} />
+        <InfoBox />
+        <NextButton title={"レシピを作成する"} onClick={handleScrape} disabled={false} />
+      </div>
+    )
+
   return (
     <>
-      <h1>レシピ投稿機能</h1>
-
-      <label htmlFor="sourceUrl">URL</label>
-      <input type="text" value={sourceUrl} onChange={(e) => setSourceUrl(e.target.value)} />
-      <button type="button" onClick={handleScrape}>
-        自動スクレイピング
-      </button>
-      <br />
+      <BackButton onClick={() => setUiState("URL")} />
       <label htmlFor="title">タイトル</label>
       <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
       <br />
