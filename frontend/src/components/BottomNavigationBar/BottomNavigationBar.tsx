@@ -10,7 +10,6 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import FavoriteIcon from "@mui/icons-material/Favorite"
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined"
 import AccountCircleIcon from "@mui/icons-material/AccountCircle"
-
 import { styled } from "@mui/material/styles"
 
 const StyledBottomNavigationAction = styled(BottomNavigationAction)(() => ({
@@ -30,7 +29,7 @@ export const BottomNavigationBar = () => {
   }
 
   return (
-    <Paper sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }} elevation={3}>
+    <Paper sx={{ position: "fixed", bottom: 0, left: 0, right: 0, paddingTop: 1.5 }} elevation={3}>
       <BottomNavigation showLabels={true} value={value} onChange={handleChange}>
         <StyledBottomNavigationAction label="検索" icon={<SearchIcon />} value="/questions" />
         <StyledBottomNavigationAction
