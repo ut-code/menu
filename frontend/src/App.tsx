@@ -16,8 +16,10 @@ import { NewRecipes } from "@/pages/NewRecipes"
 import { NotFound } from "@/pages/NotFound"
 import { supabase } from "@/pages/Auth/supabaseClient"
 
+import { Loading } from "@/components/Loading"
+import { BottomNavigationBar } from "@/components/BottomNavigationBar"
+
 import "./App.css"
-import { Loading } from "./components/Loading"
 
 export default function App() {
   // Ref: https://mixblog.vercel.app/contents/next-supabase
@@ -68,7 +70,7 @@ export default function App() {
     <UserContext.Provider value={{ user, session }}>
       <Routes>
         <Route path="/" element={location.search !== "?ref=a2hs" ? <HowTo /> : <Navigate replace to="/questions" />} />
-        <Route path="/home/favorites" element={<Favorite />} />
+        <Route path="/favorites" element={<Favorite />} />
         <Route path="/questions" element={<Questions />} />
         <Route path="/search" element={<Result />} />
         <Route path="/setting" element={<Setting />} />
@@ -85,6 +87,7 @@ export default function App() {
         <Route path="/new" element={<NewRecipes />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <BottomNavigationBar />
     </UserContext.Provider>
   )
 }
