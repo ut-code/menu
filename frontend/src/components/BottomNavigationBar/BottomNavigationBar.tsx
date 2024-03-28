@@ -11,6 +11,15 @@ import FavoriteIcon from "@mui/icons-material/Favorite"
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined"
 import AccountCircleIcon from "@mui/icons-material/AccountCircle"
 
+import { styled } from "@mui/material/styles"
+
+const StyledBottomNavigationAction = styled(BottomNavigationAction)(() => ({
+  color: "#C4C4C4",
+  "&.Mui-selected": {
+    color: "#000000",
+  },
+}))
+
 export const BottomNavigationBar = () => {
   const navigate = useNavigate()
   const location = useLocation()
@@ -23,18 +32,18 @@ export const BottomNavigationBar = () => {
   return (
     <Paper sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }} elevation={3}>
       <BottomNavigation showLabels={true} value={value} onChange={handleChange}>
-        <BottomNavigationAction label="検索" icon={<SearchIcon />} value="/questions" />
-        <BottomNavigationAction
+        <StyledBottomNavigationAction label="検索" icon={<SearchIcon />} value="/questions" />
+        <StyledBottomNavigationAction
           label="作成"
           icon={value === "/new" ? <EditIcon /> : <EditOutlinedIcon />}
           value="/new"
         />
-        <BottomNavigationAction
+        <StyledBottomNavigationAction
           label="お気に入り"
           icon={value === "/favorites" ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon />}
           value="/favorites"
         />
-        <BottomNavigationAction
+        <StyledBottomNavigationAction
           label="マイページ"
           icon={value === "/setting" ? <AccountCircleIcon /> : <AccountCircleOutlinedIcon />}
           value="/setting"
