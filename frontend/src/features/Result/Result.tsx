@@ -5,6 +5,7 @@ import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query"
 import { Loading } from "@/components/Loading"
 import { Searchbox } from "@/components/Searchbox"
 import { RecipeCard } from "@/components/RecipeCard"
+import { BackButton } from "@/components/elements/button/BackButton"
 import {
   postSearchRecipesApi,
   postSearchRecipesKeywordsApi,
@@ -16,6 +17,7 @@ import { UserContext } from "@/utils/context"
 import { Recipe, SearchInfo } from "@/utils/recipes"
 import styles from "./Result.module.css"
 import { EmptyResults } from "@/components/EmptyResults"
+import GridViewIcon from "@mui/icons-material/GridView"
 
 export const Result = () => {
   const navigate = useNavigate()
@@ -136,8 +138,9 @@ export const Result = () => {
 
   if (isLoadingRecipes || isLoadingFavoriteRecipes) return <Loading />
   return (
-    <div className="style_lightbrown">
-      <div className={styles.searchbox}>
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <BackButton onClick={() => navigate} />
         <Searchbox
           onClickHandler={onClickSearchRecipesKeywords}
           onChange={onChangeHandler}
@@ -147,22 +150,23 @@ export const Result = () => {
       </div>
 
       {recipes && recipes.length > 0 ? (
-        <div className={styles.cards}>
-          {recipes &&
-            recipes.map((recipe) => (
-              <RecipeCard
-                key={recipe.id}
-                recipe={recipe}
-                favoriteRecipes={favoriteRecipes}
-                toggleFavorite={toggleFavorite}
-              />
-            ))}
-          <div className={styles.spacer} />
-
-          <div className={styles.bottom}>
-            <button className={styles.returnHome} onClick={() => navigate("/home")}>
-              ホームへ戻る
+        <div className={styles.content}>
+          <div className={styles.changeButton}>
+            <button>
+              <GridViewIcon style={{ width: 18, height: 18 }} />
+              <h5>表示切り替え</h5>
             </button>
+          </div>
+          <div className={styles.cards}>
+            {recipes &&
+              recipes.map((recipe) => (
+                <RecipeCard
+                  key={recipe.id}
+                  recipe={recipe}
+                  favoriteRecipes={favoriteRecipes}
+                  toggleFavorite={toggleFavorite}
+                />
+              ))}
           </div>
         </div>
       ) : (
