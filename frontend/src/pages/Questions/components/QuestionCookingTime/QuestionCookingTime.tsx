@@ -25,7 +25,7 @@ export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer }: Pr
   }
 
   return (
-    <div style={{ padding: 16 }}>
+    <div style={{ padding: "32px 16px" }}>
       <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
         <BackButton onClick={() => setQuestionNumber(0)} />
         {/* <Searchbox /> */}

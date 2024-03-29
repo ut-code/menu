@@ -108,11 +108,15 @@ export const NewRecipe = () => {
 
   if (uiState === "URL")
     return (
-      <div style={{ padding: 16 }}>
-        <input type="text" value={sourceUrl} onChange={(e) => setSourceUrl(e.target.value)} />
-        <InfoBox />
-        <NextButton title={"レシピを作成する"} onClick={handleScrape} disabled={false} />
-      </div>
+      <>
+        <div style={{ padding: "32px 16px" }}>
+          <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "flex-start", gap: 32 }}>
+            <TextField label="レシピのURL" value={sourceUrl} onChange={(e) => setSourceUrl(e.target.value)} />
+            <InfoBox />
+          </div>
+          <NextButton title={"レシピを作成する"} onClick={handleScrape} disabled={false} />
+        </div>
+      </>
     )
 
   return (

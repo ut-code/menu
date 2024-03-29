@@ -24,7 +24,7 @@ export const QuestionGenre = ({ setQuestionNumber, answer, setAnswer }: Props) =
   }
 
   return (
-    <div style={{ padding: 16 }}>
+    <div style={{ padding: "32px 16px" }}>
       <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
         <BackButton onClick={() => setQuestionNumber(0)} />
         {/* <Searchbox /> */}
