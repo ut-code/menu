@@ -43,3 +43,10 @@
   align-items: flex-end;
   align-self: stretch;
 }
+
+.editArea {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
