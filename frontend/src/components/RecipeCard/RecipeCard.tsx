@@ -43,7 +43,7 @@ export const RecipeCard = ({ recipe, favoriteRecipes, toggleFavorite }: Props) =
           )}
           <div className={styles.text_area}>
             <div className={styles.title_area}>
-              <h3>{recipe.title}</h3>
+              <h3 className={styles.txt_limit}>{recipe.title}</h3>
               <TipReference url={recipe.sourceUrl} />
             </div>
             <h5 className={styles.txt_limit}>{materialsConverted}</h5>

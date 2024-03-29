@@ -17,6 +17,7 @@ const urlDomainToName: dict = {
   "recipe.rakuten.co.jp": "楽天レシピ",
   "www.mizkan.co.jp": "ミツカン",
   "www.kikkoman.co.jp": "キッコーマン",
+  "oceans-nadia.com": "Nadia",
 }
 
 const translateUrlToSiteName = (url: string): string => {
@@ -28,5 +29,5 @@ const translateUrlToSiteName = (url: string): string => {
 }
 
 export const TipReference = (props: { url: string }) => {
-  return <h4 style={{ textDecoration: "none" }}>{translateUrlToSiteName(props.url)}</h4>
+  return <h4 style={{ textDecoration: "none", fontWeight: 500 }}>{translateUrlToSiteName(props.url)}</h4>
 }

@@ -11,7 +11,9 @@ import { BackButton } from "@/components/elements/button/BackButton"
 import { NextButton } from "@/components/elements/button/NextButton"
 import { Loading } from "@/components/Loading"
 import { InfoBox } from "@/components/InfoBox"
-import { TextField } from "@/components/TextField"
+// import { TextField } from "@/components/TextField"
+import { TextField } from "@mui/material"
+import { RecipeCard } from "@/components/RecipeCard"
 import GridViewIcon from "@mui/icons-material/GridView"
 
 import emptyImage from "@/assets/image/Howto4.png"
@@ -108,42 +110,103 @@ export const NewRecipe = () => {
 
   if (uiState === "URL")
     return (
-      <div style={{ padding: 16 }}>
-        <input type="text" value={sourceUrl} onChange={(e) => setSourceUrl(e.target.value)} />
-        <InfoBox />
-        <NextButton title={"レシピを作成する"} onClick={handleScrape} disabled={false} />
-      </div>
+      <>
+        <div style={{ padding: "32px 16px" }}>
+          <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "flex-start", gap: 32 }}>
+            <TextField
+              id="outlined-basic"
+              label="レシピのURL"
+              variant="outlined"
+              value={sourceUrl}
+              onChange={(e) => setSourceUrl(e.target.value)}
+              style={{ width: "100%" }}
+            />
+            <InfoBox />
+          </div>
+          <NextButton title={"レシピを作成する"} onClick={handleScrape} disabled={false} />
+        </div>
+      </>
     )
 
   return (
-    <>
+    <div className={styles.createdContents}>
       <BackButton onClick={() => setUiState("URL")} />
-      <h1>作成内容</h1>
-      <h4>作成するレシピの内容を確認・修正してください</h4>
-      <div className={styles.changeButton}>
-        <button>
-          <GridViewIcon style={{ width: 18, height: 18 }} />
-          <h5>表示切り替え</h5>
-        </button>
+      <div className={styles.titleArea}>
+        <h1>作成内容</h1>
+        <h4>作成するレシピの内容を確認・修正してください</h4>
       </div>
-      <img src={foodImageUrl} alt="料理画像" />
-      <TextField label="料理画像URL" value={foodImageUrl} onChange={(e) => setFoodImageUrl(e.target.value)} />
-      <TextField label="料理名" value={title} onChange={(e) => setTitle(e.target.value)} />
-      <TextField label="説明" value={description} onChange={(e) => setDescription(e.target.value)} />
-      <TextField label="材料" value={materialsConverted} onChange={(e) => setMaterialsConverted(e.target.value)} />
-      <label htmlFor="dish">料理の種類</label>
-      <select value={dish} onChange={(e) => setDish(e.target.value)}>
-        <option value="主食">主食</option>
-        <option value="主菜">主菜</option>
-        <option value="副菜">副菜</option>
-        <option value="スープ">スープ</option>
-      </select>
-      <TextField
-        label="調理時間"
-        value={totalCookingTime}
-        onChange={(e) => setTotalCookingTime(Number(e.target.value))}
-      />
+
+      <div className={styles.content}>
+        <div className={styles.previewArea}>
+          <div className={styles.buttonArea}>
+            <h4 style={{ color: "#c4c4c4" }}>プレビュー</h4>
+            <div className={styles.changeButton}>
+              <button>
+                <GridViewIcon style={{ width: 18, height: 18 }} />
+                <h5>表示切り替え</h5>
+              </button>
+            </div>
+          </div>
+          <RecipeCard
+            recipe={{
+              id: 0, // Replace with the actual id value
+              keywords: [], // Replace with the actual keywords value
+              createdAt: "", // Replace with the actual createdAt value
+              title: title,
+              description: description,
+              totalCookingTime: totalCookingTime,
+              materials: materialsConverted.split(","),
+              sourceUrl: sourceUrl,
+              foodImageUrl: foodImageUrl,
+              dish: dish,
+            }}
+            favoriteRecipes={[]} // Replace with the actual favoriteRecipes value
+            toggleFavorite={() => {}} // Replace with the actual toggleFavorite value
+          />
+        </div>
+
+        <div className={styles.editArea}>
+          <TextField
+            id="outlined-basic"
+            label="料理画像URL"
+            variant="outlined"
+            value={foodImageUrl}
+            onChange={(e) => setFoodImageUrl(e.target.value)}
+            style={{ width: "100%" }}
+          />
+          <TextField
+            id="outlined-basic"
+            label="料理名"
+            variant="outlined"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            style={{ width: "100%" }}
+          />
+          <TextField
+            id="outlined-basic"
+            label="材料"
+            variant="outlined"
+            value={materialsConverted}
+            onChange={(e) => setMaterialsConverted(e.target.value)}
+            style={{ width: "100%" }}
+          />
+          <select value={dish} onChange={(e) => setDish(e.target.value)}>
+            <option value="主食">主食</option>
+            <option value="主菜">主菜</option>
+            <option value="副菜">副菜</option>
+            <option value="スープ">スープ</option>
+          </select>
+          <TextField
+            id="outlined-basic"
+            label="調理時間"
+            variant="outlined"
+            value={totalCookingTime}
+            onChange={(e) => setTotalCookingTime(Number(e.target.value))}
+            style={{ width: "100%" }}
+          />
+        </div>
+      </div>
       <NextButton title={"投稿する"} onClick={handleSubmit} disabled={false} />
-    </>
+    </div>
   )
 }
