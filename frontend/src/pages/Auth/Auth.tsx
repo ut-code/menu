@@ -60,12 +60,12 @@ export const Auth = ({ setInputUsername }: Props) => {
         {hasAccount ? (
           <div className={styles.title}>
             <h1>ログイン</h1>
-            <h6>ログインに必要な情報を入力してください</h6>
+            <h4>ログインに必要な情報を入力してください</h4>
           </div>
         ) : (
           <div className={styles.title}>
             <h1>新規アカウント作成</h1>
-            <h6>アカウント作成に必要な情報を入力してください</h6>
+            <h4>アカウント作成に必要な情報を入力してください</h4>
           </div>
         )}
         <div className={styles.content}>
