@@ -129,76 +129,82 @@ export const NewRecipe = () => {
     )
 
   return (
-    <div className={styles.preview}>
+    <div className={styles.createdContents}>
       <BackButton onClick={() => setUiState("URL")} />
       <div className={styles.titleArea}>
         <h1>作成内容</h1>
         <h4>作成するレシピの内容を確認・修正してください</h4>
       </div>
-      <div className={styles.buttonArea}>
-        <h4 style={{ color: "#c4c4c4" }}>プレビュー</h4>
-        <div className={styles.changeButton}>
-          <button>
-            <GridViewIcon style={{ width: 18, height: 18 }} />
-            <h5>表示切り替え</h5>
-          </button>
+
+      <div className={styles.content}>
+        <div className={styles.previewArea}>
+          <div className={styles.buttonArea}>
+            <h4 style={{ color: "#c4c4c4" }}>プレビュー</h4>
+            <div className={styles.changeButton}>
+              <button>
+                <GridViewIcon style={{ width: 18, height: 18 }} />
+                <h5>表示切り替え</h5>
+              </button>
+            </div>
+          </div>
+          <RecipeCard
+            recipe={{
+              id: 0, // Replace with the actual id value
+              keywords: [], // Replace with the actual keywords value
+              createdAt: "", // Replace with the actual createdAt value
+              title: title,
+              description: description,
+              totalCookingTime: totalCookingTime,
+              materials: materialsConverted.split(","),
+              sourceUrl: sourceUrl,
+              foodImageUrl: foodImageUrl,
+              dish: dish,
+            }}
+            favoriteRecipes={[]} // Replace with the actual favoriteRecipes value
+            toggleFavorite={() => {}} // Replace with the actual toggleFavorite value
+          />
         </div>
-      </div>
-      <RecipeCard
-        recipe={{
-          id: 0, // Replace with the actual id value
-          keywords: [], // Replace with the actual keywords value
-          createdAt: "", // Replace with the actual createdAt value
-          title: title,
-          description: description,
-          totalCookingTime: totalCookingTime,
-          materials: materialsConverted.split(","),
-          sourceUrl: sourceUrl,
-          foodImageUrl: foodImageUrl,
-          dish: dish,
-        }}
-        favoriteRecipes={[]} // Replace with the actual favoriteRecipes value
-        toggleFavorite={() => {}} // Replace with the actual toggleFavorite value
-      />
-      <div className={styles.editArea}>
-        <TextField
-          id="outlined-basic"
-          label="料理画像URL"
-          variant="outlined"
-          value={foodImageUrl}
-          onChange={(e) => setFoodImageUrl(e.target.value)}
-          style={{ width: "100%" }}
-        />
-        <TextField
-          id="outlined-basic"
-          label="料理名"
-          variant="outlined"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          style={{ width: "100%" }}
-        />
-        <TextField
-          id="outlined-basic"
-          label="材料"
-          variant="outlined"
-          value={materialsConverted}
-          onChange={(e) => setMaterialsConverted(e.target.value)}
-          style={{ width: "100%" }}
-        />
-        <select value={dish} onChange={(e) => setDish(e.target.value)}>
-          <option value="主食">主食</option>
-          <option value="主菜">主菜</option>
-          <option value="副菜">副菜</option>
-          <option value="スープ">スープ</option>
-        </select>
-        <TextField
-          id="outlined-basic"
-          label="調理時間"
-          variant="outlined"
-          value={totalCookingTime}
-          onChange={(e) => setTotalCookingTime(Number(e.target.value))}
-          style={{ width: "100%" }}
-        />
+
+        <div className={styles.editArea}>
+          <TextField
+            id="outlined-basic"
+            label="料理画像URL"
+            variant="outlined"
+            value={foodImageUrl}
+            onChange={(e) => setFoodImageUrl(e.target.value)}
+            style={{ width: "100%" }}
+          />
+          <TextField
+            id="outlined-basic"
+            label="料理名"
+            variant="outlined"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            style={{ width: "100%" }}
+          />
+          <TextField
+            id="outlined-basic"
+            label="材料"
+            variant="outlined"
+            value={materialsConverted}
+            onChange={(e) => setMaterialsConverted(e.target.value)}
+            style={{ width: "100%" }}
+          />
+          <select value={dish} onChange={(e) => setDish(e.target.value)}>
+            <option value="主食">主食</option>
+            <option value="主菜">主菜</option>
+            <option value="副菜">副菜</option>
+            <option value="スープ">スープ</option>
+          </select>
+          <TextField
+            id="outlined-basic"
+            label="調理時間"
+            variant="outlined"
+            value={totalCookingTime}
+            onChange={(e) => setTotalCookingTime(Number(e.target.value))}
+            style={{ width: "100%" }}
+          />
+        </div>
       </div>
       <NextButton title={"投稿する"} onClick={handleSubmit} disabled={false} />
     </div>
