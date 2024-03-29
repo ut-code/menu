@@ -24,3 +24,22 @@
 .noResult button {
   width: auto;
 }
+
+.preview {
+  padding: 32px 16px;
+}
+
+.titleArea {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.buttonArea {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  align-self: stretch;
+}
