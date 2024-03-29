@@ -5,7 +5,7 @@ import { BorderButton } from "@/components/elements/button/BorderButton"
 import { BackButton } from "@/components/elements/button/BackButton"
 import { NextButton } from "@/components/elements/button/NextButton"
 import { Loading } from "@/components/Loading"
-import { TextField } from "@/components/TextField"
+import { TextField } from "@mui/material"
 
 import styles from "./Auth.module.css"
 

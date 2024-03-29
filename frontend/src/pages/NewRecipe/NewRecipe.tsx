@@ -11,7 +11,8 @@ import { BackButton } from "@/components/elements/button/BackButton"
 import { NextButton } from "@/components/elements/button/NextButton"
 import { Loading } from "@/components/Loading"
 import { InfoBox } from "@/components/InfoBox"
-import { TextField } from "@/components/TextField"
+// import { TextField } from "@/components/TextField"
+import { TextField } from "@mui/material"
 import { RecipeCard } from "@/components/RecipeCard"
 import GridViewIcon from "@mui/icons-material/GridView"
 
@@ -112,7 +113,14 @@ export const NewRecipe = () => {
       <>
         <div style={{ padding: "32px 16px" }}>
           <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "flex-start", gap: 32 }}>
-            <TextField label="レシピのURL" value={sourceUrl} onChange={(e) => setSourceUrl(e.target.value)} />
+            <TextField
+              id="outlined-basic"
+              label="Outlined"
+              variant="outlined"
+              value={sourceUrl}
+              onChange={(e) => setSourceUrl(e.target.value)}
+            />
+            {/* <TextField label="レシピのURL" value={sourceUrl} onChange={(e) => setSourceUrl(e.target.value)} /> */}
             <InfoBox />
           </div>
           <NextButton title={"レシピを作成する"} onClick={handleScrape} disabled={false} />
@@ -152,24 +160,22 @@ export const NewRecipe = () => {
         favoriteRecipes={[]} // Replace with the actual favoriteRecipes value
         toggleFavorite={() => {}} // Replace with the actual toggleFavorite value
       />
-
-      <img src={foodImageUrl} alt="料理画像" />
-      <TextField label="料理画像URL" value={foodImageUrl} onChange={(e) => setFoodImageUrl(e.target.value)} />
+      <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+      {/* <TextField label="料理画像URL" value={foodImageUrl} onChange={(e) => setFoodImageUrl(e.target.value)} />
       <TextField label="料理名" value={title} onChange={(e) => setTitle(e.target.value)} />
       <TextField label="説明" value={description} onChange={(e) => setDescription(e.target.value)} />
-      <TextField label="材料" value={materialsConverted} onChange={(e) => setMaterialsConverted(e.target.value)} />
-      <label htmlFor="dish">料理の種類</label>
+      <TextField label="材料" value={materialsConverted} onChange={(e) => setMaterialsConverted(e.target.value)} /> */}
       <select value={dish} onChange={(e) => setDish(e.target.value)}>
         <option value="主食">主食</option>
         <option value="主菜">主菜</option>
         <option value="副菜">副菜</option>
         <option value="スープ">スープ</option>
       </select>
-      <TextField
+      {/* <TextField
         label="調理時間"
         value={totalCookingTime}
         onChange={(e) => setTotalCookingTime(Number(e.target.value))}
-      />
+      /> */}
       <NextButton title={"投稿する"} onClick={handleSubmit} disabled={false} />
     </div>
   )
