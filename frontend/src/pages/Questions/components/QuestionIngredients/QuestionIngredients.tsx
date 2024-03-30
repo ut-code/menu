@@ -40,9 +40,15 @@ export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredi
             onChange={onChangeSearchbox}
             inputContent={inputContent}
           />
-          <InfoBox />
-          <InfoBox />
-          <InfoBox />
+          <InfoBox title="💡 おすすめのキーワード" message="卵 トマト じゃがいも" />
+          <InfoBox
+            title="🐶 検索のヒント"
+            message="冷蔵庫に余っているちょっと使い道に困るような食材の名前を入れてみると、自分では思いつかないようなレシピが見つかるかもしれません！"
+          />
+          <InfoBox
+            title="🙅‍♂️ 検索できないワード"
+            message="食材の名前ではないワード(例: ふわふわ・スープ)を入力するとうまく検索ができない可能性があります"
+          />
         </div>
         <NextButton title={"次の質問に進む"} onClick={onClickNextPage} />
       </div>
