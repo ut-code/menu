@@ -1,4 +1,5 @@
 import styles from "./Searchbox.module.css"
+import SearchIcon from "@mui/icons-material/Search"
 
 interface Props {
   onClickHandler: () => void
@@ -9,8 +10,9 @@ interface Props {
 
 export const Searchbox = ({ onChange, inputContent, placeholder }: Props) => {
   return (
-    <div>
-      <input className={styles.input} type="text" placeholder={placeholder} value={inputContent} onChange={onChange} />
+    <div className={styles.input}>
+      <SearchIcon className={styles.icon} />
+      <input type="text" placeholder={placeholder} value={inputContent} onChange={onChange} />
     </div>
   )
 }

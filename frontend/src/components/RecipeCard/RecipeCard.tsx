@@ -38,7 +38,7 @@ export const RecipeCard = ({ recipe, favoriteRecipes, toggleFavorite }: Props) =
               className={styles.icon}
               onClick={(event: React.MouseEvent<HTMLDivElement>) => onClickHandler(recipe.id, event)}
             >
-              <FavoriteIcon style={{ color: isFavorited ? "red" : "gray" }} />
+              <FavoriteIcon style={{ color: isFavorited ? "#FF165D" : "#D9D9D9" }} />
             </div>
           )}
           <div className={styles.text_area}>

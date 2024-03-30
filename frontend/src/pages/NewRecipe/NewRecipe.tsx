@@ -121,7 +121,10 @@ export const NewRecipe = () => {
               onChange={(e) => setSourceUrl(e.target.value)}
               style={{ width: "100%" }}
             />
-            <InfoBox />
+            <InfoBox
+              title="🐶 作成とは？"
+              message="ネットで見つけたレシピをだるめしからいつでも見れるようにしたい…！そんなときに作成機能がおすすめです。レシピのURLを入力してだるめしに追加してみましょう"
+            />
           </div>
           <NextButton title={"レシピを作成する"} onClick={handleScrape} disabled={false} />
         </div>

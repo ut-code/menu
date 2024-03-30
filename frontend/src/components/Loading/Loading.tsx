@@ -25,7 +25,10 @@ export const Loading = () => {
           </svg>
           <h6 className={styles.text}>読み込み中…</h6>
         </div>
-        <InfoBox />
+        <InfoBox
+          title="🍳 料理のコツ"
+          message="料理を一度に大量に作って冷凍保存しておくことで、忙しい日でも食事の準備が簡単になります"
+        />
       </div>
     </div>
   )
