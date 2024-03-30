@@ -42,7 +42,7 @@ export const QuestionGenre = ({ setQuestionNumber, answer, setAnswer }: Props) =
           }}
         >
           <h1>ジャンル</h1>
-          <h6>作りたい料理の種類を選択してください</h6>
+          <h5>作りたい料理の種類を選択してください</h5>
         </div>
         <div
           style={{

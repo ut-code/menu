@@ -133,13 +133,13 @@ export const NewRecipe = () => {
       <BackButton onClick={() => setUiState("URL")} />
       <div className={styles.titleArea}>
         <h1>作成内容</h1>
-        <h4>作成するレシピの内容を確認・修正してください</h4>
+        <h5>作成するレシピの内容を確認・修正してください</h5>
       </div>
 
       <div className={styles.content}>
         <div className={styles.previewArea}>
           <div className={styles.buttonArea}>
-            <h4 style={{ color: "#c4c4c4" }}>プレビュー</h4>
+            <h5 style={{ color: "#c4c4c4" }}>プレビュー</h5>
             <div className={styles.changeButton}>
               <button>
                 <GridViewIcon style={{ width: 18, height: 18 }} />
