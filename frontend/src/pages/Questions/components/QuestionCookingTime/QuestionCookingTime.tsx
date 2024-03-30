@@ -43,7 +43,7 @@ export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer }: Pr
           }}
         >
           <h1>調理時間</h1>
-          <h6>調理にかける時間を選択してください</h6>
+          <h5>調理にかける時間を選択してください</h5>
         </div>
         <div
           style={{

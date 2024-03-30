@@ -19,7 +19,7 @@ export const RadioButtonCard = ({ key, option, selectedOption, handleChange }: P
       <div className={styles.root}>
         <div>
           <h3>{option.value}</h3>
-          <h6>{option.description}</h6>
+          <h5>{option.description}</h5>
         </div>
         <div className={styles.icon}>
           {selectedOption === option.value && <CheckIcon fontSize="medium" style={{ color: "white" }} />}
