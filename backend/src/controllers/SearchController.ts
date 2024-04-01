@@ -1,4 +1,5 @@
 import { client } from "../db.server"
+import { elasticSearchClient } from "../elasticSearchClient"
 import { Request, Response } from "express"
 // import type { Users } from "@prisma/client"
 
@@ -7,7 +8,64 @@ import { Request, Response } from "express"
 class SearchController {
   private static GOO_API_KEY = process.env.VITE_GOO_API_KEY ?? ""
 
+  indexRecipe = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { recipe } = req.body
+      const recipeIndex = await elasticSearchClient.index({
+        index: "recipes",
+        body: recipe,
+      })
+      res.status(201).json(recipeIndex)
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ error: "Internal server error" })
+    }
+  }
+
+  deleteRecipe = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const recipeId = req.params.id
+      const recipeDelete = await elasticSearchClient.delete({
+        index: "recipes",
+        id: recipeId,
+      })
+      res.status(200).json(recipeDelete)
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ error: "Internal server error" })
+    }
+  }
+
   searchRecipes = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { materials, dish } = req.body
+      const result = await elasticSearchClient.search({
+        index: "recipes",
+        body: {
+          query: {
+            match: {
+              dish: dish,
+            },
+            terms: {
+              materials: materials,
+            },
+          },
+        },
+      })
+
+      const hits = result.hits.hits
+      if (hits.length === 0) {
+        res.status(404).json({ error: "Not found" })
+        return
+      }
+      res.json(result.hits.hits)
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ error: "Internal server error" })
+    }
+  }
+
+  searchRecipesOld = async (req: Request, res: Response): Promise<void> => {
     try {
       const { searchInfo } = req.body
 
