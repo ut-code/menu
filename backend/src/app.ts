@@ -3,7 +3,7 @@ import cors from "cors"
 import UserController from "./controllers/UserController"
 import SearchController from "./controllers/SearchController"
 import RecipeController from "./controllers/RecipeController"
-import { serverUrl } from "./elasticSearchClient"
+import { elasticSearchClient } from "./elasticSearchClient"
 
 const app = express()
 
@@ -22,10 +22,8 @@ app.get("/", (req, res) => {
 
 app.get("/api/elasticsearch/health", async (req, res) => {
   try {
-    const health = await fetch(`${serverUrl}`)
-    if (health.ok) {
-      res.status(200).json({ status: "ok" })
-    }
+    const health = await elasticSearchClient.cat.health({ format: "json" })
+    res.json(health)
   } catch (error) {
     console.error(error)
     res.status(500).json({ error: "Elasticsearch is down" })

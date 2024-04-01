@@ -1,9 +1,7 @@
-import apm from "elastic-apm-node"
+import { Client } from "@elastic/elasticsearch"
 
-const serviceName = process.env.ELASTIC_APM_SERVICE_NAME ?? ""
-export const serverUrl = process.env.ELASTIC_APM_SERVER_URL ?? ""
+const serverUrl = process.env.ELASTIC_APM_SERVER_URL ?? "http://localhost:9200"
 
-export const elasticSearchClient = apm.start({
-  serviceName: serviceName,
-  serverUrl: serverUrl,
+export const elasticSearchClient = new Client({
+  node: serverUrl,
 })
