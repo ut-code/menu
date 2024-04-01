@@ -3,6 +3,7 @@ import cors from "cors"
 import UserController from "./controllers/UserController"
 import SearchController from "./controllers/SearchController"
 import RecipeController from "./controllers/RecipeController"
+import { elasticSearchClient } from "./elasticSearchClient"
 
 const app = express()
 
@@ -17,6 +18,19 @@ app.use(express.urlencoded({ extended: true }))
 
 app.get("/", (req, res) => {
   res.send("Hello, world!")
+})
+
+app.get("/api/elasticsearch/health", (req, res) => {
+  try {
+    const health = elasticSearchClient.getServiceVersion()
+    res.json({
+      status: "ok",
+      health: health,
+    })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: "Elasticsearch is not available" })
+  }
 })
 
 app.post("/api/searchRecipes", SearchController.searchRecipes)
