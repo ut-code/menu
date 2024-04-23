@@ -87,7 +87,7 @@ export default function App() {
         <Route path="/new" element={<NewRecipe />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <BottomNavigationBar />
+      {location.pathname !== "/" && <BottomNavigationBar />}
     </UserContext.Provider>
   )
 }

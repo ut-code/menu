@@ -1,4 +1,5 @@
-// import { Searchbox } from "@/components/Searchbox"
+import { Fragment } from "react"
+
 import { BackButton } from "@/components/elements/button/BackButton"
 import { NextButton } from "@/components/elements/button/NextButton"
 import { RadioButtonCard } from "@/components/RadioButtonCard"
@@ -53,7 +54,9 @@ export const QuestionGenre = ({ setQuestionNumber, answer, setAnswer }: Props) =
           }}
         >
           {options.map((option) => (
-            <RadioButtonCard key={option.value} option={option} selectedOption={answer} handleChange={setAnswer} />
+            <Fragment key={option.value}>
+              <RadioButtonCard option={option} selectedOption={answer} handleChange={setAnswer} />
+            </Fragment>
           ))}
         </div>
         <NextButton title={"次の質問に進む"} onClick={onClickNextPage} />

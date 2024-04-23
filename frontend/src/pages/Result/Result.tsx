@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react"
+import { useState, useEffect, useContext, Fragment } from "react"
 import { useNavigate } from "react-router-dom"
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query"
 
@@ -54,6 +54,11 @@ export const Result = () => {
       })
       if (!response.ok) throw new Error("レシピの取得に失敗しました")
       const recipes: Recipe[] = await response.json()
+      recipes.forEach((recipe) => {
+        if (typeof recipe.materials === "string") {
+          recipe.materials = JSON.parse(recipe.materials)
+        }
+      })
       return recipes
     },
   })
@@ -143,7 +148,7 @@ export const Result = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <BackButton onClick={() => navigate} />
+        <BackButton onClick={() => navigate("/questions")} />
         <Searchbox
           onClickHandler={onClickSearchRecipesKeywords}
           onChange={onChangeHandler}
@@ -160,17 +165,11 @@ export const Result = () => {
             </button>
           </div>
           <div className={styles.cards}>
-            {recipes.map(
-              (recipe) =>
-                recipe && (
-                  <RecipeCard
-                    key={recipe.id}
-                    recipe={recipe}
-                    favoriteRecipes={favoriteRecipes}
-                    toggleFavorite={toggleFavorite}
-                  />
-                )
-            )}
+            {recipes.map((recipe) => (
+              <Fragment key={recipe.id}>
+                <RecipeCard recipe={recipe} favoriteRecipes={favoriteRecipes} toggleFavorite={toggleFavorite} />
+              </Fragment>
+            ))}
           </div>
         </div>
       ) : (
