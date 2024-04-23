@@ -47,7 +47,10 @@ export const Result = () => {
       const response = await fetch(postSearchRecipesApi(), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ searchInfo: searchInfo }),
+        body: JSON.stringify({
+          materials: searchInfo.ingredients,
+          dish: searchInfo.dish,
+        }),
       })
       if (!response.ok) throw new Error("レシピの取得に失敗しました")
       const recipes: Recipe[] = await response.json()
@@ -148,7 +151,6 @@ export const Result = () => {
           placeholder=""
         />
       </div>
-
       {recipes && recipes.length > 0 ? (
         <div className={styles.content}>
           <div className={styles.changeButton}>
@@ -158,15 +160,17 @@ export const Result = () => {
             </button>
           </div>
           <div className={styles.cards}>
-            {recipes &&
-              recipes.map((recipe) => (
-                <RecipeCard
-                  key={recipe.id}
-                  recipe={recipe}
-                  favoriteRecipes={favoriteRecipes}
-                  toggleFavorite={toggleFavorite}
-                />
-              ))}
+            {recipes.map(
+              (recipe) =>
+                recipe && (
+                  <RecipeCard
+                    key={recipe.id}
+                    recipe={recipe}
+                    favoriteRecipes={favoriteRecipes}
+                    toggleFavorite={toggleFavorite}
+                  />
+                )
+            )}
           </div>
         </div>
       ) : (

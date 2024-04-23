@@ -28,6 +28,8 @@ model Recipes {
   sourceUrl          String   @unique(map: "Recipes_recipeUrl_key")
   foodImageUrl       String
   dish               String?
+  category           String?
+  cuisine            String?
 
   favorites             UserFavorites[]
   recipeMaterialsSearch RecipeMaterialsSearch[]

@@ -87,6 +87,7 @@ class RecipeController {
       await page.goto(sourceUrl, { waitUntil: "domcontentloaded" })
 
       const recipeData = await page.evaluate(() => {
+        // FIXME: 複数のタグがある場合に対応させる
         const scriptTag = document.querySelector("script[type='application/ld+json']")
         if (!scriptTag) {
           return null
