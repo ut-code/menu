@@ -33,8 +33,9 @@ app.get("/api/elasticsearch/health", async (req, res) => {
 app.post("/api/recipes", SearchController.indexRecipe)
 app.delete("/api/recipes/:id", SearchController.deleteRecipe)
 app.post("/api/recipes/search", SearchController.searchRecipes)
+app.post("/api/recipes/search/query", SearchController.searchRecipesWithQuery)
 
-app.post("/api/searchRecipes", SearchController.searchRecipesOld)
+app.post("/api/recipes/search/old", SearchController.searchRecipesOld)
 app.post("/api/searchRecipes/keywords", SearchController.searchRecipesByKeywords)
 
 app.get("/api/users/favorites", UserController.getFavorites)

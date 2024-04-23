@@ -10,7 +10,7 @@ describe("/searchRecipes", () => {
       dish: null,
     }
 
-    const response = await request(app).post("/api/searchRecipes").send({ searchInfo: searchInfo })
+    const response = await request(app).post("/api/recipes/search/old").send({ searchInfo: searchInfo })
     expect(response.statusCode).toBe(200)
   })
 })
