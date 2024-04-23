@@ -16,7 +16,7 @@ interface Props {
 export const RecipeCard = ({ recipe, favoriteRecipes, toggleFavorite }: Props) => {
   const { session } = useContext(UserContext)
 
-  const materialsConverted = recipe.materials.join("・")
+  const materialsConverted = JSON.parse(recipe.materials).join("・")
 
   const isFavorited: boolean =
     favoriteRecipes !== undefined && favoriteRecipes.some((favoriteRecipe) => favoriteRecipe.id === recipe.id)
