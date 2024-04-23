@@ -81,8 +81,7 @@ class SearchController {
       const recipes = hits.map((hit) => hit._source)
       res.json(recipes)
     } catch (error) {
-      console.error(error)
-      res.status(500).json({ error: "Internal server error" })
+      res.status(500).json(error)
     }
   }
 
