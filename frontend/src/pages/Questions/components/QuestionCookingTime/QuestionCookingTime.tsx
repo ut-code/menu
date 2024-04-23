@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom"
+import { Fragment } from "react"
+
 import { BackButton } from "@/components/elements/button/BackButton"
 import { NextButton } from "@/components/elements/button/NextButton"
 import { RadioButtonCard } from "@/components/RadioButtonCard"
@@ -54,7 +56,9 @@ export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer }: Pr
           }}
         >
           {options.map((option) => (
-            <RadioButtonCard key={option.value} option={option} selectedOption={answer} handleChange={setAnswer} />
+            <Fragment key={option.value}>
+              <RadioButtonCard option={option} selectedOption={answer} handleChange={setAnswer} />
+            </Fragment>
           ))}
         </div>
 

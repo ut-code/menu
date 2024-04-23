@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react"
+import { useState, useEffect, useContext, Fragment } from "react"
 import { useNavigate } from "react-router-dom"
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query"
 
@@ -148,7 +148,7 @@ export const Result = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <BackButton onClick={() => navigate} />
+        <BackButton onClick={() => navigate("/questions")} />
         <Searchbox
           onClickHandler={onClickSearchRecipesKeywords}
           onChange={onChangeHandler}
@@ -166,12 +166,9 @@ export const Result = () => {
           </div>
           <div className={styles.cards}>
             {recipes.map((recipe) => (
-              <RecipeCard
-                key={recipe.id}
-                recipe={recipe}
-                favoriteRecipes={favoriteRecipes}
-                toggleFavorite={toggleFavorite}
-              />
+              <Fragment key={recipe.id}>
+                <RecipeCard recipe={recipe} favoriteRecipes={favoriteRecipes} toggleFavorite={toggleFavorite} />
+              </Fragment>
             ))}
           </div>
         </div>
