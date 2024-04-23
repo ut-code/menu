@@ -44,7 +44,25 @@ class SearchController {
         body: {
           query: {
             bool: {
-              should: [{ match: { dish: dish } }, { terms: { materials: materials } }],
+              should: [
+                { bool: { should: [{ terms: { materials: materials } }] } },
+                {
+                  boosting: {
+                    positive: {
+                      bool: {
+                        should: [
+                          { term: { title: { value: materials.length > 0 ? materials[0] : "", boost: 2 } } },
+                          { term: { description: { value: materials.length > 0 ? materials[0] : "", boost: 2 } } },
+                          { terms: { materials: materials, boost: 1.5 } },
+                          // { match: { dish: { query: dish, boost: 2 } } },
+                        ],
+                      },
+                    },
+                    negative: { bool: { must_not: [{ match: { dish: { query: dish } } }] } },
+                    negative_boost: 0.9,
+                  },
+                },
+              ],
             },
           },
         },
