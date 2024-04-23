@@ -43,16 +43,8 @@ class SearchController {
         index: "recipes",
         body: {
           query: {
-            // bool: {
-            //   should: [{ match: { dish: dish } }, { terms: { materials: materials } }],
-            // },
             bool: {
-              should: [{ match: { dish: dish } }],
-            },
-            wildcard: {
-              title: {
-                value: `*${materials.join("* *")}*`,
-              },
+              should: [{ match: { dish: dish } }, { terms: { materials: materials } }],
             },
           },
         },
