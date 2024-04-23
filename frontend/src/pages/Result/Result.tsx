@@ -54,6 +54,11 @@ export const Result = () => {
       })
       if (!response.ok) throw new Error("レシピの取得に失敗しました")
       const recipes: Recipe[] = await response.json()
+      recipes.forEach((recipe) => {
+        if (typeof recipe.materials === "string") {
+          recipe.materials = JSON.parse(recipe.materials)
+        }
+      })
       return recipes
     },
   })
@@ -160,17 +165,14 @@ export const Result = () => {
             </button>
           </div>
           <div className={styles.cards}>
-            {recipes.map(
-              (recipe) =>
-                recipe && (
-                  <RecipeCard
-                    key={recipe.id}
-                    recipe={recipe}
-                    favoriteRecipes={favoriteRecipes}
-                    toggleFavorite={toggleFavorite}
-                  />
-                )
-            )}
+            {recipes.map((recipe) => (
+              <RecipeCard
+                key={recipe.id}
+                recipe={recipe}
+                favoriteRecipes={favoriteRecipes}
+                toggleFavorite={toggleFavorite}
+              />
+            ))}
           </div>
         </div>
       ) : (
