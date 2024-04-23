@@ -103,7 +103,7 @@ export const NewRecipe = () => {
           <h4 className={styles.text}>だるめしにログインして作成機能を使ってみましょう</h4>
         </div>
         <BorderButton onClick={() => navigate("/Auth")} disabled={false}>
-          <h4>ログインする</h4>
+          <p>ログインする</p>
         </BorderButton>
       </div>
     )
