@@ -8,6 +8,8 @@ export type Recipe = {
   sourceUrl: string
   foodImageUrl: string
   dish: string
+  category?: string
+  cuisine?: string
   createdAt: string
 }
 

@@ -1,7 +1,7 @@
 const API_BASE_URL = import.meta.env.VITE_API_ENDPOINT
 
 export const postSearchRecipesApi = (): string => {
-  return `${API_BASE_URL}/api/searchRecipes`
+  return `${API_BASE_URL}/api/recipes/search`
 }
 
 export const postSearchRecipesKeywordsApi = (): string => {

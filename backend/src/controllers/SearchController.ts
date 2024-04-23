@@ -55,7 +55,8 @@ class SearchController {
         res.status(404).json({ error: "Not found" })
         return
       }
-      res.json(result.hits.hits)
+      const recipes = hits.map((hit) => hit._source)
+      res.json(recipes)
     } catch (error) {
       console.error(error)
       res.status(500).json({ error: "Internal server error" })
