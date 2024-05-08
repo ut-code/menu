@@ -6,6 +6,7 @@ import { Loading } from "@/components/Loading"
 import { Searchbox } from "@/components/Searchbox"
 import { RecipeCard } from "@/components/RecipeCard"
 import { BackButton } from "@/components/elements/button/BackButton"
+import { BorderButton } from "@/components/elements/button/BorderButton"
 import {
   postSearchRecipesApi,
   postSearchRecipesKeywordsApi,
@@ -175,21 +176,14 @@ export const Result = () => {
       ) : (
         <div className={styles.emptyResults}>
           <EmptyResults />
-          <div className={styles.buttonBundle}>
-            <div className={styles.links}>
-              <button
-                className={styles.returnSearch}
-                onClick={() => {
-                  navigate("/questions")
-                }}
-              >
-                <h3>もう一度検索する</h3>
-              </button>
-              <button className={styles.returnHome} onClick={() => navigate("/questions")}>
-                <h3>ホームへ戻る</h3>
-              </button>
-            </div>
-          </div>
+          <BorderButton
+            onClick={() => {
+              navigate("/questions")
+            }}
+            disabled={false}
+          >
+            <h3>再検索する</h3>
+          </BorderButton>
         </div>
       )}
     </div>

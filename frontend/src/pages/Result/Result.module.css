@@ -42,3 +42,14 @@ button {
   align-items: flex-start;
   gap: 8px;
 }
+
+.emptyResults {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.emptyResults button {
+  width: auto;
+}
