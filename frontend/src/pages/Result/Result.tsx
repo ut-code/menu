@@ -17,7 +17,7 @@ import { UserContext } from "@/utils/context"
 import { Recipe, SearchInfo } from "@/utils/recipes"
 import styles from "./Result.module.css"
 import { EmptyResults } from "@/components/EmptyResults"
-import GridViewIcon from "@mui/icons-material/GridView"
+// import GridViewIcon from "@mui/icons-material/GridView"
 
 export const Result = () => {
   const navigate = useNavigate()
@@ -158,12 +158,12 @@ export const Result = () => {
       </div>
       {recipes && recipes.length > 0 ? (
         <div className={styles.content}>
-          <div className={styles.changeButton}>
+          {/* <div className={styles.changeButton}>
             <button>
               <GridViewIcon style={{ width: 18, height: 18 }} />
               <h5>表示切り替え</h5>
             </button>
-          </div>
+          </div> */}
           <div className={styles.cards}>
             {recipes.map((recipe) => (
               <Fragment key={recipe.id}>

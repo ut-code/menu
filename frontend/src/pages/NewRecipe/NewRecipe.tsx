@@ -14,7 +14,7 @@ import { InfoBox } from "@/components/InfoBox"
 // import { TextField } from "@/components/TextField"
 import { TextField } from "@mui/material"
 import { RecipeCard } from "@/components/RecipeCard"
-import GridViewIcon from "@mui/icons-material/GridView"
+// import GridViewIcon from "@mui/icons-material/GridView"
 
 import emptyImage from "@/assets/image/Howto4.png"
 
@@ -143,12 +143,12 @@ export const NewRecipe = () => {
         <div className={styles.previewArea}>
           <div className={styles.buttonArea}>
             <h5 style={{ color: "#c4c4c4" }}>プレビュー</h5>
-            <div className={styles.changeButton}>
+            {/* <div className={styles.changeButton}>
               <button>
                 <GridViewIcon style={{ width: 18, height: 18 }} />
                 <h5>表示切り替え</h5>
               </button>
-            </div>
+            </div> */}
           </div>
           <RecipeCard
             recipe={{

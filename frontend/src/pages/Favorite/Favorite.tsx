@@ -10,7 +10,7 @@ import { Chip } from "@/components/Chip"
 
 import styles from "./Favorite.module.css"
 import emptyImage from "@/assets/image/Howto4.png"
-import GridViewIcon from "@mui/icons-material/GridView"
+// import GridViewIcon from "@mui/icons-material/GridView"
 
 import { Swiper, SwiperSlide } from "swiper/react"
 import { FreeMode } from "swiper/modules"
@@ -152,12 +152,12 @@ export const Favorite = () => {
             <Chip label="じっくり" onChange={() => setFilterHard((f) => !f)} checked={filterHard} />
           </SwiperSlide>
         </Swiper>
-        <div className={styles.changeButton}>
+        {/* <div className={styles.changeButton}>
           <button>
             <GridViewIcon style={{ width: 18, height: 18 }} />
             <h5>表示切り替え</h5>
           </button>
-        </div>
+        </div> */}
       </div>
       <div className={styles.cards}>
         {recipes.length > 0 ? (
