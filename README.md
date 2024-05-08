@@ -13,7 +13,9 @@
   <img src="https://github.com/ut-code/menu/assets/53532178/6eb799e5-3f34-451a-99b5-2319db85fed2") width="200" />
 </p>
 
-@検索している動画/ブックマークしている動画を載せる？@
+### 使い方
+
+https://github.com/ut-code/menu/assets/53532178/bedf551f-6cae-429e-ae75-99e50b0ba993
 
 <br></br>
 
