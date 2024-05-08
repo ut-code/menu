@@ -149,7 +149,7 @@ export const Result = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <BackButton onClick={() => navigate("/questions")} />
+        <BackButton onClick={() => navigate("/questions?reset=true")} />
         <Searchbox
           onClickHandler={onClickSearchRecipesKeywords}
           onChange={onChangeHandler}
@@ -178,7 +178,7 @@ export const Result = () => {
           <EmptyResults />
           <BorderButton
             onClick={() => {
-              navigate("/questions")
+              navigate("/questions?reset=true")
             }}
             disabled={false}
           >

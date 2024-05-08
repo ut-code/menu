@@ -31,7 +31,7 @@ export const BottomNavigationBar = () => {
   return (
     <Paper sx={{ position: "fixed", bottom: 0, left: 0, right: 0, paddingTop: 1.5 }} elevation={3}>
       <BottomNavigation showLabels value={value} onChange={handleChange}>
-        <StyledBottomNavigationAction label="検索" icon={<SearchIcon />} value="/questions" />
+        <StyledBottomNavigationAction label="検索" icon={<SearchIcon />} value="/questions?reset=true" />
         <StyledBottomNavigationAction
           label="作成"
           icon={value === "/new" ? <EditIcon /> : <EditOutlinedIcon />}

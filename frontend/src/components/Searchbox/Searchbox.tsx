@@ -8,10 +8,10 @@ interface Props {
   placeholder: string
 }
 
-export const Searchbox = ({ onChange, inputContent, placeholder }: Props) => {
+export const Searchbox = ({ onClickHandler, onChange, inputContent, placeholder }: Props) => {
   return (
     <div className={styles.input}>
-      <SearchIcon className={styles.icon} />
+      <SearchIcon className={styles.icon} onClick={onClickHandler} />
       <input type="text" placeholder={placeholder} value={inputContent} onChange={onChange} />
     </div>
   )

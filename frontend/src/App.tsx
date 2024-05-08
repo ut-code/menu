@@ -71,7 +71,10 @@ export default function App() {
       <Routes>
         <Route path="/" element={location.search !== "?ref=a2hs" ? <HowTo /> : <Navigate replace to="/questions" />} />
         <Route path="/favorites" element={<Favorite />} />
-        <Route path="/questions" element={<Questions />} />
+        <Route
+          path="/questions"
+          element={location.search === "?reset=true" ? <Questions shouldReset={true} /> : <Questions />}
+        />
         <Route path="/result" element={<Result />} />
         <Route path="/setting" element={<Setting />} />
         <Route path="/auth" element={<Auth inputUsername={inputUsername} setInputUsername={setInputUsername} />} />
