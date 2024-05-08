@@ -3,11 +3,8 @@
 }
 
 .radio_button_card {
-  display: flex;
-  width: 360px;
   padding: 16px;
   flex-direction: column;
-  align-items: flex-start;
   border-radius: 12px;
   border: 1px solid #c4c4c4;
   background: #fff;
