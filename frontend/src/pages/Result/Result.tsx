@@ -6,6 +6,7 @@ import { Loading } from "@/components/Loading"
 import { Searchbox } from "@/components/Searchbox"
 import { RecipeCard } from "@/components/RecipeCard"
 import { BackButton } from "@/components/elements/button/BackButton"
+import { BorderButton } from "@/components/elements/button/BorderButton"
 import {
   postSearchRecipesApi,
   postSearchRecipesKeywordsApi,
@@ -148,7 +149,7 @@ export const Result = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <BackButton onClick={() => navigate("/questions")} />
+        <BackButton onClick={() => navigate("/questions?reset=true")} />
         <Searchbox
           onClickHandler={onClickSearchRecipesKeywords}
           onChange={onChangeHandler}
@@ -175,21 +176,14 @@ export const Result = () => {
       ) : (
         <div className={styles.emptyResults}>
           <EmptyResults />
-          <div className={styles.buttonBundle}>
-            <div className={styles.links}>
-              <button
-                className={styles.returnSearch}
-                onClick={() => {
-                  navigate("/questions")
-                }}
-              >
-                <h3>もう一度検索する</h3>
-              </button>
-              <button className={styles.returnHome} onClick={() => navigate("/questions")}>
-                <h3>ホームへ戻る</h3>
-              </button>
-            </div>
-          </div>
+          <BorderButton
+            onClick={() => {
+              navigate("/questions?reset=true")
+            }}
+            disabled={false}
+          >
+            <h3>再検索する</h3>
+          </BorderButton>
         </div>
       )}
     </div>
