@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react"
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query"
+import { useNavigate } from "react-router-dom"
 
 import { getUserFavoritesApi, postUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/apiUtils"
 import { UserContext } from "@/utils/context"
@@ -7,6 +8,7 @@ import { Recipe } from "@/utils/recipes"
 import { Loading } from "@/components/Loading"
 import { RecipeCard } from "@/components/RecipeCard"
 import { Chip } from "@/components/Chip"
+import { BorderButton } from "@/components/elements/button/BorderButton"
 
 import styles from "./Favorite.module.css"
 import emptyImage from "@/assets/image/Howto4.png"
@@ -21,6 +23,7 @@ import "./swiper.css"
 export const Favorite = () => {
   const queryClient = useQueryClient()
   const { session } = useContext(UserContext)
+  const navigate = useNavigate()
 
   const [initialFavoriteRecipes, setInitialFavoriteRecipes] = useState<Recipe[]>([])
   const [filterStapleFood, setFilterStapleFood] = useState<boolean>(false)
@@ -115,6 +118,19 @@ export const Favorite = () => {
   }
 
   if (isLoading) return <Loading />
+  if (!session?.access_token)
+    return (
+      <div className={styles.noResult}>
+        <div className={styles.imageArea}>
+          <img src={emptyImage} alt="empty" style={{ width: "300px" }} />
+          <h4 className={styles.text}>だるめしにログインして作成機能を使ってみましょう</h4>
+        </div>
+        <BorderButton onClick={() => navigate("/Auth")} disabled={false}>
+          <p>ログインする</p>
+        </BorderButton>
+      </div>
+    )
+
   return (
     <div className={styles.root}>
       <div className={styles.buttons}>

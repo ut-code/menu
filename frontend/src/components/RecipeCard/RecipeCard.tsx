@@ -22,7 +22,7 @@ export const RecipeCard = ({ recipe, favoriteRecipes, toggleFavorite }: Props) =
     favoriteRecipes !== undefined && favoriteRecipes.some((favoriteRecipe) => favoriteRecipe.id === recipe.id)
 
   const onClickHandler = (recipeId: number, event: React.MouseEvent<HTMLDivElement>) => {
-    if (!session) return
+    if (!session?.access_token) return
     // NOTE: LinkとonClickは別メソッド？なので event.stopPropagation() だとうまく行かなかった
     event.preventDefault()
     toggleFavorite(recipeId)
@@ -33,7 +33,7 @@ export const RecipeCard = ({ recipe, favoriteRecipes, toggleFavorite }: Props) =
       <div className={styles.container}>
         <img className={styles.image_frame} src={recipe.foodImageUrl} />
         <div className={styles.text}>
-          {session && (
+          {session?.access_token && (
             <div
               className={styles.icon}
               onClick={(event: React.MouseEvent<HTMLDivElement>) => onClickHandler(recipe.id, event)}

@@ -1,6 +1,9 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
+import { useNavigate } from "react-router-dom"
 
+import { UserContext } from "@/utils/context"
 import { supabase } from "./supabaseClient"
+import { SignOut } from "./SignOut"
 import { BorderButton } from "@/components/elements/button/BorderButton"
 import { BackButton } from "@/components/elements/button/BackButton"
 import { NextButton } from "@/components/elements/button/NextButton"
@@ -15,6 +18,8 @@ interface Props {
 }
 
 export const Auth = ({ setInputUsername }: Props) => {
+  const navigate = useNavigate()
+  const { session } = useContext(UserContext)
   const [loading, setLoading] = useState(false)
   const [hasAccount, setHasAccount] = useState<boolean>(false)
   const [email, setEmail] = useState("")
@@ -53,9 +58,10 @@ export const Auth = ({ setInputUsername }: Props) => {
   }
 
   if (loading) return <Loading />
+  if (session?.access_token) return <SignOut />
   return (
     <div className={styles.root}>
-      <BackButton onClick={() => {}} />
+      <BackButton onClick={() => navigate("/setting")} />
       <div className={styles.container}>
         {hasAccount ? (
           <div className={styles.title}>
