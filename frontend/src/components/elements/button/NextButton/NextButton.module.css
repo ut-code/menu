@@ -1,13 +1,16 @@
 .root {
   display: flex;
-  width: 394px;
-  height: 56px;
-  padding: 12px 24px;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
 
+  margin: 16px 0;
+}
+
+.button {
+  justify-content: center;
+
+  width: 90vw;
+  height: 56px;
   border-radius: 40px;
   background: #ff9a00;
   border: none;
@@ -15,12 +18,11 @@
   color: #000;
   font-family: "Noto Sans JP";
   font-size: 16px;
-  font-style: normal;
   font-weight: 700;
   line-height: normal;
 }
 
-.root[disabled] {
+.button[disabled] {
   background: rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.4);
 }

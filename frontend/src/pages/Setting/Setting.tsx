@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom"
+import { useContext } from "react"
+import { UserContext } from "@/utils/context"
 import styles from "./Setting.module.css"
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward"
 
 export const Setting = () => {
+  const { session } = useContext(UserContext)
+
   return (
     <div className={styles.container}>
       <div>
@@ -12,27 +16,19 @@ export const Setting = () => {
         <Link to={"/auth"} style={{ textDecoration: "none" }}>
           <div className={styles.list}>
             <div className={styles.textarea}>
-              <h4 style={{ fontSize: 16 }}>サインイン周りの画面</h4>
+              <h4 style={{ fontSize: 16 }}>{session?.access_token ? "ログアウト" : "アカウント作成・ログイン"}</h4>
             </div>
             <ArrowForwardIcon className={styles.icon} />
           </div>
         </Link>
-        <Link to={"https://gist.github.com/bvv-1/d3c318f90d0720e81259e58de49adc30"} style={{ textDecoration: "none" }}>
-          <div className={styles.list}>
-            <div className={styles.textarea}>
-              <h4 style={{ fontSize: 16 }}>ログアウト</h4>
-            </div>
-            <ArrowForwardIcon className={styles.icon} />
-          </div>
-        </Link>
-        <Link to={"https://gist.github.com/bvv-1/d3c318f90d0720e81259e58de49adc30"} style={{ textDecoration: "none" }}>
+        {/* <Link to={"https://gist.github.com/bvv-1/d3c318f90d0720e81259e58de49adc30"} style={{ textDecoration: "none" }}>
           <div className={styles.list}>
             <div className={styles.textarea}>
               <h4 style={{ fontSize: 16 }}>アカウント削除</h4>
             </div>
             <ArrowForwardIcon className={styles.icon} />
           </div>
-        </Link>
+        </Link> */}
       </div>
       <div>
         <div className={styles.title}>

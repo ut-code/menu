@@ -8,8 +8,8 @@ interface Props {
 
 export const NextButton = ({ onClick, title, disabled }: Props) => {
   return (
-    <div>
-      <button className={styles.root} onClick={onClick} disabled={disabled}>
+    <div className={styles.root}>
+      <button className={styles.button} onClick={onClick} disabled={disabled}>
         {title}
       </button>
     </div>

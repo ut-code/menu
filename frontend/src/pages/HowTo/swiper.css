@@ -8,11 +8,7 @@
 }
 
 .skip {
-  background-color: white;
-  border: solid var(--Black) 1px;
-  border-radius: 100px;
-  text-align: center;
-  padding: 0.5em 1em;
+  padding: 4px;
   width: fit-content;
   width: -moz-fit-content;
   margin: 16px 0 0 calc(100% - 100px);
@@ -34,5 +30,5 @@
 }
 
 .swiper-pagination-bullet-active {
-  background-color: var(--Green);
+  background-color: #404040;
 }

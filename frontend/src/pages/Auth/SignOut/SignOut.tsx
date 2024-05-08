@@ -1,4 +1,6 @@
 import { supabase } from "../supabaseClient"
+import Grid from "@mui/material/BottomNavigation"
+import { NextButton } from "@/components/elements/button/NextButton"
 
 export const SignOut = () => {
   const handleSignOut = async () => {
@@ -7,8 +9,8 @@ export const SignOut = () => {
   }
 
   return (
-    <button onClick={handleSignOut} style={{ border: "none", background: "transparent" }}>
-      <span>サインアウト</span>
-    </button>
+    <Grid style={{ marginTop: 16 }}>
+      <NextButton title="サインアウト" onClick={handleSignOut} />
+    </Grid>
   )
 }

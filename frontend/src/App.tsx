@@ -74,16 +74,7 @@ export default function App() {
         <Route path="/questions" element={<Questions />} />
         <Route path="/result" element={<Result />} />
         <Route path="/setting" element={<Setting />} />
-        <Route
-          path="/auth"
-          element={
-            !session ? (
-              <Auth inputUsername={inputUsername} setInputUsername={setInputUsername} />
-            ) : (
-              <Navigate replace to="/questions" />
-            )
-          }
-        />
+        <Route path="/auth" element={<Auth inputUsername={inputUsername} setInputUsername={setInputUsername} />} />
         <Route path="/new" element={<NewRecipe />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

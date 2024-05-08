@@ -15,7 +15,7 @@ export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredi
   const navigate = useNavigate()
   const [inputContent, setInputContent] = useState<string>("")
   useEffect(() => {
-    if (ingredients !== undefined) {
+    if (ingredients) {
       setInputContent(ingredients.join(" "))
     }
   }, [ingredients])
@@ -27,6 +27,10 @@ export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredi
   }
 
   const onClickNextPage = () => {
+    if (!ingredients || ingredients.length === 0 || ingredients[0] === "") {
+      alert("食材を入力してください")
+      return
+    }
     setQuestionNumber(1)
   }
 

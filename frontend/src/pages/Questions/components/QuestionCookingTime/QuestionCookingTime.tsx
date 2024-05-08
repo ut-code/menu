@@ -51,8 +51,8 @@ export const QuestionCookingTime = ({ setQuestionNumber, answer, setAnswer }: Pr
           style={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "flex-end",
             gap: 8,
+            width: "100%",
           }}
         >
           {options.map((option) => (
