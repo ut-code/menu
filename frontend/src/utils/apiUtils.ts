@@ -5,7 +5,7 @@ export const postSearchRecipesApi = (): string => {
 }
 
 export const postSearchRecipesKeywordsApi = (): string => {
-  return `${API_BASE_URL}/api/searchRecipes/keywords`
+  return `${API_BASE_URL}/api/recipes/search/keywords`
 }
 
 export const getUserFavoritesApi = (): string => {
