@@ -90,7 +90,7 @@ export const Auth = ({ setInputUsername }: Props) => {
           </div>
           <div className={styles.or}>
             <hr />
-            <h6>または</h6>
+            <h5>または</h5>
             <hr />
           </div>
           <BorderButton onClick={onClickLoginWithGoogle} disabled={loading}>
@@ -119,19 +119,19 @@ export const Auth = ({ setInputUsername }: Props) => {
               ></path>
               <path fill="none" d="M0 0h48v48H0z"></path>
             </svg>
-            Googleアカウントで続ける
+            <h4 style={{ fontSize: 16, fontWeight: "bold", marginLeft: 4 }}>Googleアカウントで続ける</h4>
           </BorderButton>
 
           {hasAccount ? (
             <div className={styles.orMessage}>
-              <h6>アカウントをお持ちでない方は</h6>
+              <h4>アカウントをお持ちでない方は</h4>
               <button onClick={() => setHasAccount(false)} disabled={false}>
                 アカウント作成
               </button>
             </div>
           ) : (
             <div className={styles.orMessage}>
-              <h6>すでにアカウントをお持ちの方は</h6>
+              <h4>すでにアカウントをお持ちの方は</h4>
               <button onClick={() => setHasAccount(true)} disabled={false}>
                 サインイン
               </button>

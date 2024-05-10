@@ -9,7 +9,7 @@ export const InfoBox = ({ title, message }: Props) => {
   return (
     <div className={styles.infobox}>
       <h4 style={{ fontSize: 16, fontWeight: 700 }}>{title}</h4>
-      <h4>{message}</h4>
+      <h4 style={{ fontSize: 16 }}>{message}</h4>
     </div>
   )
 }
