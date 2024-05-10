@@ -41,9 +41,9 @@
   align-items: center;
 }
 
-.or h6 {
+.or h5 {
   padding: 0 4px;
-  width: 80px;
+  width: 85px;
   text-align: center;
   color: #c4c4c4;
 }
@@ -64,4 +64,5 @@
   font-weight: 700;
   text-decoration-line: underline;
   background: none;
+  font-size: 16px;
 }
