@@ -51,6 +51,7 @@ export const Result = () => {
         body: JSON.stringify({
           materials: searchInfo.ingredients,
           dish: searchInfo.dish,
+          cookingTime: searchInfo.cookingTime,
         }),
       })
       if (!response.ok) throw new Error("レシピの取得に失敗しました")
