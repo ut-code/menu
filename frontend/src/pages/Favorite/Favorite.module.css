@@ -40,11 +40,11 @@ button {
 
 .noResult {
   width: 100%;
-  margin-top: 12vh;
+  margin-top: 25vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 32px;
 
   text-align: center;
 }
