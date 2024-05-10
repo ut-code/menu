@@ -66,10 +66,10 @@ class SearchController {
                     positive: {
                       bool: {
                         should: [
-                          { term: { title: { value: materials.length > 0 ? materials[0] : "", boost: 2 } } },
-                          { term: { description: { value: materials.length > 0 ? materials[0] : "", boost: 2 } } },
-                          { terms: { materials: materials, boost: 1.5 } },
-                          { term: { dish: { value: dish, boost: 2 } } },
+                          { term: { title: { value: materials.length > 0 ? materials[0] : "", boost: 1.5 } } },
+                          { term: { description: { value: materials.length > 0 ? materials[0] : "", boost: 1 } } },
+                          { terms: { materials: materials, boost: 1 } },
+                          { term: { dish: { value: dish, boost: 1 } } },
                           cookingTimeQuery,
                         ],
                       },
