@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  width: 100%;
+  width: 92vw;
   align-items: flex-start;
   border-radius: 12px;
   border: 1px solid #c4c4c4;
@@ -8,9 +8,9 @@
 
 .image_frame {
   width: 88px;
-  min-height: 131px;
-  max-height: 161px;
+  height: 161px;
   object-fit: cover;
+  object-position: center;
   border-radius: 12px 0px 0px 12px;
 }
 
