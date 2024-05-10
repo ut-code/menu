@@ -38,7 +38,22 @@ class SearchController {
 
   searchRecipes = async (req: Request, res: Response): Promise<void> => {
     try {
-      const { materials, dish } = req.body
+      const { materials, dish, cookingTime } = req.body
+      let cookingTimeQuery
+      switch (cookingTime) {
+        case "時短":
+          cookingTimeQuery = { range: { totalCookingTime: { gt: 0, lte: 15 } } }
+          break
+        case "普通":
+          cookingTimeQuery = { range: { totalCookingTime: { lte: 30 } } }
+          break
+        case "じっくり":
+          cookingTimeQuery = { range: { totalCookingTime: { gt: 30 } } }
+          break
+        default:
+          cookingTimeQuery = { match_all: {} }
+      }
+
       const result = await elasticSearchClient.search({
         index: "recipes",
         body: {
