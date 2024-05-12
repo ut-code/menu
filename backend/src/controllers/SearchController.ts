@@ -83,7 +83,8 @@ class SearchController {
                               },
                             },
                           },
-                          { terms: { materials: materials, boost: 1, analyzer: "my_ja_analyzer" } },
+                          // TODO: materialsにもanalyzerを指定する
+                          { terms: { materials: materials, boost: 1 } },
                           { term: { dish: { value: dish, boost: 1 } } },
                           cookingTimeQuery,
                         ],
