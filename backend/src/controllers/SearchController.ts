@@ -91,7 +91,7 @@ class SearchController {
                     },
                     negative: {
                       bool: {
-                        must_not: [{ match: { dish: { query: "" } } }],
+                        must_not: [{ term: { dish: { value: "" } } }],
                       },
                     },
                     negative_boost: 0.5,
