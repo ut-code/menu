@@ -84,14 +84,14 @@ class SearchController {
                             },
                           },
                           { terms: { materials: materials, boost: 1, analyzer: "my_ja_analyzer" } },
-                          { term: { dish: { query: dish, boost: 1 } } },
+                          { term: { dish: { value: dish, boost: 1 } } },
                           cookingTimeQuery,
                         ],
                       },
                     },
                     negative: {
                       bool: {
-                        must_not: [{ match: { dish: { query: "" } } }],
+                        must_not: [{ match: { dish: { value: "" } } }],
                       },
                     },
                     negative_boost: 0.5,
