@@ -66,7 +66,7 @@ class SearchController {
                       bool: {
                         should: [
                           {
-                            term: {
+                            match: {
                               title: {
                                 query: materials.length > 0 ? materials[0] : "",
                                 boost: 1.5,
@@ -75,7 +75,7 @@ class SearchController {
                             },
                           },
                           {
-                            term: {
+                            match: {
                               description: {
                                 query: materials.length > 0 ? materials[0] : "",
                                 boost: 1,
