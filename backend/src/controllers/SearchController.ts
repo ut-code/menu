@@ -60,7 +60,6 @@ class SearchController {
           query: {
             bool: {
               should: [
-                { bool: { should: [{ terms: { materials: materials } }] } },
                 {
                   boosting: {
                     positive: {
@@ -69,7 +68,7 @@ class SearchController {
                           {
                             term: {
                               title: {
-                                value: materials.length > 0 ? materials[0] : "",
+                                query: materials.length > 0 ? materials[0] : "",
                                 boost: 1.5,
                                 analyzer: "my_ja_analyzer",
                               },
@@ -78,14 +77,14 @@ class SearchController {
                           {
                             term: {
                               description: {
-                                value: materials.length > 0 ? materials[0] : "",
+                                query: materials.length > 0 ? materials[0] : "",
                                 boost: 1,
                                 analyzer: "my_ja_analyzer",
                               },
                             },
                           },
-                          { terms: { materials: materials, boost: 1 } },
-                          { term: { dish: { value: dish, boost: 1 } } },
+                          { terms: { materials: materials, boost: 1, analyzer: "my_ja_analyzer" } },
+                          { term: { dish: { query: dish, boost: 1 } } },
                           cookingTimeQuery,
                         ],
                       },
