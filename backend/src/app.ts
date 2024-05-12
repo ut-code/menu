@@ -1,5 +1,7 @@
 import express from "express"
 import cors from "cors"
+import swaggerUi from "swagger-ui-express"
+import swaggerDocument from "./swagger.json"
 import UserController from "./controllers/UserController"
 import SearchController from "./controllers/SearchController"
 import RecipeController from "./controllers/RecipeController"
@@ -16,11 +18,11 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.get("/", (req, res) => {
+app.get("/", (_req, res) => {
   res.send("Hello, world!")
 })
 
-app.get("/api/elasticsearch/health", async (req, res) => {
+app.get("/api/elasticsearch/health", async (_req, res) => {
   try {
     const health = await elasticSearchClient.cat.health({ format: "json" })
     res.json(health)
@@ -29,6 +31,8 @@ app.get("/api/elasticsearch/health", async (req, res) => {
     res.status(500).json({ error: "Elasticsearch is down" })
   }
 })
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 app.post("/api/recipes", SearchController.indexRecipe)
 app.delete("/api/recipes/:id", SearchController.deleteRecipe)

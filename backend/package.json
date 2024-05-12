@@ -10,7 +10,8 @@
     "setup:env": "cp .env.sample .env",
     "setup": "npm run setup:install",
     "setup:db_push": "npx prisma db push",
-    "setup:install": "npm ci && npm run setup:db_push"
+    "setup:install": "npm ci && npm run setup:db_push",
+    "swagger": "node src/swagger.mjs"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,7 @@
     "@supabase/supabase-js": "^2.39.0",
     "express": "^4.18.2",
     "prisma": "^5.10.2",
+    "swagger-ui-express": "^5.0.0",
     "typescript": "^5.3.2"
   },
   "devDependencies": {
@@ -30,8 +32,10 @@
     "@types/jest": "^29.5.10",
     "@types/node": "^20.11.30",
     "@types/supertest": "^2.0.16",
+    "@types/swagger-ui-express": "^4.1.6",
     "cors": "^2.8.5",
     "supertest": "^6.3.3",
+    "swagger-autogen": "^2.23.7",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.1"
   }
