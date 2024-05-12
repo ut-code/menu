@@ -53,6 +53,12 @@ class SearchController {
         default:
           cookingTimeQuery = { match_all: {} }
       }
+      const materialsTitleQuery = materials.map((material: string) => ({
+        term: { title: { value: material, boost: 1.5 } },
+      }))
+      const materialsDescriptionQuery = materials.map((material: string) => ({
+        term: { description: { value: material, boost: 1 } },
+      }))
 
       const result = await elasticSearchClient.search({
         index: "recipes",
@@ -66,8 +72,8 @@ class SearchController {
                     positive: {
                       bool: {
                         should: [
-                          { term: { title: { value: materials.length > 0 ? materials[0] : "", boost: 1.5 } } },
-                          { term: { description: { value: materials.length > 0 ? materials[0] : "", boost: 1 } } },
+                          materialsTitleQuery,
+                          materialsDescriptionQuery,
                           { terms: { materials: materials, boost: 1 } },
                           { term: { dish: { value: dish, boost: 1 } } },
                           cookingTimeQuery,
