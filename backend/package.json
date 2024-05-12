@@ -10,7 +10,8 @@
     "setup:env": "cp .env.sample .env",
     "setup": "npm run setup:install",
     "setup:db_push": "npx prisma db push",
-    "setup:install": "npm ci && npm run setup:db_push"
+    "setup:install": "npm ci && npm run setup:db_push",
+    "swagger": "node src/swagger.mjs"
   },
   "keywords": [],
   "author": "",
