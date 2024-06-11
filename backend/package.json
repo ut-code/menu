@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/server.js",
     "dev": "ts-node src/server.ts",
-    "build": "tsc",
+    "build": "tsc && ls dist",
     "setup:env": "cp .env.sample .env",
     "setup": "npm run setup:install",
     "setup:db_push": "npx prisma db push",
