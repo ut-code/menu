@@ -4,9 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node dist/server.js",
+    "start": "node dist/backend/src/server.js",
     "dev": "ts-node src/server.ts",
-    "build": "tsc && ls dist",
+    "build": "tsc",
     "setup:env": "cp .env.sample .env",
     "setup": "npm run setup:install",
     "setup:db_push": "npx prisma db push",
