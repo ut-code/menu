@@ -10,6 +10,90 @@
       "url": "http://localhost:3000/"
     }
   ],
+  "components": {
+    "schemas": {
+      "Recipe": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "totalCookingTime": {
+            "type": "integer"
+          },
+          "materials": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "keywords": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sourceUrl": {
+            "type": "string"
+          },
+          "foodImageUrl": {
+            "type": "string"
+          },
+          "dish": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "cuisine": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "description",
+          "totalCookingTime",
+          "materials",
+          "keywords",
+          "sourceUrl",
+          "foodImageUrl",
+          "dish",
+          "createdAt"
+        ]
+      },
+      "SearchInfo": {
+        "type": "object",
+        "properties": {
+          "ingredients": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "dish": {
+            "type": "string",
+            "nullable": true
+          },
+          "cookingTime": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": ["ingredients"]
+      }
+    }
+  },
   "paths": {
     "/": {
       "get": {
