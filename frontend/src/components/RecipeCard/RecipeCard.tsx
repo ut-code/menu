@@ -3,9 +3,11 @@ import { Link } from "react-router-dom"
 
 import FavoriteIcon from "@mui/icons-material/Favorite"
 import { TipReference } from "@/components/TipReference"
-import { Recipe } from "@/utils/recipes"
+import type { components } from "../../../../types/api"
 import { UserContext } from "@/utils/context"
 import styles from "./RecipeCard.module.css"
+
+type Recipe = components["schemas"]["Recipe"]
 
 interface Props {
   recipe: Recipe

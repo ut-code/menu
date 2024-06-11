@@ -15,10 +15,14 @@ import {
   deleteUserFavoritesApi,
 } from "@/utils/apiUtils"
 import { UserContext } from "@/utils/context"
-import { Recipe, SearchInfo } from "@/utils/recipes"
 import styles from "./Result.module.css"
 import { EmptyResults } from "@/components/EmptyResults"
 // import GridViewIcon from "@mui/icons-material/GridView"
+
+import type { components } from "../../../../types/api"
+
+type Recipe = components["schemas"]["Recipe"]
+type SearchInfo = components["schemas"]["SearchInfo"]
 
 export const Result = () => {
   const navigate = useNavigate()

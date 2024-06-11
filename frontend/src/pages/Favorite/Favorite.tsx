@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom"
 
 import { getUserFavoritesApi, postUserFavoritesApi, deleteUserFavoritesApi } from "@/utils/apiUtils"
 import { UserContext } from "@/utils/context"
-import { Recipe } from "@/utils/recipes"
 import { Loading } from "@/components/Loading"
 import { RecipeCard } from "@/components/RecipeCard"
 import { Chip } from "@/components/Chip"
@@ -19,6 +18,9 @@ import { FreeMode } from "swiper/modules"
 import "swiper/css"
 import "swiper/css/free-mode"
 import "./swiper.css"
+import type { components } from "../../../../types/api"
+
+type Recipe = components["schemas"]["Recipe"]
 
 export const Favorite = () => {
   const queryClient = useQueryClient()
