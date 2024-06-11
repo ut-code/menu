@@ -7,7 +7,8 @@
     "lint": "eslint --fix frontend/src && eslint --fix backend/src",
     "format": "prettier --write .",
     "fix": "npm run lint && npm run format && cd backend && npx prisma format",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "generate": "openapi-typescript ./openapi.json -o ./types/api.ts"
   },
   "husky": {
     "hooks": {
@@ -34,5 +35,8 @@
     "husky": "^8.0.3",
     "lint-staged": "^15.1.0",
     "prettier": "^2.8.3"
+  },
+  "dependencies": {
+    "openapi-typescript": "^6.7.6"
   }
 }

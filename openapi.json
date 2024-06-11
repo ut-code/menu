@@ -1,13 +1,99 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.0",
   "info": {
     "title": "Dull-Meshi API",
     "description": "Description",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
-  "basePath": "/",
-  "schemes": ["http"],
+  "servers": [
+    {
+      "url": "http://localhost:3000/"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Recipe": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "totalCookingTime": {
+            "type": "integer"
+          },
+          "materials": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "keywords": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sourceUrl": {
+            "type": "string"
+          },
+          "foodImageUrl": {
+            "type": "string"
+          },
+          "dish": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "cuisine": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "description",
+          "totalCookingTime",
+          "materials",
+          "keywords",
+          "sourceUrl",
+          "foodImageUrl",
+          "dish",
+          "createdAt"
+        ]
+      },
+      "SearchInfo": {
+        "type": "object",
+        "properties": {
+          "ingredients": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "dish": {
+            "type": "string",
+            "nullable": true
+          },
+          "cookingTime": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": ["ingredients"]
+      }
+    }
+  },
   "paths": {
     "/": {
       "get": {
@@ -35,20 +121,20 @@
     "/api/recipes": {
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "recipe": {
-                  "example": "any"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "recipe": {
+                    "example": "any"
+                  }
                 }
               }
             }
           }
-        ],
+        },
         "responses": {
           "201": {
             "description": "Created"
@@ -67,7 +153,9 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -83,26 +171,26 @@
     "/api/recipes/search": {
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "materials": {
-                  "example": "any"
-                },
-                "dish": {
-                  "example": "any"
-                },
-                "cookingTime": {
-                  "example": "any"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "materials": {
+                    "example": "any"
+                  },
+                  "dish": {
+                    "example": "any"
+                  },
+                  "cookingTime": {
+                    "example": "any"
+                  }
                 }
               }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -119,20 +207,20 @@
     "/api/recipes/search/keywords": {
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "keywords": {
-                  "example": "any"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "keywords": {
+                    "example": "any"
+                  }
                 }
               }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -149,20 +237,20 @@
     "/api/recipes/search/query": {
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "query": {
-                  "example": "any"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "example": "any"
+                  }
                 }
               }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -179,20 +267,20 @@
     "/api/recipes/search/old": {
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "searchInfo": {
-                  "example": "any"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "searchInfo": {
+                    "example": "any"
+                  }
                 }
               }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -206,20 +294,20 @@
     "/api/searchRecipes/keywords": {
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "keywords": {
-                  "example": "any"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "keywords": {
+                    "example": "any"
+                  }
                 }
               }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -247,20 +335,20 @@
       },
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "recipeId": {
-                  "example": "any"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "recipeId": {
+                    "example": "any"
+                  }
                 }
               }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -285,7 +373,9 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -323,20 +413,20 @@
     "/api/users/username": {
       "put": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "username": {
-                  "example": "any"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "example": "any"
+                  }
                 }
               }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -356,41 +446,41 @@
     "/api/recipes/new": {
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "example": "any"
-                },
-                "description": {
-                  "example": "any"
-                },
-                "totalCookingTime": {
-                  "example": "any"
-                },
-                "materials": {
-                  "example": "any"
-                },
-                "materialsConverted": {
-                  "example": "any"
-                },
-                "sourceUrl": {
-                  "example": "any"
-                },
-                "foodImageUrl": {
-                  "example": "any"
-                },
-                "dish": {
-                  "example": "any"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "example": "any"
+                  },
+                  "description": {
+                    "example": "any"
+                  },
+                  "totalCookingTime": {
+                    "example": "any"
+                  },
+                  "materials": {
+                    "example": "any"
+                  },
+                  "materialsConverted": {
+                    "example": "any"
+                  },
+                  "sourceUrl": {
+                    "example": "any"
+                  },
+                  "foodImageUrl": {
+                    "example": "any"
+                  },
+                  "dish": {
+                    "example": "any"
+                  }
                 }
               }
             }
           }
-        ],
+        },
         "responses": {
           "201": {
             "description": "Created"
@@ -410,20 +500,20 @@
     "/api/recipes/scrape": {
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "sourceUrl": {
-                  "example": "any"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "sourceUrl": {
+                    "example": "any"
+                  }
                 }
               }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "OK"

@@ -10,8 +10,7 @@
     "setup:env": "cp .env.sample .env",
     "setup": "npm run setup:install",
     "setup:db_push": "npx prisma db push",
-    "setup:install": "npm ci && npm run setup:db_push",
-    "swagger": "node src/swagger.mjs"
+    "setup:install": "npm ci && npm run setup:db_push"
   },
   "keywords": [],
   "author": "",
@@ -35,7 +34,6 @@
     "@types/swagger-ui-express": "^4.1.6",
     "cors": "^2.8.5",
     "supertest": "^6.3.3",
-    "swagger-autogen": "^2.23.7",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.1"
   }
