@@ -3,10 +3,39 @@ import { chromium } from "playwright"
 import { Request, Response } from "express"
 import { extractUserFromRequest } from "../utils/UserUtil"
 import type { Recipes } from "@prisma/client"
+import { elasticSearchClient } from "../elasticSearchClient"
 
 // NOTE: https://github.com/Microsoft/TypeScript/wiki/'this'-in-TypeScript#use-instance-functions
 // メンバ関数にはアロー関数を使っておくと this が undefined にならずに済む
 class RecipeController {
+  indexRecipe = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { recipe } = req.body
+      const recipeIndex = await elasticSearchClient.index({
+        index: "recipes",
+        body: recipe,
+      })
+      res.status(201).json(recipeIndex)
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ error: "Internal server error" })
+    }
+  }
+
+  deleteRecipe = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const recipeId = req.params.id
+      const recipeDelete = await elasticSearchClient.delete({
+        index: "recipes",
+        id: recipeId,
+      })
+      res.status(200).json(recipeDelete)
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ error: "Internal server error" })
+    }
+  }
+
   createRecipe = async (req: Request, res: Response): Promise<void> => {
     try {
       const userFromRequest = await extractUserFromRequest(req)
