@@ -47,7 +47,6 @@ app.get("/api/users/favorites", UserController.getFavorites)
 app.post("/api/users/favorites", UserController.addFavorite)
 app.delete("/api/users/favorites/:id", UserController.deleteFavorite)
 app.get("/api/users", UserController.getUser)
-app.put("/api/users/username", UserController.updateUsername)
 
 app.post("/api/recipes/new", RecipeController.createRecipe)
 app.post("/api/recipes/scrape", RecipeController.scrapeRecipe)
