@@ -40,9 +40,6 @@ app.post("/api/recipes/search", SearchController.searchRecipes)
 app.post("/api/recipes/search/keywords", SearchController.searchRecipesWithKeywords)
 app.post("/api/recipes/search/query", SearchController.searchRecipesWithQuery)
 
-app.post("/api/recipes/search/old", SearchController.searchRecipesOld)
-app.post("/api/searchRecipes/keywords", SearchController.searchRecipesByKeywords)
-
 app.get("/api/users/favorites", UserController.getFavorites)
 app.post("/api/users/favorites", UserController.addFavorite)
 app.delete("/api/users/favorites/:id", UserController.deleteFavorite)

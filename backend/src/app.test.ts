@@ -2,15 +2,9 @@ import request from "supertest"
 import app from "./app"
 
 // https://www.albertgao.xyz/2017/05/24/how-to-test-expressjs-with-jest-and-supertest/
-describe("/searchRecipes", () => {
-  it("正常系のテスト", async () => {
-    const searchInfo = {
-      ingredients: ["ごぼう", "豚肉"],
-      cookingTime: null,
-      dish: null,
-    }
-
-    const response = await request(app).post("/api/recipes/search/old").send({ searchInfo: searchInfo })
-    expect(response.statusCode).toBe(200)
+describe("GET /", () => {
+  it("should return 200 OK", async () => {
+    const response = await request(app).get("/")
+    expect(response.status).toBe(200)
   })
 })

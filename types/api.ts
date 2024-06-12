@@ -151,50 +151,6 @@ export interface paths {
       }
     }
   }
-  "/api/recipes/search/old": {
-    post: {
-      requestBody?: {
-        content: {
-          "application/json": {
-            /** @example any */
-            searchInfo?: unknown
-          }
-        }
-      }
-      responses: {
-        /** @description OK */
-        200: {
-          content: never
-        }
-        /** @description Internal Server Error */
-        500: {
-          content: never
-        }
-      }
-    }
-  }
-  "/api/searchRecipes/keywords": {
-    post: {
-      requestBody?: {
-        content: {
-          "application/json": {
-            /** @example any */
-            keywords?: unknown
-          }
-        }
-      }
-      responses: {
-        /** @description OK */
-        200: {
-          content: never
-        }
-        /** @description Internal Server Error */
-        500: {
-          content: never
-        }
-      }
-    }
-  }
   "/api/users/favorites": {
     get: {
       responses: {
