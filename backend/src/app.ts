@@ -40,8 +40,9 @@ app.post("/api/recipes/search", SearchController.searchRecipes)
 app.post("/api/recipes/search/keywords", SearchController.searchRecipesWithKeywords)
 app.post("/api/recipes/search/query", SearchController.searchRecipesWithQuery)
 
-app.post("/api/recipes/search/old", SearchController.searchRecipesOld)
-app.post("/api/searchRecipes/keywords", SearchController.searchRecipesByKeywords)
+app.post("/api/searchRecipes/keywords", (_req, res) => {
+  res.send("searchRecipes/keywords is not implemented yet")
+})
 
 app.get("/api/users/favorites", UserController.getFavorites)
 app.post("/api/users/favorites", UserController.addFavorite)
