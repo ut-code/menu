@@ -286,36 +286,6 @@ export interface paths {
       }
     }
   }
-  "/api/users/username": {
-    put: {
-      requestBody?: {
-        content: {
-          "application/json": {
-            /** @example any */
-            username?: unknown
-          }
-        }
-      }
-      responses: {
-        /** @description OK */
-        200: {
-          content: never
-        }
-        /** @description Bad Request */
-        400: {
-          content: never
-        }
-        /** @description Unauthorized */
-        401: {
-          content: never
-        }
-        /** @description Internal Server Error */
-        500: {
-          content: never
-        }
-      }
-    }
-  }
   "/api/recipes/new": {
     post: {
       requestBody?: {

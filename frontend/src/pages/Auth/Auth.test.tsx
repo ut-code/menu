@@ -13,10 +13,9 @@ beforeAll(() => {
 
 describe("SignIn component", () => {
   it("should handle form submission and show success alert", async () => {
-    const mockSetInputUsername = vi.fn()
     const { getByLabelText, getByText } = render(
       <MemoryRouter>
-        <Auth inputUsername="" setInputUsername={mockSetInputUsername} />
+        <Auth />
       </MemoryRouter>
     )
     const emailInput = getByLabelText("メールアドレス")
@@ -36,10 +35,9 @@ describe("SignIn component", () => {
   })
 
   it("should handle Google sign-in button click and show error alert", async () => {
-    const mockSetInputUsername = vi.fn()
     const { getByText } = render(
       <MemoryRouter>
-        <Auth inputUsername="" setInputUsername={mockSetInputUsername} />
+        <Auth />
       </MemoryRouter>
     )
     const googleSignInButton = getByText("Googleアカウントで続ける")

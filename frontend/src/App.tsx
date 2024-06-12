@@ -1,9 +1,8 @@
 import { Routes, Route, Navigate, useLocation } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { Session } from "@supabase/supabase-js"
-import { useLocalStorage } from "react-use"
 
-import { User, updateUsername } from "@/utils/users"
+import { User } from "@/utils/users"
 import { getUserApi } from "@/utils/apiUtils"
 import { UserContext } from "@/utils/context"
 import { HowTo } from "@/pages/HowTo"
@@ -26,7 +25,6 @@ export default function App() {
   const [user, setUser] = useState<User | null>(null)
   const [session, setSession] = useState<Session | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [inputUsername, setInputUsername] = useLocalStorage("inputUsername", "")
   const location = useLocation()
 
   useEffect(() => {
@@ -54,11 +52,6 @@ export default function App() {
         if (fetchedUser) {
           setUser(fetchedUser)
         }
-        const username = await updateUsername({ user, session }, inputUsername)
-        if (username && fetchedUser) {
-          setInputUsername(username)
-          setUser({ ...fetchedUser, username: username })
-        }
       })
       setIsLoading(false)
     }
@@ -77,7 +70,7 @@ export default function App() {
         />
         <Route path="/result" element={<Result />} />
         <Route path="/setting" element={<Setting />} />
-        <Route path="/auth" element={<Auth inputUsername={inputUsername} setInputUsername={setInputUsername} />} />
+        <Route path="/auth" element={<Auth />} />
         <Route path="/new" element={<NewRecipe />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
