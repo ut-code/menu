@@ -18,22 +18,21 @@ model Categories {
 }
 
 model Recipes {
-  id                 Int      @id @default(autoincrement())
-  title              String
-  description        String
-  totalCookingTime   Int      @default(-1)
-  materials          String[]
-  materialsConverted String
-  keywords           String[]
-  sourceUrl          String   @unique(map: "Recipes_recipeUrl_key")
-  foodImageUrl       String
-  dish               String?
-  category           String?
-  cuisine            String?
-
-  favorites             UserFavorites[]
+  id                    Int                     @id @default(autoincrement())
+  title                 String
+  sourceUrl             String                  @unique(map: "Recipes_recipeUrl_key")
+  description           String
+  keywords              String[]
+  totalCookingTime      Int                     @default(-1)
+  materials             String[]
+  materialsConverted    String
+  foodImageUrl          String
+  dish                  String?
+  category              String?
+  cuisine               String?
   recipeMaterialsSearch RecipeMaterialsSearch[]
   submissions           RecipeSubmissions[]
+  favorites             UserFavorites[]
 }
 
 model RecipesBackup {
@@ -49,11 +48,10 @@ model RecipesBackup {
 }
 
 model RecipeMaterialsSearch {
-  id       Int    @id @default(autoincrement())
-  material String @unique
+  id       Int     @id @default(autoincrement())
+  material String  @unique
   recipeId Int
-
-  recipe Recipes @relation(fields: [recipeId], references: [id])
+  recipe   Recipes @relation(fields: [recipeId], references: [id])
 }
 
 model Urls {
@@ -62,24 +60,21 @@ model Urls {
 }
 
 model Users {
-  id        String   @id
-  email     String   @unique
-  username  String   @default("名無し")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  favorites   UserFavorites[]
+  id          String              @id
+  email       String              @unique
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
   submissions RecipeSubmissions[]
+  favorites   UserFavorites[]
 }
 
 model UserFavorites {
-  id        Int      @id @default(autoincrement())
-  userId    String
-  recipeId  Int
-  createdAt DateTime @default(now())
-
-  user           Users   @relation(fields: [userId], references: [id])
-  favoriteRecipe Recipes @relation(fields: [recipeId], references: [id])
+  id             Int      @id @default(autoincrement())
+  userId         String
+  recipeId       Int
+  createdAt      DateTime @default(now())
+  favoriteRecipe Recipes  @relation(fields: [recipeId], references: [id])
+  user           Users    @relation(fields: [userId], references: [id])
 
   @@unique([userId, recipeId])
 }
@@ -89,9 +84,8 @@ model RecipeSubmissions {
   recipeId  Int
   userId    String
   createdAt DateTime @default(now())
-
-  recipe Recipes @relation(fields: [recipeId], references: [id])
-  user   Users   @relation(fields: [userId], references: [id])
+  recipe    Recipes  @relation(fields: [recipeId], references: [id])
+  user      Users    @relation(fields: [userId], references: [id])
 
   @@unique([userId, recipeId])
 }

@@ -1,7 +1,6 @@
 import { client } from "../db.server"
 import { elasticSearchClient } from "../elasticSearchClient"
 import { Request, Response } from "express"
-// import type { Users } from "@prisma/client"
 
 // NOTE: https://github.com/Microsoft/TypeScript/wiki/'this'-in-TypeScript#use-instance-functions
 // メンバ関数にはアロー関数を使っておくと this が undefined にならずに済む
