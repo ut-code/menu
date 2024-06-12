@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom"
 
 import { postSubmitRecipeApi, postScrapeRecipeApi } from "@/utils/apiUtils"
 import { UserContext } from "@/utils/context"
-import { Recipe } from "@/utils/recipes"
 
 import styles from "./NewRecipe.module.css"
 import { BorderButton } from "@/components/elements/button/BorderButton"
@@ -17,6 +16,9 @@ import { RecipeCard } from "@/components/RecipeCard"
 // import GridViewIcon from "@mui/icons-material/GridView"
 
 import emptyImage from "@/assets/image/Howto4.png"
+import type { components } from "../../../../types/api"
+
+type Recipe = components["schemas"]["Recipe"]
 
 type UIState = "URL" | "Detail"
 
