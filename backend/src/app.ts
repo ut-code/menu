@@ -34,8 +34,6 @@ app.get("/api/elasticsearch/health", async (_req, res) => {
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
-app.post("/api/recipes", SearchController.indexRecipe)
-app.delete("/api/recipes/:id", SearchController.deleteRecipe)
 app.post("/api/recipes/search", SearchController.searchRecipes)
 app.post("/api/recipes/search/keywords", SearchController.searchRecipesWithKeywords)
 app.post("/api/recipes/search/query", SearchController.searchRecipesWithQuery)
@@ -45,6 +43,8 @@ app.post("/api/users/favorites", UserController.addFavorite)
 app.delete("/api/users/favorites/:id", UserController.deleteFavorite)
 app.get("/api/users", UserController.getUser)
 
+app.post("/api/recipes", RecipeController.indexRecipe)
+app.delete("/api/recipes/:id", RecipeController.deleteRecipe)
 app.post("/api/recipes/new", RecipeController.createRecipe)
 app.post("/api/recipes/scrape", RecipeController.scrapeRecipe)
 
