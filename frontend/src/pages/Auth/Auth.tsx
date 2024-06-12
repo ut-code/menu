@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react"
+import { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 
 import { UserContext } from "@/utils/context"
@@ -12,21 +12,12 @@ import { TextField } from "@mui/material"
 
 import styles from "./Auth.module.css"
 
-interface Props {
-  inputUsername: string | undefined
-  setInputUsername: (inputUsername: string) => void
-}
-
-export const Auth = ({ setInputUsername }: Props) => {
+export const Auth = () => {
   const navigate = useNavigate()
   const { session } = useContext(UserContext)
   const [loading, setLoading] = useState(false)
   const [hasAccount, setHasAccount] = useState<boolean>(false)
   const [email, setEmail] = useState("")
-
-  useEffect(() => {
-    setInputUsername("")
-  }, [])
 
   const handleSignIn = async () => {
     setLoading(true)
