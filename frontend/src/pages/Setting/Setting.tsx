@@ -44,7 +44,7 @@ export const Setting = () => {
           </div>
         </Link>
       </div>
-      <div>
+      {/* <div>
         <div className={styles.title}>
           <h5>ライセンス</h5>
         </div>
@@ -56,7 +56,7 @@ export const Setting = () => {
             <img src="//u.xgoo.jp/img/sgoo.png" alt="supported by goo" title="supported by goo" width={"96px"} />
           </div>
         </Link>
-      </div>
+      </div> */}
     </div>
   )
 }
