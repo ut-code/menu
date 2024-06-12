@@ -64,7 +64,6 @@ model Users {
   email       String              @unique
   createdAt   DateTime            @default(now())
   updatedAt   DateTime            @updatedAt
-  username    String              @default("名無し")
   submissions RecipeSubmissions[]
   favorites   UserFavorites[]
 }
