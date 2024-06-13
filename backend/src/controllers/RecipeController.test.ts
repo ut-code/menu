@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import RecipeController from "./RecipeController"
 import { elasticSearchClient } from "../elasticSearchClient"
+import { skip } from "node:test"
 
 const useDockerContainer = process.env.USE_DOCKER_CONTAINER === "true"
 
@@ -160,4 +161,6 @@ if (useDockerContainer) {
       index: "recipes",
     })
   })
+} else {
+  skip()
 }
