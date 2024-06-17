@@ -1,5 +1,5 @@
 import styles from "./EmptyResults.module.css"
-import imgSorry from "@/assets/image/Sorry.png"
+import imgSorry from "../../assets/image/Sorry.png"
 
 export const EmptyResults = () => {
   return (

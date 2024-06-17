@@ -1,7 +1,7 @@
 import { useState, useContext } from "react"
 
 import { supabase } from "../supabaseClient"
-import { UserContext } from "@/utils/context"
+import { UserContext } from "../../../utils/context"
 
 export const DeleteAccount = () => {
   const { session } = useContext(UserContext)

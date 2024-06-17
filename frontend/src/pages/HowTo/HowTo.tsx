@@ -7,11 +7,11 @@ import "swiper/css/pagination"
 import "swiper/css/navigation"
 import "./swiper.css"
 
-import { NextButton } from "@/components/elements/button/NextButton"
-import one from "@/assets/image/Howto1.png"
-import two from "@/assets/image/Howto2.png"
-import three from "@/assets/image/Howto3.png"
-import four from "@/assets/image/Howto4.png"
+import { NextButton } from "../../components/elements/button/NextButton"
+import one from "../../assets/image/Howto1.png"
+import two from "../../assets/image/Howto2.png"
+import three from "../../assets/image/Howto3.png"
+import four from "../../assets/image/Howto4.png"
 
 export const HowTo = () => {
   return (

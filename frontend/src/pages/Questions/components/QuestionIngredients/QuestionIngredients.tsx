@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
-import { Searchbox } from "@/components/Searchbox"
-import { InfoBox } from "@/components/InfoBox"
-import { NextButton } from "@/components/elements/button/NextButton"
+import { Searchbox } from "../../../../components/Searchbox"
+import { InfoBox } from "../../../../components/InfoBox"
+import { NextButton } from "../../../../components/elements/button/NextButton"
 
 interface Props {
   setQuestionNumber: (questionNumber: number) => void

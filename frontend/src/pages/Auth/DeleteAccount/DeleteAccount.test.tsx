@@ -4,7 +4,7 @@ import { vi } from "vitest"
 import { Session } from "@supabase/supabase-js"
 import { DeleteAccount } from "./DeleteAccount"
 import { supabase } from "../supabaseClient"
-import { UserContext } from "@/utils/context"
+import { UserContext } from "../../../utils/context"
 
 beforeAll(() => {
   window.alert = vi.fn()

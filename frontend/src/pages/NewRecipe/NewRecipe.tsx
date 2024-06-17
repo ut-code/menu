@@ -1,21 +1,21 @@
 import { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 
-import { postSubmitRecipeApi, postScrapeRecipeApi } from "@/utils/apiUtils"
-import { UserContext } from "@/utils/context"
+import { postSubmitRecipeApi, postScrapeRecipeApi } from "../../utils/apiUtils"
+import { UserContext } from "../../utils/context"
 
 import styles from "./NewRecipe.module.css"
-import { BorderButton } from "@/components/elements/button/BorderButton"
-import { BackButton } from "@/components/elements/button/BackButton"
-import { NextButton } from "@/components/elements/button/NextButton"
-import { Loading } from "@/components/Loading"
-import { InfoBox } from "@/components/InfoBox"
-// import { TextField } from "@/components/TextField"
+import { BorderButton } from "../../components/elements/button/BorderButton"
+import { BackButton } from "../../components/elements/button/BackButton"
+import { NextButton } from "../../components/elements/button/NextButton"
+import { Loading } from "../../components/Loading"
+import { InfoBox } from "../../components/InfoBox"
+// import { TextField } from "../../components/TextField"
 import { TextField } from "@mui/material"
-import { RecipeCard } from "@/components/RecipeCard"
+import { RecipeCard } from "../../components/RecipeCard"
 // import GridViewIcon from "@mui/icons-material/GridView"
 
-import emptyImage from "@/assets/image/Howto4.png"
+import emptyImage from "../../assets/image/Howto4.png"
 import type { components } from "../../../../types/api"
 
 type Recipe = components["schemas"]["Recipe"]

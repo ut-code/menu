@@ -1,5 +1,5 @@
 import styles from "./Loading.module.css"
-import { InfoBox } from "@/components/InfoBox"
+import { InfoBox } from "../InfoBox"
 
 export const Loading = () => {
   return (

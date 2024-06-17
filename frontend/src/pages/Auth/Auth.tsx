@@ -1,13 +1,13 @@
 import { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 
-import { UserContext } from "@/utils/context"
+import { UserContext } from "../../utils/context"
 import { supabase } from "./supabaseClient"
 import { SignOut } from "./SignOut"
-import { BorderButton } from "@/components/elements/button/BorderButton"
-import { BackButton } from "@/components/elements/button/BackButton"
-import { NextButton } from "@/components/elements/button/NextButton"
-import { Loading } from "@/components/Loading"
+import { BorderButton } from "../../components/elements/button/BorderButton"
+import { BackButton } from "../../components/elements/button/BackButton"
+import { NextButton } from "../../components/elements/button/NextButton"
+import { Loading } from "../../components/Loading"
 import { TextField } from "@mui/material"
 
 import styles from "./Auth.module.css"
