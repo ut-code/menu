@@ -1,6 +1,6 @@
 import { supabase } from "../supabaseClient"
 import Grid from "@mui/material/BottomNavigation"
-import { NextButton } from "@/components/elements/button/NextButton"
+import { NextButton } from "../../../components/elements/button/NextButton"
 
 export const SignOut = () => {
   const handleSignOut = async () => {

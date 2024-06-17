@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { useContext } from "react"
-import { UserContext } from "@/utils/context"
+import { UserContext } from "../../utils/context"
 import styles from "./Setting.module.css"
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward"
 

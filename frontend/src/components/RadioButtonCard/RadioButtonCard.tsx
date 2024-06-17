@@ -1,5 +1,5 @@
 import styles from "./RadioButtonCard.module.css"
-import { Option } from "@/utils/questions"
+import { Option } from "../../utils/questions"
 import CheckIcon from "@mui/icons-material/Check"
 
 interface Props {

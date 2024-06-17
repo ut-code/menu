@@ -1,9 +1,9 @@
 import { Fragment } from "react"
 
-import { BackButton } from "@/components/elements/button/BackButton"
-import { NextButton } from "@/components/elements/button/NextButton"
-import { RadioButtonCard } from "@/components/RadioButtonCard"
-import { Option } from "@/utils/questions"
+import { BackButton } from "../../../../components/elements/button/BackButton"
+import { NextButton } from "../../../../components/elements/button/NextButton"
+import { RadioButtonCard } from "../../../../components/RadioButtonCard"
+import { Option } from "../../../../utils/questions"
 
 interface Props {
   setQuestionNumber: (questionNumber: number) => void
