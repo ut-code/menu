@@ -7,7 +7,7 @@ import "swiper/css/pagination"
 import "swiper/css/navigation"
 import "./swiper.css"
 
-import { NextButton } from "../../components/elements/button/NextButton"
+import { NextButton } from "../../components/NextButton"
 import one from "../../assets/image/Howto1.png"
 import two from "../../assets/image/Howto2.png"
 import three from "../../assets/image/Howto3.png"

@@ -1,7 +1,7 @@
 import { Fragment } from "react"
 
-import { BackButton } from "../../../../components/elements/button/BackButton"
-import { NextButton } from "../../../../components/elements/button/NextButton"
+import { BackButton } from "../../../../components/BackButton"
+import { NextButton } from "../../../../components/NextButton"
 import { RadioButtonCard } from "../../../../components/RadioButtonCard"
 import { Option } from "../../../../utils/questions"
 
