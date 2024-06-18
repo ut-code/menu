@@ -5,8 +5,8 @@ import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query"
 import { Loading } from "../../components/Loading"
 import { Searchbox } from "../../components/Searchbox"
 import { RecipeCard } from "../../components/RecipeCard"
-import { BackButton } from "../../components/elements/button/BackButton"
-import { BorderButton } from "../../components/elements/button/BorderButton"
+import { BackButton } from "../../components/BackButton"
+import { BorderButton } from "../../components/BorderButton"
 import {
   postSearchRecipesApi,
   postSearchRecipesKeywordsApi,

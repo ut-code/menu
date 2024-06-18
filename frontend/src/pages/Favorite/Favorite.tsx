@@ -7,7 +7,7 @@ import { UserContext } from "../../utils/context"
 import { Loading } from "../../components/Loading"
 import { RecipeCard } from "../../components/RecipeCard"
 import { Chip } from "../../components/Chip"
-import { BorderButton } from "../../components/elements/button/BorderButton"
+import { BorderButton } from "../../components/BorderButton"
 
 import styles from "./Favorite.module.css"
 import emptyImage from "../../assets/image/Howto4.png"
