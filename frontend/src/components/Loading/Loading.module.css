@@ -22,6 +22,8 @@
 .loader {
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
+  height: 49px;
+  width: 48px;
 }
 
 @-webkit-keyframes spin {
