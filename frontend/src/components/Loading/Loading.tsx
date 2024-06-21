@@ -6,14 +6,7 @@ export const Loading = () => {
     <div className={styles.container}>
       <div className={styles.root}>
         <div className={styles.loadingArea}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="49"
-            height="48"
-            viewBox="0 0 49 48"
-            fill="none"
-            className={styles.loader}
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49 48" fill="none" className={styles.loader}>
             <path
               d="M26.0319 2.09349C26.1104 0.969577 27.0876 0.113304 28.2008 0.28701C33.2656 1.07733 37.9643 3.47306 41.5886 7.14833C45.2129 10.8236 47.5428 15.5554 48.2624 20.6306C48.4205 21.7461 47.5507 22.7113 46.4258 22.7742C45.3009 22.8371 44.3486 21.9731 44.1711 20.8605C43.5196 16.778 41.61 12.9807 38.6836 10.0131C35.7572 7.04557 31.9868 5.08309 27.9139 4.37467C26.8039 4.18161 25.9533 3.21741 26.0319 2.09349Z"
               fill="#E0F6F9"
