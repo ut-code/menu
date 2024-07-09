@@ -7,14 +7,10 @@
 だるめし: 質問に答えていくだけで献立を提案してくれるアプリ
 
 <p>
-  <img src="https://github.com/ut-code/menu/assets/53532178/0f5152a2-5d85-4261-90f0-855e14ed86f5") width="200" />
-  <img src="https://github.com/ut-code/menu/assets/53532178/dc74d07f-2b19-4330-87ca-2a412caa9c92") width="200" />
-
-<img src="https://github.com/ut-code/menu/assets/53532178/0f5152a2-5d85-4261-90f0-855e14ed86f5") width="200" />
-
-<img src="https://github.com/ut-code/menu/assets/53532178/55f08e78-d5a7-4048-9963-ad730e658e04") width="200" />
-<img src="https://github.com/ut-code/menu/assets/53532178/6eb799e5-3f34-451a-99b5-2319db85fed2") width="200" />
-
+  <img src="https://github.com/ut-code/menu/assets/53532178/0f5152a2-5d85-4261-90f0-855e14ed86f5" width="200" />
+  <img src="https://github.com/ut-code/menu/assets/53532178/dc74d07f-2b19-4330-87ca-2a412caa9c92" width="200" />
+  <img src="https://github.com/ut-code/menu/assets/53532178/55f08e78-d5a7-4048-9963-ad730e658e04" width="200" />
+  <img src="https://github.com/ut-code/menu/assets/53532178/6eb799e5-3f34-451a-99b5-2319db85fed2" width="200" />
 </p>
 
 ### 使い方
