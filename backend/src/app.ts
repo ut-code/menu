@@ -6,6 +6,7 @@ import UserController from "./controllers/UserController"
 import SearchController from "./controllers/SearchController"
 import RecipeController from "./controllers/RecipeController"
 import { elasticSearchClient } from "./elasticSearchClient"
+import type { paths } from "../../types/openapi-types"
 
 const app = express()
 
@@ -19,16 +20,21 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.get("/", (_req, res) => {
-  res.send("Hello, world!")
+  res.status(200).send("Hello, world!")
 })
+
+type SuccessResponse = paths["/api/elasticsearch/health"]["get"]["responses"]["200"]["content"]["application/json"]
+type ErrorResponse = paths["/api/elasticsearch/health"]["get"]["responses"]["500"]["content"]["application/json"]
 
 app.get("/api/elasticsearch/health", async (_req, res) => {
   try {
     const health = await elasticSearchClient.cat.health({ format: "json" })
-    res.json(health)
+    const response: SuccessResponse = health as SuccessResponse
+    res.status(200).json(response)
   } catch (error) {
     console.error(error)
-    res.status(500).json({ error: "Elasticsearch is down" })
+    const response: ErrorResponse = { message: "Elasticsearch is down" }
+    res.status(500).json(response)
   }
 })
 
