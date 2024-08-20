@@ -95,7 +95,7 @@ export const Result = () => {
       if (!response.ok) throw new Error("お気に入りの追加に失敗しました")
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["favoriteRecipes"])
+      queryClient.invalidateQueries({ queryKey: ["favoriteRecipes"] })
     },
   })
 
@@ -110,7 +110,7 @@ export const Result = () => {
       if (!response.ok) throw new Error("お気に入りの取得に失敗しました")
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["favoriteRecipes"])
+      queryClient.invalidateQueries({ queryKey: ["favoriteRecipes"] })
     },
   })
 

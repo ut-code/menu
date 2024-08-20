@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate, useLocation } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { Session } from "@supabase/supabase-js"
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 
 import { User } from "./utils/users"
 import { getUserApi } from "./utils/apiUtils"
@@ -74,6 +75,7 @@ export default function App() {
         <Route path="/new" element={<NewRecipe />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <ReactQueryDevtools initialIsOpen={false} />
       {location.pathname !== "/" && <BottomNavigationBar />}
     </UserContext.Provider>
   )
