@@ -1,3 +1,5 @@
+import * as fs from "fs"
+import { parse } from "csv-parse/sync"
 import { elasticSearchClient } from "../elasticSearchClient"
 
 async function deleteIndexIfExists(index: string): Promise<void> {
@@ -6,6 +8,12 @@ async function deleteIndexIfExists(index: string): Promise<void> {
     await elasticSearchClient.indices.delete({ index })
     console.log(`Deleted index: ${index}`)
   }
+}
+
+function readCsvFile(filePath: string): string[][] {
+  const file = fs.readFileSync(filePath, "utf-8")
+  const records = parse(file, { columns: true })
+  return records
 }
 
 async function createIndexAndInsertData(indexName: string) {
@@ -44,6 +52,7 @@ async function createIndexAndInsertData(indexName: string) {
 }
 
 ;(async () => {
+  console.log(readCsvFile("ignore/Recipes_rows.csv"))
   const indexName = "recipes"
   await deleteIndexIfExists(indexName)
   await createIndexAndInsertData(indexName)
