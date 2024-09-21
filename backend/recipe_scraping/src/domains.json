@@ -1,0 +1,35 @@
+{
+  "structured": [
+    "✅www.kyounoryouri.jp",
+    "✅www.lettuceclub.net",
+    "✅www.ebarafoods.com",
+    "✅park.ajinomoto.co.jp",
+    "✅www.ntv.co.jp/3min/",
+    "✅www.salad-cafe.com",
+    "✅www.mizkan.co.jp",
+    "www.sirogohan.com",
+    "kumiko-jp.com",
+    "www.nipponham.co.jp"
+  ],
+  "selenium": [
+    "✅www.tablemark.co.jp",
+    "✅www.kikkoman.co.jp",
+    "✅www.meg-snow.com",
+    "www.marukome.co.jp",
+    "dancyu.jp",
+    "www.kurashiru.com"
+  ],
+  "unstructured": [
+    "!?recipe.yamasa.com",
+    "erecipe.woman.excite.co.jp",
+    "www.momoya.co.jp",
+    "www.yamaki.co.jp",
+    "www.abc-cooking.co.jp",
+    "www.nisshin-oillio.com",
+    "www.morinagamilk.co.jp",
+    "www.j-oil.com",
+    "www.asahimatsu.co.jp",
+    "www.itoham.co.jp"
+  ],
+  "disallow": ["www.yutori.co.jp"]
+}
