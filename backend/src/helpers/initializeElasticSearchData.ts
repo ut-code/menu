@@ -10,9 +10,9 @@ async function deleteIndexIfExists(index: string): Promise<void> {
   }
 }
 
-function readCsvFile(filePath: string): string[][] {
+function readCsvFile(filePath: string) {
   const file = fs.readFileSync(filePath, "utf-8")
-  const records = parse(file, { columns: true })
+  const records = parse(file, { columns: true, bom: true })
   return records
 }
 
@@ -32,16 +32,25 @@ async function createIndexAndInsertData(indexName: string) {
   })
 
   // 仮データの投入
-  const data = [
-    { title: "Elasticsearch Introduction", description: "Basics of Elasticsearch", rank: 1 },
-    { title: "Advanced Elasticsearch", description: "Advanced techniques in Elasticsearch", rank: 2 },
-    { title: "Elasticsearch Tuning", description: "Improving Elasticsearch performance", rank: 3 },
-  ]
+  const records = readCsvFile("src/helpers/ignore/Recipes_rows.v2.csv")
+  const filteredRecords = records.slice(0, 10)
+  console.log(filteredRecords)
 
-  for (const item of data) {
+  for (const row of filteredRecords) {
     await elasticSearchClient.index({
       index: indexName,
-      body: item,
+      body: {
+        id: row.id,
+        title: row.title,
+        sourceUrl: row.sourceUrl,
+        description: row.description,
+        totalCookingTime: parseInt(row.totalCookingTime),
+        materials: JSON.parse(row.materials),
+        foodImageUrl: row.foodImageUrl,
+        dish: row.dish,
+        category: row.category,
+        cuisine: row.cuisine,
+      },
     })
   }
 
@@ -52,7 +61,6 @@ async function createIndexAndInsertData(indexName: string) {
 }
 
 ;(async () => {
-  console.log(readCsvFile("ignore/Recipes_rows.csv"))
   const indexName = "recipes"
   await deleteIndexIfExists(indexName)
   await createIndexAndInsertData(indexName)

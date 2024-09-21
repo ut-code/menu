@@ -5,12 +5,14 @@ description = "Add your description here"
 authors = [
     { name = "bvv-1", email = "fhinnoigsr@gmail.com" }
 ]
-dependencies = []
+dependencies = [
+    "ipykernel>=6.29.5",
+    "pandas>=2.2.3",
+]
 readme = "README.md"
 requires-python = ">= 3.12"
 
 [project.scripts]
-hello = "recipe-scraping:hello"
 
 [build-system]
 requires = ["hatchling"]
