@@ -50,6 +50,7 @@ app.delete("/api/users/favorites/:id", UserController.deleteFavorite)
 app.get("/api/users", UserController.getUser)
 
 app.post("/api/recipes", RecipeController.indexRecipe)
+app.post("/api/recipes/:index", RecipeController.recreateIndex)
 app.delete("/api/recipes/:id", RecipeController.deleteRecipe)
 app.post("/api/recipes/new", RecipeController.createRecipe)
 app.post("/api/recipes/scrape", RecipeController.scrapeRecipe)
