@@ -344,22 +344,38 @@ async function createIndexAndInsertData(indexName: string) {
   const filteredRecords = records.slice(0, 10)
   console.log(filteredRecords)
 
-  for (const row of filteredRecords) {
-    await elasticSearchClient.index({
-      index: indexName,
-      body: {
-        id: row.id,
-        title: row.title,
-        sourceUrl: row.sourceUrl,
-        description: row.description,
-        totalCookingTime: parseInt(row.totalCookingTime),
-        materials: JSON.parse(row.materials),
-        foodImageUrl: row.foodImageUrl,
-        dish: row.dish,
-        category: row.category,
-        cuisine: row.cuisine,
-      },
+  // Bulk操作用のデータを作成
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const bulkOperations = filteredRecords.flatMap((row: any) => [
+    { index: { _index: indexName } }, // インデックス操作
+    {
+      id: row.id,
+      title: row.title,
+      sourceUrl: row.sourceUrl,
+      description: row.description,
+      totalCookingTime: parseInt(row.totalCookingTime, 10),
+      materials: JSON.parse(row.materials),
+      foodImageUrl: row.foodImageUrl,
+      dish: row.dish,
+      category: row.category,
+      cuisine: row.cuisine,
+    }, // 各レコードのデータ
+  ])
+
+  try {
+    const bulkResponse = await elasticSearchClient.bulk({
+      body: bulkOperations,
     })
+
+    if (bulkResponse.errors) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const erroredDocuments = bulkResponse.items.filter((item: any) => item.index && item.index.error)
+      console.error("Bulk insert errors:", erroredDocuments)
+    } else {
+      console.log("Bulk insert successful")
+    }
+  } catch (error) {
+    console.error("Error during bulk insert:", error)
   }
 
   // インデックスを最新の状態にリフレッシュ

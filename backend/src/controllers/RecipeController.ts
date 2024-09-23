@@ -22,6 +22,21 @@ class RecipeController {
     }
   }
 
+  bulkIndexRecipes = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { recipes } = req.body
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const body = recipes.flatMap((recipe: any) => [{ index: { _index: "recipes" } }, recipe])
+      const recipeBulkIndex = await elasticSearchClient.bulk({
+        body: body,
+      })
+      res.status(201).json(recipeBulkIndex)
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ error: "Internal server error" })
+    }
+  }
+
   recreateIndex = async (req: Request, res: Response): Promise<void> => {
     try {
       const indexName = req.params.index
