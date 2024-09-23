@@ -1,63 +1,62 @@
-// import * as fs from "fs"
-// import { parse } from "csv-parse/sync"
+import * as fs from "fs"
+import { parse } from "csv-parse/sync"
 
-// function readCsvFile(filePath: string) {
-//   const file = fs.readFileSync(filePath, "utf-8")
-//   const records = parse(file, { columns: true, bom: true })
-//   return records
-// }
+function readCsvFile(filePath: string) {
+  const file = fs.readFileSync(filePath, "utf-8")
+  const records = parse(file, { columns: true, bom: true })
+  return records
+}
 
-// async function createIndexAndInsertData(indexName: string) {
-//   // インデックスの再作成
-//   // fetchAPIでリクエストを送信する
-//   const response = await fetch("https://dull-meshi-app-backend.onrender.com/api/recipes/recipe", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({
-//       index: indexName,
-//     }),
-//   })
+async function insertData(indexName: string) {
+  // 仮データの投入
+  const records = readCsvFile("src/helpers/ignore/Recipes_rows.v2.csv")
+  const chunkSize = 1000 // Set the chunk size
 
-//   if (!response.ok) {
-//     throw new Error("Failed to recreate index")
-//   }
-//   console.log(`Index "${indexName}" recreated.`)
+  const chunkedRecords = []
 
-//   // 仮データの投入
-//   // const records = readCsvFile("src/helpers/ignore/Recipes_rows.v2.csv")
-//   // const filteredRecords = records.slice(0, 10)
-//   // console.log(filteredRecords)
+  for (let i = 0; i < records.length; i += chunkSize) {
+    chunkedRecords.push(records.slice(i, i + chunkSize))
+  }
 
-//   // for (const row of filteredRecords) {
-//   //   await elasticSearchClient.index({
-//   //     index: indexName,
-//   //     body: {
-//   //       id: row.id,
-//   //       title: row.title,
-//   //       sourceUrl: row.sourceUrl,
-//   //       description: row.description,
-//   //       totalCookingTime: parseInt(row.totalCookingTime),
-//   //       materials: JSON.parse(row.materials),
-//   //       foodImageUrl: row.foodImageUrl,
-//   //       dish: row.dish,
-//   //       category: row.category,
-//   //       cuisine: row.cuisine,
-//   //     },
-//   //   })
-//   // }
+  for (let i = 0; i < chunkedRecords.length; i++) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const chunk = chunkedRecords[i].map((row: any) => ({
+      id: row.id,
+      title: row.title,
+      sourceUrl: row.sourceUrl,
+      description: row.description,
+      totalCookingTime: parseInt(row.totalCookingTime),
+      materials: JSON.parse(row.materials),
+      foodImageUrl: row.foodImageUrl,
+      dish: row.dish,
+      category: row.category,
+      cuisine: row.cuisine,
+    }))
+    const response = await fetch("https://dull-meshi-app-backend.onrender.com/api/recipes/bulk", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        index: indexName,
+        recipes: chunk,
+      }),
+    })
+    if (response.ok) {
+      console.log(`Chunk ${i + 1}/${chunkedRecords.length} inserted.`)
+    } else {
+      console.error(`Failed to insert chunk ${i + 1}`)
+    }
+    await new Promise((resolve) => setTimeout(resolve, 100))
+  }
 
-//   // // インデックスを最新の状態にリフレッシュ
-//   // await elasticSearchClient.indices.refresh({ index: indexName })
-
-//   // console.log(`Index "${indexName}" created and data inserted.`)
-// }
+  console.log(`Index "${indexName}" created and data inserted.`)
+}
 
 ;(async () => {
   const indexName = "recipes"
   // インデックスの再作成
-  const response = await fetch("https://dull-meshi-app-backend.onrender.com/api/recipes/recipe", {
+  const response = await fetch("https://dull-meshi-app-backend.onrender.com/api/recipes/recipes", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -71,4 +70,6 @@
     throw new Error("Failed to recreate index")
   }
   console.log(`Index "${indexName}" recreated.`)
+
+  await insertData(indexName)
 })()
