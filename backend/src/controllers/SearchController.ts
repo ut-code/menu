@@ -27,52 +27,52 @@ class SearchController {
         body: {
           query: {
             bool: {
+              must: [cookingTimeQuery],
               should: [
                 {
-                  boosting: {
-                    positive: {
-                      bool: {
-                        should: [
-                          {
-                            match: {
-                              title: {
-                                query: materials.length > 0 ? materials[0] : "",
-                                boost: 1.5,
-                                analyzer: "my_ja_analyzer",
-                              },
-                            },
-                          },
-                          {
-                            match: {
-                              description: {
-                                query: materials.length > 0 ? materials[0] : "",
-                                boost: 1,
-                                analyzer: "my_ja_analyzer",
-                              },
-                            },
-                          },
-                          // TODO: materialsにもanalyzerを指定する
-                          { terms: { materials: materials, boost: 1 } },
-                          { term: { dish: { value: dish, boost: 1 } } },
-                          cookingTimeQuery,
-                        ],
-                      },
+                  term: {
+                    dish: {
+                      value: dish,
+                      boost: 1,
                     },
-                    negative: {
-                      bool: {
-                        must_not: [{ term: { dish: { value: "" } } }],
-                      },
+                  },
+                },
+                {
+                  match: {
+                    "materials.readingform": {
+                      query: materials.join(" "), // 配列を文字列に変換
+                      boost: 1,
+                      fuzziness: "AUTO",
                     },
-                    negative_boost: 0.5,
+                  },
+                },
+                {
+                  match: {
+                    "title.readingform": {
+                      query: materials.join(" "), // 配列を文字列に変換
+                      boost: 0.5,
+                      fuzziness: "AUTO",
+                    },
+                  },
+                },
+                {
+                  match: {
+                    "description.readingform": {
+                      query: materials.join(" "), // 配列を文字列に変換
+                      boost: 0.2,
+                      fuzziness: "AUTO",
+                    },
                   },
                 },
               ],
             },
           },
+          size: 20,
         },
       })
 
       const hits = result.hits.hits
+      console.log(hits)
       if (hits.length === 0) {
         res.status(404).json({ error: "Not found" })
         return

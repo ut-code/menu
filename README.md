@@ -83,6 +83,18 @@ npm run setup:env
 npm run setup
 ```
 
+Elasticsearch を起動する
+
+```shell
+docker-compose up -d
+```
+
+Elasticsearch にデータを投入する
+
+```shell
+npx ts-node src/helpers/initializeElasticSearchData.ts
+```
+
 `frontend` ディレクトリに移動（`cd frontend`）
 
 ```shell
