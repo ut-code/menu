@@ -23,9 +23,16 @@ async function createIndexAndInsertData(indexName: string) {
     body: {
       mappings: {
         properties: {
-          title: { type: "text" },
-          description: { type: "text" },
-          rank: { type: "integer" },
+          id: { type: "text" },
+          title: { type: "text", analyzer: "kuromoji" },
+          sourceUrl: { type: "text" },
+          description: { type: "text", analyzer: "kuromoji" },
+          totalCookingTime: { type: "long" },
+          materials: { type: "text", analyzer: "kuromoji" },
+          foodImageUrl: { type: "text" },
+          dish: { type: "text", analyzer: "kuromoji" },
+          category: { type: "text", analyzer: "kuromoji" },
+          cuisine: { type: "text", analyzer: "kuromoji" },
         },
       },
     },
