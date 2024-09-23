@@ -25,10 +25,10 @@ class RecipeController {
   recreateIndex = async (req: Request, res: Response): Promise<void> => {
     try {
       const indexName = req.params.index
-      const exists = await elasticSearchClient.indices.exists({
+      const indexExists = await elasticSearchClient.indices.exists({
         index: indexName,
       })
-      if (!exists) {
+      if (indexExists) {
         await elasticSearchClient.indices.delete({
           index: indexName,
         })
