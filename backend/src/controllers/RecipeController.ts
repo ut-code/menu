@@ -25,9 +25,15 @@ class RecipeController {
   recreateIndex = async (req: Request, res: Response): Promise<void> => {
     try {
       const indexName = req.params.index
-      const indexDelete = await elasticSearchClient.indices.delete({
+      const exists = await elasticSearchClient.indices.exists({
         index: indexName,
       })
+      if (!exists) {
+        await elasticSearchClient.indices.delete({
+          index: indexName,
+        })
+        console.log(`Index "${indexName}" deleted.`)
+      }
 
       await elasticSearchClient.indices.create({
         index: indexName,
@@ -348,7 +354,7 @@ class RecipeController {
           },
         },
       })
-      res.status(200).json(indexDelete)
+      res.status(200).json({ message: `Index "${indexName}" recreated.` })
     } catch (error) {
       console.error(error)
       res.status(500).json({ error: "Internal server error" })
