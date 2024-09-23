@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, Fragment } from "react"
+import { useState, useContext, Fragment } from "react"
 import { useNavigate } from "react-router-dom"
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query"
 
@@ -27,8 +27,6 @@ type SearchInfo = components["schemas"]["SearchInfo"]
 export const Result = () => {
   const navigate = useNavigate()
   const { session } = useContext(UserContext)
-
-  const [inputContent, setInputContent] = useState<string>("")
   const queryClient = useQueryClient()
 
   const storedIngredients = localStorage.getItem("ingredients")
@@ -40,11 +38,11 @@ export const Result = () => {
     cookingTime: storedCookingTime ? JSON.parse(storedCookingTime) : null,
   }
 
-  useEffect(() => {
-    // NOTE: searchInfo を空白区切りで連結したものをsetInputContent
-    // 例: ["豚肉", "玉ねぎ", "にんにく"] -> "豚肉 玉ねぎ にんにく"
-    setInputContent([...searchInfo.ingredients, searchInfo.dish, searchInfo.cookingTime].join(" "))
-  }, [])
+  // NOTE: searchInfo を空白区切りで連結したものをsetInputContent
+  // 例: ["豚肉", "玉ねぎ", "にんにく"] -> "豚肉 玉ねぎ にんにく"
+  const [inputContent, setInputContent] = useState<string>(
+    [...searchInfo.ingredients, searchInfo.dish, searchInfo.cookingTime].join(" ")
+  )
 
   const { data: recipes, isLoading: isLoadingRecipes } = useQuery({
     queryKey: ["recipes"],

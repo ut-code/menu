@@ -14,4 +14,6 @@ services:
     command: >
       bash -c "bin/elasticsearch-plugin remove analysis-kuromoji || true &&
       bin/elasticsearch-plugin install analysis-kuromoji && 
+      bin/elasticsearch-plugin remove analysis-icu || true &&
+      bin/elasticsearch-plugin install analysis-icu &&
       /usr/local/bin/docker-entrypoint.sh elasticsearch"
