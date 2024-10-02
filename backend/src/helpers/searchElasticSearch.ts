@@ -76,7 +76,7 @@ export async function searchElasticSearch(indexName: string, materials: string[]
 
 ;(async () => {
   const indexName = "recipes"
-  const materials = ["豆腐"]
+  const materials = ["えび"]
   const dish = "主菜"
   const cookingTime = "なんでも"
   const searchResults = await searchElasticSearch(indexName, materials, dish, cookingTime)

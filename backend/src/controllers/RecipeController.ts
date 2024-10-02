@@ -1,5 +1,5 @@
 import { client } from "../db.server"
-import { chromium } from "playwright"
+// import { chromium } from "playwright"
 import { Request, Response } from "express"
 import { extractUserFromRequest } from "../utils/UserUtil"
 import type { Recipes } from "@prisma/client"
@@ -461,45 +461,45 @@ class RecipeController {
         console.log("Not authorized")
       }
 
-      const { sourceUrl } = req.body
+      // const { sourceUrl } = req.body
 
-      const browser = await chromium.launch()
-      const context = await browser.newContext()
-      const page = await context.newPage()
-      // Ref) https://playwright.dev/docs/api/class-page#page-goto
-      await page.goto(sourceUrl, { waitUntil: "domcontentloaded" })
+      // const browser = await chromium.launch()
+      // const context = await browser.newContext()
+      // const page = await context.newPage()
+      // // Ref) https://playwright.dev/docs/api/class-page#page-goto
+      // await page.goto(sourceUrl, { waitUntil: "domcontentloaded" })
 
-      const recipeData = await page.evaluate(() => {
-        // FIXME: 複数のタグがある場合に対応させる
-        const scriptTag = document.querySelector("script[type='application/ld+json']")
-        if (!scriptTag) {
-          return null
-        }
-        const recipeJson = JSON.parse(scriptTag.innerHTML)
-        if (recipeJson["@type"] !== "Recipe") {
-          return null
-        }
-        return recipeJson
-      })
+      // const recipeData = await page.evaluate(() => {
+      //   // FIXME: 複数のタグがある場合に対応させる
+      //   const scriptTag = document.querySelector("script[type='application/ld+json']")
+      //   if (!scriptTag) {
+      //     return null
+      //   }
+      //   const recipeJson = JSON.parse(scriptTag.innerHTML)
+      //   if (recipeJson["@type"] !== "Recipe") {
+      //     return null
+      //   }
+      //   return recipeJson
+      // })
 
-      await browser.close()
+      // await browser.close()
 
-      // console.log(recipeData)
-      if (!recipeData) {
-        res.status(400).json({ error: "Could not find structured recipe data" })
-        return
-      }
-      const recipeResponse = {
-        title: recipeData.name,
-        description: recipeData.description,
-        totalCookingTime: this.convertTotalCookingTimeToMinutes(recipeData.totalTime),
-        materials: recipeData.recipeIngredient,
-        keywords: this.convertKeywords(recipeData.keywords),
-        sourceUrl: sourceUrl,
-        foodImageUrl: recipeData.image[0],
-        dish: recipeData.recipeCategory,
-      }
-      res.status(200).json(recipeResponse)
+      // // console.log(recipeData)
+      // if (!recipeData) {
+      //   res.status(400).json({ error: "Could not find structured recipe data" })
+      //   return
+      // }
+      // const recipeResponse = {
+      //   title: recipeData.name,
+      //   description: recipeData.description,
+      //   totalCookingTime: this.convertTotalCookingTimeToMinutes(recipeData.totalTime),
+      //   materials: recipeData.recipeIngredient,
+      //   keywords: this.convertKeywords(recipeData.keywords),
+      //   sourceUrl: sourceUrl,
+      //   foodImageUrl: recipeData.image[0],
+      //   dish: recipeData.recipeCategory,
+      // }
+      // res.status(200).json(recipeResponse)
     } catch (error) {
       console.error(error)
       res.status(500).json({ error: "Internal server error" })
