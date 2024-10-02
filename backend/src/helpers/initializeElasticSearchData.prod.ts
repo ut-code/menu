@@ -7,20 +7,29 @@ function readCsvFile(filePath: string) {
   return records
 }
 
+interface RecipeRecord {
+  id: number
+  title: string
+  sourceUrl: string
+  description: string
+  totalCookingTime: string
+  materials: string
+  foodImageUrl: string
+  dish: string
+  category: string
+  cuisine: string
+}
+
 async function insertData(indexName: string) {
   // 仮データの投入
   const records = readCsvFile("src/helpers/ignore/Recipes_rows.v2.csv")
-  const chunkSize = 1000 // Set the chunk size
+  let chunkSize = 100 // Set the chunk size
+  const maxRetries = 5 // 最大リトライ回数
+  let retryCount = 0
 
-  const chunkedRecords = []
-
-  for (let i = 0; i < records.length; i += chunkSize) {
-    chunkedRecords.push(records.slice(i, i + chunkSize))
-  }
-
-  for (let i = 0; i < chunkedRecords.length; i++) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const chunk = chunkedRecords[i].map((row: any) => ({
+  let i = 0
+  while (i < records.length) {
+    const chunk = records.slice(i, Math.min(i + chunkSize, records.length)).map((row: RecipeRecord) => ({
       id: row.id,
       title: row.title,
       sourceUrl: row.sourceUrl,
@@ -32,22 +41,45 @@ async function insertData(indexName: string) {
       category: row.category,
       cuisine: row.cuisine,
     }))
-    const response = await fetch("https://dull-meshi-app-backend.onrender.com/api/recipes/bulk", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        index: indexName,
-        recipes: chunk,
-      }),
-    })
-    if (response.ok) {
-      console.log(`Chunk ${i + 1}/${chunkedRecords.length} inserted.`)
-    } else {
-      console.error(`Failed to insert chunk ${i + 1}`)
+
+    try {
+      const response = await fetch("https://dull-meshi-app-backend.onrender.com/api/recipes/bulk", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          index: indexName,
+          recipes: chunk,
+        }),
+      })
+      if (response.ok) {
+        console.log(`Inserted ${i}-${i + chunk.length} / ${records.length} records`)
+        i += chunk.length
+        chunkSize = 100 // reset
+        await new Promise((resolve) => setTimeout(resolve, 100))
+      } else if (response.status === 500) {
+        console.error(`Failed to insert ${i}-${i + chunk.length}. Retrying...`)
+        await new Promise((resolve) => setTimeout(resolve, 30000))
+      } else if (response.status === 413) {
+        // Payload Too Large
+        chunkSize = Math.max(1, Math.floor(chunkSize / 2))
+        console.error(`Failed to insert ${i}-${i + chunk.length}`)
+        await new Promise((resolve) => setTimeout(resolve, 1000))
+      } else {
+        console.error(`Failed to insert ${i}-${i + chunk.length}`)
+        console.error(response)
+        await new Promise((resolve) => setTimeout(resolve, 30000))
+      }
+    } catch (error) {
+      console.error("Fetch failed:", error)
+      retryCount++
+      if (retryCount >= maxRetries) {
+        console.error("Max retries reached. Aborting.")
+        break
+      }
+      await new Promise((resolve) => setTimeout(resolve, 30000))
     }
-    await new Promise((resolve) => setTimeout(resolve, 100))
   }
 
   console.log(`Index "${indexName}" created and data inserted.`)
@@ -67,6 +99,7 @@ async function insertData(indexName: string) {
   })
 
   if (!response.ok) {
+    console.error(response)
     throw new Error("Failed to recreate index")
   }
   console.log(`Index "${indexName}" recreated.`)
