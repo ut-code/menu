@@ -27,7 +27,13 @@ class SearchController {
         body: {
           query: {
             bool: {
-              must: [cookingTimeQuery],
+              must: [
+                cookingTimeQuery,
+                {
+                  // 何かしら返ってくるようにmatch_allを入れておく
+                  match_all: {},
+                },
+              ],
               should: [
                 {
                   term: {
