@@ -8,6 +8,9 @@
   "servers": [
     {
       "url": "http://localhost:3000/"
+    },
+    {
+      "url": "https://dull-meshi-app-backend.onrender.com/"
     }
   ],
   "components": {
@@ -178,13 +181,13 @@
                 "type": "object",
                 "properties": {
                   "materials": {
-                    "example": "any"
+                    "example": "豚肉"
                   },
                   "dish": {
-                    "example": "any"
+                    "example": "主菜"
                   },
                   "cookingTime": {
-                    "example": "any"
+                    "example": "なんでも"
                   }
                 }
               }
