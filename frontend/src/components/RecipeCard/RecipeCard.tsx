@@ -25,7 +25,7 @@ export const RecipeCard = ({ recipe, favoriteRecipes, toggleFavorite }: Props) =
     if (textRef.current) {
       setTextHeight(textRef.current.clientHeight)
     }
-  }, [recipe])
+  }, [textRef.current])
 
   const materialsConverted = recipe.materials.join("・")
 
