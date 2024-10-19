@@ -25,7 +25,7 @@ export const RecipeCard = ({ recipe, favoriteRecipes, toggleFavorite }: Props) =
     if (textRef.current) {
       setTextHeight(textRef.current.clientHeight)
     }
-  }, [recipe])
+  }, [textRef.current])
 
   const materialsConverted = recipe.materials.join("・")
 
@@ -54,7 +54,15 @@ export const RecipeCard = ({ recipe, favoriteRecipes, toggleFavorite }: Props) =
           }}
           alt={recipe.title}
         />
-        <Box ref={textRef} flexDirection={"column"} display={"flex"} alignItems={"flex-start"} p={"16px"}>
+        <Box
+          ref={textRef}
+          flexDirection={"column"}
+          display={"flex"}
+          alignItems={"flex-start"}
+          p={"16px"}
+          position={"relative"}
+          width={"100%"}
+        >
           {session?.access_token && (
             <div
               className={styles.icon}
