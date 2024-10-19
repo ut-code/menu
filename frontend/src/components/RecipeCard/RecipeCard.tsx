@@ -1,7 +1,8 @@
-import { useContext } from "react"
+import { useContext, useState, useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
 
 import FavoriteIcon from "@mui/icons-material/Favorite"
+import { Box } from "@mui/material"
 import { TipReference } from "../TipReference"
 import { UserContext } from "../../utils/context"
 import styles from "./RecipeCard.module.css"
@@ -17,6 +18,14 @@ interface Props {
 
 export const RecipeCard = ({ recipe, favoriteRecipes, toggleFavorite }: Props) => {
   const { session } = useContext(UserContext)
+  const textRef = useRef<HTMLDivElement>(null)
+  const [textHeight, setTextHeight] = useState<number>(0)
+
+  useEffect(() => {
+    if (textRef.current) {
+      setTextHeight(textRef.current.clientHeight)
+    }
+  }, [recipe])
 
   const materialsConverted = recipe.materials.join("・")
 
@@ -33,8 +42,19 @@ export const RecipeCard = ({ recipe, favoriteRecipes, toggleFavorite }: Props) =
   return (
     <Link to={recipe.sourceUrl} target="_blank" rel="noopener noreferrer">
       <div className={styles.container}>
-        <img className={styles.image_frame} src={recipe.foodImageUrl} />
-        <div className={styles.text}>
+        <img
+          src={recipe.foodImageUrl}
+          loading="lazy"
+          style={{
+            width: "88px",
+            height: textHeight,
+            objectFit: "cover",
+            objectPosition: "center",
+            borderRadius: "12px 0px 0px 12px",
+          }}
+          alt={recipe.title}
+        />
+        <Box ref={textRef} flexDirection={"column"} display={"flex"} alignItems={"flex-start"} p={"16px"}>
           {session?.access_token && (
             <div
               className={styles.icon}
@@ -50,7 +70,7 @@ export const RecipeCard = ({ recipe, favoriteRecipes, toggleFavorite }: Props) =
             </div>
             <h5 className={styles.txt_limit}>{materialsConverted}</h5>
           </div>
-        </div>
+        </Box>
       </div>
     </Link>
   )

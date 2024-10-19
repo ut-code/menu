@@ -17,6 +17,7 @@ const StyledBottomNavigationAction = styled(BottomNavigationAction)(() => ({
   "&.Mui-selected": {
     color: "#000000",
   },
+  height: "52px",
 }))
 
 export const BottomNavigationBar = () => {
