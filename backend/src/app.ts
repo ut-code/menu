@@ -38,6 +38,16 @@ app.get("/api/elasticsearch/health", async (_req, res) => {
   }
 })
 
+app.get("/api/elasticsearch/indices", async (_req, res) => {
+  try {
+    const indices = await elasticSearchClient.cat.indices({ format: "json" })
+    res.status(200).json(indices)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: "Failed to get indices" })
+  }
+})
+
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 app.post("/api/recipes/search", SearchController.searchRecipes)
