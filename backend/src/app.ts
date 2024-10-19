@@ -52,6 +52,9 @@ app.use(
       write: async (message) => {
         console.log(message.split(" "))
         const [requestedAt, method, url, status, logType, logMessage] = message.split(" ")
+        if (url === "/") {
+          return
+        }
         await client.logs.create({
           data: {
             requestedAt: new Date(requestedAt.replace(/\[|\]/g, "")),
