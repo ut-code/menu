@@ -88,7 +88,7 @@ async function insertData(indexName: string) {
 ;(async () => {
   const indexName = "recipes"
   // インデックスの再作成
-  const response = await fetch("https://dull-meshi-app-backend.onrender.com/api/recipes/recipes", {
+  const response = await fetch("https://dull-meshi-app-backend.onrender.com/api/recipes/index/recreate", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
