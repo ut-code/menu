@@ -91,7 +91,8 @@ class SearchController {
     }
   }
 
-  searchRecipesWithKeywords = async (req: Request, res: Response): Promise<void> => {
+  // TODO: type=keywords
+  private searchRecipesWithKeywords = async (req: Request, res: Response): Promise<void> => {
     try {
       const { keywords } = req.body
 
@@ -122,7 +123,8 @@ class SearchController {
     }
   }
 
-  searchRecipesWithQuery = async (req: Request, res: Response): Promise<void> => {
+  // TODO: type=query
+  private searchRecipesWithQuery = async (req: Request, res: Response): Promise<void> => {
     try {
       const { query } = req.body
       const result = await elasticSearchClient.search({

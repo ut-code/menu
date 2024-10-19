@@ -51,19 +51,17 @@ app.get("/api/elasticsearch/indices", async (_req, res) => {
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 app.post("/api/recipes/search", SearchController.searchRecipes)
-app.post("/api/recipes/search/keywords", SearchController.searchRecipesWithKeywords)
-app.post("/api/recipes/search/query", SearchController.searchRecipesWithQuery)
 
 app.get("/api/users/favorites", UserController.getFavorites)
 app.post("/api/users/favorites", UserController.addFavorite)
 app.delete("/api/users/favorites/:id", UserController.deleteFavorite)
 app.get("/api/users", UserController.getUser)
 
-app.post("/api/recipes/:index", RecipeController.recreateIndex)
+app.post("/api/recipes/index/recreate", RecipeController.recreateIndex)
 app.post("/api/recipes", RecipeController.indexRecipe)
 app.post("/api/recipes/bulk", RecipeController.bulkIndexRecipes)
 app.delete("/api/recipes/:id", RecipeController.deleteRecipe)
 app.post("/api/recipes/new", RecipeController.createRecipe)
-app.post("/api/recipes/scrape", RecipeController.scrapeRecipe)
+// app.post("/api/recipes/scrape", RecipeController.scrapeRecipe)
 
 export default app

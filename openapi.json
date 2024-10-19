@@ -121,9 +121,62 @@
         }
       }
     },
-    "/api/recipes": {
+    "/api/elasticsearch/indices": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/recipes/index/recreate": {
       "post": {
         "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/recipes": {
+      "post": {
+        "description": "index recipe",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "recipe": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/recipes/bulk": {
+      "post": {
+        "description": "index recipe in bulk",
         "requestBody": {
           "content": {
             "application/json": {
@@ -150,7 +203,7 @@
     },
     "/api/recipes/{id}": {
       "delete": {
-        "description": "",
+        "description": "delete recipe",
         "parameters": [
           {
             "name": "id",
@@ -188,66 +241,6 @@
                   },
                   "cookingTime": {
                     "example": "なんでも"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/api/recipes/search/keywords": {
-      "post": {
-        "description": "",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "keywords": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/api/recipes/search/query": {
-      "post": {
-        "description": "",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "query": {
-                    "example": "any"
                   }
                 }
               }
