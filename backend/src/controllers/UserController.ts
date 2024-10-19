@@ -64,7 +64,7 @@ class UserController {
 
   addFavorite = async (req: Request, res: Response): Promise<void> => {
     try {
-      const { recipeId } = req.body
+      const recipeId = Number(req.params.id)
       const userFromRequest = await extractUserFromRequest(req)
       if (!userFromRequest) {
         res.status(401).json({ error: "Not authorized" })

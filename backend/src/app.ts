@@ -157,7 +157,7 @@ app.post("/api/recipes/search", SearchController.searchRecipes)
 app.post("/api/recipes/search/some", SearchController.searchSomeRecipes)
 
 app.get("/api/users/favorites", UserController.getFavorites)
-app.post("/api/users/favorites", UserController.addFavorite)
+app.post("/api/users/favorites/:id", UserController.addFavorite)
 app.delete("/api/users/favorites/:id", UserController.deleteFavorite)
 app.get("/api/users", UserController.getUser)
 

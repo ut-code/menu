@@ -4,16 +4,12 @@ export const postSearchRecipesApi = (): string => {
   return `${API_BASE_URL}/api/recipes/search`
 }
 
-export const postSearchRecipesKeywordsApi = (): string => {
-  return `${API_BASE_URL}/api/recipes/search/keywords`
-}
-
 export const getUserFavoritesApi = (): string => {
   return `${API_BASE_URL}/api/users/favorites`
 }
 
-export const postUserFavoritesApi = (): string => {
-  return `${API_BASE_URL}/api/users/favorites`
+export const postUserFavoritesApi = (id: number): string => {
+  return `${API_BASE_URL}/api/users/favorites/${id}`
 }
 
 export const deleteUserFavoritesApi = (id: number): string => {

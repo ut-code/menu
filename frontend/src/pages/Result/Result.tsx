@@ -9,7 +9,6 @@ import { BackButton } from "../../components/BackButton"
 import { BorderButton } from "../../components/BorderButton"
 import {
   postSearchRecipesApi,
-  postSearchRecipesKeywordsApi,
   getUserFavoritesApi,
   postUserFavoritesApi,
   deleteUserFavoritesApi,
@@ -44,7 +43,11 @@ export const Result = () => {
     [...searchInfo.ingredients, searchInfo.dish, searchInfo.cookingTime].join(" ")
   )
 
-  const { data: recipes, isLoading: isLoadingRecipes } = useQuery({
+  const {
+    data: recipes,
+    isLoading: isLoadingRecipes,
+    refetch,
+  } = useQuery({
     queryKey: ["recipes"],
     queryFn: async () => {
       const response = await fetch(postSearchRecipesApi(), {
@@ -85,10 +88,9 @@ export const Result = () => {
   const addFavorite = useMutation({
     mutationFn: async (recipeId: number) => {
       if (!session?.access_token) return []
-      const response = await fetch(postUserFavoritesApi(), {
+      const response = await fetch(postUserFavoritesApi(recipeId), {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${session?.access_token}` },
-        body: JSON.stringify({ recipeId: recipeId }),
       })
       if (!response.ok) throw new Error("お気に入りの追加に失敗しました")
     },
@@ -113,39 +115,22 @@ export const Result = () => {
   })
 
   const toggleFavorite = (recipeId: number) => {
-    if (!favoriteRecipes) return
-    if (favoriteRecipes.some((recipe) => recipe.id === recipeId)) {
+    if (isFavorited(recipeId)) {
       deleteFavorite.mutate(recipeId)
     } else {
       addFavorite.mutate(recipeId)
     }
   }
 
-  //----------------------------------------------------------------
-  // フリーワード検索機能
-  //----------------------------------------------------------------
-  const searchRecipesKeywords = useMutation({
-    mutationFn: async () => {
-      const response = await fetch(postSearchRecipesKeywordsApi(), {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ keywords: inputContent }),
-      })
-      if (!response.ok) throw new Error("レシピの取得に失敗しました")
-      const recipes: Recipe[] = await response.json()
-      return recipes
-    },
-    onSuccess: (recipes) => {
-      queryClient.setQueryData(["recipes"], recipes)
-    },
-  })
-
-  const onClickSearchRecipesKeywords = () => {
-    searchRecipesKeywords.mutate()
+  const isFavorited = (recipeId: number | string) => {
+    if (!favoriteRecipes) return false
+    return favoriteRecipes.some((favorite) => favorite.id.toString() === recipeId.toString())
   }
 
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputContent(e.target.value)
+  const onClickSearch = () => {
+    searchInfo.ingredients = inputContent.split(" ")
+    localStorage.setItem("ingredients", JSON.stringify(searchInfo.ingredients))
+    refetch()
   }
 
   if (isLoadingRecipes || isLoadingFavoriteRecipes) return <Loading />
@@ -154,8 +139,8 @@ export const Result = () => {
       <div className={styles.header}>
         <BackButton onClick={() => navigate("/questions?reset=true")} />
         <Searchbox
-          onClickHandler={onClickSearchRecipesKeywords}
-          onChange={onChangeHandler}
+          onClickHandler={onClickSearch}
+          onChange={(e) => setInputContent(e.target.value)}
           inputContent={inputContent}
           placeholder=""
         />
@@ -171,7 +156,7 @@ export const Result = () => {
           <div className={styles.cards}>
             {recipes.map((recipe) => (
               <Fragment key={recipe.id}>
-                <RecipeCard recipe={recipe} favoriteRecipes={favoriteRecipes} toggleFavorite={toggleFavorite} />
+                <RecipeCard recipe={recipe} isFavorited={isFavorited(recipe.id)} toggleFavorite={toggleFavorite} />
               </Fragment>
             ))}
           </div>
@@ -179,12 +164,7 @@ export const Result = () => {
       ) : (
         <div className={styles.emptyResults}>
           <EmptyResults />
-          <BorderButton
-            onClick={() => {
-              navigate("/questions?reset=true")
-            }}
-            disabled={false}
-          >
+          <BorderButton onClick={() => refetch()} disabled={false}>
             <h3>再検索する</h3>
           </BorderButton>
         </div>
