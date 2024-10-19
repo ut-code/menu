@@ -91,7 +91,33 @@ class SearchController {
     }
   }
 
-  searchRecipesWithKeywords = async (req: Request, res: Response): Promise<void> => {
+  searchSomeRecipes = async (_req: Request, res: Response): Promise<void> => {
+    try {
+      const result = await elasticSearchClient.search({
+        index: "recipes",
+        body: {
+          query: {
+            match_all: {},
+          },
+          size: 30,
+        },
+      })
+
+      const hits = result.hits.hits
+      if (hits.length === 0) {
+        res.status(404).json({ error: "Not found" })
+        return
+      }
+      const recipes = hits.map((hit) => hit._source)
+      res.json(recipes)
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ error: "Internal server error" })
+    }
+  }
+
+  // TODO: type=keywords
+  private searchRecipesWithKeywords = async (req: Request, res: Response): Promise<void> => {
     try {
       const { keywords } = req.body
 
@@ -122,7 +148,8 @@ class SearchController {
     }
   }
 
-  searchRecipesWithQuery = async (req: Request, res: Response): Promise<void> => {
+  // TODO: type=query
+  private searchRecipesWithQuery = async (req: Request, res: Response): Promise<void> => {
     try {
       const { query } = req.body
       const result = await elasticSearchClient.search({

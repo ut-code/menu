@@ -37,9 +37,9 @@ class RecipeController {
     }
   }
 
-  recreateIndex = async (req: Request, res: Response): Promise<void> => {
+  recreateIndex = async (_req: Request, res: Response): Promise<void> => {
     try {
-      const indexName = req.params.index
+      const indexName = "recipes"
       const indexExists = await elasticSearchClient.indices.exists({
         index: indexName,
       })
@@ -452,59 +452,59 @@ class RecipeController {
     }
   }
 
-  scrapeRecipe = async (req: Request, res: Response): Promise<void> => {
-    try {
-      const userFromRequest = await extractUserFromRequest(req)
-      if (!userFromRequest) {
-        // res.status(401).json({ error: "Not authorized" })
-        // return
-        console.log("Not authorized")
-      }
+  // scrapeRecipe = async (req: Request, res: Response): Promise<void> => {
+  //   try {
+  //     const userFromRequest = await extractUserFromRequest(req)
+  //     if (!userFromRequest) {
+  //       // res.status(401).json({ error: "Not authorized" })
+  //       // return
+  //       console.log("Not authorized")
+  //     }
 
-      // const { sourceUrl } = req.body
+  //     // const { sourceUrl } = req.body
 
-      // const browser = await chromium.launch()
-      // const context = await browser.newContext()
-      // const page = await context.newPage()
-      // // Ref) https://playwright.dev/docs/api/class-page#page-goto
-      // await page.goto(sourceUrl, { waitUntil: "domcontentloaded" })
+  //     // const browser = await chromium.launch()
+  //     // const context = await browser.newContext()
+  //     // const page = await context.newPage()
+  //     // // Ref) https://playwright.dev/docs/api/class-page#page-goto
+  //     // await page.goto(sourceUrl, { waitUntil: "domcontentloaded" })
 
-      // const recipeData = await page.evaluate(() => {
-      //   // FIXME: 複数のタグがある場合に対応させる
-      //   const scriptTag = document.querySelector("script[type='application/ld+json']")
-      //   if (!scriptTag) {
-      //     return null
-      //   }
-      //   const recipeJson = JSON.parse(scriptTag.innerHTML)
-      //   if (recipeJson["@type"] !== "Recipe") {
-      //     return null
-      //   }
-      //   return recipeJson
-      // })
+  //     // const recipeData = await page.evaluate(() => {
+  //     //   // FIXME: 複数のタグがある場合に対応させる
+  //     //   const scriptTag = document.querySelector("script[type='application/ld+json']")
+  //     //   if (!scriptTag) {
+  //     //     return null
+  //     //   }
+  //     //   const recipeJson = JSON.parse(scriptTag.innerHTML)
+  //     //   if (recipeJson["@type"] !== "Recipe") {
+  //     //     return null
+  //     //   }
+  //     //   return recipeJson
+  //     // })
 
-      // await browser.close()
+  //     // await browser.close()
 
-      // // console.log(recipeData)
-      // if (!recipeData) {
-      //   res.status(400).json({ error: "Could not find structured recipe data" })
-      //   return
-      // }
-      // const recipeResponse = {
-      //   title: recipeData.name,
-      //   description: recipeData.description,
-      //   totalCookingTime: this.convertTotalCookingTimeToMinutes(recipeData.totalTime),
-      //   materials: recipeData.recipeIngredient,
-      //   keywords: this.convertKeywords(recipeData.keywords),
-      //   sourceUrl: sourceUrl,
-      //   foodImageUrl: recipeData.image[0],
-      //   dish: recipeData.recipeCategory,
-      // }
-      // res.status(200).json(recipeResponse)
-    } catch (error) {
-      console.error(error)
-      res.status(500).json({ error: "Internal server error" })
-    }
-  }
+  //     // // console.log(recipeData)
+  //     // if (!recipeData) {
+  //     //   res.status(400).json({ error: "Could not find structured recipe data" })
+  //     //   return
+  //     // }
+  //     // const recipeResponse = {
+  //     //   title: recipeData.name,
+  //     //   description: recipeData.description,
+  //     //   totalCookingTime: this.convertTotalCookingTimeToMinutes(recipeData.totalTime),
+  //     //   materials: recipeData.recipeIngredient,
+  //     //   keywords: this.convertKeywords(recipeData.keywords),
+  //     //   sourceUrl: sourceUrl,
+  //     //   foodImageUrl: recipeData.image[0],
+  //     //   dish: recipeData.recipeCategory,
+  //     // }
+  //     // res.status(200).json(recipeResponse)
+  //   } catch (error) {
+  //     console.error(error)
+  //     res.status(500).json({ error: "Internal server error" })
+  //   }
+  // }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private isRecipe = (data: any): data is Recipes => {
