@@ -30,7 +30,8 @@ function logBodyGen(prependStr: string, getBodyFunc: (req: any, res: any) => str
     const method = req.method
     const status = res.statusCode
     const body = getBodyFunc(req, res)
-    return `${method} ${url} ${status} ${prependStr}: ${JSON.stringify(body)}`
+    const timeStamp = new Date().toISOString()
+    return `[${timeStamp}] ${method} ${url} ${status} ${prependStr}: ${JSON.stringify(body)}`
   })
   return bodyFormatName
 }
@@ -44,8 +45,9 @@ appResponsePrototype.send = function sendOverWrite(body: any) {
   this[morganBodyResponseSymbol] = body
 }
 
-app.use(morgan(logBodyGen("Request", (req) => req.body)))
-app.use(morgan(logBodyGen("Response", (_req, res) => res[morganBodyResponseSymbol])))
+app.use(morgan("[:date[iso]] :method :url :status ResponseTime :response-time ms"))
+app.use(morgan(logBodyGen("RequestBody", (req) => req.body)))
+app.use(morgan(logBodyGen("ResponseBody", (_req, res) => res[morganBodyResponseSymbol])))
 
 app.get("/", (_req, res) => {
   res.status(200).send("Hello, world!")
