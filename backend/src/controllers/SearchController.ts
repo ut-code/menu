@@ -73,7 +73,7 @@ class SearchController {
               ],
             },
           },
-          size: 20,
+          size: 1000,
         },
       })
 
