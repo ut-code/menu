@@ -51,6 +51,7 @@ app.get("/api/elasticsearch/indices", async (_req, res) => {
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 app.post("/api/recipes/search", SearchController.searchRecipes)
+app.post("/api/recipes/search/some", SearchController.searchSomeRecipes)
 
 app.get("/api/users/favorites", UserController.getFavorites)
 app.post("/api/users/favorites", UserController.addFavorite)

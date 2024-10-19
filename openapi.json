@@ -24,6 +24,9 @@
           "title": {
             "type": "string"
           },
+          "sourceUrl": {
+            "type": "string"
+          },
           "description": {
             "type": "string"
           },
@@ -36,15 +39,6 @@
               "type": "string"
             }
           },
-          "keywords": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "sourceUrl": {
-            "type": "string"
-          },
           "foodImageUrl": {
             "type": "string"
           },
@@ -56,10 +50,6 @@
           },
           "cuisine": {
             "type": "string"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "required": [
@@ -157,7 +147,18 @@
                 "type": "object",
                 "properties": {
                   "recipe": {
-                    "example": "any"
+                    "example": {
+                      "id": 1,
+                      "title": "テストタイトル",
+                      "description": "豚肉の生姜焼きのレシピです。",
+                      "totalCookingTime": 30,
+                      "materials": ["豚肉", "生姜", "醤油", "みりん", "砂糖"],
+                      "sourceUrl": "https://google.com",
+                      "foodImageUrl": "https://google.com",
+                      "dish": "主菜",
+                      "category": "和食",
+                      "cuisine": "日本料理"
+                    }
                   }
                 }
               }
@@ -247,6 +248,22 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/recipes/search/some": {
+      "post": {
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
