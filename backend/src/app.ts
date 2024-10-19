@@ -55,16 +55,20 @@ app.use(
         if (url === "/") {
           return
         }
-        await client.logs.create({
-          data: {
-            requestedAt: new Date(requestedAt.replace(/\[|\]/g, "")),
-            method,
-            url,
-            status: parseInt(status),
-            logType,
-            message: logMessage,
-          },
-        })
+        try {
+          await client.logs.create({
+            data: {
+              requestedAt: new Date(requestedAt.replace(/\[|\]/g, "")),
+              method,
+              url,
+              status: parseInt(status),
+              logType,
+              message: logMessage,
+            },
+          })
+        } catch (error) {
+          console.error(error)
+        }
       },
     },
   })
@@ -80,16 +84,20 @@ app.use(
           if (url !== "/api/recipes/search") {
             return
           }
-          await client.logs.create({
-            data: {
-              requestedAt: new Date(requestedAt.replace(/\[|\]/g, "")),
-              method,
-              url,
-              status: parseInt(status),
-              logType,
-              message: logMessage,
-            },
-          })
+          try {
+            await client.logs.create({
+              data: {
+                requestedAt: new Date(requestedAt.replace(/\[|\]/g, "")),
+                method,
+                url,
+                status: parseInt(status),
+                logType,
+                message: logMessage,
+              },
+            })
+          } catch (error) {
+            console.error(error)
+          }
         },
       },
     }
@@ -106,16 +114,20 @@ app.use(
           if (url !== "/api/recipes/search") {
             return
           }
-          await client.logs.create({
-            data: {
-              requestedAt: new Date(requestedAt.replace(/\[|\]/g, "")),
-              method,
-              url,
-              status: parseInt(status),
-              logType,
-              message: logMessage,
-            },
-          })
+          try {
+            await client.logs.create({
+              data: {
+                requestedAt: new Date(requestedAt.replace(/\[|\]/g, "")),
+                method,
+                url,
+                status: parseInt(status),
+                logType,
+                message: logMessage,
+              },
+            })
+          } catch (error) {
+            console.error(error)
+          }
         },
       },
     }
