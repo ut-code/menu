@@ -12,11 +12,11 @@ type Recipe = components["schemas"]["Recipe"]
 
 interface Props {
   recipe: Recipe
-  favoriteRecipes: Recipe[] | undefined
+  isFavorited: boolean
   toggleFavorite: (recipeId: number) => void
 }
 
-export const RecipeCard = ({ recipe, favoriteRecipes, toggleFavorite }: Props) => {
+export const RecipeCard = ({ recipe, isFavorited, toggleFavorite }: Props) => {
   const { session } = useContext(UserContext)
   const textRef = useRef<HTMLDivElement>(null)
   const [textHeight, setTextHeight] = useState<number>(0)
@@ -28,10 +28,6 @@ export const RecipeCard = ({ recipe, favoriteRecipes, toggleFavorite }: Props) =
   }, [textRef.current])
 
   const materialsConverted = recipe.materials.join("・")
-
-  const isFavorited: boolean =
-    favoriteRecipes !== undefined && favoriteRecipes.some((favoriteRecipe) => favoriteRecipe.id === recipe.id)
-
   const onClickHandler = (recipeId: number, event: React.MouseEvent<HTMLDivElement>) => {
     if (!session?.access_token) return
     // NOTE: LinkとonClickは別メソッド？なので event.stopPropagation() だとうまく行かなかった

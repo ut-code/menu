@@ -494,7 +494,6 @@ class RecipeController {
   //     //   description: recipeData.description,
   //     //   totalCookingTime: this.convertTotalCookingTimeToMinutes(recipeData.totalTime),
   //     //   materials: recipeData.recipeIngredient,
-  //     //   keywords: this.convertKeywords(recipeData.keywords),
   //     //   sourceUrl: sourceUrl,
   //     //   foodImageUrl: recipeData.image[0],
   //     //   dish: recipeData.recipeCategory,
@@ -520,10 +519,6 @@ class RecipeController {
       typeof data.foodImageUrl === "string" &&
       (typeof data.dish === "string" || data.dish === undefined)
     )
-  }
-
-  private convertKeywords = (keywords: string): string[] => {
-    return keywords.split(",").map((keyword) => keyword.trim())
   }
 
   private convertTotalCookingTimeToMinutes = (totalTime: string): number => {

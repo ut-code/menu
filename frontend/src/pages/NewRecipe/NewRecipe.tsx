@@ -165,7 +165,7 @@ export const NewRecipe = () => {
               foodImageUrl: foodImageUrl,
               dish: dish,
             }}
-            favoriteRecipes={[]} // Replace with the actual favoriteRecipes value
+            isFavorited={false} // Replace with the actual favoriteRecipes value
             toggleFavorite={() => {}} // Replace with the actual toggleFavorite value
           />
         </div>

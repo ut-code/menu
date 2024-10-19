@@ -83,10 +83,9 @@ export const Favorite = () => {
   const onClickAddFavorite = useMutation({
     mutationFn: async (recipeId: number) => {
       if (!session?.access_token) return []
-      const response = await fetch(postUserFavoritesApi(), {
+      const response = await fetch(postUserFavoritesApi(recipeId), {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${session?.access_token}` },
-        body: JSON.stringify({ recipeId: recipeId }),
       })
       if (!response.ok) throw new Error("お気に入りの追加に失敗しました")
     },
@@ -183,7 +182,10 @@ export const Favorite = () => {
             <RecipeCard
               key={recipe.id}
               recipe={recipe}
-              favoriteRecipes={favoriteRecipes}
+              isFavorited={
+                favoriteRecipes != null &&
+                favoriteRecipes.some((favorite) => favorite.id.toString() === recipe.id.toString())
+              }
               toggleFavorite={toggleFavorite}
             />
           ))
