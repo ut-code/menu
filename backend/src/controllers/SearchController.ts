@@ -78,7 +78,6 @@ class SearchController {
       })
 
       const hits = result.hits.hits
-      console.log(hits)
       if (hits.length === 0) {
         res.status(404).json({ error: "Not found" })
         return
