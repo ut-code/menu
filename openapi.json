@@ -181,7 +181,7 @@
                 "type": "object",
                 "properties": {
                   "materials": {
-                    "example": "豚肉"
+                    "example": ["豚肉"]
                   },
                   "dish": {
                     "example": "主菜"
