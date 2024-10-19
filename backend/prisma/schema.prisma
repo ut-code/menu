@@ -89,3 +89,13 @@ model RecipeSubmissions {
 
   @@unique([userId, recipeId])
 }
+
+model Logs {
+  id        Int      @id @default(autoincrement())
+  requestedAt DateTime
+  method      String
+  url         String
+  status      Int
+  logType     String
+  message     String
+}

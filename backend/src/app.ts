@@ -7,6 +7,7 @@ import UserController from "./controllers/UserController"
 import SearchController from "./controllers/SearchController"
 import RecipeController from "./controllers/RecipeController"
 import { elasticSearchClient } from "./elasticSearchClient"
+import { client } from "./db.server"
 import type { paths } from "../../types/openapi-types"
 
 const app = express()
@@ -31,7 +32,7 @@ function logBodyGen(prependStr: string, getBodyFunc: (req: any, res: any) => str
     const status = res.statusCode
     const body = getBodyFunc(req, res)
     const timeStamp = new Date().toISOString()
-    return `[${timeStamp}] ${method} ${url} ${status} ${prependStr}: ${JSON.stringify(body)}`
+    return `[${timeStamp}] ${method} ${url} ${status} ${prependStr} ${JSON.stringify(body)}`
   })
   return bodyFormatName
 }
@@ -45,9 +46,78 @@ appResponsePrototype.send = function sendOverWrite(body: any) {
   this[morganBodyResponseSymbol] = body
 }
 
-app.use(morgan("[:date[iso]] :method :url :status ResponseTime :response-time ms"))
-app.use(morgan(logBodyGen("RequestBody", (req) => req.body)))
-app.use(morgan(logBodyGen("ResponseBody", (_req, res) => res[morganBodyResponseSymbol])))
+app.use(
+  morgan("[:date[iso]] :method :url :status ResponseTime(ms) :response-time", {
+    stream: {
+      write: async (message) => {
+        console.log(message.split(" "))
+        const [requestedAt, method, url, status, logType, logMessage] = message.split(" ")
+        await client.logs.create({
+          data: {
+            requestedAt: new Date(requestedAt.replace(/\[|\]/g, "")),
+            method,
+            url,
+            status: parseInt(status),
+            logType,
+            message: logMessage,
+          },
+        })
+      },
+    },
+  })
+)
+app.use(
+  morgan(
+    logBodyGen("RequestBody", (req) => req.body),
+    {
+      stream: {
+        write: async (message) => {
+          console.log(message)
+          const [requestedAt, method, url, status, logType, logMessage] = message.split(" ")
+          if (url !== "/api/recipes/search") {
+            return
+          }
+          await client.logs.create({
+            data: {
+              requestedAt: new Date(requestedAt.replace(/\[|\]/g, "")),
+              method,
+              url,
+              status: parseInt(status),
+              logType,
+              message: logMessage,
+            },
+          })
+        },
+      },
+    }
+  )
+)
+app.use(
+  morgan(
+    logBodyGen("ResponseBody", (_req, res) => res[morganBodyResponseSymbol]),
+    {
+      stream: {
+        write: async (message) => {
+          console.log(message)
+          const [requestedAt, method, url, status, logType, logMessage] = message.split(" ")
+          if (url !== "/api/recipes/search") {
+            return
+          }
+          await client.logs.create({
+            data: {
+              requestedAt: new Date(requestedAt.replace(/\[|\]/g, "")),
+              method,
+              url,
+              status: parseInt(status),
+              logType,
+              message: logMessage,
+            },
+          })
+        },
+      },
+    }
+  )
+)
 
 app.get("/", (_req, res) => {
   res.status(200).send("Hello, world!")
