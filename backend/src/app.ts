@@ -1,5 +1,6 @@
 import express from "express"
 import cors from "cors"
+import morgan from "morgan"
 import swaggerUi from "swagger-ui-express"
 import swaggerDocument from "../../openapi.json"
 import UserController from "./controllers/UserController"
@@ -18,6 +19,35 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+// morgan でリクエストボディとレスポンスボディをログ出力する
+// Ref: https://www.npmjs.com/package/morgan-body
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function logBodyGen(prependStr: string, getBodyFunc: (req: any, res: any) => string) {
+  const bodyFormatName = "bodyFmt_" + prependStr
+  morgan.format(bodyFormatName, function logBody(_, req, res) {
+    const url = req.url
+    const method = req.method
+    const status = res.statusCode
+    const body = getBodyFunc(req, res)
+    const timeStamp = new Date().toISOString()
+    return `[${timeStamp}] ${method} ${url} ${status} ${prependStr}: ${JSON.stringify(body)}`
+  })
+  return bodyFormatName
+}
+
+const appResponsePrototype = Object.getPrototypeOf(app.response)
+const originalSend = appResponsePrototype.send
+const morganBodyResponseSymbol = Symbol()
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+appResponsePrototype.send = function sendOverWrite(body: any) {
+  originalSend.call(this, body)
+  this[morganBodyResponseSymbol] = body
+}
+
+app.use(morgan("[:date[iso]] :method :url :status ResponseTime :response-time ms"))
+app.use(morgan(logBodyGen("RequestBody", (req) => req.body)))
+app.use(morgan(logBodyGen("ResponseBody", (_req, res) => res[morganBodyResponseSymbol])))
 
 app.get("/", (_req, res) => {
   res.status(200).send("Hello, world!")
