@@ -36,7 +36,7 @@ export const QuestionIngredients = ({ setQuestionNumber, ingredients, setIngredi
 
   return (
     <>
-      <div style={{ padding: "32px 16px" }}>
+      <div style={{ padding: "16px 16px" }}>
         <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "flex-start", gap: 16 }}>
           <Searchbox
             onClickHandler={() => navigate("/result")}
